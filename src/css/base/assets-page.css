@@ -1,0 +1,10 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 225px calc(100%  - 225px);
+    grid-template-rows: 44px calc(100% - 44px);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}

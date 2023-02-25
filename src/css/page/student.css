@@ -1,0 +1,436 @@
+.body {
+    background-color: #f4f7ff;
+    padding: 16px;
+  }
+.body-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .row-input {
+    display: flex;
+  }
+  .input {
+    position: relative;
+    margin-right: 8px;
+  }
+  .search {
+    background-color: #ffffff;
+    border-radius: 2.5px;
+    border: 1px solid #afafaf;
+    width: 179px;
+    height: 35px;
+    overflow: hidden;
+    padding-left: 38px;
+    box-sizing: border-box;
+  }
+  .icon-filter,
+  .icon-search {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+  }
+  
+  .search::placeholder {
+    font-size: 13px;
+    font-style: italic;
+  }
+  .filter::placeholder {
+    font-size: 13px;
+    color: #000;
+  }
+  .filter {
+    background-color: #ffffff;
+    border-radius: 2.5px;
+    border: 1px solid #afafaf;
+    width: 219px;
+    height: 35px;
+    overflow: hidden;
+    padding-left: 38px;
+    box-sizing: border-box;
+  }
+  .input .icon-down-bold {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+  }
+  .add {
+    position: relative;
+  }
+  .button-function {
+    display: flex;
+  }
+  .btn-add {
+    background-color: #1aa4c8;
+    border-radius: 3px;
+    min-width: 110px;
+    height: 36px;
+    border: none;
+    color: #fff;
+    outline: none;
+  }
+  .btn-add:hover {
+  }
+  
+  .btn-excel {
+    background-color: #ffffff;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    border: none;
+    margin-left: 8px;
+    outline: none;
+  }
+  .btn-excel .icon-excel,
+  .btn-excel .icon-delete {
+    margin: 0 auto;
+    outline: none;
+    /* position: relative; */
+  }
+  .btn-excel:focus,
+  .btn-excel .icon-excel:hover,
+  .btn-excel .icon-delete:hover,
+  .btn-excel .icon-excel:focus,
+  .btn-excel .icon-delete:focus{
+    opacity: 0.6;
+    outline: none;
+    
+  }
+  .tooltip-excel,
+  .tooltip-delete{
+    padding: 4px 10px;
+    background-color: #fff;
+    color: #000;
+    position: absolute;
+    border: 1px  solid #000;
+    margin-bottom: 70px;
+    z-index: 3;
+    display: none;
+    margin-left: -60px;
+    min-width: 70px;
+  }
+  .icon-excel:hover .tooltip-excel,
+  .icon-delete:hover .tooltip-delete{
+    display: block;
+    opacity: 1 !important;
+  }
+  .menu-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .menu-item {
+    opacity: 0.6;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    width: 44px;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .menu-item:hover {
+    background-color: #1aa4c8;
+    opacity: 1;
+  
+    overflow: hidden;
+  }
+  .menu-body .icon {
+    margin: 0 auto;
+  }
+
+   .m-table {
+    background-color: #fff;
+    height: calc(100% - 130px);
+    overflow-y: scroll;
+    width: calc(100% - 10px);
+    overflow-x: scroll;
+    margin: 10px 0px;
+  
+    /* overflow:scroll; */
+  }
+  table {
+    color: #111;
+    width: auto;
+    height: auto;
+    border-spacing: 0px;
+    margin-top: 16px;
+  }
+  tbody tr td {
+    color: #111;
+  }
+  tbody tr:hover {
+    background-color: #9ed6e4 !important;
+  }
+  tbody tr:hover .checkbox,
+  tbody tr:hover .td-item-final {
+    background-color: #9ed6e4 !important;
+  }
+  .m-table input[type="checkbox"]:after {
+    font-size: 30px;
+    width: 16px !important;
+  
+    border: 1px solid #ccc;
+  }
+  .m-table input[type="checkbox"] {
+    transform: rotate(-90deg);
+    transition: all 0.2s ease;
+  }
+  .m-table input[type="checkbox"]:checked:after {
+    height: 16px;
+    top: 0px;
+    left: 0px;
+    position: relative;
+    background: url("../../assets/icon/Sprites.64af8f61.svg") no-repeat -1224px -360px;
+    background-color: #ffff;
+    border: 1px solid green;
+    content: "";
+    display: inline-block;
+  }
+  .m-table input[type="checkbox"]:checked {
+    transform: rotate(0deg);
+  }
+  .checkbox-rotate {
+    transform: rotate(0deg);
+  }
+  thead tr {
+    background-color: #e5e8ec;
+  
+    position: sticky;
+  
+    top: 0px;
+    z-index: 1;
+  }
+  thead > .minWidth {
+    min-width: 150px !important;
+    width: 100%;
+  }
+  thead tr th {
+    min-width: 150px;
+    
+  }
+  tbody tr {
+  }
+  .row-active {
+    background-color: #e5f3ff !important;
+  }
+  th {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    text-align: left;
+    padding: 0px 10px;
+    height: 35px;
+    box-sizing: border-box;
+  }
+  td {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    padding: 0px 10px;
+    text-align: left;
+    height: 44px;
+    box-sizing: border-box;
+  }
+  .sticky-left-top {
+    position: sticky;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    background-color: #e5e8ec;
+  }
+  .sticky-left {
+    position: sticky;
+    z-index: 0;
+    left: 0;
+    background-color: #fff;
+  }
+  .sticky-right-top {
+    position: sticky;
+    z-index: 0;
+    right: 0;
+    top: 0;
+    background-color: #e5e8ec;
+  }
+  .sticky-right {
+    position: sticky;
+    right: 0;
+    background-color: #fff;
+    z-index: 0;
+  }
+  #Dob-error,
+  #Email-error {
+    display: none;
+    color: #ff0000;
+  }
+  .td-item-final {
+    color: #0075c0;
+    border-right: none;
+  }
+  .edit-text {
+    font-weight: 700;
+    margin-left: 10px;
+  }
+  .th-item-final {
+    border-right: none;
+  }
+  .td-func {
+    color: #0075c0;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px;
+    position: relative;
+  }
+  .icon-down {
+    background: url("../../assets/icon/Sprites.64af8f61.svg") no-repeat -900px -365px;
+    width: 8px;
+    height: 5px;
+    z-index: 3;
+    cursor: pointer;
+  }
+ 
+  .edit-text {
+    cursor: pointer;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+  .paging {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4px;
+    background-color: #fff;
+    color: #aaa;
+    position: sticky;
+    bottom: 0px;
+    width: 100%;
+    height: auto;
+  }
+  .page {
+    width: 220px;
+    height: 32px;
+    display: flex;
+  
+    border: 1px solid #bbb;
+    color: #000;
+  }
+  .content-page {
+    min-width: 170px;
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: 6px;
+    position: relative;
+  }
+  .icon-dropup {
+    background: url("../../assets/icon/dropdown2.png") no-repeat 4px;
+    width: 20px;
+    height: 16px;
+    cursor: pointer;
+    align-items: center;
+    padding: 8px 7px;
+    cursor: pointer;
+  }
+  .icon-dropup:hover {
+    background-color: #ddd;
+  }
+  .iconrotate {
+    transform: rotate(180deg) !important;
+  }
+  .item-dropup {
+    padding: 10px;
+  }
+  .item-up {
+    position: absolute;
+    background-color: #fff;
+    margin-left: -187px;
+    margin-top: -230px;
+    width: 220px;
+    border: 1px solid #bbb;
+    /* display: none; */
+  }
+  .item-dropup:hover {
+    background-color: #2f9d22;
+    color: #fff;
+  }
+  .paging-left strong {
+    color: #000;
+  }
+  .paging-left {
+    color: #111;
+    margin-left: 0px;
+  }
+  .paging-right {
+    display: flex;
+    margin-right: 24px;
+    color: #bbb;
+  }
+  .paging-right select {
+    min-width: 170px;
+    height: 35px;
+  }
+  .before-text {
+    color: rgb(104, 102, 102);
+    margin: 8px;
+    margin-top: 10px;
+  }
+  .more-icon {
+    background: url("../../assets/icon/icons8-more-24.png");
+    width: 24px;
+    height: 24px;
+    color: #727272;
+    margin-top: 6px;
+    margin-right: 4px;
+  }
+  .button-unclick {
+    border: none;
+    background-color: #fff;
+  }
+  .button-clicked {
+    padding: 2px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+  }
+  .paging button {
+    margin: 8px 4px 2px 0px;
+    width: 20px;
+    height: 20px;
+  }
+  .after-text {
+    color: #111;
+    margin: 8px;
+    margin-top: 10px;
+  }
+  .tooltip-Iden {
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    margin-top: -30px;
+    font-size: 11px;
+    padding: 6px;
+    display: none;
+  }
+  .iden-tool:hover .tooltip-Iden {
+    display: block;
+  }
+  .border-active {
+    border: 1px solid #0075c0;
+  }
+  .pagination {
+    margin-left: 20px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #111;
+    font-size: 13px;
+  }
+  
+  .act {
+    background-color: green;
+    color: #fff;
+  }
+  

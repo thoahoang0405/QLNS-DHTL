@@ -1,0 +1,122 @@
+.body {
+    background-color: #f4f7ff;
+    padding: 16px;
+  }
+.body-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .row-input {
+    display: flex;
+  }
+  .input {
+    position: relative;
+    margin-right: 8px;
+  }
+  .search {
+    background-color: #ffffff;
+    border-radius: 2.5px;
+    border: 1px solid #afafaf;
+    width: 179px;
+    height: 35px;
+    overflow: hidden;
+    padding-left: 38px;
+    box-sizing: border-box;
+  }
+  .icon-filter,
+  .icon-search {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+  }
+  
+  .search::placeholder {
+    font-size: 13px;
+    font-style: italic;
+  }
+  .filter::placeholder {
+    font-size: 13px;
+    color: #000;
+  }
+  .filter {
+    background-color: #ffffff;
+    border-radius: 2.5px;
+    border: 1px solid #afafaf;
+    width: 219px;
+    height: 35px;
+    overflow: hidden;
+    padding-left: 38px;
+    box-sizing: border-box;
+  }
+  .input .icon-down-bold {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+  }
+  .add {
+    position: relative;
+  }
+  .button-function {
+    display: flex;
+  }
+  .btn-add {
+    background-color: #1aa4c8;
+    border-radius: 3px;
+    min-width: 110px;
+    height: 36px;
+    border: none;
+    color: #fff;
+    outline: none;
+  }
+  .btn-add:hover {
+  }
+  
+  .btn-excel {
+    background-color: #ffffff;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    border: none;
+    margin-left: 8px;
+    outline: none;
+  }
+  .btn-excel .icon-excel,
+  .btn-excel .icon-delete {
+    margin: 0 auto;
+    outline: none;
+    /* position: relative; */
+  }
+  .btn-excel:focus,
+  .btn-excel .icon-excel:hover,
+  .btn-excel .icon-delete:hover,
+  .btn-excel .icon-excel:focus,
+  .btn-excel .icon-delete:focus{
+    opacity: 0.6;
+    outline: none;
+    
+  }
+  .tooltip-excel,
+  .tooltip-delete{
+    padding: 4px 10px;
+    background-color: #fff;
+    color: #000;
+    position: absolute;
+    border: 1px  solid #000;
+    margin-bottom: 70px;
+    z-index: 3;
+    display: none;
+    margin-left: -60px;
+    min-width: 70px;
+  }
+  .icon-excel:hover .tooltip-excel,
+  .icon-delete:hover .tooltip-delete{
+    display: block;
+    opacity: 1 !important;
+  }
