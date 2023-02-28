@@ -1,5 +1,5 @@
 <template>
-a
+trang hợp đồng
 </template>
 <script>
 

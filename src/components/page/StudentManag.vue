@@ -303,13 +303,15 @@
         </div>
       </div> -->
   </div>
+<Form ></Form>
 </template>
 <script>
 import Paginate from "vuejs-paginate-next";
+import Form from "../base/FormDetail.vue"
 import $ from "jquery";
 export default {
   components: {
-    Paginate,
+    Paginate, Form
   },
   data() {
     return {
@@ -317,7 +319,7 @@ export default {
       pageNumber: 1,
       page: 1,
       totalPage: 0,
-      isShow: false,
+      isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
       isShowDrop: false,
 
       pageDefault: 10,
