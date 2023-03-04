@@ -119,7 +119,7 @@
     margin: 25px auto;
     border-radius: 8px;
     width: 595px;
-    /* display: none; */
+    display: none;
 }
     .form-Wrap {
         padding: 0 20px;
