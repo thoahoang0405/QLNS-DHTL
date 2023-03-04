@@ -1,0 +1,12 @@
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\bin\Debug\net6.0\QLNS.COMMON.deps.json
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\bin\Debug\net6.0\QLNS.COMMON.dll
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\bin\Debug\net6.0\QLNS.COMMON.pdb
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.csproj.AssemblyReference.cache
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.GeneratedMSBuildEditorConfig.editorconfig
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.AssemblyInfoInputs.cache
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.AssemblyInfo.cs
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.csproj.CoreCompileInputs.cache
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.dll
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\refint\QLNS.COMMON.dll
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.pdb
+D:\dhtl\ptda\QLNS\API\QLNS.DHTL\QLNS.COMMON\obj\Debug\net6.0\ref\QLNS.COMMON.dll
