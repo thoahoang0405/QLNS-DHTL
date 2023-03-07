@@ -62,9 +62,15 @@ export default {
         },
         {
           icon: "icon-bonus",
-          name: "Khen thưởng, kỷ luật",
+          name: "Khen thưởng",
           dropdown: true,
           to: "/thuong",
+        },
+        {
+          icon: "icon-bonus",
+          name: "Kỷ luật",
+          dropdown: true,
+          to: "/kiluat",
         },
         {
           icon: "icon-recruiter",

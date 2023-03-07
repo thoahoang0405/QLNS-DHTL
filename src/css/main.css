@@ -125,3 +125,6 @@
   .data-tip-bottom[data-tip]::after {
     top: calc(100%);
   }
+  .flex{
+    display: flex;
+  }
