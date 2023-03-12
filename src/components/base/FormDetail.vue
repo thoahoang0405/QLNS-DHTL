@@ -22,11 +22,12 @@
                     <div class="input__box">
                         <label for="">Giới tính</label>
                         <div class="radio__box">
-                            <input type="radio" name="gt">
+                            <input type="radio" id="nam" v-model="desc.gioitinh" value="nam">
                             <label class="nam" for="">Nam</label>
-                            <input type="radio" name="gt">
+                            <input type="radio" id="nu" v-model="desc.gioitinh" value="nu">
                             <label class="nu" for="">Nữ</label>
                         </div>
+                        <!-- <div style= "color:red" id="disp">{{ desc.gioitinh }}</div> -->
                     </div>
                 </div>
                 
@@ -73,7 +74,7 @@
                 </div>
                 <div class="input__box">    
                     <label for="">Địa chỉ</label>
-                    <input @blur="validate()" class="diachi" type="date" v-model="desc.diachi">
+                    <input @blur="validate()" class="diachi" type="text" v-model="desc.diachi">
                     <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
                 </div>
                 <div class="column column-s">
@@ -96,7 +97,7 @@
             </div>
             <div class="form-bottom">
                 <div class="btn btn-cancel">Hủy</div>
-                <div class="btn btn-save" @click="save()">Lưu</div>
+                <div class="btn btn-save" @click="save()" >Lưu</div>
             </div>
         </form>
     </div>
@@ -146,7 +147,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 29px;
+        margin-bottom: 14px;
     }
     .close {
         cursor: pointer;
@@ -164,7 +165,7 @@
     padding: 14px;
     background-color: #D9D9D9;
     gap: 28px;
-    margin-top: 26px;
+    margin-top: 14px;
   }
   .btn-cancel {
     background-color: #fff;
@@ -181,7 +182,6 @@
   .column {
     display: flex;
     column-gap: 20px;
-    margin-bottom: 10px;
   }
   .radio__box {
     display: flex;
@@ -213,9 +213,11 @@
     export default {
         data(){
             return {
+                isShow: false,
                 errors: {
                     masv: '',
                     ten: '',
+                    // gioitinh: 'nam',
                     ngaysinh: '',
                     khoa: '',
                     cmnd: '',
@@ -231,6 +233,7 @@
                 desc: {
                     masv: '',
                     ten: '',
+                    gioitinh: 'nam',
                     ngaysinh: '',
                     khoa: '',
                     cmnd: '',
@@ -246,12 +249,16 @@
             }
         },
         methods: {
+            btnHidden(){
+                this.isShow = !this.isShow
+            },
             validate(){
                 let isValid = true;
 
                 this.errors = {
                     masv: '',
                     ten: '',
+                    // gioitinh: '',
                     ngaysinh: '',
                     khoa: '',
                     cmnd: '',
@@ -272,6 +279,10 @@
                     this.errors.ten = "Không được để trống!";
                     isValid = false;
                 }
+                // if(!this.desc.gioitinh) {
+                //     this.errors.gioitinh = "Không được để trống!";
+                //     isValid = false;
+                // }
                 if(!this.desc.ngaysinh) {
                     this.errors.ngaysinh = "Không được để trống!";
                     isValid = false;
@@ -305,6 +316,9 @@
                 if(!this.desc.email) {
                     this.errors.email = "Không được để trống!";
                     isValid = false;
+                }else if(!this.isEmail(this.desc.email)) {
+                    this.errors.email = "Yêu cầu nhập kiểu email";
+                    isValid = false;
                 }
                 if(!this.desc.diachi) {
                     this.errors.diachi = "Không được để trống!";
@@ -322,22 +336,44 @@
                     this.errors.ngaytotnghiep = "Không được để trống!";
                     isValid = false;
                 }
+                // var getSelectedValue = document.querySelector( 
+                //     'input[name="gioitinh"]:checked'); 
+            
+                // if(getSelectedValue != null) { 
+                //     document.getElementById("disp").innerHTML 
+                //         = getSelectedValue.value 
+                //         + " season is selected"; 
+                // }
+                
                 return isValid
             },
             isNumber(value) {
                 return /^\d*$/.test(value);
             },
+            isEmail(value){
+                var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                return validRegex.test(value)
+            },
             save(){
                 this.validate()
-                console.log(this.validate())
             },
-            // onclick(){
-            //     this.save();
-            // }
+            checkButton() {  
+                var getSelectedValue = document.querySelector( 
+                    'input[name="gt"]:checked'); 
+                
+                if(getSelectedValue != null) { 
+                    document.getElementById("disp").innerHTML 
+                        = getSelectedValue.value 
+                        + " season is selected"; 
+                } 
+                else { 
+                    document.getElementById("error").innerHTML 
+                        = "*You have not selected any season"; 
+                } 
+            }  
         },
         created() {
             // this.save()
-            //gọi chỗ này là khi mở lên nó gọi hàm kia luôn k cần click gì
         }
     }
 </script>

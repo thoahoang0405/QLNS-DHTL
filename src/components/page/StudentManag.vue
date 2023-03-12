@@ -27,7 +27,7 @@
       </div>
       <div class="button-function">
         <div class="add">
-          <button class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
+          <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
         </div>
 
         <button class="btn-excel">
@@ -303,7 +303,7 @@
         </div>
       </div> -->
   </div>
-<Form ></Form>
+<Form v-show="isShow"></Form>
 </template>
 <script>
 import Paginate from "vuejs-paginate-next";
@@ -328,6 +328,9 @@ export default {
   methods: {
     showPage(is) {
       this.isShow = is;
+    },
+    btnShow(){
+      this.isShow = !this.isShow
     },
     btnDropUp() {
       $(".icon-dropup").toggleClass("iconrotate");

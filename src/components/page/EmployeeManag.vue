@@ -27,7 +27,7 @@
         </div>
         <div class="button-function">
           <div class="add">
-            <button class="btn-add btn-hover-blue">+ Thêm nhân viên</button>
+            <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm nhân viên</button>
           </div>
   
           <button class="btn-excel">
@@ -261,14 +261,16 @@
       </div>
     </div>
   <!-- <Form ></Form> -->
+  <FormEmployee v-show="isShow"></FormEmployee>
   </template>
   <script>
 //   import Paginate from "vuejs-paginate-next";
 //   import Form from "../base/FormDetail.vue"
+  import FormEmployee from "../base/FormEmployee.vue"
   import $ from "jquery";
   export default {
     components: {
-    //   Paginate, Form
+      FormEmployee,
     },
     data() {
       return {
@@ -283,6 +285,9 @@
       };
     },
     methods: {
+      btnShow(){
+        this.isShow = !this.isShow
+      },
       showPage(is) {
         this.isShow = is;
       },

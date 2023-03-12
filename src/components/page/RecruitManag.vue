@@ -112,6 +112,7 @@
     </div>
     </div>
    
+
 </template>
 <style scoped>
 .container {
@@ -175,6 +176,15 @@
 </style>
 
 <script>
-// import { MessageOutlined } from '@ant-design/icons-vue';
-
+  // import FomrD from '../base/FormDetail.vue';
+  export default {
+    components: {
+      
+    },
+    data() {
+      return {
+        isShow: false,
+      }
+    }
+  }
 </script>
