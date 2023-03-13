@@ -39,8 +39,9 @@
                     </div>
                     <div class="input__box">
                         <label for="">Khoa</label>
-                        <input @blur="validate()" class="khoa" type="text" v-model="desc.khoa">
-                        <div class="invalid-feedback" v-if="errors.khoa">{{ errors.khoa }}</div>
+                        <combobox class="khoa " v-model="desc.khoa"></combobox>
+                        <!-- <input @blur="validate()" class="khoa" type="text" v-model="desc.khoa"> -->
+                       
                     </div>
                 </div>
                 <div class="column">
@@ -93,6 +94,7 @@
                         <input @blur="validate()" class="ngaytotnghiep" type="date" v-model="desc.ngaytotnghiep">
                         <div class="invalid-feedback" v-if="errors.ngaytotnghiep">{{ errors.ngaytotnghiep }}</div>
                     </div>
+
                 </div>
             </div>
             <div class="form-bottom">
@@ -105,6 +107,8 @@
 <style>
 .invalid-feedback {
     color: red;
+    position: absolute;
+    font-size: 11px;
 }
 #form {
     background-color: rgba(0, 0, 0, 0.2);
@@ -128,15 +132,20 @@
     padding-left: 5px;
     color: #707070;
     margin-top: 7px;
+    height: 36px;
   }
   .form {
     width: fit-content;
     height: fit-content;
     background-color: #fff;
-    margin: 25px auto;
+    margin: auto auto;
     border-radius: 8px;
-    width: 595px;
+    width:800px;
     /* display: none; */
+}
+input{
+    height: 36px;
+
 }
     .form-Wrap {
         padding: 0 20px;
@@ -175,9 +184,12 @@
     color: #fff;
 }
 .btn {
-    padding: 5px 30px;
+    /* padding: 5px 30px; */
     cursor: pointer;
     border-radius: 2px;
+    height: 36px;
+    align-items: center;
+    box-sizing: border-box;
   }
   .column {
     display: flex;
@@ -193,7 +205,7 @@
     width: 15px;
     margin: 0;
   }
-  @media screen and (max-width: 520px) {
+  /* @media screen and (max-width: 520px) {
    .column-s{
     display: block;
    }
@@ -207,9 +219,10 @@
     font-size: 12px;
     height: 20px;   
    }
-  }
+  } */
 </style>
 <script>
+import combobox from "../base/BaseCombobox.vue"
     export default {
         data(){
             return {
@@ -247,6 +260,9 @@
                     ngaytotnghiep: '',
                 }
             }
+        },
+        components: {
+            combobox
         },
         methods: {
             btnHidden(){

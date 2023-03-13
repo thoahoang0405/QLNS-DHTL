@@ -142,7 +142,7 @@
           <div class="content-page">{{ pageDefault }} bản ghi trên 1 trang</div>
           <div class="dropup-page">
             <div class="icon-dropup" @click="btnDropUp"></div>
-            <div class="item-up" v-show="isShow">
+            <div class="item-up" v-show="isShowDrop">
               <div
                 class="item-dropup"
                 :class="{ act: isActive == '10' }"
@@ -327,14 +327,14 @@ export default {
   },
   methods: {
     showPage(is) {
-      this.isShow = is;
+      this.isShowDrop = is;
     },
     btnShow(){
       this.isShow = !this.isShow
     },
     btnDropUp() {
       $(".icon-dropup").toggleClass("iconrotate");
-      if (!this.isShow) {
+      if (!this.isShowDrop) {
         this.showPage(true);
         $(".icon-dropup").addClass("iconrotate");
       } else {

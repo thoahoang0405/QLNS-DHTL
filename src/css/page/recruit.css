@@ -1,6 +1,7 @@
 .body {
     background-color: #f4f7ff;
     padding: 16px;
+    height: 100%;
   }
 .body-header {
     display: flex;
