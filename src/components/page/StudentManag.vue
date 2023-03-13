@@ -303,7 +303,7 @@
         </div>
       </div> -->
   </div>
-<Form v-show="isShow"></Form>
+<Form v-show="isShow" @hideForm="closeForm"></Form>
 </template>
 <script>
 import Paginate from "vuejs-paginate-next";
@@ -331,6 +331,10 @@ export default {
     },
     btnShow(){
       this.isShow = !this.isShow
+    },
+    //nhận lệnh ẩn từ bên form chi tiết
+    closeForm(value){
+      this.isShow=value
     },
     btnDropUp() {
       $(".icon-dropup").toggleClass("iconrotate");

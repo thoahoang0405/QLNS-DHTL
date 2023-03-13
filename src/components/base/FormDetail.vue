@@ -4,7 +4,7 @@
             <div class="form-top">
                 <div class="form-title">
                     <h3 class="title">Thêm/sửa thông tin sinh viên</h3>
-                    <span class="close">X</span>
+                    <span class="close" @click="closeForm">X</span>
                 </div>
             </div>
             <div class="form-Wrap">
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="form-bottom">
-                <div class="btn btn-cancel">Hủy</div>
+                <div class="btn btn-cancel" @click="closeForm">Hủy</div>
                 <div class="btn btn-save" @click="save()" >Lưu</div>
             </div>
         </form>
@@ -267,6 +267,10 @@ import combobox from "../base/BaseCombobox.vue"
         methods: {
             btnHidden(){
                 this.isShow = !this.isShow
+            },
+            //gửi lệnh ẩn form từ bên này sang trang chính
+            closeForm(){
+                this.$emit("hideForm", false);
             },
             validate(){
                 let isValid = true;
