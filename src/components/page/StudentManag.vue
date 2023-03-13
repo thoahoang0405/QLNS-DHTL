@@ -305,6 +305,11 @@
   </div>
 <Form v-show="isShow" @hideForm="closeForm"></Form>
 </template>
+<style>
+  .btn-add:hover {
+    opacity: 0.8;
+  }
+</style>
 <script>
 import Paginate from "vuejs-paginate-next";
 import Form from "../base/FormDetail.vue"

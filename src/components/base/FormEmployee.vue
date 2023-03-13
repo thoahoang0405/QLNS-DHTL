@@ -3,16 +3,16 @@
        <form class="form">
            <div class="form-top">
                <div class="form-title">
-                   <h3 class="title">Thêm/sửa thông tin sinh viên</h3>
-                   <span class="close">X</span>
+                   <h3 class="title">Thêm/sửa thông tin nhân viên</h3>
+                   <span class="close" @click="closeForm">X</span>
                </div>
            </div>
            <div class="form-Wrap">
                <div class="column">
                    <div class="input__box">
                        <label for="">Mã nhân viên</label>
-                       <input @blur="validate()" class="masv" type="text" v-model="desc.masv">
-                       <div class="invalid-feedback" v-if="errors.masv">{{ errors.masv }}</div>
+                       <input @blur="validate()" class="manv" type="text" v-model="desc.manv">
+                       <div class="invalid-feedback" v-if="errors.manv">{{ errors.manv }}</div>
                    </div>
                    <div class="input__box">
                        <label for="">Tên nhân viên</label>
@@ -39,27 +39,29 @@
                    </div>
                    <div class="input__box">
                        <label for="">Khoa</label>
-                       <input @blur="validate()" class="khoa" type="text" v-model="desc.khoa">
-                       <div class="invalid-feedback" v-if="errors.khoa">{{ errors.khoa }}</div>
+                       <combobox class="khoa " v-model="desc.khoa"></combobox>
+                       <!-- <input @blur="validate()" class="khoa" type="text" v-model="desc.khoa"> -->
+                      
                    </div>
                </div>
                <div class="column">
-                   <div class="input__box">
-                       <label for="">Cmnd/cccd</label> 
-                       <input @blur="validate()" class="cmnd" type="text" v-model="desc.cmnd">
-                       <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
-                   </div>
-                   <div class="input__box">
-                       <label for="">Ngày cấp</label>
-                       <input @blur="validate()" class="ngaycap" type="date" v-model="desc.ngaycap">
-                       <div class="invalid-feedback" v-if="errors.ngaycap">{{ errors.ngaycap }}</div>
-                   </div>
-               </div>
-               <div class="input__box">    
-                   <label for="">Nơi cấp</label>
-                   <input @blur="validate()" class="noicap" type="text" v-model="desc.noicap">
-                       <div class="invalid-feedback" v-if="errors.noicap">{{ errors.noicap }}</div>
-               </div>
+                    <div class="input__box">
+                        <label for="">Cmnd/cccd</label> 
+                        <input @blur="validate()" class="cmnd" type="text" v-model="desc.cmnd">
+                        <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
+                    </div>
+                    <div class="input__box">
+                        <label for="">Ngày cấp</label>
+                        <input @blur="validate()" class="ngaycap" type="date" v-model="desc.ngaycap">
+                        <div class="invalid-feedback" v-if="errors.ngaycap">{{ errors.ngaycap }}</div>
+                    </div>
+                    <div class="input__box">
+                        <label for="">Nơi cấp</label>
+                    <input @blur="validate()" class="noicap" type="text" v-model="desc.noicap">
+                    <div class="invalid-feedback" v-if="errors.noicap">{{ errors.noicap }}</div>
+                    </div>
+                </div>
+               
                <div class="column">
                    <div class="input__box">
                        <label for="">Email</label>
@@ -72,6 +74,24 @@
                        <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
                    </div>
                </div>
+               <div class="column column-s">
+                   <div class="input__box">
+                       <label for="">Mã số thuế</label>
+                       <input @blur="validate()" class="daotao" type="text" v-model="desc.daotao">
+                       <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Số tài khoản</label>
+                       <input @blur="validate()" class="ngaynhaphoc" type="text" v-model="desc.ngaynhaphoc">
+                       <div class="invalid-feedback" v-if="errors.ngaynhaphoc">{{ errors.ngaynhaphoc }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Tên ngân hàng</label>
+                       <input @blur="validate()" class="ngaytotnghiep" type="text" v-model="desc.ngaytotnghiep">
+                       <div class="invalid-feedback" v-if="errors.ngaytotnghiep">{{ errors.ngaytotnghiep }}</div>
+                   </div>
+
+               </div>
                <div class="input__box">    
                    <label for="">Địa chỉ</label>
                    <input @blur="validate()" class="diachi" type="text" v-model="desc.diachi">
@@ -79,32 +99,69 @@
                </div>
                <div class="column column-s">
                    <div class="input__box">
-                       <label for="">Chương trình đào tạo</label>
+                       <label for="">Khoa</label>
                        <input @blur="validate()" class="daotao" type="text" v-model="desc.daotao">
                        <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
                    </div>
                    <div class="input__box">
-                       <label for="">Ngày nhập học</label>
+                       <label for="">Trạng thái</label>
+                       <input @blur="validate()" class="ngaynhaphoc" type="text" v-model="desc.ngaynhaphoc">
+                       <div class="invalid-feedback" v-if="errors.ngaynhaphoc">{{ errors.ngaynhaphoc }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Cấp bậc lương</label>
+                       <input @blur="validate()" class="ngaytotnghiep" type="text" v-model="desc.ngaytotnghiep">
+                       <div class="invalid-feedback" v-if="errors.ngaytotnghiep">{{ errors.ngaytotnghiep }}</div>
+                   </div>
+
+               </div>
+               
+               <div class="column column-s">
+                   <div class="input__box">
+                       <label for="">Phòng ban</label>
+                       <input @blur="validate()" class="daotao" type="text" v-model="desc.daotao">
+                       <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Chứng chỉ đào tạo</label>
                        <input @blur="validate()" class="ngaynhaphoc" type="date" v-model="desc.ngaynhaphoc">
                        <div class="invalid-feedback" v-if="errors.ngaynhaphoc">{{ errors.ngaynhaphoc }}</div>
                    </div>
                    <div class="input__box">
-                       <label for="">Ngày dự kiến tốt nghiệp</label>
+                       <label for="">Tình trạng hôn nhân</label>
                        <input @blur="validate()" class="ngaytotnghiep" type="date" v-model="desc.ngaytotnghiep">
                        <div class="invalid-feedback" v-if="errors.ngaytotnghiep">{{ errors.ngaytotnghiep }}</div>
                    </div>
                </div>
+               <div class="column">
+                   <div class="input__box">
+                       <label for="">Khen thưởng</label>
+                       <input @blur="validate()" class="email" type="text" v-model="desc.email">
+                       <div class="invalid-feedback" v-if="errors.email">{{ errors.email }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Kỷ luật</label>
+                       <input @blur="validate()" class="sodt" type="text" v-model="desc.sodt">
+                       <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
+                   </div>
+               </div>
            </div>
            <div class="form-bottom">
-               <div class="btn btn-cancel">Hủy</div>
+               <div class="btn btn-cancel" @click="closeForm">Hủy</div>
                <div class="btn btn-save" @click="save()" >Lưu</div>
            </div>
        </form>
    </div>
 </template>
 <style>
+
+label {
+    margin: 14px 0;
+}
 .invalid-feedback {
    color: red;
+   position: absolute;
+   font-size: 12px;
 }
 #form {
    background-color: rgba(0, 0, 0, 0.2);
@@ -117,10 +174,13 @@
    /* display: none; */
  }
  input {
+    padding-bottom: 6px;
+    max-width: 100%;
+    max-height: 20px;
    border: 1px solid #ccc;
    border-radius: 2px;
    outline: none;
-   height: 29px;
+   height: 10px;
    position: relative;
    height: 29px;
    width: 100%;
@@ -133,28 +193,28 @@
    width: fit-content;
    height: fit-content;
    background-color: #fff;
-   margin: 25px auto;
+   margin: auto auto;
    border-radius: 8px;
-   width: 595px;
+   width:800px;
    /* display: none; */
 }
-   .form-Wrap {
-       padding: 0 20px;
-   }
-   .form-title {
-       padding: 0 13px;
-       background-color: #D9D9D9;
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
-       margin-bottom: 14px;
-   }
-   .close {
-       cursor: pointer;
-       font-weight: 600;
-       font-size: 18px;
-       color: #726c6c;
-   }
+.form-Wrap {
+    padding: 0 20px;
+}
+.form-title {
+    padding: 0 13px;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+.close {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    color: #726c6c;
+}
  .input__box {
    width: 100%;
    margin-bottom: 10px;
@@ -175,9 +235,12 @@
    color: #fff;
 }
 .btn {
-   padding: 5px 30px;
+   padding: 10px 30px;
    cursor: pointer;
    border-radius: 2px;
+   height: 36px;
+   align-items: center;
+   box-sizing: border-box;
  }
  .column {
    display: flex;
@@ -193,7 +256,7 @@
    width: 15px;
    margin: 0;
  }
- @media screen and (max-width: 520px) {
+ /* @media screen and (max-width: 520px) {
   .column-s{
    display: block;
   }
@@ -207,15 +270,16 @@
    font-size: 12px;
    height: 20px;   
   }
- }
+ } */
 </style>
 <script>
+import combobox from "../base/BaseCombobox.vue"
    export default {
        data(){
            return {
                isShow: false,
                errors: {
-                   masv: '',
+                   manv: '',
                    ten: '',
                    // gioitinh: 'nam',
                    ngaysinh: '',
@@ -231,7 +295,7 @@
                    ngaytotnghiep: '',
                },
                desc: {
-                   masv: '',
+                   manv: '',
                    ten: '',
                    gioitinh: 'nam',
                    ngaysinh: '',
@@ -248,15 +312,22 @@
                }
            }
        },
+       components: {
+           combobox
+       },
        methods: {
            btnHidden(){
                this.isShow = !this.isShow
+           },
+           //gửi lệnh ẩn form từ bên này sang trang chính
+           closeForm(){
+               this.$emit("hideForm", false);
            },
            validate(){
                let isValid = true;
 
                this.errors = {
-                   masv: '',
+                   manv: '',
                    ten: '',
                    // gioitinh: '',
                    ngaysinh: '',
@@ -271,8 +342,8 @@
                    ngaynhaphoc: '',
                    ngaytotnghiep: '',
                }
-               if(!this.desc.masv) {
-                   this.errors.masv = "Không được để trống!";
+               if(!this.desc.manv) {
+                   this.errors.manv = "Không được để trống!";
                    isValid = false;
                }
                if(!this.desc.ten) {

@@ -132,7 +132,9 @@
 }
 .item-row{
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
 }
 /* .item-row {
   display: grid;

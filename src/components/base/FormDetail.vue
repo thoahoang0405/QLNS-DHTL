@@ -55,12 +55,13 @@
                         <input @blur="validate()" class="ngaycap" type="date" v-model="desc.ngaycap">
                         <div class="invalid-feedback" v-if="errors.ngaycap">{{ errors.ngaycap }}</div>
                     </div>
-                </div>
-                <div class="input__box">    
-                    <label for="">Nơi cấp</label>
+                    <div class="input__box">
+                        <label for="">Nơi cấp</label>
                     <input @blur="validate()" class="noicap" type="text" v-model="desc.noicap">
-                        <div class="invalid-feedback" v-if="errors.noicap">{{ errors.noicap }}</div>
+                    <div class="invalid-feedback" v-if="errors.noicap">{{ errors.noicap }}</div>
+                    </div>
                 </div>
+                
                 <div class="column">
                     <div class="input__box">
                         <label for="">Email</label>
@@ -77,6 +78,19 @@
                     <label for="">Địa chỉ</label>
                     <input @blur="validate()" class="diachi" type="text" v-model="desc.diachi">
                     <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
+                </div>
+                <div class="column column-s">
+                    <div class="input__box">
+                        <label for="">Kỳ học</label>
+                        <input @blur="validate()" class="ngaynhaphoc" type="text" v-model="desc.ngaynhaphoc">
+                        <div class="invalid-feedback" v-if="errors.ngaynhaphoc">{{ errors.ngaynhaphoc }}</div>
+                    </div>
+                    <div class="input__box">
+                        <label for="">Khen thưởng</label>
+                        <input @blur="validate()" class="ngaytotnghiep" type="text" v-model="desc.ngaytotnghiep">
+                        <div class="invalid-feedback" v-if="errors.ngaytotnghiep">{{ errors.ngaytotnghiep }}</div>
+                    </div>
+
                 </div>
                 <div class="column column-s">
                     <div class="input__box">
@@ -105,10 +119,13 @@
     </div>
 </template>
 <style>
+label {
+    margin: 14px 0;
+}
 .invalid-feedback {
     color: red;
     position: absolute;
-    font-size: 11px;
+    font-size: 12px;
 }
 #form {
     background-color: rgba(0, 0, 0, 0.2);
@@ -121,6 +138,9 @@
     /* display: none; */
   }
   input {
+    max-width: 100%;
+    max-height: 20px;
+    padding-bottom: 6px;
     border: 1px solid #ccc;
     border-radius: 2px;
     outline: none;
@@ -132,7 +152,6 @@
     padding-left: 5px;
     color: #707070;
     margin-top: 7px;
-    height: 36px;
   }
   .form {
     width: fit-content;
@@ -142,10 +161,6 @@
     border-radius: 8px;
     width:800px;
     /* display: none; */
-}
-input{
-    height: 36px;
-
 }
     .form-Wrap {
         padding: 0 20px;
@@ -163,6 +178,9 @@ input{
         font-weight: 600;
         font-size: 18px;
         color: #726c6c;
+    }
+    .close:hover {
+        opacity: 0.8;
     }
   .input__box {
     width: 100%;
@@ -184,12 +202,15 @@ input{
     color: #fff;
 }
 .btn {
-    /* padding: 5px 30px; */
+    padding: 10px 30px;
     cursor: pointer;
     border-radius: 2px;
     height: 36px;
     align-items: center;
     box-sizing: border-box;
+  }
+  .btn:hover {
+    opacity: 0.8;
   }
   .column {
     display: flex;
