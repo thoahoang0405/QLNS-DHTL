@@ -27,7 +27,7 @@
       </div>
       <div class="button-function">
         <div class="add">
-          <button class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
+          <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
         </div>
 
         <button class="btn-excel">
@@ -142,7 +142,7 @@
           <div class="content-page">{{ pageDefault }} bản ghi trên 1 trang</div>
           <div class="dropup-page">
             <div class="icon-dropup" @click="btnDropUp"></div>
-            <div class="item-up" v-show="isShow">
+            <div class="item-up" v-show="isShowDrop">
               <div
                 class="item-dropup"
                 :class="{ act: isActive == '10' }"
@@ -303,8 +303,13 @@
         </div>
       </div> -->
   </div>
-<Form ></Form>
+<Form v-show="isShow" @hideForm="closeForm"></Form>
 </template>
+<style>
+  .btn-add:hover {
+    opacity: 0.8;
+  }
+</style>
 <script>
 import Paginate from "vuejs-paginate-next";
 import Form from "../base/FormDetail.vue"
@@ -327,11 +332,18 @@ export default {
   },
   methods: {
     showPage(is) {
-      this.isShow = is;
+      this.isShowDrop = is;
+    },
+    btnShow(){
+      this.isShow = !this.isShow
+    },
+    //nhận lệnh ẩn từ bên form chi tiết
+    closeForm(value){
+      this.isShow=value
     },
     btnDropUp() {
       $(".icon-dropup").toggleClass("iconrotate");
-      if (!this.isShow) {
+      if (!this.isShowDrop) {
         this.showPage(true);
         $(".icon-dropup").addClass("iconrotate");
       } else {
