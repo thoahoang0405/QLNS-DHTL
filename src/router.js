@@ -5,7 +5,7 @@ import Document from "./components/page/ContractManag.vue";
 import Employee from './components/page/EmployeeManag.vue'
 import Bonus from "./components/page/BonusCis.vue";
 import Home from "./components/page/HomePage.vue"
-import Punish from './components/page/PunishPage.vue'
+// import Punish from './components/page/PunishPage.vue'
 const routes =  [
     {
         
@@ -25,10 +25,10 @@ const routes =  [
               path: "/thuong",
               component: Bonus,
             },
-            {
-              path: "/kiluat",
-              component: Punish,
-            },
+            // {
+            //   path: "/kiluat",
+            //   component: Punish,
+            // },
             {
               path: "/tuyendung",
               component: Recruit,
