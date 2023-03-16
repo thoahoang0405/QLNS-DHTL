@@ -326,7 +326,7 @@ export default {
       totalPage: 0,
       isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
       isShowDrop: false,
-
+      // isShowNotifi: false,
       pageDefault: 10,
     };
   },
@@ -341,6 +341,7 @@ export default {
     closeForm(value){
       this.isShow=value
     },
+
     btnDropUp() {
       $(".icon-dropup").toggleClass("iconrotate");
       if (!this.isShowDrop) {

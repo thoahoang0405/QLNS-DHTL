@@ -84,8 +84,13 @@ export default {
     return {
       currentItem: {}, // item hiện tại
       isShowCbb: false, // show drop-down
-      placeholder: "Nhập giá trị ", // playholder
-      dataItems: [],
+      placeholder: "Nhập giá trị", // playholder
+      dataItems: [
+        {id:1, khoa: 'CNTT'},
+        {id:2, khoa: 'QTKD'},
+        {id:3, khoa: 'Kinh tế'},
+        {id:4, khoa: 'Cơ Khí'}
+      ],
       keyword: "",
       i: -1,
       hOfItem: 35,
