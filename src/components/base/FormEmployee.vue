@@ -39,7 +39,7 @@
                    </div>
                    <div class="input__box">
                        <label for="">Khoa</label>
-                       <combobox  class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
+                       <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
                        <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
                       
                    </div>
@@ -128,7 +128,7 @@
                        <div class="invalid-feedback" v-if="errors.tinhtrang">{{ errors.tinhtrang }}</div>
                    </div>
                </div>
-               <div class="column">
+               <!-- <div class="column">
                    <div class="input__box">
                        <label for="">Khen thưởng</label>
                        <input class="khenthuong" type="text" v-model="desc.khenthuong">
@@ -139,7 +139,7 @@
                        <input class="kyluat" type="text" v-model="desc.kyluat">
                        <div class="invalid-feedback" v-if="errors.kyluat">{{ errors.kyluat }}</div>
                    </div>
-               </div>
+               </div> -->
            </div>
            <div class="form-bottom">
                <div class="btn btn-cancel" @click="closeForm">Hủy</div>
@@ -155,7 +155,7 @@
 <style>
 
 label {
-    margin: 14px 0;
+    margin: 10px 0;
 }
 .invalid-feedback {
    color: red;
@@ -173,21 +173,19 @@ label {
    display: flex;
    /* display: none; */
  }
- input {
-    padding-bottom: 6px;
+ #form input {
     max-width: 100%;
-    max-height: 20px;
-   border: 1px solid #ccc;
-   border-radius: 2px;
-   outline: none;
-   height: 10px;
-   position: relative;
-   height: 29px;
-   width: 100%;
-   outline: none;
-   padding-left: 5px;
-   color: #707070;
-   margin-top: 7px;
+    max-height: 26px;
+    padding-bottom: 6px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    outline: none;
+    position: relative;
+    width: 100%;
+    outline: none;
+    padding-left: 5px;
+    color: #707070;
+    margin-top: 7px;
  }
  .form {
    width: fit-content;
@@ -195,7 +193,7 @@ label {
    background-color: #fff;
    margin: auto auto;
    border-radius: 8px;
-   width:800px;
+   width: 800px;
    /* display: none; */
 }
 .form-Wrap {
@@ -207,7 +205,7 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 2px;
 }
 .close {
     cursor: pointer;
@@ -222,10 +220,10 @@ label {
  .form-bottom {
    display: flex;
    justify-content: flex-end;
-   padding: 14px;
+   padding: 8px;
    background-color: #D9D9D9;
    gap: 28px;
-   margin-top: 14px;
+   margin-top: 2px;
  }
  .btn-cancel {
    background-color: #fff;
@@ -524,14 +522,14 @@ import combobox from "../base/BaseCombobox.vue";
                }
 
 
-               // var getSelectedValue = document.querySelector( 
-               //     'input[name="gioitinh"]:checked'); 
+               var getSelectedValue = document.querySelector( 
+                   'input[name="gioitinh"]:checked'); 
            
-               // if(getSelectedValue != null) { 
-               //     document.getElementById("disp").innerHTML 
-               //         = getSelectedValue.value 
-               //         + " season is selected"; 
-               // }
+               if(getSelectedValue != null) { 
+                   document.getElementById("disp").innerHTML 
+                       = getSelectedValue.value 
+                       + " season is selected"; 
+               }
                
                return isValid
            },

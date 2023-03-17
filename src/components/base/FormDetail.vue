@@ -29,6 +29,7 @@
                             <input type="radio" id="nu" v-model="desc.gioitinh" value="nu">
                             <label class="nu" for="">Nữ</label>
                         </div>
+                        <div class="invalid-feedback" v-if="errors.gioitinh">{{ errors.gioitinh }}</div>
                         <!-- <div style= "color:red" id="disp">{{ desc.gioitinh }}</div> -->
                     </div>
                 </div>
@@ -41,7 +42,8 @@
                     </div>
                     <div class="input__box">
                         <label for="">Khoa</label>
-                        <combobox class="khoa " v-model="desc.khoa"></combobox>
+                        <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
+                        <!-- <combobox class="khoa " v-model="desc.khoa"></combobox> -->
                         <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
                        
                     </div>
@@ -76,11 +78,23 @@
                         <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
                     </div>
                 </div>
-                <div class="input__box">    
+                <div class="column">
+                    <div class="input__box">
+                        <label for="">Số tài khoản</label>
+                        <input class="sotaikhoan" type="text" v-model="desc.sotaikhoan">
+                        <div class="invalid-feedback" v-if="errors.sotaikhoan">{{ errors.sotaikhoan }}</div>
+                    </div>
+                    <div class="input__box">
+                        <label for="">Địa chỉ</label>
+                        <input class="sodt" type="text" v-model="desc.sodt">
+                        <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
+                    </div>
+                </div>
+                <!-- <div class="input__box">    
                     <label for="">Địa chỉ</label>
                     <input class="diachi" type="text" v-model="desc.diachi">
                     <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
-                </div>
+                </div> -->
                 <div class="column column-s">
                     <div class="input__box">
                         <label for="">Kỳ học</label>
@@ -122,11 +136,11 @@
         <!-- Notification -->
         
     </div>
-    <notifi v-show="isShowNotifi" @closeNotifi="closeNo"></notifi>
+    <!-- <notifi v-show="isShowNotifi" @closeNotifi="closeNo"></notifi> -->
 </template>
 <style>
 label {
-    margin: 14px 0;
+    margin: 10px 0;
 }
 .invalid-feedback {
     color: red;
@@ -143,21 +157,20 @@ label {
     display: flex;
     /* display: none; */
   }
-  input {
+
+ #form input {
     max-width: 100%;
-    max-height: 20px;
+    max-height: 26px;
     padding-bottom: 6px;
     border: 1px solid #ccc;
     border-radius: 2px;
     outline: none;
-    height: 29px;
     position: relative;
-    height: 29px;
     width: 100%;
     outline: none;
     padding-left: 5px;
     color: #707070;
-    margin-top: 7px;
+    margin-top: 4px;
   }
   .form {
     width: fit-content;
@@ -190,7 +203,8 @@ label {
     }
   .input__box {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    margin-top: 10px;
   }
   .form-bottom {
     display: flex;
@@ -225,10 +239,9 @@ label {
   .radio__box {
     display: flex;
     align-items: center;
-    margin-top: 8px;
     column-gap: 10px;
   }
-  .radio__box input {
+  #form .radio__box input {
     width: 15px;
     margin: 0;
   }
@@ -331,17 +344,24 @@ label {
   } */
 </style>
 <script>
-import notifi from "./FormNotifi.vue"
+// import notifi from "./FormNotifi.vue"
 import combobox from "../base/BaseCombobox.vue"
     export default {
         data(){
             return {
                 // isShowNotifi: false,
+                dataItem:[
+                    {id:1, khoa: 'CNTT'},
+                    {id:2, khoa: 'QTKD'},
+                    {id:3, khoa: 'Kinh tế'},
+                    {id:4, khoa: 'Cơ Khí'}
+                ],
+                dataFields: {value: 'id', text: 'khoa'},
                 isShow: false,
                 errors: {
                     masv: '',
                     ten: '',
-                    // gioitinh: 'nam',
+                    gioitinh: '',
                     ngaysinh: '',
                     khoa: '',
                     cmnd: '',
@@ -349,6 +369,7 @@ import combobox from "../base/BaseCombobox.vue"
                     noicap: '',
                     email: '',
                     sodt: '',
+                    sotaikhoan: '',
                     diachi: '',
                     kyhoc: '',
                     khenthuong: '',
@@ -357,9 +378,10 @@ import combobox from "../base/BaseCombobox.vue"
                     ngaytotnghiep: '',
                 },
                 desc: {
+                    id: '',
                     masv: '',
                     ten: '',
-                    gioitinh: 'nam',
+                    gioitinh: '',
                     ngaysinh: '',
                     khoa: '',
                     cmnd: '',
@@ -367,6 +389,7 @@ import combobox from "../base/BaseCombobox.vue"
                     noicap: '',
                     email: '',
                     sodt: '',
+                    sotaikhoan: '',
                     diachi: '',
                     kyhoc: '',
                     khenthuong: '',
@@ -378,7 +401,7 @@ import combobox from "../base/BaseCombobox.vue"
         },
         components: {
             combobox,
-            notifi
+            // notifi
         },
         methods: {
             // btnShowNotifi(){
@@ -387,13 +410,13 @@ import combobox from "../base/BaseCombobox.vue"
             btnHidden(){
                 this.isShow = !this.isShow
             },
-            closeNo() {
-                this.isShowNotifi = !this.isShowNotifi;
-            },
+            // closeNo() {
+            //     this.isShowNotifi = !this.isShowNotifi;
+            // },
             //gửi lệnh ẩn form từ bên này sang trang chính
             
             closeForm(){
-                // this.$emit("hideForm", false);
+                this.$emit("hideForm", false);
                 this.isShowNotifi = true,
                 this.desc = {
                 manv: '',
@@ -446,7 +469,7 @@ import combobox from "../base/BaseCombobox.vue"
                 this.errors = {
                     masv: '',
                     ten: '',
-                    // gioitinh: '',
+                    gioitinh: '',
                     ngaysinh: '',
                     khoa: '',
                     cmnd: '',
@@ -454,6 +477,7 @@ import combobox from "../base/BaseCombobox.vue"
                     noicap: '',
                     email: '',
                     sodt: '',
+                    sotaikhoan: '',
                     diachi: '',
                     kyhoc: '',
                     khenthuong: '',
@@ -469,10 +493,10 @@ import combobox from "../base/BaseCombobox.vue"
                     this.errors.ten = "Không được để trống!";
                     isValid = false;
                 }
-                // if(!this.desc.gioitinh) {
-                //     this.errors.gioitinh = "Không được để trống!";
-                //     isValid = false;
-                // }
+                if(!this.desc.gioitinh) {
+                    this.errors.gioitinh = "Không được để trống!";
+                    isValid = false;
+                }
                 if(!this.desc.ngaysinh) {
                     this.errors.ngaysinh = "Không được để trống!";
                     isValid = false;
@@ -482,6 +506,13 @@ import combobox from "../base/BaseCombobox.vue"
                     isValid = false;
                 } else if(!this.isNumber(this.desc.sodt)) {
                     this.errors.sodt = "Yêu cầu nhập số";
+                    isValid = false;
+                }
+                if(!this.desc.sotaikhoan) {
+                    this.errors.sotaikhoan = "Không được để trống!";
+                    isValid = false;
+                }else if(!this.isNumber(this.desc.sotaikhoan)) {
+                    this.errors.sotaikhoan = "Yêu cầu nhập số";
                     isValid = false;
                 }
                 if(!this.desc.khoa) {
@@ -554,6 +585,8 @@ import combobox from "../base/BaseCombobox.vue"
             },
             save(){
                 this.validate()
+                this.$emit("save",this.desc)
+                console.log(this.desc)
             },
             checkButton() {  
                 var getSelectedValue = document.querySelector( 
@@ -568,6 +601,7 @@ import combobox from "../base/BaseCombobox.vue"
                     document.getElementById("error").innerHTML 
                         = "*You have not selected any season"; 
                 } 
+                
             }  
         },
         created() {

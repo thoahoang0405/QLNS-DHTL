@@ -84,7 +84,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row">
+          <tr ref="row" v-for="item in list" :key="item.id">
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
@@ -98,25 +98,24 @@
                 style="width: 18px; height: 18px"
               />
             </td>
-            <td class="text-center">1</td>
-            <td>1951061039</td>
-            <td>Hoàng Thị Thỏa</td>
-            <td>Nữ</td>
-            <td>04/05/2001</td>
-             <td>038743874</td>
-            <td>hoangthoa@gmail.com</td>
-            <td>0827264382</td>
-            <td>046576578</td>
-            <td>Nam Định</td>
-            <td>Công nghệ thông tin</td>
-
-            <td>kì II-2022</td>
-            <td>Sinh viên tiên tiến</td>
-            <td></td>
-            <td></td>
-            <td>Đang học</td>
-            <td>1951061039</td>
-            <td>948388922</td>
+            <td class="text-center">{{ item.id }}</td>
+            <td>{{ item.msv }}</td>
+            <td>{{ item.ten }}</td>
+            <td>{{ item.gioitinh }}</td>
+            <td>{{ item.ngaysinh }}</td>
+             <td>{{ item.cmnd }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.sodt }}</td>
+            <td>{{ item.sotaikhoan }}</td>
+            <td>{{ item.diachi }}</td>
+            <td>{{ item.khoa }}</td>
+            <td>{{ item.kyhoc }}</td>
+            <td>{{ item.khenthuong }}</td>
+            <td>{{ item.kyluat }}</td>
+            <td>{{ item.hocbong }}</td>
+            <td>{{ item.trangthai }}</td>
+            <td>{{ item.tendangnhap }}</td>
+            <td>{{ item.matkhau }}</td>
             <td
               ref="func"
               class="td-item-final td-func sticky-right"
@@ -303,7 +302,7 @@
         </div>
       </div> -->
   </div>
-<Form v-show="isShow" @hideForm="closeForm"></Form>
+<Form v-show="isShow" @hideForm="closeForm" @save="clickAdd"></Form>
 </template>
 <style>
   .btn-add:hover {
@@ -320,6 +319,272 @@ export default {
   },
   data() {
     return {
+      list: [
+        {
+          id: 1,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 2,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 3,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 4,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 5,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 6,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 7,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 8,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 9,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 10,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 11,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+        {
+          id: 12,
+          msv: '1951061106',
+          ten: 'Ngô Văn Tùng',
+          gioitinh: 'Nam',
+          ngaysinh: '18/03/2001',
+          cmnd: '038743874',
+          email: 'ngotung@gmail.com',
+          sodt: '9999999999',
+          sotaikhoan: '8888888888',
+          diachi: 'Bắc Ninh',
+          khoa: 'Công nghệ thông tin',
+          kyhoc: 'kì II-2022',
+          khenthuong: '	Sinh viên tiên tiến',
+          kyluat: '',
+          hocbong: '',
+          trangthai: 'Đang học',
+          // ngaycap: '1/1/2019',
+          // noicap: '1/1/2024',
+          tendangnhap: '1951061106',
+          matkhau: '1111111111',
+        },
+      ],
       isActive: "10",
       pageNumber: 1,
       page: 1,
@@ -331,6 +596,9 @@ export default {
     };
   },
   methods: {
+    clickAdd(item) {
+      this.list.push(item)
+    },
     showPage(is) {
       this.isShowDrop = is;
     },
