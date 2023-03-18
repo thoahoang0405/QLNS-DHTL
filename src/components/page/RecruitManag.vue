@@ -221,12 +221,29 @@
   column-gap: 10px;
   margin-top: 10px;
 } 
-.btnEdit,
+.btnEdit{
+  background-color: #1aa4c8;
+    color: #fff;
+    padding: 6px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.btnEdit:hover{
+  background-color: #fff;
+    color: #1aa4c8;
+    border: 1px solid #1aa4c8;
+}
 .btnDelete {
-  border: 1px solid #ccc;
+  border: 1px solid #e25656;
   padding: 6px 8px;
   border-radius: 2px;
   cursor: pointer;
+  background-color: #fff;
+  color: #e25656;
+}
+.btnDelete:hover{
+  background-color: #e25656;
+  color: #fff;
 }
 
 /* @media screen and (max-width: 767.98px) {

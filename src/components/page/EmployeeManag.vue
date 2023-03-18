@@ -225,7 +225,7 @@ import Form from "../base/FormEmployee.vue"
 import $ from "jquery";
 export default {
   components: {
-    Paginate, Form
+    Paginate,Form
   },
   data() {
     return {

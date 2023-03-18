@@ -27,7 +27,7 @@
       </div>
       <div class="button-function">
         <div class="add">
-          <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
+          <button @click="btnAddStudent" class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
         </div>
 
         <button class="btn-excel">
@@ -84,7 +84,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="item in list" :key="item.id">
+          <tr ref="row" v-for="item in list" :key="item.id" >
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
@@ -123,8 +123,8 @@
               colspan="12"
             >
               <div class="edit-text"></div>
-              <div class="icon icon-edit"></div>
-                <div class="icon icon-delete"></div>
+              <div class="icon icon-edit" @click="btnEditStudent(item)"></div>
+                <div class="icon icon-delete" @click="deleteClick(item)"></div>
             </td>
           </tr>
         </tbody>
@@ -302,7 +302,9 @@
         </div>
       </div> -->
   </div>
-<Form v-show="isShow" @hideForm="closeForm" @save="clickAdd"></Form>
+<Form v-show="isShowForm" @hideForm="hideFormDetail" :student="studentSelected"></Form>
+<PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
+
 </template>
 <style>
   .btn-add:hover {
@@ -312,10 +314,11 @@
 <script>
 import Paginate from "vuejs-paginate-next";
 import Form from "../base/FormDetail.vue"
+import PopupConfirm from "../base/BasePopupDelete.vue"
 import $ from "jquery";
 export default {
   components: {
-    Paginate, Form
+    Paginate,Form,PopupConfirm
   },
   data() {
     return {
@@ -586,13 +589,17 @@ export default {
         },
       ],
       isActive: "10",
+      studentSelected: [],
       pageNumber: 1,
       page: 1,
       totalPage: 0,
+      isShowConfirm: false,
+      isShowForm: false,
       isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
       isShowDrop: false,
       // isShowNotifi: false,
       pageDefault: 10,
+      msvDelete: "",
     };
   },
   methods: {
@@ -602,14 +609,30 @@ export default {
     showPage(is) {
       this.isShowDrop = is;
     },
-    btnShow(){
-      this.isShow = !this.isShow
+    btnAddStudent(){
+      this.isShowForm = !this.isShowForm
+    },
+    btnEditStudent(item){
+      this.isShowForm = !this.isShowForm
+      this.studentSelected=item
+    },
+    deleteClick(item){
+      this.isShowConfirm=!this.isShowConfirm
+      console.log(item.msv);
+      this.msvDelete=item.msv
+
+    },
+    cancelConfirm(value){
+      this.isShowConfirm=value
     },
     //nhận lệnh ẩn từ bên form chi tiết
-    closeForm(value){
+    closeFormDetail(value){
+      console.log(value);
       this.isShow=value
     },
-
+    hideFormDetail(value){
+this.isShowForm=value
+    },
     btnDropUp() {
       $(".icon-dropup").toggleClass("iconrotate");
       if (!this.isShowDrop) {

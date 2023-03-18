@@ -146,130 +146,14 @@
                <div class="btn btn-save" @click="save()" >Lưu</div>
            </div>
        </form>
+       <notifi v-show="isShowNotifi" @closeNotifi="closeNo" @cancelNotifi="FormCancel"></notifi>
    </div>
 
    <!-- thongbao -->
-   <notifi v-show="isShowNotifi" @closeNotifi="closeNo" @cancelNotifi="FormCancel"></notifi>
+   
    
 </template>
-<style>
 
-label {
-    margin: 10px 0;
-}
-.invalid-feedback {
-   color: red;
-   position: absolute;
-   font-size: 12px;
-   /* border: 2px solid red; */
-}
-#form {
-   background-color: rgba(0, 0, 0, 0.2);
-   z-index: 3;
-   width: 100%;
-   height: 100%;
-   margin: auto;
-   position: fixed;
-   display: flex;
-   /* display: none; */
- }
- #form input {
-    max-width: 100%;
-    max-height: 26px;
-    padding-bottom: 6px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    outline: none;
-    position: relative;
-    width: 100%;
-    outline: none;
-    padding-left: 5px;
-    color: #707070;
-    margin-top: 7px;
- }
- .form {
-   width: fit-content;
-   height: fit-content;
-   background-color: #fff;
-   margin: auto auto;
-   border-radius: 8px;
-   width: 800px;
-   /* display: none; */
-}
-.form-Wrap {
-    padding: 0 20px;
-}
-.form-title {
-    padding: 0 13px;
-    background-color: #D9D9D9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2px;
-}
-.close {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 18px;
-    color: #726c6c;
-}
- .input__box {
-   width: 100%;
-   margin-bottom: 10px;
- }
- .form-bottom {
-   display: flex;
-   justify-content: flex-end;
-   padding: 8px;
-   background-color: #D9D9D9;
-   gap: 28px;
-   margin-top: 2px;
- }
- .btn-cancel {
-   background-color: #fff;
- }
- .btn-save {
-   background-color:  #1A8FDD;
-   color: #fff;
-}
-.btn {
-   padding: 10px 30px;
-   cursor: pointer;
-   border-radius: 2px;
-   height: 36px;
-   align-items: center;
-   box-sizing: border-box;
- }
- .column {
-   display: flex;
-   column-gap: 20px;
- }
- .radio__box {
-   display: flex;
-   align-items: center;
-   margin-top: 8px;
-   column-gap: 10px;
- }
- .radio__box input {
-   width: 15px;
-   margin: 0;
- }
- /* @media screen and (max-width: 520px) {
-  .column-s{
-   display: block;
-  }
-  .column {
-   margin-bottom: 0;
-  }
-  label {
-   font-size: 12px;
-  }
-  input {
-   font-size: 12px;
-   height: 20px;   
-  }
- } */
-</style>
 <script>
 import notifi from "./FormNotifi.vue"
 import combobox from "../base/BaseCombobox.vue";
@@ -564,3 +448,121 @@ import combobox from "../base/BaseCombobox.vue";
        }
    }
 </script>
+<style>
+
+label {
+    margin: 10px 0;
+}
+.invalid-feedback {
+   color: red;
+   position: absolute;
+   font-size: 12px;
+   /* border: 2px solid red; */
+}
+#form {
+   background-color: rgba(0, 0, 0, 0.2);
+   z-index: 3;
+   width: 100%;
+   height: 100%;
+   margin: auto;
+   position: fixed;
+   display: flex;
+   /* display: none; */
+ }
+ #form input {
+    max-width: 100%;
+    max-height: 26px;
+    padding-bottom: 6px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    outline: none;
+    position: relative;
+    width: 100%;
+    outline: none;
+    padding-left: 5px;
+    color: #707070;
+    margin-top: 7px;
+ }
+ .form {
+   width: fit-content;
+   height: fit-content;
+   background-color: #fff;
+   margin: auto auto;
+   border-radius: 8px;
+   width: 800px;
+   /* display: none; */
+}
+.form-Wrap {
+    padding: 0 20px;
+}
+.form-title {
+    padding: 0 13px;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+.close {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    color: #726c6c;
+}
+ .input__box {
+   width: 100%;
+   margin-bottom: 10px;
+ }
+ .form-bottom {
+   display: flex;
+   justify-content: flex-end;
+   padding: 8px;
+   background-color: #D9D9D9;
+   gap: 28px;
+   margin-top: 2px;
+ }
+ .btn-cancel {
+   background-color: #fff;
+ }
+ .btn-save {
+   background-color:  #1A8FDD;
+   color: #fff;
+}
+.btn {
+   padding: 10px 30px;
+   cursor: pointer;
+   border-radius: 2px;
+   height: 36px;
+   align-items: center;
+   box-sizing: border-box;
+ }
+ .column {
+   display: flex;
+   column-gap: 20px;
+ }
+ .radio__box {
+   display: flex;
+   align-items: center;
+   margin-top: 8px;
+   column-gap: 10px;
+ }
+ .radio__box input {
+   width: 15px;
+   margin: 0;
+ }
+ /* @media screen and (max-width: 520px) {
+  .column-s{
+   display: block;
+  }
+  .column {
+   margin-bottom: 0;
+  }
+  label {
+   font-size: 12px;
+  }
+  input {
+   font-size: 12px;
+   height: 20px;   
+  }
+ } */
+</style>
