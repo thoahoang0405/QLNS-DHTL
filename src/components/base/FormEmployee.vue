@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import notifi from "./FormNotifi.vue"
+// import notifi from "./FormNotifi.vue"
 import combobox from "../base/BaseCombobox.vue";
    export default {
        data(){
@@ -217,7 +217,7 @@ import combobox from "../base/BaseCombobox.vue";
        },
        components: {
            combobox,
-           notifi
+        //    notifi
        },
        methods: {
             selectItemCbb(value) {
@@ -236,8 +236,8 @@ import combobox from "../base/BaseCombobox.vue";
             
            //gửi lệnh ẩn form từ bên này sang trang chính
            closeForm(){
-                this.isShowNotifi = true
-            //    this.$emit("hideForm", false);
+                // this.isShowNotifi = true
+               this.$emit("hideForm", false);
                this.desc = {
                 manv: '',
                    ten: '',
