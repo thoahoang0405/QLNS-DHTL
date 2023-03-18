@@ -77,19 +77,13 @@ namespace QLNS.DL
 
                     if (TotalRecords >= 0 && pageSize > 0)
                     {
-                        if(TotalPagesAll< pageSize)
-                        {
-                            TotalPagesAll = 1;
-                        }
-                        else
-                        {
+                       
                             TotalPagesAll = (int)(decimal)(TotalRecords / pageSize);
                             if (TotalPagesAll % pageSize != 0)
                             {
                                 TotalPagesAll = TotalPagesAll + 1;
                             }
-                        }
-                        
+                       
                     }
 
 

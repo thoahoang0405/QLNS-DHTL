@@ -29,8 +29,12 @@ namespace QLNS.DL.ContractDL
             {
                 parameters.Add("v_Where", $"ContractName LIKE '%{keyword}%'");
 
-               
-            
+
+
+            }
+            else
+            {
+                parameters.Add("v_Where", "");
             }
             
 
