@@ -167,7 +167,7 @@
     color: #111;
   }
   tbody tr:hover {
-    background-color: #9ed6e4 !important;
+    background-color: #9ed6e4 ;
   }
   tbody tr:hover .checkbox,
   tbody tr:hover .td-item-final {

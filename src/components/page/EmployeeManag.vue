@@ -12,7 +12,7 @@
             type="text"
             id="filter"
             class="filter"
-            placeholder="Lọc theo kì học"
+            placeholder="Lọc theo vị trí"
           />
           <div class="icon-filter icon"></div>
           <div class="icon-cbb">
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="input">
-          <input type="text" class="filter" placeholder="Lọc theo xếp loại" />
+          <input type="text" class="filter" placeholder="Lọc theo phòng ban" />
           <div class="icon-filter icon"></div>
           <div class="icon icon-down-bold"></div>
         </div>

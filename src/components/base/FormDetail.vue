@@ -129,7 +129,7 @@
             </div>
             <div class="form-bottom">
                 <div class="btn btn-cancel" @click="closeForm">Hủy</div>
-                <div class="btn btn-save" @click="save()" >Lưu</div>
+                <div class="btn btn-save" @click="save" >Lưu</div>
             </div>
         </form>
 
@@ -144,6 +144,7 @@
 <script>
 import notifi from "./FormNotifi.vue"
 import combobox from "../base/BaseCombobox.vue"
+import { useToast } from "vue-toastification";
     export default {
         data(){
             return {
@@ -210,7 +211,7 @@ import combobox from "../base/BaseCombobox.vue"
             notifi
         },
         methods: {
-           
+          
             btnHidden(){
                 this.isShow = !this.isShow
             },
@@ -393,6 +394,9 @@ import combobox from "../base/BaseCombobox.vue"
                 return validRegex.test(value)
             },
             save(){
+                const toast = useToast();
+                this.$emit("hideForm", false);
+                toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
                 this.validate()
                 this.$emit("save",this.desc)
                 console.log(this.desc)

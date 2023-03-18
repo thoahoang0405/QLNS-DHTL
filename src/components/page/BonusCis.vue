@@ -524,6 +524,13 @@
   .title-heading {
     /* background-color: silver; */
   }
+  /* tbody tr:hover {
+    background-color: #9ed6e4 ;
+  }
+  tbody tr:hover .checkbox,
+  tbody tr:hover .td-item-final {
+    background-color: #9ed6e4 !important;
+  } */
   .head-popup {
     display: flex;
     justify-content: space-between;
@@ -531,11 +538,28 @@
     background-color: white;
     margin-bottom: 0 !important;
   }
-  svg::hover {
+  svg:hover {
     color: red;
   }
   .btn-close-popup::hover {
     color: red !important;
   }
+  .sticky-right-top {
+    position: sticky;
+    z-index: 0;
+    right: 0;
+    top: 0;
+    background-color: #acfdd1;
+}
+.sticky-left-top {
+    position: sticky;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    background-color: #acfdd1;
+}
+thead tr{
+  background-color: #acfdd1;
+}
   </style>
   

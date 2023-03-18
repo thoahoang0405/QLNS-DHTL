@@ -84,7 +84,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="item in list" :key="item.id" >
+          <tr ref="row" v-for="item in list" :key="item.id" @dblclick="btnEditStudent(item)" >
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
