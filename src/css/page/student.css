@@ -148,9 +148,9 @@
 
    .m-table {
     background-color: #fff;
-    height: calc(100% - 130px);
+    height:calc(100% - 130px);
     overflow-y: scroll;
-    width: calc(100% - 10px);
+    width:100%  ;
     overflow-x: scroll;
     margin: 10px 0px;
   
@@ -161,7 +161,7 @@
     width: auto;
     height: auto;
     border-spacing: 0px;
-    margin-top: 16px;
+    margin-top: 10px;
   }
   tbody tr td {
     color: #111;
@@ -372,11 +372,7 @@
     min-width: 170px;
     height: 35px;
   }
-  .before-text {
-    color: rgb(104, 102, 102);
-    margin: 8px;
-    margin-top: 10px;
-  }
+  
   .more-icon {
     background: url("../../assets/icon/icons8-more-24.png");
     width: 24px;
@@ -399,11 +395,7 @@
     width: 20px;
     height: 20px;
   }
-  .after-text {
-    color: #111;
-    margin: 8px;
-    margin-top: 10px;
-  }
+  
   .tooltip-Iden {
     position: absolute;
     background-color: #000;
@@ -418,15 +410,6 @@
   }
   .border-active {
     border: 1px solid #0075c0;
-  }
-  .pagination {
-    margin-left: 20px;
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #111;
-    font-size: 13px;
   }
   
   .act {

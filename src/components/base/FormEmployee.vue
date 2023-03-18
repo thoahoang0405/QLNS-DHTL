@@ -11,20 +11,20 @@
                <div class="column">
                    <div class="input__box">
                        <label for="">Mã nhân viên</label>
-                       <input class="manv" type="text" v-model="desc.manv">
+                       <input class="manv" type="text" v-model="employee.EmployeeCode">
                        <div class="invalid-feedback" v-if="errors.manv">{{ errors.manv }}</div>
                    </div>
                    <div class="input__box">
                        <label for="">Tên nhân viên</label>
-                       <input class="ten" type="text" v-model="desc.ten">
+                       <input class="ten" type="text" v-model="employee.EmployeeName">
                        <div class="invalid-feedback" v-if="errors.ten">{{ errors.ten }}</div>
                    </div>
                    <div class="input__box">
                        <label for="">Giới tính</label>
                        <div class="radio__box">
-                           <input type="radio" id="nam" v-model="desc.gioitinh" value="nam">
+                           <input type="radio" id="nam" v-model="employee.Gender" value="nam">
                            <label class="nam" for="">Nam</label>
-                           <input type="radio" id="nu" v-model="desc.gioitinh" value="nu">
+                           <input type="radio" id="nu" v-model="employee.Gender" value="nu">
                            <label class="nu" for="">Nữ</label>
                        </div>
                        <!-- <div style= "color:red" id="disp">{{ desc.gioitinh }}</div> -->
@@ -34,7 +34,7 @@
                <div class="column">
                    <div class="input__box">
                        <label for="">Ngày sinh</label>
-                       <input class="ngaysinh" type="date" v-model="desc.ngaysinh">
+                       <input class="ngaysinh" type="date" v-model="employee.DateOfBirth">
                        <div class="invalid-feedback" v-if="errors.ngaysinh">{{ errors.ngaysinh }}</div>
                    </div>
                    <div class="input__box">
@@ -47,7 +47,7 @@
                <div class="column">
                     <div class="input__box">
                         <label for="">Cmnd/cccd</label> 
-                        <input class="cmnd" type="text" v-model="desc.cmnd">
+                        <input class="cmnd" type="text" v-model="employee.IdentityNumber">
                         <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
                     </div>
                     <div class="input__box">
@@ -160,6 +160,7 @@ import combobox from "../base/BaseCombobox.vue";
    export default {
        data(){
            return {
+            employee: {},
                 isShowNotifi: false,
                 dataItem:[
                     {id:1, khoa: 'CNTT'},
@@ -425,6 +426,9 @@ import combobox from "../base/BaseCombobox.vue";
                return validRegex.test(value)
            },
            save(){
+            // if(!this.validate()){
+            //     console.log(this.employee);
+            // }
                this.validate()
             //    console.log(this.desc)
            },
