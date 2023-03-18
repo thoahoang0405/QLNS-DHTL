@@ -55,7 +55,7 @@
               />
             </th>
             <th class="text-center" style="min-width: 40px;">STT</th>
-            <th>Mã nhân viên</th>
+              <th>Mã nhân viên</th>
               <th>Họ và tên</th>
               <th>Giới tính</th>
               <th>Ngày sinh</th>
@@ -64,10 +64,11 @@
               <th>Số điện thoại</th>
               <th>Mã số thuế</th>
               <th>Số tài khoản</th>
-              <th>Tên ngân hàng</th>
               <th>Địa chỉ</th>
+              <td>Trạng thái</td>
+              <th>Lớp</th>
               <th>Khoa</th>
-              <th>Trạng thái</th>
+              <th>Chương trình đào tạo</th>
               <th>Cấp bậc lương</th>
               <th>Phòng ban</th>
               <th>Chứng chỉ đào tạo</th>
@@ -111,20 +112,14 @@
             <td>ngotung180301@gmail.com</td>
             <td>0393072588</td>
             <td>8888888888</td>
-            <td>8686868686</td>
-            <td>MB Bank</td>
-            
             <td>Bắc Ninh</td>
+            <td>Trạng thái</td>
+            <td>61THNB</td>
             <td>Công nghệ thông tin</td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td>Đại học</td>
+            <td>1/1/2019</td>
+            <td>1/1/2024</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td>admin</td>
-            <td>admin</td>
             <td
               ref="func"
               class="td-item-final td-func sticky-right"
