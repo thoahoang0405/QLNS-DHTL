@@ -1,7 +1,9 @@
-using QLNS.BL.BaseBL;
-using QLNS.BL.EmployeeBL;
-using QLNS.BL.EmployeeDL;
+using QLNS.BL;
+using QLNS.BL;
+using QLNS.DL;
 using QLNS.Common.entities;
+using QLNS.BL.BaseBL;
+using QLNS.DL.ContractDL;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
@@ -10,7 +12,35 @@ builder.Services.AddControllers()
 // Add services to the container.
 builder.Services.AddScoped<IEmployeeBL, EmployeeBL>();
 builder.Services.AddScoped<IEmployeeDL, EmployeeDL>();
+builder.Services.AddScoped<IStudentBL, StudentBL>();
+builder.Services.AddScoped<IStudentDL, StudentDL>();
+builder.Services.AddScoped<IClassificationBL, ClassificationBL>();
+builder.Services.AddScoped<IClassificationDL, ClassificationDL>();
+builder.Services.AddScoped<IDepartmentBL, DepartmentBL>();
+builder.Services.AddScoped<IDepartmentDL, DepartmentDL>();
+builder.Services.AddScoped<IDisciplineBL, DisciplineBL>();
+builder.Services.AddScoped<IDisciplineDL, DisciplineDL>(); 
+builder.Services.AddScoped<IFacultyBL, FacultyBL>();
+builder.Services.AddScoped<IFacultyDL, FacultyDL>();
+builder.Services.AddScoped<IPositionBL, PositionBL>();
+builder.Services.AddScoped<IPositionDL, PositionDL>();
+builder.Services.AddScoped<IRecruitmentBL, RecruitmentBL>();
+builder.Services.AddScoped<IRecruitmentDL, RecruitmentDL>();
+builder.Services.AddScoped<IEducationProgramBL, EducationProgramBL>();
+builder.Services.AddScoped<IEducationProgramDL, EducationProgramDL>();
+builder.Services.AddScoped<ISalaryBL, SalaryBL>();
+builder.Services.AddScoped<ISalaryDL, SalaryDL>();
+builder.Services.AddScoped<IStatusEmployeeBL, StatusEmployeeBL>();
+builder.Services.AddScoped<IStatusEmployeeDL, StatusEmployeeDL>();
+builder.Services.AddScoped<IStatusStudentBL, StatusStudentBL>();
+builder.Services.AddScoped<IStatusStudentDL, StatusStudentDL>();
+builder.Services.AddScoped<ITranningCertificationBL, TranningCertificationBL>();
+builder.Services.AddScoped<ITranningCertificationDL, TranningCertificationDL>();
 
+builder.Services.AddScoped<IContractBL, ContractBL>();
+builder.Services.AddScoped<IContractDL, ContractDL>();
+builder.Services.AddScoped<IBonusBL, BonusBL>();
+builder.Services.AddScoped<IBonusDL, BonusDL>();
 builder.Services.AddScoped(typeof(IBaseDL<>), typeof(BaseDL<>));
 builder.Services.AddScoped(typeof(IBaseBL<>), typeof(BaseBL<>));
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>

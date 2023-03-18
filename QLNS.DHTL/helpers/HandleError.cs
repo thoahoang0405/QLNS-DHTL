@@ -60,7 +60,7 @@ namespace QLNS.DHTL
             Console.WriteLine(exception.Message);
             return new ErrorResult(
                  Common.Enums.ErrorCodes.Exception,
-                "Có lỗi xảy ra. Vui lòng liên hệ MISA!",
+                "Có lỗi xảy ra!",
                 "Catched an exception",
                 "https://openapi.com.vn/errorcode/e002",
                 Activity.Current?.Id ?? httpContext?.TraceIdentifier);
@@ -89,7 +89,7 @@ namespace QLNS.DHTL
             Console.WriteLine(mySqlException.Message);
             return new ErrorResult(
                 Common.Enums.ErrorCodes.Exception,
-                "Có lỗi xảy ra. Vui lòng liên hệ MISA!",
+                "Có lỗi xảy ra",
                 "Catched an exception",
                 "https://openapi.misa.com.vn/errorcode/e002",
                 Activity.Current?.Id ?? httpContext?.TraceIdentifier);

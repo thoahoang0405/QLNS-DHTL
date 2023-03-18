@@ -14,7 +14,7 @@ namespace QLNS.BL.BaseBL
     {
 
         #region Field
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=misa; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
         #endregion
 
         #region method
@@ -23,47 +23,55 @@ namespace QLNS.BL.BaseBL
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-      
-        public Guid InsertRecord(T record)
-        {
-            GetBeforeSave(record);
 
+        public virtual Guid InsertRecord(T record)
+        {
+            var newId = Guid.NewGuid();
+
+            var primary = typeof(T).GetProperties().FirstOrDefault(prop => prop.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0);
+            if (primary != null)
+            {
+                primary.SetValue(record, newId);
+            }
+
+            // tên proc dùng để truy vấn
             string tableName = EntityUtilities.GetTableName<T>();
-            string storeProcedureName = $"Proc_{tableName}_Insert";
+            string insertRecordProcedureName = $"Proc_{tableName}_Insert";
+
+
+            // chuẩn bị tham số đầu vào 
             var properties = typeof(T).GetProperties();
             var parameters = new DynamicParameters();
+
             foreach (var property in properties)
             {
-                string propertyName = $"@{property.Name}";
-                var propertyValue = property.GetValue(record);
-                parameters.Add(propertyName, propertyValue);
+                var value = property.GetValue(record); // lấy giá trị của property
+
+                var propertyName = property.Name; // lấy tên của property
+
+                parameters.Add($"@{propertyName}", value);
             }
-            int numberOfAffectedRows = 0;
+
+            // thực hiện gọi vào DB
+            int numberOfAffetedRows = 0;
             using (var sqlConnection = new MySqlConnection(connectionDB))
             {
+                numberOfAffetedRows = sqlConnection.Execute(insertRecordProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
 
-                numberOfAffectedRows = sqlConnection.Execute(storeProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
-                var result = Guid.Empty;
-                if (numberOfAffectedRows > 0)
+                if (numberOfAffetedRows > 0)
                 {
-                    var primaryKeyProperty = typeof(T).GetProperties().FirstOrDefault(prop => prop.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0);
-                    var newId = primaryKeyProperty?.GetValue(record);
-                    if (newId != null)
-                    {
-                        result = (Guid)newId;
-                    }
+                    return newId;
                 }
-                return result;
+                return Guid.Empty;
 
             }
 
         }
-
         /// <summary>
         /// set giá trị riêng cho bảng
         /// </summary>
         /// <param name="entity"></param>
-       
+
         protected virtual void GetBeforeSave(T entity)
         {
 
@@ -87,9 +95,10 @@ namespace QLNS.BL.BaseBL
                 var propertyValue = property.GetValue(entity);
                 parameters.Add(propertyName, propertyValue);
             }
-            int numberOfAffectedRows = 0;
+            
             using (var sqlConnection = new MySqlConnection(connectionDB))
             {
+                int numberOfAffectedRows = 0;
 
                 numberOfAffectedRows = sqlConnection.Execute(storeProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
                 return numberOfAffectedRows;

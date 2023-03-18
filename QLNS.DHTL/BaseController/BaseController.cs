@@ -33,21 +33,21 @@ namespace QLNS.DHTL.BaseController
         /// < returns > trả về validate nếu lỗi validate, trả về HttpContext nếu bị trùng mã và exception, trả về data nếu thành công</returns>
         /// CreatedBy: HTTHOA(16/08/2022)
         [HttpPost]
-        public virtual IActionResult InsertRecord([FromBody] T record)
+        public virtual IActionResult InsertRecord(T record)
         {
 
-            try
-            {
-                var validate = HandleError.ValidateEntity(ModelState, HttpContext);
-                if (validate != null)
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest, validate);
-                }
+            //try
+            //{
+            //    var validate = HandleError.ValidateEntity(ModelState, HttpContext);
+            //    if (validate != null)
+            //    {
+            //        return StatusCode(StatusCodes.Status400BadRequest, validate);
+            //    }
 
-                var numberOfAffectedRows = _baseBL.InsertRecord(record);
+             var result = _baseBL.InsertRecord(record);
 
 
-                if (numberOfAffectedRows != Guid.Empty)
+                if (result != Guid.Empty)
                 {
                     return StatusCode(StatusCodes.Status201Created, record);
 
@@ -55,18 +55,18 @@ namespace QLNS.DHTL.BaseController
                 else
                 {
 
-                    return StatusCode(StatusCodes.Status400BadRequest, "e004");
+                    return StatusCode(StatusCodes.Status400BadRequest, "lỗi thêm dữ liệu be");
                 }
-            }
-            catch (MySqlException mySqlException)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, HandleError.GenerateDuplicateCodeErrorResult(mySqlException, HttpContext));
-            }
+            //}
+            //catch (MySqlException mySqlException)
+            //{
+            //    return StatusCode(StatusCodes.Status400BadRequest, HandleError.GenerateDuplicateCodeErrorResult(mySqlException, HttpContext));
+            //}
 
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, HandleError.GenerateExceptionResult(ex, HttpContext));
-            }
+            //catch (Exception ex)
+            //{
+            //    return StatusCode(StatusCodes.Status500InternalServerError, HandleError.GenerateExceptionResult(ex, HttpContext));
+            //}
         }
         /// <summary>
         /// sửa theo id
@@ -78,14 +78,8 @@ namespace QLNS.DHTL.BaseController
         [HttpPut("{id}")]
         public IActionResult UpdateRecord([FromBody] T entity, [FromRoute] Guid id)
         {
-            try
-
-            {
-                var validate = HandleError.ValidateEntity(ModelState, HttpContext);
-                if (validate != null)
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest, validate);
-                }
+            
+              
                 int numberOfAffectedRows = _baseBL.UpdateRecord(entity, id);
 
                 if (numberOfAffectedRows > 0)
@@ -96,11 +90,8 @@ namespace QLNS.DHTL.BaseController
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, "e004");
                 }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, HandleError.GenerateExceptionResult(ex, HttpContext));
-            }
+           
+            
 
         }
 

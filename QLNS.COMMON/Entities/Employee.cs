@@ -1,6 +1,7 @@
 ﻿
 
 using QLNS.Common.Enums;
+using QLNS.COMMON;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,136 +9,49 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLNS.Common.entities
 {
+    #region
+    [Table("employee")]
     public class Employee
     {
-        // Ctrl k s
-        #region field
-        //trường, biến, : camelCase
-        //hàm, class, ...: PasCalCase
 
-
-        /// <summary>
-        /// Id nhân viên
-        /// </summary>
-         [Key]
+        [Key]
+     
         public Guid EmployeeID { get; set; }
-
-        /// <summary>
-        /// Mã nhân viên
-        /// </summary>
-       
-        [Required(ErrorMessage = "Mã nhân viên không được trống")]
+        
         public string EmployeeCode { get; set; }
-
-        /// <summary>
-        /// Tên nhân viên
-        /// </summary>
-        [Required(ErrorMessage = "Tên nhân viên không được trống")]
         public string EmployeeName { get; set; }
-
-        /// <summary>
-        /// Ngày sinh
-        /// </summary>
-        
-        public DateTime? DateOfBirth { get; set; }
-
-        /// <summary>
-        /// Giới tính
-        /// </summary>
-        public Gender? Gender { get; set; }
-
+     
+        public Gender Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Nation { get; set; }
+        public string Religion { get; set; }
+        public string Email { get; set; }
+        public string Phonenumber { get; set; }
+        public string IdentityNumber { get; set; }
+        public string TaxCode { get; set; }
+        public string InsuraneCardNumber { get; set; }
+        public string BankAccountNumber { get; set; }
+        public string BankAccountName { get; set; }
+        public string Adress { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public Guid FacultyID { get; set; }
+        public string FacultyName { get; set; }
+        public Guid StatusEmployeeID { get; set; }
+        public string StatusEmployeeName { get; set; }
+        public Guid SalaryID { get; set; }
+        public string SalaryName { get; set; }
         public Guid DepartmentID { get; set; }
-        /// <summary>
-        /// tên đơn vị
-        /// </summary>
-        [Required(ErrorMessage = "Đơn vị không được trống")]
         public string DepartmentName { get; set; }
-
+        public Guid TrainingCertificateID { get; set; }
+        public string TrainingCertificateName { get; set; }
+        public string MaritalStatus { get; set; }
         
-        /// <summary>
-        /// tên vị trí
-        /// </summary>
-        public string? PositionName { get; set; }
-        /// <summary>
-        /// số cmnd
-        /// </summary>
-        public string? IdentityNumber { get; set; }
-
-        /// <summary>
-        /// Ngày cấp
-        /// </summary>
-        public DateTime? IdentityDate { get; set; }
-
-        /// <summary>
-        /// nơi cấp
-        /// </summary>
-        public string? IdentityPlace { get; set; }
-
-        /// <summary>
-        /// địa chỉ
-        /// </summary>
-        public string? Address { get; set; }
-
-
-        
-        /// <summary>
-        /// sđt
-        /// </summary>
-        public string? PhoneNumber { get; set; }
-        /// <summary>
-        /// số đt cố định
-        /// </summary>
-        public string? LandlinePhone { get; set; }
-
-        /// <summary>
-        /// email
-        /// </summary>
-
-        [EmailAddress(ErrorMessage = "email không đúng định dạng")]
-        public string? Email { get; set; }
-      
-      
+        public Guid PositionsID { get; set; }
+        public string PositionsName { get; set; }
       
 
-        /// <summary>
-        /// tên ngân hàng
-        /// </summary>
-        public string? BankName { get; set; }
-
-        /// <summary>
-        /// số tài khoản
-        /// </summary>
-        public string? BankAccount { get; set; }
-
-
-        /// <summary>
-        /// chi nhánh
-        /// </summary>
-        public string? BankBranch { get; set; }
-        /// <summary>
-        /// ngày tạo
-        /// </summary>
-        public DateTime? CreatedDate { get; set; }
-
-        /// <summary>
-        /// người tạo
-        /// </summary>
-        public string? CreatedBy { get; set; }
-
-        /// <summary>
-        /// ngày chỉnh sửa
-        /// </summary>
-        public DateTime? ModifiedDate { get; set; }
-
-        /// <summary>
-        /// người chỉnh sửa
-        /// </summary>
-        public string? ModifiedBy { get; set; }
-       
-       
-
-
-        #endregion
+#endregion
 
 
 

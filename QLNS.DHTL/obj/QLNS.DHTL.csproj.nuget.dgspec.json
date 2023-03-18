@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj": {}
+    "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj": {}
   },
   "projects": {
-    "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj": {
+    "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj",
+        "projectUniqueName": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj",
         "projectName": "QLNS.BL",
-        "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj",
+        "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.BL\\obj\\",
+        "outputPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
-                "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj"
+              "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
+                "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj"
               },
-              "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj": {
-                "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj"
+              "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj": {
+                "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj"
               }
             }
           }
@@ -51,6 +51,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -67,18 +73,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
+    "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
+        "projectUniqueName": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
         "projectName": "QLNS.COMMON",
-        "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
+        "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\obj\\",
+        "outputPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -127,18 +133,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj": {
+    "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj",
+        "projectUniqueName": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj",
         "projectName": "QLNS.DHTL",
-        "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj",
+        "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DHTL\\QLNS.DHTL.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DHTL\\obj\\",
+        "outputPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DHTL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -160,11 +166,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj": {
-                "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj"
+              "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj": {
+                "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj"
               },
-              "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
-                "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj"
+              "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
+                "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj"
               }
             }
           }
@@ -182,6 +188,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -203,18 +213,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj": {
+    "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj",
+        "projectUniqueName": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj",
         "projectName": "QLNS.DL",
-        "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj",
+        "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.DL\\obj\\",
+        "outputPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -236,8 +246,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
-                "projectPath": "D:\\dhtl\\ptda\\QLNS\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj"
+              "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj": {
+                "projectPath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj"
               }
             }
           }
@@ -277,7 +287,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

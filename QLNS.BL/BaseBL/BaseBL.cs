@@ -26,7 +26,7 @@ namespace QLNS.BL.BaseBL
         /// <param name="record"></param>
         /// <returns></returns>
         
-        public Guid InsertRecord(T record)
+        public virtual Guid InsertRecord(T record)
         {
 
             return _baseDL.InsertRecord(record);
