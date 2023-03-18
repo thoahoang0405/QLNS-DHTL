@@ -4,26 +4,23 @@
     <div class="body-header">
       <div class="row-input">
         <div class="input">
-          <input type="text" class="search" placeholder="Tìm kiếm sinh viên" />
+          <input type="text" class="search" v-model="txtSearch"  @keypress.enter="getpagingStudent" placeholder="Tìm kiếm sinh viên" />
           <div class="icon-search icon"></div>
         </div>
-        <div class="input">
-          <input
-            type="text"
-            id="filter"
-            class="filter"
-            placeholder="Lọc theo kì học"
-          />
-          <div class="icon-filter icon"></div>
-          <div class="icon-cbb">
-            <div class="icon icon-down-bold hiddenCbb"></div>
-          </div>
-        </div>
-        <div class="input">
-          <input type="text" class="filter" placeholder="Lọc theo xếp loại" />
-          <div class="icon-filter icon"></div>
-          <div class="icon icon-down-bold"></div>
-        </div>
+        <Combobox
+          :items="faculty"
+         
+          :fieldName="'FacultyName'"
+         
+          @selectedItem="selectItemCbb"
+        ></Combobox>
+      
+        <Combobox
+          :items="classification"       
+          :fieldName="'Classification'"
+          @selectedItem="selectItemCategory"
+         
+        ></Combobox>
       </div>
       <div class="button-function">
         <div class="add">
@@ -63,15 +60,15 @@
             <th>Email</th>
             <th>Số điện thoại</th>
             <th>Số tài khoản</th>
+            <th>Tên ngân hàng</th>
             <th>Địa chỉ</th>
             <th>Khoa</th>
-            <th>Kì học</th>
-            <th>Khen thưởng</th>
-            <th>Kỉ luật</th>
-            <th>Học bổng</th>
+            <th>Lớp</th>
+            <th>Chương trình đào tạo</th>
+            <th>Xếp loại</th>
             <th>Trạng thái</th>
-            <th>Tên đăng nhập</th>
-            <th>mật khẩu</th>
+           
+          
             <th
               class="th-item-final sticky-right-top"
               colspan="12"
@@ -84,7 +81,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="item in list" :key="item.id" @dblclick="btnEditStudent(item)" >
+          <tr ref="row" v-for="(item,index) in students" :key="item.StudentID" @dblclick="btnEditStudent(item)" >
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
@@ -98,24 +95,23 @@
                 style="width: 18px; height: 18px"
               />
             </td>
-            <td class="text-center">{{ item.id }}</td>
-            <td>{{ item.msv }}</td>
-            <td>{{ item.ten }}</td>
-            <td>{{ item.gioitinh }}</td>
-            <td>{{ item.ngaysinh }}</td>
-             <td>{{ item.cmnd }}</td>
-            <td>{{ item.email }}</td>
-            <td>{{ item.sodt }}</td>
-            <td>{{ item.sotaikhoan }}</td>
-            <td>{{ item.diachi }}</td>
-            <td>{{ item.khoa }}</td>
-            <td>{{ item.kyhoc }}</td>
-            <td>{{ item.khenthuong }}</td>
-            <td>{{ item.kyluat }}</td>
-            <td>{{ item.hocbong }}</td>
-            <td>{{ item.trangthai }}</td>
-            <td>{{ item.tendangnhap }}</td>
-            <td>{{ item.matkhau }}</td>
+            <td class="text-center">{{ index+1 }}</td>
+            <td>{{ item.StudentCode }}</td>
+            <td>{{ item.StudentName }}</td>
+            <td>{{ gender(item.Gender) }}</td>
+            <td>{{ formatDate(item.DateOfBirth) }}</td>
+             <td>{{ item.IdentityNumber }}</td>
+            <td>{{ item.Email }}</td>
+            <td>{{ item.Phonenumber }}</td>
+            <td>{{ item.BankAccountNumber }}</td>
+            <td>{{ item.BankAccountName}}</td>
+            <td>{{ item.Adress }}</td>
+            <td>{{ item.FacultyName }}</td>
+            <td>{{ item.Class}}</td>
+            <td>{{ item.EducationProgramName }}</td>       
+            <td>{{ item.ClassificationName }}</td>       
+            <td>{{ item.StatusName }}</td>
+           
             <td
               ref="func"
               class="td-item-final td-func sticky-right"
@@ -133,7 +129,7 @@
     <div class="paging">
       <div class="paging-left">
         Tổng số:
-        <strong>200</strong>
+        <strong>{{ totalRecord }}</strong>
         bản ghi
       </div>
       <div class="paging-right">
@@ -146,7 +142,7 @@
                 class="item-dropup"
                 :class="{ act: isActive == '10' }"
                 pageSize="10"
-                :value="pageDefault"
+              
                 @click="getPageDefault"
               >
                 10 bản ghi trên 1 trang
@@ -156,6 +152,7 @@
                 :class="{ act: isActive == '20' }"
                 pageSize="20"
                 @click="getPageDefault"
+                :value="pageDefault"
               >
                 20 bản ghi trên 1 trang
               </div>
@@ -306,19 +303,22 @@
 <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
 
 </template>
-<style>
+<style scoped>
   .btn-add:hover {
     opacity: 0.8;
   }
+  
 </style>
 <script>
 import Paginate from "vuejs-paginate-next";
 import Form from "../base/FormDetail.vue"
 import PopupConfirm from "../base/BasePopupDelete.vue"
 import $ from "jquery";
+import Combobox from "../base/BaseCombobox2.vue";
+import axios from "axios";
 export default {
   components: {
-    Paginate,Form,PopupConfirm
+    Paginate,Form,PopupConfirm,Combobox
   },
   data() {
     return {
@@ -588,7 +588,7 @@ export default {
           matkhau: '1111111111',
         },
       ],
-      isActive: "10",
+      isActive: "20",
       studentSelected: [],
       pageNumber: 1,
       page: 1,
@@ -597,12 +597,147 @@ export default {
       isShowForm: false,
       isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
       isShowDrop: false,
-      // isShowNotifi: false,
-      pageDefault: 10,
+      students:{},
+      pageDefault: 20,
       msvDelete: "",
+      faculty:{},
+      facultyID: "",
+      classification:{},
+      classificationID:"",
+      txtSearch:""
     };
   },
+  watch: {
+    txtSearch: function () {
+      if (this.txtSearch == "") {
+        this.getpagingStudent();
+      }
+    },
+  },
+  created(){
+    this.getpagingStudent()
+    this.getDepartment()
+    this.getPosition()
+  },
   methods: {
+    getpagingStudent() {
+      try {
+       
+        var me = this;
+       
+        axios
+          .get(
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+          )
+          .then(function (res) {
+          
+            me.totalPage = res.data.TotalPages;
+            me.totalRecord = res.data.TotalRecords;
+            me.students = res.data.Data;
+            
+           
+            
+          })
+         
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    gender(gender){
+      switch (gender) {
+        case 0:
+          gender="Nam"
+          break;
+          case 1:
+            gender="Nữ"
+          break;
+        default:
+          break;
+      }
+      return gender;
+    },
+    getDepartment(){
+      try {
+       
+       var me = this;
+      
+       axios
+         .get(
+          "https://localhost:44301/api/Faculty"
+         )
+         .then(function (res) {
+          me.faculty=res.data
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+
+    },
+    getPosition(){
+      try {
+       
+       var me = this;
+      
+       axios
+         .get(
+          "https://localhost:44301/api/Classifications"
+         )
+         .then(function (res) {
+          me.classification=res.data
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+
+    },
+    formatDate(date) {
+      try {
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${newDate}-${month}-${year}`;
+        }
+      } catch (error) {
+        return "";
+      }
+    },
+    selectItemCbb(value) {
+    
+      if (value.FacultyID) {
+        this.facultyID = value.FacultyID;
+      } else {
+        this.facultyID = "";
+        this.getpagingStudent();
+      }
+      this.getpagingStudent();
+     
+    },
+    selectItemCategory(value) {
+      console.log(value.ClassificationID);
+      if (value.ClassificationID) {
+        this.classificationID = value.ClassificationID;
+        
+      } else {
+        this.classificationID= "";
+        this.getpagingStudent();
+      }
+      this.getpagingStudent();
+    },
     clickAdd(item) {
       this.list.push(item)
     },
@@ -648,7 +783,7 @@ this.isShowForm=value
       this.pageDefault = e.target.getAttribute("pageSize");
       this.showPage(false);
       $(".icon-dropup").removeClass("iconrotate");
-      this.filterEmployee();
+      this.getpagingStudent();
       if (this.pageDefault > this.totalRecord) {
         this.pageDefault = this.totalRecord;
       }
@@ -656,7 +791,7 @@ this.isShowForm=value
 
     clickCallback(pageNum) {
       this.pageNumber = pageNum;
-      this.filterEmployee();
+      this.getpagingStudent();
     },
   },
 };

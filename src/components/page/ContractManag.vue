@@ -1,10 +1,10 @@
 <template>
     <div class="body">
-      <h3 class="header-bd">Quản lý sinh viên</h3>
+      <h3 class="header-bd">Quản lý hợp đồng</h3>
       <div class="body-header">
         <div class="row-input">
           <div class="input">
-            <input type="text" class="search" placeholder="Tìm kiếm " />
+            <input type="text" class="search" placeholder="Tìm kiếm hợp đồng"  v-model="txtSearch"  @keypress.enter="getpagingStudent"/>
             <div class="icon-search icon"></div>
           </div>
         
@@ -52,7 +52,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ref="row" v-for="item in list" :key="item.id" >
+            <tr ref="row" v-for="(item,index) of contract" :key="item.ContractID" >
               <td
                 ref="rowCheck"
                 class="checkbox sticky-left"
@@ -66,11 +66,11 @@
                   style="width: 18px; height: 18px"
                 />
               </td>
-              <td class="text-center">{{ item.id }}</td>
-              <td>hợp đồng làm việc </td>
-              <td>{{ item.ngaysinh }}</td>
-              <td>{{ item.ngaysinh }}</td>
-              <td>{{ item.ngaysinh }}</td>
+              <td class="text-center">{{ index + 1}}</td>
+              <td>{{ item.ContractName }} </td>
+              <td>{{ formatDate(item.SignDay) }}</td>
+              <td>{{ formatDate(item.EffectiveDate) }}</td>
+              <td>{{ formatDate(item.ExpirationDate) }}</td>
               <td
                 ref="func"
                 class="td-item-final td-func sticky-right"
@@ -88,7 +88,7 @@
       <div class="paging">
         <div class="paging-left">
           Tổng số:
-          <strong>200</strong>
+          <strong>{{ totalRecord }}</strong>
           bản ghi
         </div>
         <div class="paging-right">
@@ -314,6 +314,7 @@ thead tr{
   import Form from "../base/FormDetail.vue"
   import PopupConfirm from "../base/BasePopupDelete.vue"
   import $ from "jquery";
+  import axios from "axios";
   export default {
     components: {
       Paginate,Form,PopupConfirm
@@ -590,6 +591,7 @@ thead tr{
         studentSelected: [],
         pageNumber: 1,
         page: 1,
+        txtSearch:"",
         totalPage: 0,
         isShowConfirm: false,
         isShowForm: false,
@@ -598,12 +600,39 @@ thead tr{
         // isShowNotifi: false,
         pageDefault: 10,
         msvDelete: "",
+        contract:{},
       };
     },
+    watch: {
+    txtSearch: function () {
+      if (this.txtSearch == "") {
+        this.getpagingStudent();
+      }
+    },
+  },
+  created(){
+    this.getpagingStudent()
+   
+  },
     methods: {
       clickAdd(item) {
         this.list.push(item)
       },
+      formatDate(date) {
+      try {
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${newDate}-${month}-${year}`;
+        }
+      } catch (error) {
+        return "";
+      }
+    },
       showPage(is) {
         this.isShowDrop = is;
       },
@@ -620,6 +649,30 @@ thead tr{
         this.msvDelete=item.msv
   
       },
+      getpagingStudent() {
+      try {
+       
+        var me = this;
+       
+        axios
+          .get(
+            `https://localhost:44301/api/Contract/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&pageNumber=${this.pageNumber}`
+          )
+          .then(function (res) {
+          
+            me.totalPage = res.data.TotalPages;
+            me.totalRecord = res.data.TotalRecords;
+            me.contract = res.data.Data;
+            console.log(res.data.Data);
+          })
+         
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
       cancelConfirm(value){
         this.isShowConfirm=value
       },
@@ -646,7 +699,7 @@ thead tr{
         this.pageDefault = e.target.getAttribute("pageSize");
         this.showPage(false);
         $(".icon-dropup").removeClass("iconrotate");
-        this.filterEmployee();
+        this.getpagingStudent();
         if (this.pageDefault > this.totalRecord) {
           this.pageDefault = this.totalRecord;
         }
@@ -654,7 +707,7 @@ thead tr{
   
       clickCallback(pageNum) {
         this.pageNumber = pageNum;
-        this.filterEmployee();
+        this.getpagingStudent();
       },
     },
   };
