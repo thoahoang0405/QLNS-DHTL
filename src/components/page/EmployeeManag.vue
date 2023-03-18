@@ -99,25 +99,6 @@
                 style="width: 18px; height: 18px"
               />
             </td>
-<<<<<<< HEAD
-            <td class="text-center">1</td>
-            <td>1951061106</td>
-            <td>Ngô Văn Tùng</td>
-            <td>Nam</td>
-            <td>18/03/2001</td>
-            <td>9999999999</td>
-            <td>ngotung180301@gmail.com</td>
-            <td>0393072588</td>
-            <td>8888888888</td>
-            <td>Bắc Ninh</td>
-            <td>Trạng thái</td>
-            <td>61THNB</td>
-            <td>Công nghệ thông tin</td>
-            <td>Đại học</td>
-            <td>1/1/2019</td>
-            <td>1/1/2024</td>
-            <td></td>
-=======
             <td class="text-center">{{ index+1 }}</td>
             <td>{{ emp.EmployeeCode }}</td>
             <td>{{ emp.EmployeeName }}</td>
@@ -139,7 +120,6 @@
             <td>{{ emp.MaritalStatus }}</td>
             <td>{{ emp.PositionsName }}</td>
            
->>>>>>> 5f8984661eb528802f019a70064751e15f3d9bfe
             <td
               ref="func"
               class="td-item-final td-func sticky-right"
