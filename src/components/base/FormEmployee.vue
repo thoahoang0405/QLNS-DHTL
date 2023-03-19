@@ -38,18 +38,18 @@
                        <div class="invalid-feedback" v-if="errors.ngaysinh">{{ errors.ngaysinh }}</div>
                    </div>
                    <div class="input__box">
-                       <label for="">Khoa</label>
-                       <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
-                       <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
-                      
+                       <label for="">Cmnd/cccd</label> 
+                       <input class="cmnd" type="text" v-model="employee.IdentityNumber">
+                       <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
+                   </div>
+                   
+                   <div class="input__box">
+                       <label for="">Email</label>
+                       <input class="email" type="text" v-model="desc.email">
+                       <div class="invalid-feedback" v-if="errors.email">{{ errors.email }}</div>
                    </div>
                </div>
                <div class="column">
-                    <div class="input__box">
-                        <label for="">Cmnd/cccd</label> 
-                        <input class="cmnd" type="text" v-model="employee.IdentityNumber">
-                        <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
-                    </div>
                     <div class="input__box">
                         <label for="">Ngày cấp</label>
                         <input class="ngaycap" type="date" v-model="desc.ngaycap">
@@ -64,17 +64,10 @@
                
                <div class="column">
                    <div class="input__box">
-                       <label for="">Email</label>
-                       <input class="email" type="text" v-model="desc.email">
-                       <div class="invalid-feedback" v-if="errors.email">{{ errors.email }}</div>
-                   </div>
-                   <div class="input__box">
                        <label for="">Số điện thoại</label>
                        <input class="sodt" type="text" v-model="desc.sodt">
                        <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
                    </div>
-               </div>
-               <div class="column column-s">
                    <div class="input__box">
                        <label for="">Mã số thuế</label>
                        <input class="masothue" type="text" v-model="desc.masothue">
@@ -85,48 +78,82 @@
                        <input class="sotaikhoan" type="text" v-model="desc.sotaikhoan">
                        <div class="invalid-feedback" v-if="errors.sotaikhoan">{{ errors.sotaikhoan }}</div>
                    </div>
+               </div>
+               <div class="column column-s">
                    <div class="input__box">
                        <label for="">Tên ngân hàng</label>
                        <input class="tennganhang" type="text" v-model="desc.tennganhang">
                        <div class="invalid-feedback" v-if="errors.tennganhang">{{ errors.tennganhang }}</div>
                    </div>
-
-               </div>
-               <div class="input__box">    
-                   <label for="">Địa chỉ</label>
-                   <input class="diachi" type="text" v-model="desc.diachi">
-                   <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
+                   <div class="input__box">
+                       <label for="">Địa chỉ</label>
+                       <input class="diachi" type="text" v-model="desc.diachi">
+                       <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Khoa</label>
+                       <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
+                       <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
+                      
+                   </div>
                </div>
                <div class="column column-s">
-                   <div class="input__box">
+                   <!-- <div class="input__box">
                        <label for="">Trạng thái</label>
                        <input class="trangthai" type="text" v-model="desc.trangthai">
                        <div class="invalid-feedback" v-if="errors.trangthai">{{ errors.trangthai }}</div>
+                   </div> -->
+                   <div class="input__box">
+                       <label for="">Trạng thái</label>
+                       <combobox class="trangthai " :value="desc.trangthai" :items="dataItem" :code="'id'" :fieldName="'trangthai'" @selectedItem="selectItemCbb"></combobox>
                    </div>
                    <div class="input__box">
+                       <label for="">Cấp bậc lương</label>
+                       <combobox class="capbacluong " :value="desc.capbacluong" :items="dataItem" :code="'id'" :fieldName="'capbacluong'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Phòng ban</label>
+                       <combobox class="phongban " :value="desc.phongban" :items="dataItem" :code="'id'" :fieldName="'phongban'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <!-- <div class="input__box">
                        <label for="">Cấp bậc lương</label>
                        <input class="capbacluong" type="text" v-model="desc.capbacluong">
                        <div class="invalid-feedback" v-if="errors.capbacluong">{{ errors.capbacluong }}</div>
                    </div>
-
-               </div>
-               
-               <div class="column column-s">
                    <div class="input__box">
                        <label for="">Phòng ban</label>
                        <input class="phongban" type="text" v-model="desc.phongban">
                        <div class="invalid-feedback" v-if="errors.phongban">{{ errors.phongban }}</div>
-                   </div>
-                   <div class="input__box">
+                   </div> -->
+
+               </div>
+               
+               <div class="column column-s">
+                   <!-- <div class="input__box">
                        <label for="">Chứng chỉ đào tạo</label>
                        <input class="daotao" type="text" v-model="desc.daotao">
                        <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
+                   </div> -->
+                   <div class="input__box">
+                       <label for="">Chứng chỉ đào tạo</label>
+                       <combobox class="daotao " :value="desc.daotao" :items="dataItem" :code="'id'" :fieldName="'daotao'" @selectedItem="selectItemCbb"></combobox>
+                       <!-- <input class="daotao" type="text" v-model="desc.daotao"> -->
+                      
                    </div>
                    <div class="input__box">
                        <label for="">Tình trạng hôn nhân</label>
                        <input class="tinhtrang" type="text" v-model="desc.tinhtrang">
                        <div class="invalid-feedback" v-if="errors.tinhtrang">{{ errors.tinhtrang }}</div>
                    </div>
+                   <div class="input__box">
+                       <label for="">Vị trí</label>
+                       <combobox class="vtri " :value="desc.vtri" :items="dataItem" :code="'id'" :fieldName="'vtri'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <!-- <div class="input__box">
+                       <label for="">Vị trí</label>
+                       <input class="vitri" type="text" v-model="desc.vitri">
+                       <div class="invalid-feedback" v-if="errors.vitri">{{ errors.vitri }}</div>
+                   </div> -->
                </div>
                <!-- <div class="column">
                    <div class="input__box">
@@ -174,45 +201,39 @@ import combobox from "../base/BaseCombobox.vue";
                    manv: '',
                    ten: '',
                    ngaysinh: '',
-                   khoa: '',
                    cmnd: '',
-                   ngaycap: '',
-                   noicap: '',
                    email: '',
                    sodt: '',
                    masothue: '',
                    sotaikhoan: '',
                    tennganhang: '',
+                   diachi: '',
+                   khoa: '',
                    trangthai: '',
                    capbacluong: '',
                    phongban: '',
-                   tinhtrang: '',
-                   diachi: '',
                    daotao: '',
-                   khenthuong: '',
-                   kyluat: '',
+                   tinhtrang: '',
+                   vitri: '',
                },
                desc: {
                 manv: '',
                    ten: '',
                    ngaysinh: '',
-                   khoa: '',
                    cmnd: '',
-                   ngaycap: '',
-                   noicap: '',
                    email: '',
                    sodt: '',
                    masothue: '',
                    sotaikhoan: '',
                    tennganhang: '',
+                   diachi: '',
+                   khoa: '',
                    trangthai: '',
                    capbacluong: '',
                    phongban: '',
-                   tinhtrang: '',
-                   diachi: '',
                    daotao: '',
-                   khenthuong: '',
-                   kyluat: '',
+                   tinhtrang: '',
+                   vitri: '',
                }
            }
        },
@@ -241,25 +262,22 @@ import combobox from "../base/BaseCombobox.vue";
                this.$emit("hideForm", false);
                this.desc = {
                 manv: '',
-                   ten: '',
-                   ngaysinh: '',
-                   khoa: '',
-                   cmnd: '',
-                   ngaycap: '',
-                   noicap: '',
-                   email: '',
-                   sodt: '',
-                   masothue: '',
-                   sotaikhoan: '',
-                   tennganhang: '',
-                   trangthai: '',
-                   capbacluong: '',
-                   phongban: '',
-                   tinhtrang: '',
-                   diachi: '',
-                   daotao: '',
-                   khenthuong: '',
-                   kyluat: '',
+                ten: '',
+                ngaysinh: '',
+                cmnd: '',
+                email: '',
+                sodt: '',
+                masothue: '',
+                sotaikhoan: '',
+                tennganhang: '',
+                diachi: '',
+                khoa: '',
+                trangthai: '',
+                capbacluong: '',
+                phongban: '',
+                daotao: '',
+                tinhtrang: '',
+                vitri: '',
                }
                this.errors = {
                 manv: '',
@@ -389,14 +407,14 @@ import combobox from "../base/BaseCombobox.vue";
                    this.errors.tinhtrang = "Không được để trống!";
                    isValid = false;
                }
-               if(!this.desc.khenthuong) {
-                   this.errors.khenthuong = "Không được để trống!";
-                   isValid = false;
-               }
-               if(!this.desc.kyluat) {
-                   this.errors.kyluat = "Không được để trống!";
-                   isValid = false;
-               }
+            //    if(!this.desc.khenthuong) {
+            //        this.errors.khenthuong = "Không được để trống!";
+            //        isValid = false;
+            //    }
+            //    if(!this.desc.kyluat) {
+            //        this.errors.kyluat = "Không được để trống!";
+            //        isValid = false;
+            //    }
                if(!this.desc.ngaycap) {
                    this.errors.ngaycap = "Không được để trống!";
                    isValid = false;
@@ -505,7 +523,7 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
 }
 .close {
     cursor: pointer;
