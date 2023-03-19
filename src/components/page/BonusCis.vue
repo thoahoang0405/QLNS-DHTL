@@ -278,10 +278,10 @@
               >
                 <div class="edit-text"></div>
                 <button class="bonus"  @click="OpenPopupPunish()">
-                 Thêm khen thưởng
+                 Khen thưởng
                 </button>
                 <button class="dis" @click="OpenPopupBonus()">
-                Thêm  kỉ luật
+                Kỉ luật
                 </button>
               </td>
               
@@ -292,7 +292,7 @@
       <div class="paging">
         <div class="paging-left">
           Tổng số:
-          <strong>200</strong>
+          <strong>{{ totalRecord }}</strong>
           bản ghi
         </div>
         <div class="paging-right">
@@ -465,11 +465,28 @@
   };
   </script>
   <style scoped>
+ 
    ul.pagination {
     display: flex;
     color: #111;
     list-style-type: none;
 }
+th {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    text-align: left;
+    padding: 0px 10px;
+    height: 35px;
+    box-sizing: border-box;
+  }
+  td {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    padding: 0px 10px;
+    text-align: left;
+    height: 44px;
+    box-sizing: border-box;
+  }
 ul.pagination a {
     text-decoration: none;
     color: #111;
@@ -643,24 +660,24 @@ li.page-item.disabled {
     z-index: 0;
     right: 0;
     top: 0;
-    background-color: #ccf8e0;
+    background-color: #b1cbed;
 }
 .sticky-left-top {
     position: sticky;
     z-index: 0;
     left: 0;
     top: 0;
-    background-color: #ccf8e0;
+    background-color: #b1cbed;
 }
 thead tr{
-  background-color: #ccf8e0;
+  background-color: #b1cbed;
 }
 .bonus{
   padding: 2px 6px;
   font-size: 11px;
   height: 30px;
   box-sizing: border-box;
-  min-width: 100px;
+  min-width: 80px;
   margin-right: 4px;
   border-radius: 2.5px;
   background-color: #0cc71b;
@@ -678,13 +695,14 @@ thead tr{
   font-size: 11px;
   height: 30px;
   box-sizing: border-box;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 4px;
   border-radius: 2.5px;
   background-color: #426cf7;
   color: #f5f2f2;
   border: none;
   margin-top: 2px;
+  margin-right: 4px;
 }
 .dis:hover{
   background-color: #ffff;

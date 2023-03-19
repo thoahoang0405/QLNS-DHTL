@@ -5,7 +5,7 @@
       <router-link to="/" class="brand" @click="activeNumber = -1">
        
         <img src="../assets/icon/Logo-DH-Thuy-Loi.webp" style="width: 50px" alt="">
-        <h1 class="brand-text" v-if="isZoomOut">ĐHTL QLNS</h1>
+        <h1 class="brand-text" v-if="isZoomOut">QLNS</h1>
       </router-link>
       <ul class="navbar">
         <div v-for="item in items" :key="item" class="nav-item">
