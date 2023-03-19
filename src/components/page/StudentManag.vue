@@ -199,105 +199,7 @@
         </div>
       </div>
     </div>
-    <!-- <div id="table">
-        <div class="table">
-          <table>
-            <thead>
-              <tr>
-                <th class="text-center width-fit">
-                  <input type="checkbox" />
-                </th>
-
-                <th class="stt">STT <div class="tooltip-stt">Số thứ tự</div>
-                </th>
-
-                <th>Mã sinh viên</th>
-                <th>Họ và tên</th>
-                <th>Giới tính</th>
-                <th>Ngày sinh</th>
-                <th>Số CMND/CCCD</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
-                <th>Số tài khoản</th>
-                <th>Địa chỉ</th>
-                <th>Khoa</th>
-                <th>Kì học</th>
-                <th>Khen thưởng
-                </th>
-                <th>Kỉ luật</th>
-                <th>Học bổng</th>
-                <th>Trạng thái</th>
-                <th>Tên đăng nhập</th>
-                <th>mật khẩu</th>
-                <th>Chức năng</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center">
-                  <input type="checkbox" />
-                </td>
-                <td class="text-center">1</td>
-                <td>1951061039</td>
-                <td>Hoàng Thị Thỏa</td>
-                <td>Nữ</td>
-                <td>04/05/2001</td>
-                <td >hoangthoa@gmail.com</td>
-                <td >0827264382</td>
-                <td >046576578</td>
-                <td >Nam Định</td>
-                <td>Công nghệ thông tin</td>
-                
-                <td>kì II-2022</td>
-                <td>Sinh viên tiên tiến</td>
-                <td></td>
-                <td></td>
-                <td>Đang học</td>
-                <td>1951061039</td>
-                <td>948388922</td>
-                <td>
-                  <div class="function-table">
-                    <div class="icon icon-edit"></div>
-                    <div class="icon icon-delete"></div>
-                  </div>
-                </td>
-              </tr>
-      
-            </tbody>
-          </table>
-          <div class="table-footer">
-            <div class="tb-footer-left">
-              <div class="total-record">
-                Tổng số: <strong>200 </strong>bản ghi
-              </div>
-
-              <div class="paging-combobox">
-                
-                
-                  <input type="text" class="page" placeholder="20">
-                  <div class="icon icon-down-bold"></div>
-                
-              
-              </div>
-             
-              <div class="paging">
-                <div class="icon icon-prev"></div>
-                <p>1</p>
-                <strong>2</strong>
-                <p>...</p>
-                <p>100</p>
-                <div class="icon icon-next"></div>
-              </div>
-            </div>
-            <div class="tb-footer-right">
-              <div class="total-count"><strong>10</strong></div>
-              <div class="total-price"><strong>100.000.000</strong></div>
-              <div class="total-price"><strong>100.000.000</strong></div>
-              <div class="total-price"><strong>100.000.000</strong></div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+   
   </div>
 <Form v-show="isShowForm" @hideForm="hideFormDetail" :student="studentSelected"></Form>
 <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
@@ -627,7 +529,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -666,7 +568,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Faculty"
+          "https://localhost:44301/api/Faculty"
          )
          .then(function (res) {
           me.faculty=res.data
@@ -687,7 +589,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Classifications"
+          "https://localhost:44301/api/Classifications"
          )
          .then(function (res) {
           me.classification=res.data

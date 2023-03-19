@@ -200,34 +200,13 @@
       <div class="body-header">
         <div class="row-input">
           <div class="input">
-            <input type="text" class="search" placeholder="Tìm kiếm" />
+            <input type="text" class="search" placeholder="Tìm kiếm"  v-model="txtSearch"  @keypress.enter="getPagingEmployee"  />
             <div class="icon-search icon"></div>
           </div>
-          <div class="input">
-            <input
-              type="text"
-              id="filter"
-              class="filter"
-              placeholder="Lọc theo kì học"
-            />
-            <div class="icon-filter icon"></div>
-            <div class="icon-cbb">
-              <div class="icon icon-down-bold hiddenCbb"></div>
-            </div>
-          </div>
-          <div class="input">
-            <input type="text" class="filter" placeholder="Lọc theo xếp loại" />
-            <div class="icon-filter icon"></div>
-            <div class="icon icon-down-bold"></div>
-          </div>
+         
+          
         </div>
-        <div class="button-function">
-          <button class="btn-excel">
-            <div class="icon icon-excel">
-              <div class="tooltip-excel">Xuất ra excel</div>
-            </div>
-          </button>
-        </div>
+     
       </div>
       <div id="m-table" class="m-table">
         <table id="tbEmployee" class="table">
@@ -246,40 +225,29 @@
                 />
               </th>
               <th class="text-center" style="min-width: 40px">STT</th>
-              <th>Mã nhân viên</th>
+              <th>Mã sinh viên viên</th>
               <th>Họ và tên</th>
-              <th>Giới tính</th>
+             
               <th>Ngày sinh</th>
-              <th>Số CMND/CCCD</th>
-              <th>Email</th>
-              <th>Số điện thoại</th>
-              <th>Mã số thuế</th>
-              <th>Số tài khoản</th>
-              <th>Tên ngân hàng</th>
-              <th>Địa chỉ</th>
+              <th>Giới tính</th>
               <th>Khoa</th>
-              <th>Trạng thái</th>
-              <th>Cấp bậc lương</th>
-              <th>Phòng ban</th>
-              <th>Chứng chỉ đào tạo</th>
-              <th>Tình trạng hôn nhân</th>
-              <th>Khen thưởng</th>
-              <th>Kỷ luật</th>
-              <th>Tên tài khoản</th>
-              <th>Mật khẩu</th>
+              <th>Lớp</th>
+              <th>Xếp loại</th>
+             
               <th
                 class="th-item-final sticky-right-top"
                 colspan="12"
                 style="min-width: 100px; text-align: center"
               >
                 <div class="th-item">
-                  <span class="table-text">Chức năng </span>
+                  <span class="table-text">Thêm khen thưởng/kỉ luật</span>
                 </div>
               </th>
+           
             </tr>
           </thead>
           <tbody>
-            <tr v-for="i in 5" :key="i" ref="row">
+            <tr v-for="(item,i) of students" :key="item.StudentID" ref="row">
               <td
                 ref="rowCheck"
                 class="checkbox sticky-left"
@@ -293,69 +261,30 @@
                   style="width: 18px; height: 18px"
                 />
               </td>
-              <td class="text-center">1</td>
-              <td>1951061106</td>
-              <td>Ngô Văn Tùng</td>
-              <td>Nam</td>
-              <td>18/03/2001</td>
-              <td>9999999999</td>
-              <td>ngotung180301@gmail.com</td>
-              <td>0393072588</td>
-              <td>8888888888</td>
-              <td>8686868686</td>
-              <td>MB Bank</td>
-  
-              <td>Bắc Ninh</td>
-              <td>Công nghệ thông tin</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Đại học</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>admin</td>
-              <td>admin</td>
+              <td class="text-center">{{ i+1 }}</td>
+              <td>{{ item.StudentCode }}</td>
+              <td>{{ item.StudentName }}</td>
+              <td>{{ item.DateOfBirth }}</td>
+              <td>{{ item.Gender }}</td>
+              <td>{{ item.FacultyName }}</td>
+              <td>{{ item.Class }}</td>
+              <td>{{ item.ClassificationName }}</td>
+              
               <td
                 ref="func"
                 class="td-item-final td-func sticky-right"
-                style="position: sticky; right: 0; background-color: #fff"
+                style="position: sticky; right: 0; background-color: #fff; width: auto;"
                 colspan="12"
               >
                 <div class="edit-text"></div>
-                <div class="icon"  @click="OpenPopupPunish()">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                    />
-                  </svg>
-                </div>
-                <div class="icon" @click="OpenPopupBonus()">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
-                    />
-                  </svg>
-                </div>
+                <button class="bonus"  @click="OpenPopupPunish()">
+                 Thêm khen thưởng
+                </button>
+                <button class="dis" @click="OpenPopupBonus()">
+                Thêm  kỉ luật
+                </button>
               </td>
+              
             </tr>
           </tbody>
         </table>
@@ -418,7 +347,7 @@
           </div>
           <div>
             <Paginate
-              v-model="page"
+              v-model="pageNumber"
               :page-count="totalPage"
               :page-range="3"
               :margin-pages="1"
@@ -436,13 +365,38 @@
     <Form v-show="isShow" @hideForm="closeForm"></Form>
   </template>
   <script>
+  import axios from "axios"
+  import $ from "jquery"
+  import Paginate from "vuejs-paginate-next";
   export default {
     data() {
       return {
         isOpenPopupBonus: false,
-        isOpenPopupPunish: false
+        isOpenPopupPunish: false,
+        pageDefault:10,
+        pageNumber: 1,
+        txtSearch:"",
+        totalPage:1,
+        totalRecord:0,
+        students:{},
+        isShowDrop:false,
+
       };
     },
+    components: {
+      Paginate
+    },
+    watch: {
+    txtSearch: function () {
+      if (this.txtSearch == "") {
+        this.getpagingStudent();
+      }
+    },
+  },
+  created(){
+    this.getpagingStudent()
+   
+  },
     methods: {
       thongbao() {
         alert("Xác nhận đóng");
@@ -453,10 +407,144 @@
       OpenPopupPunish() {
         this.isOpenPopupPunish = true;
       },
+      getpagingStudent() {
+      try {
+       
+        var me = this;
+       
+        axios
+          .get(
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+          )
+          .then(function (res) {
+          
+            me.totalPage = res.data.TotalPages;
+            me.totalRecord = res.data.TotalRecords;
+            me.students = res.data.Data;
+            
+           
+            
+          })
+         
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    showPage(is) {
+      this.isShowDrop = is;
+    },
+    btnDropUp() {
+      $(".icon-dropup").toggleClass("iconrotate");
+      if (!this.isShowDrop) {
+        this.showPage(true);
+        $(".icon-dropup").addClass("iconrotate");
+      } else {
+        this.showPage(false);
+        $(".icon-dropup").removeClass("iconrotate");
+      }
+    },
+    getPageDefault(e) {
+      this.isActive = e.target.getAttribute("pageSize");
+      this.pageDefault = e.target.getAttribute("pageSize");
+      this.showPage(false);
+      $(".icon-dropup").removeClass("iconrotate");
+      this.getpagingStudent();
+      if (this.pageDefault > this.totalRecord) {
+        this.pageDefault = this.totalRecord;
+      }
+    },
+
+    clickCallback(pageNum) {
+      this.pageNumber = pageNum;
+      this.getpagingStudent();
+    },
     },
   };
   </script>
   <style scoped>
+   ul.pagination {
+    display: flex;
+    color: #111;
+    list-style-type: none;
+}
+ul.pagination a {
+    text-decoration: none;
+    color: #111;
+    width: 200px ;
+}
+.content-page {
+    min-width: 170px;
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: 9px;
+    position: relative;
+}
+.page-link{
+  margin: 5px;
+}
+.paging-left {
+    color: #111;
+    margin-left: 5px;
+    margin-top: 20px;
+
+
+    text-align: center;
+}
+.page-item:first-child {
+ 
+ 
+  color: #727272;
+}
+.page-item:last-child {
+ 
+  color: #727272;
+}
+
+.page-item {
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  justify-content: center;
+}
+
+li.page-item.disabled {
+  color: #bbb;
+}
+.page-item.active {
+  font-weight: 700;
+  text-align: center;
+  background-color: #eeeaea;
+  color: #000;
+}
+
+.page-item.active a {
+  width: 20px;
+  text-align: center;
+}
+
+.before-text {
+  color: rgb(104, 102, 102);
+  margin: 8px;
+  margin-top: 10px;
+}
+
+.after-text {
+  color: #111;
+  margin: 8px;
+  margin-top: 10px;
+}
+.page{
+  margin-top: 10px;
+  margin-right: 20px;
+}
   .bonus-form {
     /* padding-left: 20px; */
   }
@@ -544,22 +632,67 @@
   .btn-close-popup::hover {
     color: red !important;
   }
+  table[data-v-07d000ee], tr[data-v-07d000ee], td[data-v-07d000ee] {
+    border: none;
+    padding: 0px 0px 5px 5px;
+   
+    margin-top: 0px;
+}
   .sticky-right-top {
     position: sticky;
     z-index: 0;
     right: 0;
     top: 0;
-    background-color: #acfdd1;
+    background-color: #ccf8e0;
 }
 .sticky-left-top {
     position: sticky;
     z-index: 0;
     left: 0;
     top: 0;
-    background-color: #acfdd1;
+    background-color: #ccf8e0;
 }
 thead tr{
-  background-color: #acfdd1;
+  background-color: #ccf8e0;
+}
+.bonus{
+  padding: 2px 6px;
+  font-size: 11px;
+  height: 30px;
+  box-sizing: border-box;
+  min-width: 100px;
+  margin-right: 4px;
+  border-radius: 2.5px;
+  background-color: #0cc71b;
+  color: #f5f2f2;
+  border: none;
+  margin-top: 2px;
+}
+.bonus:hover{
+  background-color: #ffff;
+  color: #0fdb20;
+  border: 1px solid #0fdb20;
+}
+.dis{
+  padding: 2px 6px;
+  font-size: 11px;
+  height: 30px;
+  box-sizing: border-box;
+  min-width: 100px;
+  margin-left: 4px;
+  border-radius: 2.5px;
+  background-color: #426cf7;
+  color: #f5f2f2;
+  border: none;
+  margin-top: 2px;
+}
+.dis:hover{
+  background-color: #ffff;
+  color: #426cf7;
+  border: 1px solid #426cf7;
+}
+tbody tr:hover .checkbox, tbody tr:hover .td-item-final{
+  background-color: #fff !important;
 }
   </style>
   

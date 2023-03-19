@@ -30,13 +30,13 @@
   
         <div class="drop-down-body">
           <div
-            v-for="(item,index) of dataItems"
+            v-for="item of dataItems"
             class="drop-down-item "
             :class="item[fieldName] == currentItem[fieldName] ? 'active' : ''"
             @click.exact.stop="onClickItem(item)"
             :key="item"
           >
-          <div :id="index" v-if="item[fieldName] == currentItem[fieldName]"  class=" tick"></div>
+        
             <div class="drop-down-name">   {{ item[fieldName] }}</div>
           </div>
         </div>
@@ -85,12 +85,7 @@ export default {
       currentItem: {}, // item hiện tại
       isShowCbb: false, // show drop-down
       placeholder: "Nhập giá trị", // playholder
-      dataItems: [
-        {id:1, khoa: 'CNTT'},
-        {id:2, khoa: 'QTKD'},
-        {id:3, khoa: 'Kinh tế'},
-        {id:4, khoa: 'Cơ Khí'}
-      ],
+      dataItems: [],
       keyword: "",
       i: -1,
       hOfItem: 35,
@@ -100,138 +95,138 @@ export default {
   },
   
   methods: {
-    /**
-     * hàm xử lý sự kiện khi blur
-     *
-     */
-    onBlur() {
-      setTimeout(() => {
+      /**
+       * hàm xử lý sự kiện khi blur
+       *
+       */
+      onBlur() {
+        setTimeout(() => {
+          this.isShowCbb = false;
+        }, 200);
+        this.$emit("keyword", this.keyword)
+        console.log(this.keyword);
+        this.$emit("onBlur");
+      
+      },
+      /**
+       * hàm chọn item khi nhấn enter
+       *
+       */
+      keyTab() {
+        var code = event.keyCode || event.which;
+        if (code === 9) {
+          this.onFocus();
+        }
+      },
+      selectItem() {
+        this.$emit("selectedItem", this.currentItem);
+        console.log(this.currentItem);
+        this.keyword = this.currentItem[this.fieldName];
+   
         this.isShowCbb = false;
-      }, 200);
-      this.$emit("keyword", this.keyword)
-      console.log(this.keyword);
-      this.$emit("onBlur");
-    
-    },
-    /**
-     * hàm chọn item khi nhấn enter
-     *
-     */
-    keyTab() {
-      var code = event.keyCode || event.which;
-      if (code === 9) {
-        this.onFocus();
-      }
-    },
-    selectItem() {
-      this.$emit("selectedItem", this.currentItem);
-      console.log(this.currentItem);
-      this.keyword = this.currentItem[this.fieldCode];
-      this.placeholder = this.currentItem[this.fieldCode];
-      this.isShowCbb = false;
-      this.i = 0;
-      this.$el.querySelector(".input").focus();
-      this.dataItems = this.items;
-    },
-    /**
-     * hàm click chọn item
-     *
-     */
-    onClickItem(item) {
-      this.currentItem = item;
-      this.selectItem();
-    },
-
-    toggleCombobox() {
-      this.isShowCbb = !this.isShowCbb;
-      if (this.isShowCbb == true) {
-        this.scrollItem((this.i - 1) * this.hOfItem);
-      }
-    },
-
-    scrollItem(position) {
-      if (position >= 0) {
-        this.$el.querySelector(".drop-down-body").scrollTo(0, position); //cuộn đến tọa độ (0,position)
-      }
-    },
-    keyDown() {
-      try {
-        if (!this.isShowCbb) {
-          this.isShowCbb = true;
-        } else {
-          this.i++;
-          if (this.i > this.dataItems.length - 1) {
-            this.i = this.dataItems.length - 1;
-          }
-          this.currentItem = this.dataItems[this.i];
-          this.scrollItem((this.i - 1) * this.hOfItem);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    keyUp() {
-      try {
-        if (this.i > 0) {
-          this.i--;
-          this.currentItem = this.dataItems[this.i];
-          this.scrollItem((this.i - 1) * this.hOfItem);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    /**
-     * hàm xử lý sự kiện focus
-     *
-     */
-    onFocus() {
-      this.$el.querySelector(".input").select(); // khi focus thì select
-    },
-  },
-  created() {
-    // this.placeholder = this.label;
-  },
-  watch: {
-    Filter: function(value){
-      this.filter=value
-      console.log(value);
-    },
-    items: function (value) {
-      // nhận mảng item để hiển thị
-      this.dataItems = value;
-    },
-    value: function (vl) {
-      this.keyword = vl;
-    },
-    
-    keyword() {
-      if (this.keyword != this.currentItem[this.fieldCode]) {
-        // this.isShowCbb = true;
-      } else if (this.keyword) {
-        // this.isShowCbb=!this.isShowCbb
-        this.dataItems.forEach((item) => {
-          let valueSearch = item[this.fieldCode].trim().toLowerCase();
-          if (valueSearch.includes(this.keyword.trim().toLowerCase())) {
-            return item;
-          }
-        });
-      } else {
+        this.i = 0;
+        this.$el.querySelector(".input").focus();
         this.dataItems = this.items;
-      }
+      },
+      /**
+       * hàm click chọn item
+       *
+       */
+      onClickItem(item) {
+        this.currentItem = item;
+        this.selectItem();
+      },
+  
+      toggleCombobox() {
+        this.isShowCbb = !this.isShowCbb;
+        if (this.isShowCbb == true) {
+          this.scrollItem((this.i - 1) * this.hOfItem);
+        }
+      },
+  
+      scrollItem(position) {
+        if (position >= 0) {
+          this.$el.querySelector(".drop-down-body").scrollTo(0, position); //cuộn đến tọa độ (0,position)
+        }
+      },
+      keyDown() {
+        try {
+          if (!this.isShowCbb) {
+            this.isShowCbb = true;
+          } else {
+            this.i++;
+            if (this.i > this.dataItems.length - 1) {
+              this.i = this.dataItems.length - 1;
+            }
+            this.currentItem = this.dataItems[this.i];
+            this.scrollItem((this.i - 1) * this.hOfItem);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      keyUp() {
+        try {
+          if (this.i > 0) {
+            this.i--;
+            this.currentItem = this.dataItems[this.i];
+            this.scrollItem((this.i - 1) * this.hOfItem);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+  
+      /**
+       * hàm xử lý sự kiện focus
+       *
+       */
+      onFocus() {
+        this.$el.querySelector(".input").select(); // khi focus thì select
+      },
     },
-  },
-  mounted() {
-    // xét giá trị ban đầu cho combobox
-    this.currentItem[this.fieldCode] = this.code;
-
-    // this.item.filter((item,index)=>{
-    //   if(item[this.fieldCode]===this.currentItem[this.fieldCode]){
-    //     this.i=index
-    //   }
-    // })
-  },
+    created() {
+      // this.placeholder = this.label;
+    },
+    watch: {
+      Filter: function(value){
+        this.filter=value
+        console.log(value);
+      },
+      items: function (value) {
+        // nhận mảng item để hiển thị
+        this.dataItems = value;
+      },
+      value: function (vl) {
+        this.keyword = vl;
+      },
+      
+      keyword() {
+        if (this.keyword != this.currentItem[this.fieldName]) {
+          // this.isShowCbb = true;
+        } else if (this.keyword) {
+          // this.isShowCbb=!this.isShowCbb
+          this.dataItems.forEach((item) => {
+            let valueSearch = item[this.fieldName].trim().toLowerCase();
+            if (valueSearch.includes(this.keyword.trim().toLowerCase())) {
+              return item;
+            }
+          });
+        } else {
+          this.dataItems = this.items;
+        }
+      },
+    },
+    mounted() {
+      // xét giá trị ban đầu cho combobox
+      this.currentItem[this.fieldName] = this.code;
+  
+      // this.item.filter((item,index)=>{
+      //   if(item[this.fieldCode]===this.currentItem[this.fieldCode]){
+      //     this.i=index
+      //   }
+      // })
+    },
 };
 </script>
 
