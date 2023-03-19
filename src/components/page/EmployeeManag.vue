@@ -53,7 +53,7 @@
               />
             </th>
             <th class="text-center" style="min-width: 40px;">STT</th>
-            <th>Mã nhân viên</th>
+              <th>Mã nhân viên 1</th>
               <th>Họ và tên</th>
               <th>Giới tính</th>
               <th>Ngày sinh</th>
