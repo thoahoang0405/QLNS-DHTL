@@ -359,9 +359,9 @@ import combobox from "../base/BaseCombobox.vue"
                 return validRegex.test(value)
             },
             save(){
-                // const toast = useToast();
-                // this.$emit("hideForm", false);
-                // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
+                const toast = useToast();
+                this.$emit("hideForm", false);
+                toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
                 this.validate()
                 this.$emit("save",this.desc)
                 console.log(this.desc)

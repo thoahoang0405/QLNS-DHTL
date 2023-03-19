@@ -53,7 +53,7 @@
               />
             </th>
             <th class="text-center" style="min-width: 40px;">STT</th>
-              <th>Mã nhân viên</th>
+              
               <th>Họ và tên</th>
               <th>Giới tính</th>
               <th>Ngày sinh</th>
@@ -63,9 +63,9 @@
               <th>Mã số thuế</th>
               <th>Số tài khoản</th>
               <th>Tên ngân hàng</th>
-              <td>Địa chỉ</td>
+              <th>Địa chỉ</th>
               <th>Khoa</th>
-              <th>Trạng thái</th>
+              <th>Chương trình đào tạo</th>
               <th>Cấp bậc lương</th>
               <th>Phòng ban</th>
               <th>Chứng chỉ đào tạo</th>
