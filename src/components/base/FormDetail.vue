@@ -82,7 +82,7 @@
                         <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
                         <!-- <combobox class="khoa " v-model="desc.khoa"></combobox> -->
                         <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
-                        <!-- <div class="invalid-feedback khoa" v-if="errors.khoa">{{ errors.khoa }}</div> -->
+                        <div class="invalid-feedback khoa" v-if="errors.khoa">{{ errors.khoa }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Lớp</label>
@@ -218,8 +218,7 @@ import combobox from "../base/BaseCombobox.vue"
                 // this.$emit("hideForm", false);
                 this.isShowNotifi = true,
                 this.desc = {
-                manv: '',
-                masv: '',
+                    masv: '',
                     ten: '',
                     gioitinh: '',
                     ngaysinh: '',
@@ -237,7 +236,7 @@ import combobox from "../base/BaseCombobox.vue"
                     trangthai: '',
                }
                this.errors = {
-                manv: '',
+                    masv: '',
                    ten: '',
                    ngaysinh: '',
                    khoa: '',
@@ -259,10 +258,28 @@ import combobox from "../base/BaseCombobox.vue"
                    kyluat: '',
                }
             },
+            // employeeDetail: function (value) {
+            //     value.DateOfBirth = this.fomartDate(value.DateOfBirth);
+            //     this.desc.DateOfBirth = value.DateOfBirth;
+            // },
+            // fomartDate(date) {
+            // try {
+            //     if (date) {
+            //     date = new Date(date);
+            //     let newDate = date.getDate();
+            //     let month = date.getMonth() + 1;
+            //     let year = date.getFullYear();
+            //     newDate = newDate < 10 ? `0${newDate}` : newDate;
+            //     month = month < 10 ? `0${month}` : month;
+            //     return `${year}-${month}-${newDate}`;
+            //     }
+            // } catch (error) {
+            //     return "";
+            // }
+            // },
             validate(){
                 // e.preventDefault();
                 let isValid = true;
-
                 this.errors = {
                     masv: '',
                     ten: '',
@@ -283,6 +300,7 @@ import combobox from "../base/BaseCombobox.vue"
                     ngaytotnghiep: '',
                 }
                 
+
                 if(!this.desc.masv) {
                     this.errors.masv = "Không được để trống!";
                     isValid = false;
@@ -298,15 +316,19 @@ import combobox from "../base/BaseCombobox.vue"
                 if(!this.desc.ngaysinh) {
                     this.errors.ngaysinh = "Không được để trống!";
                     isValid = false;
-                } else if(!this.isDate(this.errors.ngaysinh)){
-                    this.errors.ngaysinh = "aaa";
-                    isValid = false;
-                }
+                } 
+                // else if(this.desc.DateOfBirth > new Date() && this.desc.DateOfBirth){
+                //     this.errors.DateOfBirth = "aaa";
+                //     isValid = false;
+                // }
                 if(!this.desc.sodt) {
                     this.errors.sodt = "Không được để trống!";
                     isValid = false;
                 } else if(!this.isNumber(this.desc.sodt)) {
                     this.errors.sodt = "Yêu cầu nhập số";
+                    isValid = false;
+                }else if(this.desc.sodt.length < 10) {
+                    this.errors.sodt = "Không được nhỏ hơn 10 số";
                     isValid = false;
                 }
                 if(!this.desc.cmnd) {
@@ -331,10 +353,10 @@ import combobox from "../base/BaseCombobox.vue"
                 //     this.errors.lop = "Không được để trống!";
                 //     isValid = false;
                 // }
-                // if(!this.desc.khoa) {
-                //     this.errors.khoa = "Không được để trống!";
-                //     isValid = false;
-                // }
+                if(!this.desc.khoa) {
+                    this.errors.khoa = "Không được để trống!";
+                    isValid = false;
+                }
                 
                 // var getSelectedValue = document.querySelector( 
                 //     'input[name="gioitinh"]:checked'); 
@@ -347,10 +369,15 @@ import combobox from "../base/BaseCombobox.vue"
                 
                 return isValid
             },
-            isDate(){
-                var d = new Date();
-                return d
-            },
+            // isDate(date){
+            //     date = new Date(date);
+            //     let newDate = date.getDate();
+            //     let month = date.getMonth() + 1;
+            //     let year = date.getFullYear();
+            //     newDate = newDate < 10 ? `0${newDate}` : newDate;
+            //     month = month < 10 ? `0${month}` : month;
+            //     return `${year}-${month}-${newDate}`;
+            // },
             isNumber(value) {
                 return /^\d*$/.test(value);
             },
@@ -360,7 +387,7 @@ import combobox from "../base/BaseCombobox.vue"
             },
             save(){
                 // const toast = useToast();
-                this.$emit("hideForm", false);
+                // this.$emit("hideForm", false);
                 // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
                 this.validate()
                 this.$emit("save",this.desc)
@@ -512,9 +539,9 @@ label {
     height: 20px;   
    }
   } */
-  .khoa {
+  /* .khoa {
     margin-top: 4px;
-  }
+  } */
   .important {
     color: red;
   }
