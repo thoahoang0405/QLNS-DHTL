@@ -53,7 +53,7 @@
               />
             </th>
             <th class="text-center" style="min-width: 40px;">STT</th>
-              
+            <th>Mã nhân viên</th>
               <th>Họ và tên</th>
               <th>Giới tính</th>
               <th>Ngày sinh</th>
@@ -65,7 +65,8 @@
               <th>Tên ngân hàng</th>
               <th>Địa chỉ</th>
               <th>Khoa</th>
-              <th>Chương trình đào tạo</th>
+           
+              <th>Trạng thái</th>
               <th>Cấp bậc lương</th>
               <th>Phòng ban</th>
               <th>Chứng chỉ đào tạo</th>
@@ -101,7 +102,7 @@
             <td class="text-center">{{ index+1 }}</td>
             <td>{{ emp.EmployeeCode }}</td>
             <td>{{ emp.EmployeeName }}</td>
-            <td>{{ emp.Gender }}</td>
+            <td>{{ gender(emp.Gender) }}</td>
             <td>{{ formatDate(emp.DateOfBirth) }}</td>
             <td>{{ emp.IdentityNumber }}</td>
             <td>{{ emp.Email }}</td>
@@ -126,7 +127,7 @@
               colspan="12"
             >
               <div class="edit-text"></div>
-              <div class="icon icon-edit"></div>
+              <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
                 <div class="icon icon-delete"></div>
             </td>
           </tr>
@@ -211,7 +212,7 @@
       </div>
     </div>
   </div>
-<Form v-show="isShow" @hideForm="closeForm"></Form>
+<Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
 </template>
 <style>
   .btn-add:hover {
@@ -248,6 +249,9 @@ export default {
       departmentID:"",
       positionID:"",
       txtSearch:"",
+      employeeSelect:{},
+      newCode: "",
+      formMode: 1,
     };
   },
   created() {
@@ -263,7 +267,12 @@ export default {
     },
   },
   methods: {
-
+    
+    editEmployee(emp){
+      this.employeeSelect=emp
+     this.isShow=true
+     this.formMode=2
+    },
     getPagingEmployee() {
       try {
        
@@ -271,7 +280,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:7029/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -297,7 +306,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Departments"
+          "https://localhost:44301/api/Departments"
          )
          .then(function (res) {
           me.department=res.data
@@ -318,7 +327,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Position"
+          "https://localhost:44301/api/Position"
          )
          .then(function (res) {
           me.position=res.data
@@ -373,7 +382,30 @@ export default {
       this.isShowDrop = is;
     },
     btnShow(){
+      this.employeeSelect={}
+      this.getNewCode()
+      this.formMode=1;
       this.isShow = !this.isShow
+    },
+    getNewCode(){
+      try {
+       
+       var me = this;
+      
+       axios
+         .get(
+          "https://localhost:44301/api/Employees/NewCode"
+         )
+         .then(function (res) {
+          me.newCode=res.data
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
     },
     //nhận lệnh ẩn từ bên form chi tiết
     closeForm(value){
@@ -389,6 +421,20 @@ export default {
         $(".icon-dropup").removeClass("iconrotate");
       }
     },
+    gender(gender){
+      switch (gender) {
+        case 0:
+          gender="Nam"
+          break;
+          case 1:
+            gender="Nữ"
+          break;
+        default:
+          break;
+      }
+      return gender;
+    },
+    
     getPageDefault(e) {
       this.isActive = e.target.getAttribute("pageSize");
       this.pageDefault = e.target.getAttribute("pageSize");

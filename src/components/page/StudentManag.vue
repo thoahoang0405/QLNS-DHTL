@@ -529,7 +529,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -568,7 +568,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Faculty"
+          "https://localhost:44301/api/Faculty"
          )
          .then(function (res) {
           me.faculty=res.data
@@ -589,7 +589,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Classifications"
+          "https://localhost:44301/api/Classifications"
          )
          .then(function (res) {
           me.classification=res.data
