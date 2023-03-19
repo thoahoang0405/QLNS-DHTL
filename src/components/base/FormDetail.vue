@@ -397,7 +397,7 @@ import { useToast } from "vue-toastification";
                 const toast = useToast();
                 this.$emit("hideForm", false);
                 toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
-                this.validate()
+                // this.validate()
                 this.$emit("save",this.desc)
                 console.log(this.desc)
             },

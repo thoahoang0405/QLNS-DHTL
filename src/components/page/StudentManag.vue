@@ -567,7 +567,7 @@ export default {
         },
         {
           id: 12,
-          msv: '1951061106',
+          msv: '999999999',
           ten: 'Ngô Văn Tùng',
           gioitinh: 'Nam',
           ngaysinh: '18/03/2001',

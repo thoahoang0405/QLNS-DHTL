@@ -389,14 +389,14 @@ import combobox from "../base/BaseCombobox.vue";
                    this.errors.tinhtrang = "Không được để trống!";
                    isValid = false;
                }
-               if(!this.desc.khenthuong) {
-                   this.errors.khenthuong = "Không được để trống!";
-                   isValid = false;
-               }
-               if(!this.desc.kyluat) {
-                   this.errors.kyluat = "Không được để trống!";
-                   isValid = false;
-               }
+            //    if(!this.desc.khenthuong) {
+            //        this.errors.khenthuong = "Không được để trống!";
+            //        isValid = false;
+            //    }
+            //    if(!this.desc.kyluat) {
+            //        this.errors.kyluat = "Không được để trống!";
+            //        isValid = false;
+            //    }
                if(!this.desc.ngaycap) {
                    this.errors.ngaycap = "Không được để trống!";
                    isValid = false;
