@@ -21,18 +21,23 @@
       </div>
     </div>
     <div id="body-recruit">
-      <div class="body-recruit">
+      <div class="body-recruit" >
      
-      <div class="item-row">
-        <div class="item-recruit">
+      <div class="item-row" >
+        <div class="item-recruit" v-for="item of recruitment" :key="item.RecruitmentID" style="display:flex; flex-wrap: wrap;">
           <div class="body-rec">
+            <div >
+              <img v-if="item.DepartmentOfWork=='Công nghệ thông tin'" class="image" src="@/assets/img/anh7.png" alt="" />
+            </div>
             <div>
-              <img class="image" src="../../assets/img/anh7.png" alt="" />
+              <img v-if="item.DepartmentOfWork=='Kinh tế'" class="image" src="../../assets/img/anh2.jpg" alt="" />
             </div>
             <div class="title-wrap">
-              <h3 class="header-h3">Hệ quản trị CSDL</h3>
+              <h3 class="header-h3">{{ item.Title }}</h3>
               <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Đại học</div>
+              <div>Văn bằng: {{ item.Experience }}</div>
+              <div>Khoa: {{ item.DepartmentOfWork }}</div>
+              <div>Bậc lương: {{ item.Salary }}</div>
               <div class="btn-wrap">
                 <div class="btnEdit">Edit</div>
                 <div class="btnDelete">Delete</div>
@@ -41,123 +46,7 @@
             </div>
           </div>
         </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh2.jpg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Đồ họa máy tính</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Thạc sĩ</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh5.jpg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Toán 1</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Đại học</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh1.jpg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Kiến trúc máy tính</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Đại học</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh3.jpg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Trí tuệ nhân tạo</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Thạc sĩ</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh8.jpg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Lập trình Web</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Thạc sĩ</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh9.jpeg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Cở sở dữ liệu</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Thạc sĩ</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item-recruit">
-          <div class="body-rec">
-            <div>
-              <img class="image" src="../../assets/img/anh10.jpg" alt="" />
-            </div>
-            <div class="title-wrap">
-              <h3 class="header-h3">Xử lý ảnh</h3>
-              <!-- <div class="title-name">Đại học thủy lợi</div> -->
-              <div>Văn bằng: Thạc sĩ</div>
-              <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
-                <div class="btnDelete">Delete</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
       </div>
      </div>
@@ -261,13 +150,45 @@
 </style>
 
 <script>
+import axios from 'axios';
+
 // import FomrD from '../base/FormDetail.vue';
 export default {
   components: {},
   data() {
     return {
       isShow: false,
+      recruitment: {},
+     
     };
   },
+  created() {
+    this.getRecruitment()
+  },
+  methods:{
+    getRecruitment(){
+      try {
+       
+       var me = this;
+      
+       axios
+         .get(
+          "https://localhost:44301/api/Recruitment"
+         )
+         .then(function (res) {
+          me.recruitment=res.data
+          for (const iterator of res.data) {
+              console.log(iterator.Benefit);
+          }
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+    }
+  }
 };
 </script>

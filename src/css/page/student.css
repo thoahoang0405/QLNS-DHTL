@@ -185,7 +185,7 @@
   }
   .m-table input[type="checkbox"]:checked:after {
     height: 16px;
-    top: 0px;
+    top: 9px;
     left: 0px;
     position: relative;
     background: url("../../assets/icon/Sprites.64af8f61.svg") no-repeat -1224px -360px;
@@ -318,6 +318,86 @@
     border: 1px solid #bbb;
     color: #000;
   }
+  ul.pagination {
+    display: flex;
+    color: #111;
+    list-style-type: none;
+}
+ul.pagination a {
+    text-decoration: none;
+    color: #111;
+    width: 200px ;
+}
+.content-page {
+    min-width: 170px;
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: 9px;
+    position: relative;
+}
+.page-link{
+  margin: 5px;
+}
+.paging-left {
+    color: #111;
+    margin-left: 5px;
+    margin-top: 20px;
+
+
+    text-align: center;
+}
+.page-item:first-child {
+ 
+ 
+  color: #727272;
+}
+.page-item:last-child {
+ 
+  color: #727272;
+}
+
+.page-item {
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  justify-content: center;
+}
+
+li.page-item.disabled {
+  color: #bbb;
+}
+.page-item.active {
+  font-weight: 700;
+  text-align: center;
+  background-color: #eeeaea;
+  color: #000;
+}
+
+.page-item.active a {
+  width: 20px;
+  text-align: center;
+}
+
+.before-text {
+  color: rgb(104, 102, 102);
+  margin: 8px;
+  margin-top: 10px;
+}
+
+.after-text {
+  color: #111;
+  margin: 8px;
+  margin-top: 10px;
+}
+.page{
+  margin-top: 10px;
+  margin-right: 20px;
+}
   .content-page {
     min-width: 170px;
     margin-left: 6px;
