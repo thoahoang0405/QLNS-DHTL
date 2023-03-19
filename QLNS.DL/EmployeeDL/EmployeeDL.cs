@@ -14,7 +14,7 @@ namespace QLNS.DL
 {
     public class EmployeeDL : BaseDL<Employee>, IEmployeeDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=18032001";
         public PagingData<Employee> FilterEmployee(string? keyword, int? pageSize, Guid? departmentID, Guid? positionID, int? pageNumber = 1)
         {
 

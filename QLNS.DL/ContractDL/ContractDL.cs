@@ -14,7 +14,7 @@ namespace QLNS.DL.ContractDL
 {
     public class ContractDL:BaseDL<Contract>, IContractDL   
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=18032001";
         public PagingData<Contract> FilterContract(string? keyword, int? pageSize, int? pageNumber = 1)
         {
 

@@ -15,7 +15,7 @@ namespace QLNS.BL
 {
     public class BonusDL : BaseDL<Bonus>, IBonusDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=18032001";
         public PagingData<Bonus> FilterBonus(string? keyword, int? pageSize, int? pageNumber = 1)
         {
 

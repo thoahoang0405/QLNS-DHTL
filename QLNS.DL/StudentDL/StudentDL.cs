@@ -13,7 +13,7 @@ namespace QLNS.DL
 {
     public class StudentDL: BaseDL<Student>, IStudentDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=18032001";
         public PagingData<Student> FilterStudent(string? keyword, int? pageSize, Guid? facultyID, Guid? classificationID, int? pageNumber = 1)
         {
 

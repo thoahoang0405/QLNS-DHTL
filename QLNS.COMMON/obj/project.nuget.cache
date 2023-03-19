@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mEtmEgA35CCwOrlWkFcegGcU7An3ndeos4cm0r62L+epN87IhNtfrySqVyjUOKTtgugp26F4+Kp+XtqOmsZGfw==",
+  "dgSpecHash": "PmE4BkAJ7M3NV+XnRQ+kbXD8A8vnbnw3VVizNXe4wCWkZXTQxtG3W2FX8960pg1eHdoFZ3R7J4iR4O+745MRJw==",
   "success": true,
-  "projectFilePath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
+  "projectFilePath": "D:\\QLNS-DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

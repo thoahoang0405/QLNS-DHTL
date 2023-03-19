@@ -15,7 +15,7 @@ namespace QLNS.BL
 {
     public class DisciplineDL : BaseDL<Discipline>, IDisciplineDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=18032001";
         public PagingData<Discipline> FilterDiscipline(string? keyword, int? pageSize, int? pageNumber = 1)
         {
 

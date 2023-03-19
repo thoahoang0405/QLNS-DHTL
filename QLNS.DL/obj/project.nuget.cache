@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "kOSNRXaKkeFr6bqqi9KpdWHxGgEdB5I2RM+01rtCpOcPbkfDmqvTiPU2UHsHFdcBRR+7FVObTlo++8DooqO41Q==",
+  "dgSpecHash": "/fK3YGu+l7/Yg6snOeLKnGBdlq+75n9vWARQIfc2tygQwyFcA5RPJjgEmfBYbBcKeArnpfPmExLSHd1MRoyalQ==",
   "success": true,
-  "projectFilePath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj",
+  "projectFilePath": "D:\\QLNS-DHTL\\QLNS.DL\\QLNS.DL.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\admin\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+    "C:\\Users\\TungNV\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\TungNV\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
   ],
   "logs": []
 }
