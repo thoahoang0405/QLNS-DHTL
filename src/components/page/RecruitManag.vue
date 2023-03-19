@@ -70,9 +70,6 @@
   width: 100%;
   overflow-y: scroll;
 }
-.title-wrap {
-  /* margin-top: 40px; */
-}
 .item-row{
   display: flex;
   align-items: center;

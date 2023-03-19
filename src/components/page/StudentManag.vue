@@ -469,7 +469,7 @@ export default {
         },
         {
           id: 12,
-          msv: '1951061106',
+          msv: '999999999',
           ten: 'Ngô Văn Tùng',
           gioitinh: 'Nam',
           ngaysinh: '18/03/2001',
@@ -529,7 +529,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -568,7 +568,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Faculty"
+          "https://localhost:7029/api/Faculty"
          )
          .then(function (res) {
           me.faculty=res.data
@@ -589,7 +589,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Classifications"
+          "https://localhost:7029/api/Classifications"
          )
          .then(function (res) {
           me.classification=res.data

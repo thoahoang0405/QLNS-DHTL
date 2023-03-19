@@ -1,186 +1,161 @@
 <template>
-  <div id="form">
-    <form class="form">
-      <div class="form-top">
-        <div class="form-title">
-          <h3 class="title">Thêm/sửa thông tin nhân viên</h3>
-          <span class="close" @click="closeForm">X</span>
-        </div>
-      </div>
-      <div class="form-Wrap">
-        <div class="column">
-          <div class="input__box">
-            <label for="">Mã nhân viên</label>
-            <input class="manv" type="text" v-model="employee.EmployeeCode" />
-            <div class="invalid-feedback" v-if="errors.manv">
-              {{ errors.manv }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Tên nhân viên</label>
-            <input class="ten" type="text" v-model="employee.EmployeeName" />
-            <div class="invalid-feedback" v-if="errors.ten">
-              {{ errors.ten }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Giới tính</label>
-            <div class="radio__box">
-              <input
-                type="radio"
-                id="nam"
-                v-model="employee.Gender"
-                value="nam"
-              />
-              <label class="nam" for="">Nam</label>
-              <input
-                type="radio"
-                id="nu"
-                v-model="employee.Gender"
-                value="nu"
-              />
-              <label class="nu" for="">Nữ</label>
-            </div>
-            <!-- <div style= "color:red" id="disp">{{ desc.gioitinh }}</div> -->
-          </div>
-        </div>
+    <div id="form">
+       <form class="form">
+           <div class="form-top">
+               <div class="form-title">
+                   <h3 class="title">Thêm/sửa thông tin nhân viên</h3>
+                   <span class="close" @click="closeForm">X</span>
+               </div>
+           </div>
+           <div class="form-Wrap">
+               <div class="column">
+                   <div class="input__box">
+                       <label for="">Mã nhân viên</label>
+                       <input class="manv" type="text" v-model="employee.EmployeeCode">
+                       <div class="invalid-feedback" v-if="errors.manv">{{ errors.manv }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Tên nhân viên</label>
+                       <input class="ten" type="text" v-model="employee.EmployeeName">
+                       <div class="invalid-feedback" v-if="errors.ten">{{ errors.ten }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Giới tính</label>
+                       <div class="radio__box">
+                           <input type="radio" id="nam" v-model="employee.Gender" value="nam">
+                           <label class="nam" for="">Nam</label>
+                           <input type="radio" id="nu" v-model="employee.Gender" value="nu">
+                           <label class="nu" for="">Nữ</label>
+                       </div>
+                       <!-- <div style= "color:red" id="disp">{{ desc.gioitinh }}</div> -->
+                   </div>
+               </div>
+               
+               <div class="column">
+                   <div class="input__box">
+                       <label for="">Ngày sinh</label>
+                       <input class="ngaysinh" type="date" v-model="employee.DateOfBirth">
+                       <div class="invalid-feedback" v-if="errors.ngaysinh">{{ errors.ngaysinh }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Cmnd/cccd</label> 
+                       <input class="cmnd" type="text" v-model="employee.IdentityNumber">
+                       <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
+                   </div>
+                   
+                   <div class="input__box">
+                       <label for="">Email</label>
+                       <input class="email" type="text" v-model="desc.email">
+                       <div class="invalid-feedback" v-if="errors.email">{{ errors.email }}</div>
+                   </div>
+               </div>
+               <div class="column">
+                    <div class="input__box">
+                        <label for="">Ngày cấp</label>
+                        <input class="ngaycap" type="date" v-model="desc.ngaycap">
+                        <div class="invalid-feedback" v-if="errors.ngaycap">{{ errors.ngaycap }}</div>
+                    </div>
+                    <div class="input__box">
+                        <label for="">Nơi cấp</label>
+                    <input class="noicap" type="text" v-model="desc.noicap">
+                    <div class="invalid-feedback" v-if="errors.noicap">{{ errors.noicap }}</div>
+                    </div>
+                </div>
+               
+               <div class="column">
+                   <div class="input__box">
+                       <label for="">Số điện thoại</label>
+                       <input class="sodt" type="text" v-model="desc.sodt">
+                       <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Mã số thuế</label>
+                       <input class="masothue" type="text" v-model="desc.masothue">
+                       <div class="invalid-feedback" v-if="errors.masothue">{{ errors.masothue }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Số tài khoản</label>
+                       <input class="sotaikhoan" type="text" v-model="desc.sotaikhoan">
+                       <div class="invalid-feedback" v-if="errors.sotaikhoan">{{ errors.sotaikhoan }}</div>
+                   </div>
+               </div>
+               <div class="column column-s">
+                   <div class="input__box">
+                       <label for="">Tên ngân hàng</label>
+                       <input class="tennganhang" type="text" v-model="desc.tennganhang">
+                       <div class="invalid-feedback" v-if="errors.tennganhang">{{ errors.tennganhang }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Địa chỉ</label>
+                       <input class="diachi" type="text" v-model="desc.diachi">
+                       <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Khoa</label>
+                       <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
+                       <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
+                      
+                   </div>
+               </div>
+               <div class="column column-s">
+                   <!-- <div class="input__box">
+                       <label for="">Trạng thái</label>
+                       <input class="trangthai" type="text" v-model="desc.trangthai">
+                       <div class="invalid-feedback" v-if="errors.trangthai">{{ errors.trangthai }}</div>
+                   </div> -->
+                   <div class="input__box">
+                       <label for="">Trạng thái</label>
+                       <combobox class="trangthai " :value="desc.trangthai" :items="dataItem" :code="'id'" :fieldName="'trangthai'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Cấp bậc lương</label>
+                       <combobox class="capbacluong " :value="desc.capbacluong" :items="dataItem" :code="'id'" :fieldName="'capbacluong'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Phòng ban</label>
+                       <combobox class="phongban " :value="desc.phongban" :items="dataItem" :code="'id'" :fieldName="'phongban'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <!-- <div class="input__box">
+                       <label for="">Cấp bậc lương</label>
+                       <input class="capbacluong" type="text" v-model="desc.capbacluong">
+                       <div class="invalid-feedback" v-if="errors.capbacluong">{{ errors.capbacluong }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Phòng ban</label>
+                       <input class="phongban" type="text" v-model="desc.phongban">
+                       <div class="invalid-feedback" v-if="errors.phongban">{{ errors.phongban }}</div>
+                   </div> -->
 
-        <div class="column">
-          <div class="input__box">
-            <label for="">Ngày sinh</label>
-            <input
-              class="ngaysinh"
-              type="date"
-              v-model="employee.DateOfBirth"
-            />
-            <div class="invalid-feedback" v-if="errors.ngaysinh">
-              {{ errors.ngaysinh }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Khoa</label>
-            <combobox
-              class="khoa"
-              :value="desc.khoa"
-              :items="dataItem"
-              :code="'id'"
-              :fieldName="'khoa'"
-              @selectedItem="selectItemCbb"
-            ></combobox>
-            <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
-          </div>
-        </div>
-        <div class="column">
-          <div class="input__box">
-            <label for="">Cmnd/cccd</label>
-            <input class="cmnd" type="text" v-model="employee.IdentityNumber" />
-            <div class="invalid-feedback" v-if="errors.cmnd">
-              {{ errors.cmnd }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Ngày cấp</label>
-            <input class="ngaycap" type="date" v-model="desc.ngaycap" />
-            <div class="invalid-feedback" v-if="errors.ngaycap">
-              {{ errors.ngaycap }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Nơi cấp</label>
-            <input class="noicap" type="text" v-model="desc.noicap" />
-            <div class="invalid-feedback" v-if="errors.noicap">
-              {{ errors.noicap }}
-            </div>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="input__box">
-            <label for="">Email</label>
-            <input class="email" type="text" v-model="desc.email" />
-            <div class="invalid-feedback" v-if="errors.email">
-              {{ errors.email }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Số điện thoại</label>
-            <input class="sodt" type="text" v-model="desc.sodt" />
-            <div class="invalid-feedback" v-if="errors.sodt">
-              {{ errors.sodt }}
-            </div>
-          </div>
-        </div>
-        <div class="column column-s">
-          <div class="input__box">
-            <label for="">Mã số thuế</label>
-            <input class="masothue" type="text" v-model="desc.masothue" />
-            <div class="invalid-feedback" v-if="errors.masothue">
-              {{ errors.masothue }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Số tài khoản</label>
-            <input class="sotaikhoan" type="text" v-model="desc.sotaikhoan" />
-            <div class="invalid-feedback" v-if="errors.sotaikhoan">
-              {{ errors.sotaikhoan }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Tên ngân hàng</label>
-            <input class="tennganhang" type="text" v-model="desc.tennganhang" />
-            <div class="invalid-feedback" v-if="errors.tennganhang">
-              {{ errors.tennganhang }}
-            </div>
-          </div>
-        </div>
-        <div class="input__box">
-          <label for="">Địa chỉ</label>
-          <input class="diachi" type="text" v-model="desc.diachi" />
-          <div class="invalid-feedback" v-if="errors.diachi">
-            {{ errors.diachi }}
-          </div>
-        </div>
-        <div class="column column-s">
-          <div class="input__box">
-            <label for="">Trạng thái</label>
-            <input class="trangthai" type="text" v-model="desc.trangthai" />
-            <div class="invalid-feedback" v-if="errors.trangthai">
-              {{ errors.trangthai }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Cấp bậc lương</label>
-            <input class="capbacluong" type="text" v-model="desc.capbacluong" />
-            <div class="invalid-feedback" v-if="errors.capbacluong">
-              {{ errors.capbacluong }}
-            </div>
-          </div>
-        </div>
-
-        <div class="column column-s">
-          <div class="input__box">
-            <label for="">Phòng ban</label>
-            <input class="phongban" type="text" v-model="desc.phongban" />
-            <div class="invalid-feedback" v-if="errors.phongban">
-              {{ errors.phongban }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Chứng chỉ đào tạo</label>
-            <input class="daotao" type="text" v-model="desc.daotao" />
-            <div class="invalid-feedback" v-if="errors.daotao">
-              {{ errors.daotao }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Tình trạng hôn nhân</label>
-            <input class="tinhtrang" type="text" v-model="desc.tinhtrang" />
-            <div class="invalid-feedback" v-if="errors.tinhtrang">
-              {{ errors.tinhtrang }}
-            </div>
-          </div>
-        </div>
-        <!-- <div class="column">
+               </div>
+               
+               <div class="column column-s">
+                   <!-- <div class="input__box">
+                       <label for="">Chứng chỉ đào tạo</label>
+                       <input class="daotao" type="text" v-model="desc.daotao">
+                       <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
+                   </div> -->
+                   <div class="input__box">
+                       <label for="">Chứng chỉ đào tạo</label>
+                       <combobox class="daotao " :value="desc.daotao" :items="dataItem" :code="'id'" :fieldName="'daotao'" @selectedItem="selectItemCbb"></combobox>
+                       <!-- <input class="daotao" type="text" v-model="desc.daotao"> -->
+                      
+                   </div>
+                   <div class="input__box">
+                       <label for="">Tình trạng hôn nhân</label>
+                       <input class="tinhtrang" type="text" v-model="desc.tinhtrang">
+                       <div class="invalid-feedback" v-if="errors.tinhtrang">{{ errors.tinhtrang }}</div>
+                   </div>
+                   <div class="input__box">
+                       <label for="">Vị trí</label>
+                       <combobox class="vtri " :value="desc.vtri" :items="dataItem" :code="'id'" :fieldName="'vtri'" @selectedItem="selectItemCbb"></combobox>
+                   </div>
+                   <!-- <div class="input__box">
+                       <label for="">Vị trí</label>
+                       <input class="vitri" type="text" v-model="desc.vitri">
+                       <div class="invalid-feedback" v-if="errors.vitri">{{ errors.vitri }}</div>
+                   </div> -->
+               </div>
+               <!-- <div class="column">
                    <div class="input__box">
                        <label for="">Khen thưởng</label>
                        <input class="khenthuong" type="text" v-model="desc.khenthuong">
@@ -211,100 +186,245 @@
 <script>
 // import notifi from "./FormNotifi.vue"
 import combobox from "../base/BaseCombobox.vue";
-import axios from  "axios"
-export default {
-  data() {
-    return {
-      employee: {},
-      isShowNotifi: false,
-      dataItem: [
-        { id: 1, khoa: "CNTT" },
-        { id: 2, khoa: "QTKD" },
-        { id: 3, khoa: "Kinh tế" },
-        { id: 4, khoa: "Cơ Khí" },
-      ],
-      dataFields: { value: "id", text: "khoa" },
-      isShow: false,
-      errors: {
-        manv: "",
-        ten: "",
-        ngaysinh: "",
-        khoa: "",
-        cmnd: "",
-        ngaycap: "",
-        noicap: "",
-        email: "",
-        sodt: "",
-        masothue: "",
-        sotaikhoan: "",
-        tennganhang: "",
-        trangthai: "",
-        capbacluong: "",
-        phongban: "",
-        tinhtrang: "",
-        diachi: "",
-        daotao: "",
-        khenthuong: "",
-        kyluat: "",
-      },
-      desc: {
-        manv: "",
-        ten: "",
-        ngaysinh: "",
-        khoa: "",
-        cmnd: "",
-        ngaycap: "",
-        noicap: "",
-        email: "",
-        sodt: "",
-        masothue: "",
-        sotaikhoan: "",
-        tennganhang: "",
-        trangthai: "",
-        capbacluong: "",
-        phongban: "",
-        tinhtrang: "",
-        diachi: "",
-        daotao: "",
-        khenthuong: "",
-        kyluat: "",
-      },
-    };
-  },
-  components: {
-    combobox,
-    //    notifi
-  },
-  methods: {
-    saveData() {
-      try {
-        var me = this;
-        axios
-          .post("https://localhost:7029/api/Employees", me.employees)
-          .then(function (res) {
-            console.log(res);
-          })
+   export default {
+       data(){
+           return {
+            employee: {},
+                isShowNotifi: false,
+                dataItem:[
+                    {id:1, khoa: 'CNTT'},
+                    {id:2, khoa: 'QTKD'},
+                    {id:3, khoa: 'Kinh tế'},
+                    {id:4, khoa: 'Cơ Khí'}
+                ],
+                dataFields: {value: 'id', text: 'khoa'},
+               isShow: false,
+               errors: {
+                   manv: '',
+                   ten: '',
+                   ngaysinh: '',
+                   cmnd: '',
+                   email: '',
+                   sodt: '',
+                   masothue: '',
+                   sotaikhoan: '',
+                   tennganhang: '',
+                   diachi: '',
+                   khoa: '',
+                   trangthai: '',
+                   capbacluong: '',
+                   phongban: '',
+                   daotao: '',
+                   tinhtrang: '',
+                   vitri: '',
+               },
+               desc: {
+                manv: '',
+                   ten: '',
+                   ngaysinh: '',
+                   cmnd: '',
+                   email: '',
+                   sodt: '',
+                   masothue: '',
+                   sotaikhoan: '',
+                   tennganhang: '',
+                   diachi: '',
+                   khoa: '',
+                   trangthai: '',
+                   capbacluong: '',
+                   phongban: '',
+                   daotao: '',
+                   tinhtrang: '',
+                   vitri: '',
+               }
+           }
+       },
+       components: {
+           combobox,
+        //    notifi
+       },
+       methods: {
+            selectItemCbb(value) {
+                this.desc.khoa = value.khoa
+            },
+           btnHidden(){
+               this.isShow = !this.isShow
+           },
+           closeNo(value) {
+                this.isShowNotifi = value;
+            },
+            FormCancel(value) {
+                this.isShowNotifi = value
+                this.$emit("hideForm", false);
+            },
+            
+           //gửi lệnh ẩn form từ bên này sang trang chính
+           closeForm(){
+                // this.isShowNotifi = true
+               this.$emit("hideForm", false);
+               this.desc = {
+                manv: '',
+                ten: '',
+                ngaysinh: '',
+                cmnd: '',
+                email: '',
+                sodt: '',
+                masothue: '',
+                sotaikhoan: '',
+                tennganhang: '',
+                diachi: '',
+                khoa: '',
+                trangthai: '',
+                capbacluong: '',
+                phongban: '',
+                daotao: '',
+                tinhtrang: '',
+                vitri: '',
+               }
+               this.errors = {
+                manv: '',
+                   ten: '',
+                   ngaysinh: '',
+                   khoa: '',
+                   cmnd: '',
+                   ngaycap: '',
+                   noicap: '',
+                   email: '',
+                   sodt: '',
+                   masothue: '',
+                   sotaikhoan: '',
+                   tennganhang: '',
+                   trangthai: '',
+                   capbacluong: '',
+                   phongban: '',
+                   tinhtrang: '',
+                   diachi: '',
+                   daotao: '',
+                   khenthuong: '',
+                   kyluat: '',
+               }
+           },
+           validate(){
+               let isValid = true;
 
-          .catch(function () {
-            console.log(1);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    selectItemCbb(value) {
-      this.desc.khoa = value.khoa;
-    },
-    btnHidden() {
-      this.isShow = !this.isShow;
-    },
-    closeNo(value) {
-      this.isShowNotifi = value;
-    },
-    FormCancel(value) {
-      this.isShowNotifi = value;
-      this.$emit("hideForm", false);
-    },
+               this.errors = {
+                   manv: '',
+                   ten: '',
+                   ngaysinh: '',
+                   khoa: '',
+                   cmnd: '',
+                   ngaycap: '',
+                   noicap: '',
+                   email: '',
+                   sodt: '',
+                   masothue: '',
+                   sotaikhoan: '',
+                   tennganhang: '',
+                   trangthai: '',
+                   capbacluong: '',
+                   phongban: '',
+                   tinhtrang: '',
+                   diachi: '',
+                   daotao: '',
+                   khenthuong: '',
+                   kyluat: '',
+               }
+               if(!this.desc.manv) {
+                   this.errors.manv = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.ten) {
+                   this.errors.ten = "Không được để trống!";
+                   isValid = false;
+               }
+               // if(!this.desc.gioitinh) {
+               //     this.errors.gioitinh = "Không được để trống!";
+               //     isValid = false;
+               // }
+               if(!this.desc.ngaysinh) {
+                   this.errors.ngaysinh = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.sodt) {
+                   this.errors.sodt = "Không được để trống!";
+                   isValid = false;
+               } else if(!this.isNumber(this.desc.sodt)) {
+                   this.errors.sodt = "Yêu cầu nhập số";
+                   isValid = false;
+               }
+               if(!this.desc.khoa) {
+                   this.errors.khoa = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.cmnd) {
+                   this.errors.cmnd = "Không được để trống!";
+                   isValid = false;
+               }else if(!this.isNumber(this.desc.cmnd)) {
+                   this.errors.cmnd = "Yêu cầu nhập số";
+                   isValid = false;
+               }
+               if(!this.desc.masothue) {
+                   this.errors.masothue = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.sotaikhoan) {
+                   this.errors.sotaikhoan = "Không được để trống!";
+                   isValid = false;
+               } else if(!this.isNumber(this.desc.sotaikhoan)) {
+                   this.errors.sotaikhoan = "Yêu cầu nhập số";
+                   isValid = false;
+               }
+               if(!this.desc.email) {
+                   this.errors.email = "Không được để trống!";
+                   isValid = false;
+               }else if(!this.isEmail(this.desc.email)) {
+                   this.errors.email = "Yêu cầu nhập kiểu email";
+                   isValid = false;
+               }
+               if(!this.desc.diachi) {
+                   this.errors.diachi = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.daotao) {
+                   this.errors.daotao = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.tennganhang) {
+                   this.errors.tennganhang = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.trangthai) {
+                   this.errors.trangthai = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.capbacluong) {
+                   this.errors.capbacluong = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.phongban) {
+                   this.errors.phongban = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.tinhtrang) {
+                   this.errors.tinhtrang = "Không được để trống!";
+                   isValid = false;
+               }
+            //    if(!this.desc.khenthuong) {
+            //        this.errors.khenthuong = "Không được để trống!";
+            //        isValid = false;
+            //    }
+            //    if(!this.desc.kyluat) {
+            //        this.errors.kyluat = "Không được để trống!";
+            //        isValid = false;
+            //    }
+               if(!this.desc.ngaycap) {
+                   this.errors.ngaycap = "Không được để trống!";
+                   isValid = false;
+               }
+               if(!this.desc.noicap) {
+                   this.errors.noicap = "Không được để trống!";
+                   isValid = false;
+               }
 
     //gửi lệnh ẩn form từ bên này sang trang chính
     closeForm() {
@@ -513,7 +633,8 @@ export default {
         document.getElementById("error").innerHTML =
           "*You have not selected any season";
       }
-    },
+    }
+            }
   },
   created() {
     // this.save()
@@ -567,12 +688,12 @@ label {
   padding: 0 20px;
 }
 .form-title {
-  padding: 0 13px;
-  background-color: #d9d9d9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2px;
+    padding: 0 13px;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
 }
 .close {
   cursor: pointer;
