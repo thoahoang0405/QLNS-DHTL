@@ -83,3 +83,11 @@ D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\System.Net.Http.Formatting
 D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\System.Web.Http.dll
 D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

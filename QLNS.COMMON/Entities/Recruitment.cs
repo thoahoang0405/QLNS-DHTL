@@ -14,11 +14,11 @@ namespace QLNS.COMMON.Entities
         
        [Key]
         public Guid RecruitmentID { get; set; }
-        public string Title { get; set; }
-        public string Skill { get; set; }
-        public string Benefit { get; set; }
-        public string Salary { get; set; }
-        public string Experience { get; set; }
-        public string DepartmentOfWork { get; set; }
+        public string? Title { get; set; }
+        public string? Skill { get; set; }
+        public string? Benefit { get; set; }
+        public string? Salary { get; set; }
+        public string? Experience { get; set; }
+        public string? DepartmentOfWork { get; set; }
     }
 }

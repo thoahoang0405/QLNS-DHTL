@@ -13,10 +13,10 @@ namespace QLNS.COMMON.Entities
     {
         [Key]
         public Guid BonusID { get; set; }
-        public string Reason { get; set; }
-        public string Location { get; set; }
-        public DateTime BonusDate { get; set; }
-        public string Form { get; set; }
-       public Guid UserID {get; set;}
+        public string? Reason { get; set; }
+        public string? Location { get; set; }
+        public DateTime? BonusDate { get; set; }
+        public string? Form { get; set; }
+       public Guid? UserID {get; set;}
     }
 }

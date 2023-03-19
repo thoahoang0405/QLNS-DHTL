@@ -14,9 +14,9 @@ namespace QLNS.COMMON.Entities
         [Key]
       public Guid  ContractID { get; set; }
         public string ContractName { get; set; }
-       public DateTime SignDay { get; set; }
-       public DateTime EffectiveDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-       public Guid EmployeeID { get; set; }
+       public DateTime? SignDay { get; set; }
+       public DateTime? EffectiveDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
+       public Guid? EmployeeID { get; set; }
     }
 }
