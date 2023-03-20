@@ -301,13 +301,13 @@ export default {
       salary: {},
       formMode: 1,
       isShowNotifi: false,
-      dataItem: [
-        { id: 1, khoa: "CNTT" },
-        { id: 2, khoa: "QTKD" },
-        { id: 3, khoa: "Kinh tế" },
-        { id: 4, khoa: "Cơ Khí" },
-      ],
-      dataFields: { value: "id", text: "khoa" },
+      // dataItem: [
+      //   { id: 1, khoa: "CNTT" },
+      //   { id: 2, khoa: "QTKD" },
+      //   { id: 3, khoa: "Kinh tế" },
+      //   { id: 4, khoa: "Cơ Khí" },
+      // ],
+      // dataFields: { value: "id", text: "khoa" },
       isShow: false,
       isValid:true,
       errors: {
