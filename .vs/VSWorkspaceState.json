@@ -2,10 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\ConsoleApp1",
+    "\\QLNS.DHTL",
     "\\QLNS.DL",
+    "\\QLNS.DL\\BaseDL",
     "\\QLNS.DL\\ContractDL",
+    "\\QLNS.DL\\EmployeeDL",
     "\\QLNS.DL\\StatusStudentDL"
   ],
-  "SelectedNode": "\\QLNS.DL\\StatusStudentDL\\StatusStudentDL.cs",
+  "SelectedNode": "\\QLNS.DL\\BaseDL\\BaseDL.cs",
   "PreviewInSolutionExplorer": false
 }

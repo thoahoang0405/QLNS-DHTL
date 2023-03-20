@@ -14,10 +14,10 @@ namespace QLNS.COMMON.Entities
         [Key]
         public Guid DisciplineID { get; set; }
 
-          public string  Reason { get; set; }
-        public string Location { get; set; }
-        public DateTime DisciplineDate { get; set; }
-        public string Form { get; set; }
-        public Guid UserID { get; set; }
+          public string?  Reason { get; set; }
+        public string? Location { get; set; }
+        public DateTime? DisciplineDate { get; set; }
+        public string? Form { get; set; }
+        public Guid? UserID { get; set; }
     }
 }
