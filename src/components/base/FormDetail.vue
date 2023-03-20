@@ -13,20 +13,20 @@
                 <div class="column">
                     <div class="input__box">
                         <label for="">Mã sinh viên <span class="important">*</span></label>
-                        <input class="masv" type="text" v-model="desc.masv">
+                        <input class="masv" type="text" v-model="students.StudentCode">
                         <div class="invalid-feedback" v-if="errors.masv">{{ errors.masv }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Tên sinh viên <span class="important">*</span></label>
-                        <input class="ten" type="text" v-model="desc.ten">
+                        <input class="ten" type="text" v-model="students.StudentName">
                         <div class="invalid-feedback" v-if="errors.ten">{{ errors.ten }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Giới tính <span class="important">*</span></label>
                         <div class="radio__box">
-                            <input type="radio" id="nam" v-model="desc.gioitinh" value="nam">
+                            <input type="radio" id="nam" v-model="students.Gender" value="0">
                             <label class="nam" for="">Nam</label>
-                            <input type="radio" id="nu" v-model="desc.gioitinh" value="nu">
+                            <input type="radio" id="nu" v-model="students.Gender" value="1">
                             <label class="nu" for="">Nữ</label>
                         </div>
                         <div class="invalid-feedback" v-if="errors.gioitinh">{{ errors.gioitinh }}</div>
@@ -37,24 +37,24 @@
                 <div class="column">
                     <div class="input__box">
                         <label for="">Ngày sinh <span class="important">*</span></label>
-                        <input class="ngaysinh" type="date" v-model="desc.ngaysinh">
+                        <input class="ngaysinh" type="date" v-model="students.DateOfBirth">
                         <div class="invalid-feedback" v-if="errors.ngaysinh">{{ errors.ngaysinh }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Cmnd/cccd <span class="important">*</span></label> 
-                        <input class="cmnd" type="text" v-model="desc.cmnd">
+                        <input class="cmnd" type="text" v-model="students.IdentityNumber">
                         <div class="invalid-feedback" v-if="errors.cmnd">{{ errors.cmnd }}</div>
                     </div>
                 </div>
                 <div class="column">
                     <div class="input__box">
                         <label for="">Email <span class="important">*</span></label>
-                        <input class="email" type="text" v-model="desc.email">
+                        <input class="email" type="text" v-model="students.Email">
                         <div class="invalid-feedback" v-if="errors.email">{{ errors.email }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Số điện thoại <span class="important">*</span></label>
-                        <input class="sodt" type="text" v-model="desc.sodt">
+                        <input class="sodt" type="text" v-model="students.Phonenumber">
                         <div class="invalid-feedback" v-if="errors.sodt">{{ errors.sodt }}</div>
                     </div>
 
@@ -62,31 +62,31 @@
                 <div class="column">
                     <div class="input__box">
                         <label for="">Số tài khoản</label>
-                        <input class="sotaikhoan" type="text" v-model="desc.sotaikhoan">
+                        <input class="sotaikhoan" type="text" v-model="students.BankAccountNumber">
                         <div class="invalid-feedback" v-if="errors.sotaikhoan">{{ errors.sotaikhoan }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Tên ngân hàng</label>
-                        <input class="tennganhang" type="text" v-model="desc.tennganhang">
+                        <input class="tennganhang" type="text" v-model="students.BankAccountName">
                         <div class="invalid-feedback" v-if="errors.tennganhang">{{ errors.tennganhang }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Địa chỉ <span class="important">*</span></label>
-                        <input class="diachi" type="text" v-model="desc.diachi">
+                        <input class="diachi" type="text" v-model="students.Adress">
                         <div class="invalid-feedback" v-if="errors.diachi">{{ errors.diachi }}</div>
                     </div>
                 </div>
                 <div class="column">
                     <div class="input__box">
                         <label for="">Khoa</label>
-                        <combobox class="khoa " :value="desc.khoa" :items="dataItem" :code="'id'" :fieldName="'khoa'" @selectedItem="selectItemCbb"></combobox>
+                        <combobox class="khoa " :value="students.FacultyName" :items="dataItem" :code="'id'" :fieldName="'FacultyName'" @selectedItem="selectItemCbb"></combobox>
                         <!-- <combobox class="khoa " v-model="desc.khoa"></combobox> -->
                         <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
                         <div class="invalid-feedback khoa" v-if="errors.khoa">{{ errors.khoa }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Lớp</label>
-                        <input class="lop" type="text" v-model="desc.lop">
+                        <input class="lop" type="text" v-model="students.class">
                         <div class="invalid-feedback" v-if="errors.lop">{{ errors.lop }}</div>
                     </div>
                     
@@ -95,7 +95,7 @@
                 <div class="column column-s">
                     <div class="input__box">
                         <label for="">Chương trình đào tạo</label>
-                        <combobox class="daotao " :value="desc.daotao" :items="dataItem" :code="'id'" :fieldName="'daotao'" @selectedItem="selectItemCbb"></combobox>
+                        <combobox class="daotao " :value="students.EducationProgtamName" :items="dataItem" :code="'id'" :fieldName="'daotao'" @selectedItem="selectItemCbb"></combobox>
                     </div>
                     <!-- <div class="input__box">
                         <label for="">Chương trình đào tạo</label>
@@ -104,12 +104,20 @@
                     </div> -->
                     <div class="input__box">
                         <label for="">Xếp loại</label>
-                        <input class="xeploai" type="text" v-model="desc.xeploai">
+                        <input class="xeploai" type="text" v-model="students.ClassificationName">
                         <div class="invalid-feedback" v-if="errors.xeploai">{{ errors.xeploai }}</div>
                     </div>
                     <div class="input__box">
                         <label for="">Trạng thái</label>
-                        <combobox class="trangthai " :value="desc.trangthai" :items="dataItem" :code="'id'" :fieldName="'trangthai'" @selectedItem="selectItemCbb"></combobox>
+                        <combobox class="trangthai " :value="students.StatusName" :items="dataItem" :code="'id'" :fieldName="'trangthai'" @selectedItem="selectItemCbb"></combobox>
+                        <!-- <combobox
+                            class="trangthai"
+                            :value="employee.StatusName"
+                            :items="statusname"
+                            :code="'StatusNameID'"
+                            :fieldName="'StatusName'"
+                            @selectedItem="selectItemStatusName"
+                        ></combobox> -->
                     </div>
                     <!-- <div class="input__box">
                         <label for="">Trạng thái</label>
@@ -135,11 +143,18 @@
 
 <script>
 import notifi from "./FormNotifi.vue"
+import axios from "axios";
 import combobox from "../base/BaseCombobox.vue"
+import { useToast } from "vue-toastification";
+
 // import { useToast } from "vue-toastification";
     export default {
         data(){
             return {
+                 statusname:{},
+                department: {},
+                formMode: 1,
+
                 isShowNotifi: false,
                 dataItem:[
                     {id:1, khoa: 'CNTT'},
@@ -148,7 +163,7 @@ import combobox from "../base/BaseCombobox.vue"
                     {id:4, khoa: 'Cơ Khí'}
                 ],
                 dataFields: {value: 'id', text: 'khoa'},
-                students: [],
+                students: {},
                 errors: {
                     masv: '',
                     ten: '',
@@ -167,40 +182,91 @@ import combobox from "../base/BaseCombobox.vue"
                     xeploai: '',
                     trangthai: '',
                 },
-                desc: {
-                    masv: '',
-                    ten: '',
-                    gioitinh: '',
-                    ngaysinh: '',
-                    cmnd: '',
-                    email: '',
-                    sodt: '',
-                    khoa: '',
-                    sotaikhoan: '',
-                    tennganhang: '',
-                    diachi: '',
-                    // khoa: '',
-                    lop: '',
-                    daotao: '',
-                    xeploai: '',
-                    trangthai: '',
-                }
+                // desc: {
+                //     masv: '',
+                //     ten: '',
+                //     gioitinh: '',
+                //     ngaysinh: '',
+                //     cmnd: '',
+                //     email: '',
+                //     sodt: '',
+                //     khoa: '',
+                //     sotaikhoan: '',
+                //     tennganhang: '',
+                //     diachi: '',
+                //     // khoa: '',
+                //     lop: '',
+                //     daotao: '',
+                //     xeploai: '',
+                //     trangthai: '',
+                // }
             }
         },
-        props: ["student"],
+        props: ["student","code", "FormMode","loadData"],
         watch: {
             student: function(value){
                 this.desc=value
                 this.students=value
                 this.desc.masv=value.msv
-            }
+            },
+            code: function(vl){
+                this.students.StudentCode=vl
+            },
+            FormMode: function(value){
+                this.formMode=value
+            },
         },
         components: {
             combobox,
             notifi
         },
         methods: {
-          
+            getNewCode(){
+                try {
+                
+                var me = this;
+                
+                axios
+                    .get(
+                    "https://localhost:7029/api/Students/NewCode"
+                    )
+                    .then(function (res) {
+                    me.students.StudentCode=res.data
+                    })
+                    
+                    .catch(function () {
+                    console.log(1);
+                    });
+                } catch (error) {
+                console.log(error);
+                }
+            },
+            addStudent(){
+                var me = this;
+                console.log(me.students);
+                me.students.Gender=parseInt( me.students.Gender)
+                const toast = useToast();
+                try {
+                    axios
+                    .post("https://localhost:7029/api/Students", me.students)
+                    .then(function (res) {
+                        console.log("ok", res.data);
+                        me.students={}
+                        me.getNewCode()
+                        toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+                        me.loadData()
+                    })
+                    
+                    .catch(function () {
+                        toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            selectItemCbb(value) {
+                this.desc.khoa = value.khoa;
+            },
             btnHidden(){
                 this.isShow = !this.isShow
             },
@@ -214,6 +280,10 @@ import combobox from "../base/BaseCombobox.vue"
             },
             // gửi lệnh ẩn form từ bên này sang trang chính
             
+
+
+
+
             closeForm(){
                 // this.$emit("hideForm", false);
                 this.isShowNotifi = true,
@@ -258,6 +328,7 @@ import combobox from "../base/BaseCombobox.vue"
                    kyluat: '',
                }
             },
+
             // employeeDetail: function (value) {
             //     value.DateOfBirth = this.fomartDate(value.DateOfBirth);
             //     this.desc.DateOfBirth = value.DateOfBirth;
@@ -369,6 +440,24 @@ import combobox from "../base/BaseCombobox.vue"
                 
                 return isValid
             },
+
+            // getStatusName() {
+            //     try {
+            //         var me = this;
+
+            //         axios
+            //         .get("https://localhost:7029/api/StatusStudent")
+            //         .then(function (res) {
+            //             me.statusname = res.data;
+            //         })
+
+            //         .catch(function () {
+            //             console.log(1);
+            //         });
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
+            //     },
             // isDate(date){
             //     date = new Date(date);
             //     let newDate = date.getDate();
@@ -386,6 +475,9 @@ import combobox from "../base/BaseCombobox.vue"
                 return validRegex.test(value)
             },
             save(){
+                    if(this.formMode==1){
+                this.addStudent()
+            }
                 // const toast = useToast();
                 // this.$emit("hideForm", false);
                 // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
@@ -407,10 +499,19 @@ import combobox from "../base/BaseCombobox.vue"
                         = "*You have not selected any season"; 
                 } 
                 
-            }  
+            } ,
+            
+            selectItemStatusName(value) {
+                this.employee.StatusNameID = value.StatusNameID;
+                this.employee.StatusName = value.StatusName;
+            },
+            
+
         },
         created() {
             // this.save()
+            // this.getStatusName();
+
         }
     }
 </script>
