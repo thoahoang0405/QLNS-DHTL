@@ -10,15 +10,15 @@
       <div class="form-Wrap">
         <div class="column">
           <div class="input__box">
-            <label for="">Mã nhân viên</label>
-            <input class="manv" type="text" v-model="employee.EmployeeCode" />
+            <label for="">Mã nhân viên <span>*</span></label>
+            <input @blur="validate" class="manv" type="text" v-model="employee.EmployeeCode" />
             <div class="invalid-feedback" v-if="errors.manv">
               {{ errors.manv }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Tên nhân viên</label>
-            <input class="ten" type="text" v-model="employee.EmployeeName" />
+            <label for="">Tên nhân viên <span>*</span></label>
+            <input @blur="validate" class="ten" type="text" v-model="employee.EmployeeName" />
             <div class="invalid-feedback" v-if="errors.ten">
               {{ errors.ten }}
             </div>
@@ -30,24 +30,26 @@
                 type="radio"
                 id="nam"
                 v-model="employee.Gender"
-                value="1"
+                value="0"
               />
               <label class="nam" for="">Nam</label>
               <input
                 type="radio"
                 id="nu"
                 v-model="employee.Gender"
-                value="0"
+                value="1"
               />
               <label class="nu" for="">Nữ</label>
             </div>
-            <!-- <div style= "color:red" id="disp">{{ desc.gioitinh }}</div> -->
+            <div class="invalid-feedback" v-if="errors.gioitinh">
+              {{ errors.gioitinh }}
+            </div>
           </div>
         </div>
 
         <div class="column">
           <div class="input__box">
-            <label for="">Ngày sinh</label>
+            <label for="">Ngày sinh </label>
             <input
               class="ngaysinh"
               type="date"
@@ -58,16 +60,16 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Cmnd/cccd</label>
-            <input class="cmnd" type="text" v-model="employee.IdentityNumber" />
+            <label for="">Cmnd/cccd <span>*</span></label>
+            <input @blur="validate" class="cmnd" type="text" v-model="employee.IdentityNumber" />
             <div class="invalid-feedback" v-if="errors.cmnd">
               {{ errors.cmnd }}
             </div>
           </div>
 
           <div class="input__box">
-            <label for="">Email</label>
-            <input class="email" type="text" v-model="employee.Email" />
+            <label for="">Email <span>*</span></label>
+            <input @blur="validate"  class="email" type="text" v-model="employee.Email" />
             <div class="invalid-feedback" v-if="errors.email">
               {{ errors.email }}
             </div>
@@ -77,16 +79,16 @@
           <div class="input__box">
             <label for="">Dân tộc</label>
             <input class="ngaycap" type="text" v-model="employee.Nation" />
-            <div class="invalid-feedback" v-if="errors.ngaycap">
+            <!-- <div class="invalid-feedback" v-if="errors.ngaycap">
               {{ errors.ngaycap }}
-            </div>
+            </div> -->
           </div>
           <div class="input__box">
             <label for="">Tôn giáo</label>
             <input class="noicap" type="text" v-model="employee.Religion" />
-            <div class="invalid-feedback" v-if="errors.noicap">
-              {{ errors.noicap }}
-            </div>
+            <!-- <div class="invalid-feedback" v-if="errors.tongiao">
+              {{ errors.tongiao }}
+            </div> -->
           </div>
         </div>
 
@@ -101,25 +103,25 @@
           <div class="input__box">
             <label for="">Mã số thuế</label>
             <input class="masothue" type="text" v-model="employee.TaxCode" />
-            <div class="invalid-feedback" v-if="errors.masothue">
+            <!-- <div class="invalid-feedback" v-if="errors.masothue">
               {{ errors.masothue }}
-            </div>
+            </div> -->
           </div>
           <div class="input__box">
             <label for="">Số tài khoản</label>
             <input class="sotaikhoan" type="text" v-model="employee.BankAccountNumber" />
-            <div class="invalid-feedback" v-if="errors.sotaikhoan">
+            <!-- <div class="invalid-feedback" v-if="errors.sotaikhoan">
               {{ errors.sotaikhoan }}
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="column column-s">
           <div class="input__box">
             <label for="">Tên ngân hàng</label>
             <input class="tennganhang" type="text" v-model="employee.BankAccountName" />
-            <div class="invalid-feedback" v-if="errors.tennganhang">
+            <!-- <div class="invalid-feedback" v-if="errors.tennganhang">
               {{ errors.tennganhang }}
-            </div>
+            </div> -->
           </div>
           <div class="input__box">
             <label for="">Địa chỉ</label>
@@ -138,6 +140,9 @@
               :fieldName="'FacultyName'"
               @selectedItem="selectItemFaculty"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.khoa">
+              {{ errors.khoa }}
+            </div>
             <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
           </div>
         </div>
@@ -157,6 +162,9 @@
               :fieldName="'StatusEmployeeName'"
               @selectedItem="selectItemStatus"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.trangthai">
+              {{ errors.trangthai }}
+            </div>
           </div>
           <div class="input__box">
             <label for="">Cấp bậc lương</label>
@@ -168,6 +176,9 @@
               :fieldName="'SalaryName'"
               @selectedItem="selectItemSalary"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.capbacluong">
+              {{ errors.capbacluong }}
+            </div>
           </div>
           <div class="input__box">
             <label for="">Phòng ban</label>
@@ -179,6 +190,9 @@
               :fieldName="'DepartmentName'"
               @selectedItem="selectItemDepartment"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.phongban">
+              {{ errors.phongban }}
+            </div>
           </div>
           <!-- <div class="input__box">
                        <label for="">Cấp bậc lương</label>
@@ -208,6 +222,9 @@
               :fieldName="'TrainingCertificationName'"
               @selectedItem="selectItemCertifi"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.chungchidaotao">
+              {{ errors.chungchidaotao }}
+            </div>
             <!-- <input class="daotao" type="text" v-model="desc.daotao"> -->
           </div>
           <div class="input__box">
@@ -227,6 +244,9 @@
               :fieldName="'PositionsName'"
               @selectedItem="selectItemPosition"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.vitri">
+              {{ errors.vitri }}
+            </div>
           </div>
           <!-- <div class="input__box">
                        <label for="">Vị trí</label>
@@ -289,6 +309,7 @@ export default {
       ],
       dataFields: { value: "id", text: "khoa" },
       isShow: false,
+      isValid:true,
       errors: {
         manv: "",
         ten: "",
@@ -304,11 +325,11 @@ export default {
         trangthai: "",
         capbacluong: "",
         phongban: "",
-        daotao: "",
+        chungchidaotao: "",
         tinhtrang: "",
         vitri: "",
       },
-      desc: {
+      error: {
         manv: "",
         ten: "",
         ngaysinh: "",
@@ -323,10 +344,11 @@ export default {
         trangthai: "",
         capbacluong: "",
         phongban: "",
-        daotao: "",
+        chungchidaotao: "",
         tinhtrang: "",
         vitri: "",
       },
+   
     };
   },
   props: ["employeeSL","code", "FormMode","loadData"],
@@ -366,7 +388,7 @@ export default {
           "https://localhost:44301/api/Employees/NewCode"
          )
          .then(function (res) {
-          me.newCode=res.data
+          me.employee.EmployeeCode=res.data
          })
         
          .catch(function () {
@@ -473,251 +495,121 @@ export default {
         kyluat: "",
       };
     },
-    //    validate(){
-    //        let isValid = true;
-
-    //        this.errors = {
-    //            manv: '',
-    //            ten: '',
-    //            ngaysinh: '',
-    //            khoa: '',
-    //            cmnd: '',
-    //            ngaycap: '',
-    //            noicap: '',
-    //            email: '',
-    //            sodt: '',
-    //            masothue: '',
-    //            sotaikhoan: '',
-    //            tennganhang: '',
-    //            trangthai: '',
-    //            capbacluong: '',
-    //            phongban: '',
-    //            tinhtrang: '',
-    //            diachi: '',
-    //            daotao: '',
-    //            khenthuong: '',
-    //            kyluat: '',
-    //        }
-    //        if(!this.desc.manv) {
-    //            this.errors.manv = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.ten) {
-    //            this.errors.ten = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        // if(!this.desc.gioitinh) {
-    //        //     this.errors.gioitinh = "Không được để trống!";
-    //        //     this.isValid = false;
-    //        // }
-    //        if(!this.desc.ngaysinh) {
-    //            this.errors.ngaysinh = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.sodt) {
-    //            this.errors.sodt = "Không được để trống!";
-    //            this.isValid = false;
-    //        } else if(!this.isNumber(this.desc.sodt)) {
-    //            this.errors.sodt = "Yêu cầu nhập số";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.khoa) {
-    //            this.errors.khoa = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.cmnd) {
-    //            this.errors.cmnd = "Không được để trống!";
-    //            this.isValid = false;
-    //        }else if(!this.isNumber(this.desc.cmnd)) {
-    //            this.errors.cmnd = "Yêu cầu nhập số";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.masothue) {
-    //            this.errors.masothue = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.sotaikhoan) {
-    //            this.errors.sotaikhoan = "Không được để trống!";
-    //            this.isValid = false;
-    //        } else if(!this.isNumber(this.desc.sotaikhoan)) {
-    //            this.errors.sotaikhoan = "Yêu cầu nhập số";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.email) {
-    //            this.errors.email = "Không được để trống!";
-    //            this.isValid = false;
-    //        }else if(!this.isEmail(this.desc.email)) {
-    //            this.errors.email = "Yêu cầu nhập kiểu email";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.diachi) {
-    //            this.errors.diachi = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.daotao) {
-    //            this.errors.daotao = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.tennganhang) {
-    //            this.errors.tennganhang = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.trangthai) {
-    //            this.errors.trangthai = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.capbacluong) {
-    //            this.errors.capbacluong = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.phongban) {
-    //            this.errors.phongban = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //        if(!this.desc.tinhtrang) {
-    //            this.errors.tinhtrang = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //     //    if(!this.desc.khenthuong) {
-    //     //        this.errors.khenthuong = "Không được để trống!";
-    //     //        isValid = false;
-    //     //    }
-    //     //    if(!this.desc.kyluat) {
-    //     //        this.errors.kyluat = "Không được để trống!";
-    //     //        isValid = false;
-    //     //    }
-    //        if(!this.desc.ngaycap) {
-    //            this.errors.ngaycap = "Không được để trống!";
-    //           this. isValid = false;
-    //        }
-    //        if(!this.desc.noicap) {
-    //            this.errors.noicap = "Không được để trống!";
-    //            this.isValid = false;
-    //        }
-    //     },
+    
     //gửi lệnh ẩn form từ bên này sang trang chính
 
-    // validate() {
-    //   let isValid = true;
-
-    //   this.errors = {
-    //     manv: "",
-    //     ten: "",
-    //     ngaysinh: "",
-    //     khoa: "",
-    //     cmnd: "",
-    //     ngaycap: "",
-    //     noicap: "",
-    //     email: "",
-    //     sodt: "",
-    //     masothue: "",
-    //     sotaikhoan: "",
-    //     tennganhang: "",
-    //     trangthai: "",
-    //     capbacluong: "",
-    //     phongban: "",
-    //     tinhtrang: "",
-    //     diachi: "",
-    //     daotao: "",
-    //     khenthuong: "",
-    //     kyluat: "",
-    //   };
-    //   if (!this.desc.manv) {
-    //     this.errors.manv = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.ten) {
-    //     this.errors.ten = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   // if(!this.desc.gioitinh) {
-    //   //     this.errors.gioitinh = "Không được để trống!";
-    //   //     this.isValid = false;
-    //   // }
-    //   if (!this.desc.ngaysinh) {
-    //     this.errors.ngaysinh = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.sodt) {
-    //     this.errors.sodt = "Không được để trống!";
-    //     this.isValid = false;
-    //   } else if (!this.isNumber(this.desc.sodt)) {
-    //     this.errors.sodt = "Yêu cầu nhập số";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.khoa) {
-    //     this.errors.khoa = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.cmnd) {
-    //     this.errors.cmnd = "Không được để trống!";
-    //     this.isValid = false;
-    //   } else if (!this.isNumber(this.desc.cmnd)) {
-    //     this.errors.cmnd = "Yêu cầu nhập số";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.masothue) {
+    validate() {
+      
+      if (!this.employee.EmployeeCode) {
+        this.errors.manv = " Mã nhân viên không được để trống!";
+        this.isValid = false;
+      }else{
+        this.errors.manv = "";
+        this.isValid = true;
+      }
+     
+      if (!this.employee.EmployeeName) {
+        this.errors.ten = "Tên nhân viên Không được để trống!";
+        this.isValid = false;
+      }else{
+        this.errors.ten = "";
+        this.isValid = true;
+      }
+      
+      if (!this.employee.IdentityNumber) {
+        this.errors.cmnd = "CCCD Không được để trống!";
+        this.isValid = false;
+      }else{
+        this.errors.cmnd = "";
+        this.isValid = true;
+      }
+      if (!this.employee.Email) {
+        this.errors.email = "Email Không được để trống!";
+        this.isValid = false;
+      }else{
+        this.errors.email = "";
+        this.isValid = true;
+      }
+      // if(!this.employee.Gender) {
+      //     this.errors.gioitinh = "Không được để trống!";
+      //     this.isValid = false;
+      // }
+      // if (!this.employee.DateOfBirth) {
+      //   this.errors.ngaysinh = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.IdentityNumber) {
+      //   this.errors.cmnd = "Không được để trống!";
+      //   this.isValid = false;
+      // } else if (!this.isNumber(this.employee.IdentityNumber)) {
+      //   this.errors.cmnd = "Yêu cầu nhập số";
+      //   this.isValid = false;
+      // }
+      // if(!this.employee.Phonenumber) {
+      //   this.errors.sodt = "Không được để trống!";
+      //   isValid = false;
+      // } else if(!this.isNumber(this.employee.Phonenumber)) {
+      //   this.errors.sodt = "Yêu cầu nhập số";
+      //   isValid = false;
+      // }else if(this.employee.Phonenumber.length < 10) {
+      //   this.errors.sodt = "Không được nhỏ hơn 10 số";
+      //   isValid = false;
+      // }
+      // if (!this.employee.FacultyName) {
+      //   this.errors.khoa = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      
+    //   if (!this.employee.masothue) {
     //     this.errors.masothue = "Không được để trống!";
     //     this.isValid = false;
     //   }
-    //   if (!this.desc.sotaikhoan) {
+    //   if (!this.employee.sotaikhoan) {
     //     this.errors.sotaikhoan = "Không được để trống!";
     //     this.isValid = false;
-    //   } else if (!this.isNumber(this.desc.sotaikhoan)) {
+    //   } else if (!this.isNumber(this.employee.sotaikhoan)) {
     //     this.errors.sotaikhoan = "Yêu cầu nhập số";
     //     this.isValid = false;
     //   }
-    //   if (!this.desc.email) {
-    //     this.errors.email = "Không được để trống!";
-    //     this.isValid = false;
-    //   } else if (!this.isEmail(this.desc.email)) {
-    //     this.errors.email = "Yêu cầu nhập kiểu email";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.diachi) {
-    //     this.errors.diachi = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.daotao) {
-    //     this.errors.daotao = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.tennganhang) {
+      // if (!this.employee.Email) {
+      //   this.errors.email = "Không được để trống!";
+      //   this.isValid = false;
+      // } else if (!this.isEmail(this.employee.Email)) {
+      //   this.errors.email = "Yêu cầu nhập kiểu email";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.Adress) {
+      //   this.errors.diachi = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.daotao) {
+      //   this.errors.daotao = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+    //   if (!this.employee.tennganhang) {
     //     this.errors.tennganhang = "Không được để trống!";
     //     this.isValid = false;
     //   }
-    //   if (!this.desc.trangthai) {
-    //     this.errors.trangthai = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.capbacluong) {
-    //     this.errors.capbacluong = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.phongban) {
-    //     this.errors.phongban = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.tinhtrang) {
-    //     this.errors.tinhtrang = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.khenthuong) {
-    //     this.errors.khenthuong = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.kyluat) {
-    //     this.errors.kyluat = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.ngaycap) {
-    //     this.errors.ngaycap = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.desc.noicap) {
-    //     this.errors.noicap = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
+      // if (!this.employee.StatusEmployeeName) {
+      //   this.errors.trangthai = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.SalaryName) {
+      //   this.errors.capbacluong = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.DepartmentName) {
+      //   this.errors.phongban = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.TrainingCertificateName) {
+      //   this.errors.chungchidaotao = "Không được để trống!";
+      //   this.isValid = false;
+      // }
+      // if (!this.employee.PositionsName) {
+      //   this.errors.vitri = "Không được để trống!";
+      //   this.isValid = false;
+      // }
 
     //   var getSelectedValue = document.querySelector(
     //     'input[name="gioitinh"]:checked'
@@ -728,8 +620,8 @@ export default {
     //       getSelectedValue.value + " season is selected";
     //   }
 
-    //   return this.isValid;
-    // },
+      // return isValid;
+    },
     isNumber(value) {
       return /^\d*$/.test(value);
     },
@@ -742,10 +634,13 @@ export default {
         if(this.formMode==1){
             this.addEmployee()
         }
-      // if(!this.validate()){
-      //     console.log(this.employee);
-      // }
-      this.validate();
+      if(!this.validate()){
+          console.log(this.employee);
+      }
+    //   this.validate();
+
+    //   this.$emit("save",this.desc)
+
       //    console.log(this.desc)
     },
     checkButton() {
@@ -898,6 +793,9 @@ export default {
 label {
   margin: 10px 0;
 }
+label span{
+  color: red;
+}
 .invalid-feedback {
   color: red;
   position: absolute;
@@ -1010,4 +908,10 @@ label {
    height: 20px;   
   }
  } */
+ /* .khoa {
+    margin-top: 4px;
+  } */
+  .important {
+    color: red;
+  }
 </style>
