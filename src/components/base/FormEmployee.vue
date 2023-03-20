@@ -351,7 +351,7 @@ export default {
    
     };
   },
-  props: ["employeeSL","code", "FormMode","loadData"],
+  props: ["employeeSL","code", "FormMode","loadData", "employeeId"],
   components: {
     combobox,
     //    notifi
@@ -361,6 +361,7 @@ export default {
         this.employee=value
         value.DateOfBirth=this.formatDate(value.DateOfBirth)
         this.employee.DateOfBirth=value.DateOfBirth
+        this.employee.EmployeeID=value.EmployeeID
     },
     code: function(vl){
         this.employee.EmployeeCode=vl
@@ -368,6 +369,7 @@ export default {
     FormMode: function(value){
         this.formMode=value
     },
+    
   },
   created() {
     this.getDepartment();
@@ -420,6 +422,29 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    editEmployee(){
+      var me = this;
+        console.log(me.employee);
+        me.employee.Gender=parseInt( me.employee.Gender)
+      const toast = useToast();
+      try {
+        axios
+          .put(`https://localhost:44301/api/Employees/${this.employee.EmployeeID}`, me.employee)
+          .then(function (res) {
+            console.log("ok", res.data);
+            me.$emit("hideForm", false);
+            toast.success("Sửa dữ liệu thành công", { timeout: 2000 });
+            me.loadData()
+          })
+         
+          .catch(function () {
+            toast.error("Sửa dữ liệu thất bại", { timeout: 2000 });
+          });
+      } catch (error) {
+        console.log(error);
+      }
+
     },
     selectItemCbb(value) {
       this.desc.khoa = value.khoa;
@@ -633,10 +658,12 @@ export default {
     save() {
         if(this.formMode==1){
             this.addEmployee()
+        }else{
+          this.editEmployee()
         }
-      if(!this.validate()){
-          console.log(this.employee);
-      }
+      // if(!this.validate()){
+      //     console.log(this.employee);
+      // }
     //   this.validate();
 
     //   this.$emit("save",this.desc)

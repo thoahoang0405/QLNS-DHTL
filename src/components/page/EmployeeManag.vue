@@ -212,7 +212,7 @@
       </div>
     </div>
   </div>
-<Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
+<Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="employeeID"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
 </template>
 <style>
   .btn-add:hover {
@@ -252,6 +252,7 @@ export default {
       employeeSelect:{},
       newCode: "",
       formMode: 1,
+      employeeID:"",
     };
   },
   created() {
@@ -271,6 +272,7 @@ export default {
     
     editEmployee(emp){
       this.employeeSelect=emp
+      this.employeeID=emp.EmployeeID
      this.isShow=true
      this.formMode=2
     },
