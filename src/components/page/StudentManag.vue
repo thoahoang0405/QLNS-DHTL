@@ -201,7 +201,7 @@
     </div>
    
   </div>
-<Form v-show="isShowForm" @hideForm="hideFormDetail" :student="studentSelected"></Form>
+<Form v-show="isShowForm" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :student="studentSelected"></Form>
 <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
 
 </template>
@@ -224,272 +224,7 @@ export default {
   },
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 2,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 3,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 4,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 5,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 6,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 7,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 8,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 9,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 10,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 11,
-          msv: '1951061106',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-        {
-          id: 12,
-          msv: '999999999',
-          ten: 'Ngô Văn Tùng',
-          gioitinh: 'Nam',
-          ngaysinh: '18/03/2001',
-          cmnd: '038743874',
-          email: 'ngotung@gmail.com',
-          sodt: '9999999999',
-          sotaikhoan: '8888888888',
-          diachi: 'Bắc Ninh',
-          khoa: 'Công nghệ thông tin',
-          kyhoc: 'kì II-2022',
-          khenthuong: '	Sinh viên tiên tiến',
-          kyluat: '',
-          hocbong: '',
-          trangthai: 'Đang học',
-          // ngaycap: '1/1/2019',
-          // noicap: '1/1/2024',
-          tendangnhap: '1951061106',
-          matkhau: '1111111111',
-        },
-      ],
+   
       isActive: "20",
       studentSelected: [],
       pageNumber: 1,
@@ -506,7 +241,8 @@ export default {
       facultyID: "",
       classification:{},
       classificationID:"",
-      txtSearch:""
+      txtSearch:"",
+      newCode: "",
     };
   },
   watch: {
@@ -529,7 +265,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -568,7 +304,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Faculty"
+          "https://localhost:7029/api/Faculty"
          )
          .then(function (res) {
           me.faculty=res.data
@@ -589,7 +325,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Classifications"
+          "https://localhost:7029/api/Classifications"
          )
          .then(function (res) {
           me.classification=res.data
@@ -647,14 +383,32 @@ export default {
       this.isShowDrop = is;
     },
     btnAddStudent(){
-      this.isShowForm = !this.isShowForm
+      this.isShowForm = !this.isShowForm;
+      this.getNewCode()
+    },
+    getNewCode() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:7029/api/Students/NewCode")
+          .then(function (res) {
+            me.newCode = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     },
     btnEditStudent(item){
-      this.isShowForm = !this.isShowForm
+      this.isShowForm = !this.isShowForm;
       this.studentSelected=item
     },
     deleteClick(item){
-      this.isShowConfirm=!this.isShowConfirm
+      this.isShowConfirm=!this.isShowConfirm;
       console.log(item.msv);
       this.msvDelete=item.msv
 

@@ -75,26 +75,10 @@
             </div>
           </div>
         </div>
-        <div class="column">
-          <div class="input__box">
-            <label for="">Dân tộc</label>
-            <input class="ngaycap" type="text" v-model="employee.Nation" />
-            <!-- <div class="invalid-feedback" v-if="errors.ngaycap">
-              {{ errors.ngaycap }}
-            </div> -->
-          </div>
-          <div class="input__box">
-            <label for="">Tôn giáo</label>
-            <input class="noicap" type="text" v-model="employee.Religion" />
-            <!-- <div class="invalid-feedback" v-if="errors.tongiao">
-              {{ errors.tongiao }}
-            </div> -->
-          </div>
-        </div>
 
         <div class="column">
           <div class="input__box">
-            <label for="">Số điện thoại</label>
+            <label for="">Số điện thoại<span class="important">*</span></label>
             <input class="sodt" type="text" v-model="employee.Phonenumber" />
             <div class="invalid-feedback" v-if="errors.sodt">
               {{ errors.sodt }}
@@ -124,34 +108,21 @@
             </div> -->
           </div>
           <div class="input__box">
-            <label for="">Địa chỉ</label>
-            <input class="diachi" type="text" v-model="employee.Adress" />
+            <label for="">Địa chỉ<span class="important">*</span></label>
+            <input @blur="validate" class="diachi" type="text" v-model="employee.Adress" />
             <div class="invalid-feedback" v-if="errors.diachi">
               {{ errors.diachi }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Khoa</label>
-            <combobox
-              class="khoa"
-              :value="employee.FacultyName"
-              :items="faculty"
-              :code="'FacultyID'"
-              :fieldName="'FacultyName'"
-              @selectedItem="selectItemFaculty"
-            ></combobox>
-            <div class="invalid-feedback" v-if="errors.khoa">
-              {{ errors.khoa }}
+            <label for="">Tình trạng hôn nhân</label>
+            <input class="tinhtrang" type="text" v-model="employee.MaritalStatus" />
+            <div class="invalid-feedback" v-if="errors.tinhtrang">
+              {{ errors.tinhtrang }}
             </div>
-            <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
           </div>
         </div>
         <div class="column column-s">
-          <!-- <div class="input__box">
-                       <label for="">Trạng thái</label>
-                       <input class="trangthai" type="text" v-model="desc.trangthai">
-                       <div class="invalid-feedback" v-if="errors.trangthai">{{ errors.trangthai }}</div>
-                   </div> -->
           <div class="input__box">
             <label for="">Trạng thái</label>
             <combobox
@@ -194,24 +165,9 @@
               {{ errors.phongban }}
             </div>
           </div>
-          <!-- <div class="input__box">
-                       <label for="">Cấp bậc lương</label>
-                       <input class="capbacluong" type="text" v-model="desc.capbacluong">
-                       <div class="invalid-feedback" v-if="errors.capbacluong">{{ errors.capbacluong }}</div>
-                   </div>
-                   <div class="input__box">
-                       <label for="">Phòng ban</label>
-                       <input class="phongban" type="text" v-model="desc.phongban">
-                       <div class="invalid-feedback" v-if="errors.phongban">{{ errors.phongban }}</div>
-                   </div> -->
         </div>
 
         <div class="column column-s">
-          <!-- <div class="input__box">
-                       <label for="">Chứng chỉ đào tạo</label>
-                       <input class="daotao" type="text" v-model="desc.daotao">
-                       <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
-                   </div> -->
           <div class="input__box">
             <label for="">Chứng chỉ đào tạo</label>
             <combobox
@@ -228,11 +184,19 @@
             <!-- <input class="daotao" type="text" v-model="desc.daotao"> -->
           </div>
           <div class="input__box">
-            <label for="">Tình trạng hôn nhân</label>
-            <input class="tinhtrang" type="text" v-model="employee.MaritalStatus" />
-            <div class="invalid-feedback" v-if="errors.tinhtrang">
-              {{ errors.tinhtrang }}
+            <label for="">Khoa</label>
+            <combobox
+              class="khoa"
+              :value="employee.FacultyName"
+              :items="faculty"
+              :code="'FacultyID'"
+              :fieldName="'FacultyName'"
+              @selectedItem="selectItemFaculty"
+            ></combobox>
+            <div class="invalid-feedback" v-if="errors.khoa">
+              {{ errors.khoa }}
             </div>
+            <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
           </div>
           <div class="input__box">
             <label for="">Vị trí</label>
@@ -248,24 +212,24 @@
               {{ errors.vitri }}
             </div>
           </div>
-          <!-- <div class="input__box">
-                       <label for="">Vị trí</label>
-                       <input class="vitri" type="text" v-model="desc.vitri">
-                       <div class="invalid-feedback" v-if="errors.vitri">{{ errors.vitri }}</div>
-                   </div> -->
         </div>
-        <!-- <div class="column">
-                   <div class="input__box">
-                       <label for="">Khen thưởng</label>
-                       <input class="khenthuong" type="text" v-model="desc.khenthuong">
-                       <div class="invalid-feedback" v-if="errors.khenthuong">{{ errors.khenthuong }}</div>
-                   </div>
-                   <div class="input__box">
-                       <label for="">Kỷ luật</label>
-                       <input class="kyluat" type="text" v-model="desc.kyluat">
-                       <div class="invalid-feedback" v-if="errors.kyluat">{{ errors.kyluat }}</div>
-                   </div>
-               </div> -->
+        
+        <div class="column">
+          <div class="input__box">
+            <label for="">Dân tộc</label>
+            <input class="ngaycap" type="text" v-model="employee.Nation" />
+            <!-- <div class="invalid-feedback" v-if="errors.ngaycap">
+              {{ errors.ngaycap }}
+            </div> -->
+          </div>
+          <div class="input__box">
+            <label for="">Tôn giáo</label>
+            <input class="noicap" type="text" v-model="employee.Religion" />
+            <!-- <div class="invalid-feedback" v-if="errors.tongiao">
+              {{ errors.tongiao }}
+            </div> -->
+          </div>
+        </div>
       </div>
       <div class="form-bottom">
         <div class="btn btn-cancel" @click="closeForm">Hủy</div>
@@ -387,7 +351,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Employees/NewCode"
+          "https://localhost:7029/api/Employees/NewCode"
          )
          .then(function (res) {
           me.employee.EmployeeCode=res.data
@@ -407,7 +371,7 @@ export default {
       const toast = useToast();
       try {
         axios
-          .post("https://localhost:44301/api/Employees", me.employee)
+          .post("https://localhost:7029/api/Employees", me.employee)
           .then(function (res) {
             console.log("ok", res.data);
             me.employee={}
@@ -430,7 +394,7 @@ export default {
       const toast = useToast();
       try {
         axios
-          .put(`https://localhost:44301/api/Employees/${this.employee.EmployeeID}`, me.employee)
+          .put(`https://localhost:7029/api/Employees/${this.employee.EmployeeID}`, me.employee)
           .then(function (res) {
             console.log("ok", res.data);
             me.$emit("hideForm", false);
@@ -478,27 +442,26 @@ export default {
     closeForm() {
       // this.isShowNotifi = true
       this.$emit("hideForm", false);
-      this.desc = {
-        manv: "",
-        ten: "",
-        ngaysinh: "",
-        cmnd: "",
-        email: "",
-        sodt: "",
-        masothue: "",
-        sotaikhoan: "",
-        tennganhang: "",
-        diachi: "",
-        khoa: "",
-        trangthai: "",
-        capbacluong: "",
-        phongban: "",
-        daotao: "",
-        tinhtrang: "",
-        vitri: "",
-      };
+      // this.desc = {
+        
+      //   ten: "",
+      //   ngaysinh: "",
+      //   cmnd: "",
+      //   email: "",
+      //   sodt: "",
+      //   masothue: "",
+      //   sotaikhoan: "",
+      //   tennganhang: "",
+      //   diachi: "",
+      //   khoa: "",
+      //   trangthai: "",
+      //   capbacluong: "",
+      //   phongban: "",
+      //   daotao: "",
+      //   tinhtrang: "",
+      //   vitri: "",
+      // };
       this.errors = {
-        manv: "",
         ten: "",
         ngaysinh: "",
         khoa: "",
@@ -555,6 +518,11 @@ export default {
         this.errors.email = "";
         this.isValid = true;
       }
+
+      if (!this.employee.Adress) {
+        this.errors.diachi = "Địa chỉ không được để trống!";
+        this.isValid = false;
+      }
       // if(!this.employee.Gender) {
       //     this.errors.gioitinh = "Không được để trống!";
       //     this.isValid = false;
@@ -601,10 +569,6 @@ export default {
       //   this.isValid = false;
       // } else if (!this.isEmail(this.employee.Email)) {
       //   this.errors.email = "Yêu cầu nhập kiểu email";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.Adress) {
-      //   this.errors.diachi = "Không được để trống!";
       //   this.isValid = false;
       // }
       // if (!this.employee.daotao) {
@@ -690,7 +654,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Departments")
+          .get("https://localhost:7029/api/Departments")
           .then(function (res) {
             me.department = res.data;
           })
@@ -708,7 +672,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Position")
+          .get("https://localhost:7029/api/Position")
           .then(function (res) {
             me.position = res.data;
           })
@@ -726,7 +690,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Salary")
+          .get("https://localhost:7029/api/Salary")
           .then(function (res) {
             me.salary = res.data;
           })
@@ -743,7 +707,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/TranningCertification")
+          .get("https://localhost:7029/api/TranningCertification")
           .then(function (res) {
             me.certificate = res.data;
           })
@@ -760,7 +724,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/StatusEmployee")
+          .get("https://localhost:7029/api/StatusEmployee")
           .then(function (res) {
             me.statusEmployee = res.data;
           })
@@ -777,7 +741,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Faculty")
+          .get("https://localhost:7029/api/Faculty")
           .then(function (res) {
             me.faculty = res.data;
           })

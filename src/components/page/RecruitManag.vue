@@ -170,7 +170,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Recruitment"
+          "https://localhost:7029/api/Recruitment"
          )
          .then(function (res) {
           me.recruitment=res.data
