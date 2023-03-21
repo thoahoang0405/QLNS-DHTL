@@ -2,7 +2,10 @@
     <div class="notification-wrap">
             <div class="notification">
                 <div class="warring">
-                    <i class="fa fa-exclamation-triangle"></i>
+                  
+                        <i class="icon-warning"></i>
+                    
+                    
                     <div class="warrning-title">Bạn có chắc chắn xóa sinh viên có mã  {{ msv }} không?</div>
                 </div>
                 <div class="btn-wrap">
@@ -32,6 +35,7 @@
 
         methods: {
             noClick() {
+                //đồng ý xóa
                 this.$emit('closeNotifi',false)
             },
             CancelNotifi() {
@@ -68,15 +72,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 30px;
     }
     .warring i {
         font-size: 60px;
+        width:52px;
+        height: 40px;
         color: #F4A733;
     }
     .warrning-title{
         text-align: center;
-        font-size: 18px;
+        font-size: 16px;
+        margin-left: 8px;
     }
     .btn-wrap {
         display: flex;

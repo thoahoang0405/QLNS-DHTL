@@ -11,15 +11,15 @@
         <div class="column">
           <div class="input__box">
             <label for="">Mã nhân viên <span>*</span></label>
-            <input @blur="validate" class="manv" type="text" v-model="employee.EmployeeCode" />
-            <div class="invalid-feedback" v-if="errors.manv">
+            <input @blur="validateEmployeeCode" class="manv" :class="errors.manv!=''? 'borderRed' : ''" type="text" v-model="employee.EmployeeCode" />
+            <div v-if="errors.manv!=''" class="invalid-feedback">
               {{ errors.manv }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Tên nhân viên <span>*</span></label>
-            <input @blur="validate" class="ten" type="text" v-model="employee.EmployeeName" />
-            <div class="invalid-feedback" v-if="errors.ten">
+            <input @blur="validateName" :class="errors.ten!=''? 'borderRed' : ''" class="ten" type="text" v-model="employee.EmployeeName" />
+            <div class="invalid-feedback" v-if="errors.ten!=''">
               {{ errors.ten }}
             </div>
           </div>
@@ -51,25 +51,28 @@
           <div class="input__box">
             <label for="">Ngày sinh </label>
             <input
+            :class="errors.ngaysinh!=''? 'borderRed' : ''"
+          @blur="validateDateOfBirth"
               class="ngaysinh"
               type="date"
               v-model="employee.DateOfBirth"
+
             />
-            <div class="invalid-feedback" v-if="errors.ngaysinh">
+            <div class="invalid-feedback" v-if="errors.ngaysinh!=''">
               {{ errors.ngaysinh }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Cmnd/cccd <span>*</span></label>
-            <input @blur="validate" class="cmnd" type="text" v-model="employee.IdentityNumber" />
-            <div class="invalid-feedback" v-if="errors.cmnd">
+            <input @blur="validateIdentity" class="cmnd" type="text" :class="errors.cmnd!=''? 'borderRed' : ''" v-model="employee.IdentityNumber" />
+            <div class="invalid-feedback" v-if="errors.cmnd!=''">
               {{ errors.cmnd }}
             </div>
           </div>
 
           <div class="input__box">
             <label for="">Email <span>*</span></label>
-            <input @blur="validate"  class="email" type="text" v-model="employee.Email" />
+            <input @blur="validateEmail" :class="errors.email!=''? 'borderRed' : ''"  class="email" type="text" v-model="employee.Email" />
             <div class="invalid-feedback" v-if="errors.email">
               {{ errors.email }}
             </div>
@@ -212,24 +215,9 @@
               {{ errors.vitri }}
             </div>
           </div>
+       
         </div>
-        
-        <div class="column">
-          <div class="input__box">
-            <label for="">Dân tộc</label>
-            <input class="ngaycap" type="text" v-model="employee.Nation" />
-            <!-- <div class="invalid-feedback" v-if="errors.ngaycap">
-              {{ errors.ngaycap }}
-            </div> -->
-          </div>
-          <div class="input__box">
-            <label for="">Tôn giáo</label>
-            <input class="noicap" type="text" v-model="employee.Religion" />
-            <!-- <div class="invalid-feedback" v-if="errors.tongiao">
-              {{ errors.tongiao }}
-            </div> -->
-          </div>
-        </div>
+       
       </div>
       <div class="form-bottom">
         <div class="btn btn-cancel" @click="closeForm">Hủy</div>
@@ -241,6 +229,7 @@
       @closeNotifi="closeNo"
       @cancelNotifi="FormCancel"
     ></notifi>
+    <popUpDup @closeNotifi="closePoup" v-show="isShowPop"></popUpDup>
   </div>
 
   <!-- thongbao -->
@@ -252,7 +241,7 @@ import combobox from "../base/BaseCombobox.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 
-
+import popUpDup from "../base/PopUpDuplicateCode.vue"
 export default {
   data() {
     return {
@@ -265,6 +254,10 @@ export default {
       salary: {},
       formMode: 1,
       isShowNotifi: false,
+<<<<<<< HEAD
+=======
+      isShowPop:false,
+>>>>>>> 8b43e7c0514729ed797c738a65901ec36b42d2d8
       isShow: false,
       isValid:true,
       errors: {
@@ -290,7 +283,7 @@ export default {
   },
   props: ["employeeSL","code", "FormMode","loadData", "employeeId"],
   components: {
-    combobox,
+    combobox,popUpDup
     //    notifi
   },
   watch: {
@@ -317,6 +310,27 @@ export default {
     this.getCerti();
   },
   methods: {
+    save(){
+      if(this.formMode==1){
+        this.getAllEmployee()
+        this.validateDateOfBirth()
+        this.validateEmail()
+        this.validateEmployeeCode()
+        this.validateIdentity()
+
+        this.validateName()
+        if(this.isValid==true){
+          this.addEmployee()
+        }
+        
+      }else{
+        this.editEmployee()
+      }
+
+    },
+    closePoup(value){
+this.isShowPop=value
+    },
     getNewCode(){
       try {
        
@@ -339,10 +353,12 @@ export default {
     },
     addEmployee(){
         var me = this;
+      
         console.log(me.employee);
         me.employee.Gender=parseInt( me.employee.Gender)
       const toast = useToast();
-      try {
+      
+        try {
         axios
           .post("https://localhost:7029/api/Employees", me.employee)
           .then(function (res) {
@@ -359,6 +375,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      
+     
     },
     editEmployee(){
       var me = this;
@@ -459,24 +477,29 @@ export default {
     
     //gửi lệnh ẩn form từ bên này sang trang chính
 
-    validate() {
+    validateEmployeeCode() {
       
-      // if (!this.employee.EmployeeCode) {
-      //   this.errors.manv = " Mã nhân viên không được để trống!";
-      //   this.isValid = false;
-      // }else{
-      //   this.errors.manv = "";
-      //   this.isValid = true;
-      // }
-     
+      if (!this.employee.EmployeeCode) {
+        this.errors.manv = " Mã nhân viên không được để trống!";
+        this.isValid = false;
+      }else{
+        this.errors.manv = "";
+        this.isValid = true;
+      }
+      },
+      validateName() {
       if (!this.employee.EmployeeName) {
         this.errors.ten = "Tên nhân viên Không được để trống!";
         this.isValid = false;
-      }else{
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      
+      else{
         this.errors.ten = "";
         this.isValid = true;
       }
-      
+    },
+    validateIdentity() {
       if (!this.employee.IdentityNumber) {
         this.errors.cmnd = "CCCD Không được để trống!";
         this.isValid = false;
@@ -484,129 +507,64 @@ export default {
         this.errors.cmnd = "";
         this.isValid = true;
       }
+    },
+    validateEmail() {
       if (!this.employee.Email) {
         this.errors.email = "Email Không được để trống!";
+        this.isValid = false;
+      }
+      else if ((this.employee.Email)&&(!this.isEmail(this.employee.Email))){
+        this.errors.email = "Email Không đúng định dạng!";
         this.isValid = false;
       }else{
         this.errors.email = "";
         this.isValid = true;
       }
-
-      if (!this.employee.Adress) {
-        this.errors.diachi = "Địa chỉ không được để trống!";
-        this.isValid = false;
-      }
-      // if(!this.employee.Gender) {
-      //     this.errors.gioitinh = "Không được để trống!";
-      //     this.isValid = false;
-      // }
-      // if (!this.employee.DateOfBirth) {
-      //   this.errors.ngaysinh = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.IdentityNumber) {
-      //   this.errors.cmnd = "Không được để trống!";
-      //   this.isValid = false;
-      // } else if (!this.isNumber(this.employee.IdentityNumber)) {
-      //   this.errors.cmnd = "Yêu cầu nhập số";
-      //   this.isValid = false;
-      // }
-      // if(!this.employee.Phonenumber) {
-      //   this.errors.sodt = "Không được để trống!";
-      //   isValid = false;
-      // } else if(!this.isNumber(this.employee.Phonenumber)) {
-      //   this.errors.sodt = "Yêu cầu nhập số";
-      //   isValid = false;
-      // }else if(this.employee.Phonenumber.length < 10) {
-      //   this.errors.sodt = "Không được nhỏ hơn 10 số";
-      //   isValid = false;
-      // }
-      // if (!this.employee.FacultyName) {
-      //   this.errors.khoa = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-      
-    //   if (!this.employee.masothue) {
-    //     this.errors.masothue = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-    //   if (!this.employee.sotaikhoan) {
-    //     this.errors.sotaikhoan = "Không được để trống!";
-    //     this.isValid = false;
-    //   } else if (!this.isNumber(this.employee.sotaikhoan)) {
-    //     this.errors.sotaikhoan = "Yêu cầu nhập số";
-    //     this.isValid = false;
-    //   }
-      // if (!this.employee.Email) {
-      //   this.errors.email = "Không được để trống!";
-      //   this.isValid = false;
-      // } else if (!this.isEmail(this.employee.Email)) {
-      //   this.errors.email = "Yêu cầu nhập kiểu email";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.daotao) {
-      //   this.errors.daotao = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-    //   if (!this.employee.tennganhang) {
-    //     this.errors.tennganhang = "Không được để trống!";
-    //     this.isValid = false;
-    //   }
-      // if (!this.employee.StatusEmployeeName) {
-      //   this.errors.trangthai = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.SalaryName) {
-      //   this.errors.capbacluong = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.DepartmentName) {
-      //   this.errors.phongban = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.TrainingCertificateName) {
-      //   this.errors.chungchidaotao = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-      // if (!this.employee.PositionsName) {
-      //   this.errors.vitri = "Không được để trống!";
-      //   this.isValid = false;
-      // }
-
-    //   var getSelectedValue = document.querySelector(
-    //     'input[name="gioitinh"]:checked'
-    //   );
-
-    //   if (getSelectedValue != null) {
-    //     document.getElementById("disp").innerHTML =
-    //       getSelectedValue.value + " season is selected";
-    //   }
-
-      // return isValid;
-    },
-    isNumber(value) {
-      return /^\d*$/.test(value);
     },
     isEmail(value) {
       var validRegex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       return validRegex.test(value);
     },
-    save() {
-        if(this.formMode==1){
-            this.addEmployee()
-        }else{
-          this.editEmployee()
-        }
-      // if(!this.validate()){
-      //     console.log(this.employee);
-      // }
-    //   this.validate();
-
-    //   this.$emit("save",this.desc)
-
-      //    console.log(this.desc)
+    validateDateOfBirth(){
+    if (this.employee.DateOfBirth) {
+        this.employee.DateOfBirth = new Date(this.employee.DateOfBirth)
+      }
+      if (this.employee.DateOfBirth > new Date() && this.employee.DateOfBirth) {
+        this.isValid = false;
+        this.errors.ngaysinh="Ngày sinh không được lớn hơn ngày hiện tại!"
+     
+      } else {
+        this.isValid = true;
+      }
     },
+     getAllEmployee(){
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:44301/api/Employees")
+          .then(function (res) {
+          
+            for (const item of res.data) {
+            
+             if(me.employee.EmployeeCode==item.EmployeeCode){
+             
+              me.isShowPop=!me.isShowPop
+              me.isValid=false
+             }else{
+              me.isValid=true
+             }
+            }
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+     },
     checkButton() {
       var getSelectedValue = document.querySelector('input[name="gt"]:checked');
 
@@ -878,4 +836,7 @@ label span{
   .important {
     color: red;
   }
+  .borderRed{
+  border: 1px solid red !important;
+}
 </style>

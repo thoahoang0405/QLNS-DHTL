@@ -658,6 +658,9 @@ export default {
 label {
   margin: 10px 0;
 }
+.borderRed{
+  border: 1px solid red;
+}
 .invalid-feedback {
   color: red;
   position: absolute;

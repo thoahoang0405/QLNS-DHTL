@@ -2,7 +2,7 @@
     <div class="notification-wrap">
             <div class="notification">
                 <div class="warring">
-                    <i class="fa fa-exclamation-triangle"></i>
+                    <i class="icon-warning"></i>
                     <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
                 </div>
                 <div class="btn-wrap">
@@ -61,15 +61,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 30px;
     }
     .warring i {
         font-size: 60px;
+        width:43px;
+        height: 40px;
         color: #F4A733;
     }
     .warrning-title{
         text-align: center;
-        font-size: 18px;
+        font-size: 16px;
+        margin-left: 8px;
     }
     .btn-wrap {
         display: flex;
