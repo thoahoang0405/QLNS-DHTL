@@ -127,7 +127,7 @@
             >
               <div class="edit-text"></div>
               <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
-              <div class="icon icon-delete"></div>
+              <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
         </tbody>
@@ -228,6 +228,8 @@ import axios from "axios";
 import Form from "../base/FormEmployee.vue"
 import $ from "jquery";
 import Combobox from "../base/BaseCombobox2.vue";
+import { useToast } from "vue-toastification";
+
 export default {
   components: {
     Paginate,Form,Combobox
@@ -267,7 +269,21 @@ export default {
     },
   },
   methods: {
-    
+    deleteEmployee() {
+      const toast = useToast();
+      if(confirm('Bạn có chắc chắn xóa sinh viên có mã không?')){
+        console.log()
+        axios.delete(`https://localhost:7029/api/Employees/${this.employees.EmployeeID}`)
+          .then(res => {
+            console.log(res.EmployeeID)
+            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+          })
+          .catch(function () {
+            toast.error("Xóa dữ liệu thất bại", { timeout: 2000 });
+          });
+
+      }
+    },
     
     editEmployee(emp){
       this.employeeSelect=emp

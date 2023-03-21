@@ -215,13 +215,6 @@ export default {
         educationProgram: {},
         statusname: {},
       isShowNotifi: false,
-    //   dataItem: [
-    //     { id: 1, khoa: "CNTT" },
-    //     { id: 2, khoa: "QTKD" },
-    //     { id: 3, khoa: "Kinh tế" },
-    //     { id: 4, khoa: "Cơ Khí" },
-    //   ],
-    //   dataFields: { value: "id", text: "khoa" },
       students: {},
       errors: {
         masv: "",
@@ -243,7 +236,7 @@ export default {
       },
     };
   },
-  props: ["student", "code", "FormMode", "loadData"],
+  props: ["student", "code", "FormMode", "loadData","studentId"],
   created() {
     this.getFaculty();
     this.getStatus();
@@ -253,9 +246,10 @@ export default {
   },
   watch: {
     student: function (value) {
-      this.desc = value;
+      value.DateOfBirth=this.formatDate(value.DateOfBirth)
+      this.students.DateOfBirth=value.DateOfBirth
+      this.students.StudentID=value.StudentID
       this.students = value;
-      this.desc.masv = value.msv;
     },
     code: function (vl) {
       this.students.StudentCode = vl;
@@ -269,6 +263,21 @@ export default {
     notifi,
   },
   methods: {
+    formatDate(date) {
+      try {
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${year}-${month}-${newDate}`;
+        }
+      } catch (error) {
+        return "";
+      }
+    },
     getFaculty() {
       try {
         var me = this;
@@ -379,6 +388,29 @@ export default {
         console.log(error);
       }
     },
+    // editStudent(){
+    //   var me = this;
+    //     console.log(me.students);
+    //     me.students.Gender=parseInt( me.students.Gender)
+    //   const toast = useToast();
+    //   try {
+    //     axios
+    //       .put(`https://localhost:7029/api/Students/${me.students.StudentID}`, me.students)
+    //       .then(function (res) {
+    //         console.log("ok", res.data);
+    //         toast.success("Sửa dữ liệu thành công", { timeout: 2000 });
+    //         me.$emit("hideForm", false);
+    //         me.loadData()
+    //       })
+         
+    //       .catch(function () {
+    //         toast.error("Sửa dữ liệu thất bại", { timeout: 2000 });
+    //       });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+
+    // },
     selectItemFaculty(value) {
       this.students.FacultyName = value.FacultyName;
     },
@@ -388,6 +420,7 @@ export default {
     selectItemEducationProgramName(value) {
       this.students.EducationProgramName = value.EducationProgramName;
     },
+    
     btnHidden() {
       this.isShow = !this.isShow;
     },
@@ -589,13 +622,14 @@ export default {
     save() {
       if (this.formMode == 1) {
         this.addStudent();
-      }
+      }else{
+          // this.editStudent()
+        }
       // const toast = useToast();
       // this.$emit("hideForm", false);
       // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
     //   this.validate();
-      this.$emit("save", this.desc);
-      console.log(this.desc);
+      // this.$emit("save", this.desc);
     },
     checkButton() {
       var getSelectedValue = document.querySelector('input[name="gt"]:checked');

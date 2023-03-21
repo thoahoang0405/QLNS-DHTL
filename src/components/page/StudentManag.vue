@@ -81,7 +81,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="(item,index) in students" :key="item.StudentID" @dblclick="btnEditStudent(item)" >
+          <tr ref="row" v-for="(item,index) in students" :key="item.StudentID" @dblclick="editStudent(item)" >
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
@@ -119,7 +119,7 @@
               colspan="12"
             >
               <div class="edit-text"></div>
-              <div class="icon icon-edit" @click="btnEditStudent(item)"></div>
+              <div class="icon icon-edit" @click="editStudent(item)"></div>
                 <div class="icon icon-delete" @click="deleteClick(item)"></div>
             </td>
           </tr>
@@ -201,7 +201,7 @@
     </div>
    
   </div>
-<Form v-show="isShowForm" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :student="studentSelected"></Form>
+<Form v-show="isShowForm" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :studentId="studentID"  :student="studentSelected" :FormMode="formMode"></Form>
 <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
 
 </template>
@@ -224,7 +224,6 @@ export default {
   },
   data() {
     return {
-   
       isActive: "20",
       studentSelected: [],
       pageNumber: 1,
@@ -243,6 +242,8 @@ export default {
       classificationID:"",
       txtSearch:"",
       newCode: "",
+      formMode:1,
+      studentID: "",
     };
   },
   watch: {
@@ -403,7 +404,10 @@ export default {
         console.log(error);
       }
     },
-    btnEditStudent(item){
+    editStudent(item){
+      this.studentID=item.StudentID
+      console.log(item.StudentID);
+      this.formMode=2
       this.isShowForm = !this.isShowForm;
       this.studentSelected=item
     },
