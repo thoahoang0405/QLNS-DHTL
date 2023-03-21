@@ -52,7 +52,7 @@ const router = createRouter({
     if (to.fullPath == "/login") return true;
   
     const response = await Axios({
-      url: "https://localhost:44301/api/Authors",
+      url: "https://localhost:7029/api/Authors",
       method: "Get",
     }).catch(() => {
       return null;

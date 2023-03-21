@@ -10,7 +10,7 @@
       </div>
       <div class="button-function">
         <div class="add">
-          <button class="btn-add btn-hover-blue">+ Thêm tin tuyển dụng</button>
+          <button @click="btnShowRecruit" class="btn-add btn-hover-blue">+ Thêm tin tuyển dụng</button>
         </div>
         <button @click=" getRecruitment" class="btn-excel">
           <div class="icon icon-load">
@@ -44,7 +44,7 @@
               <div>Khoa: {{ item.DepartmentOfWork }}</div>
               <div>Bậc lương: {{ item.Salary }}</div>
               <div class="btn-wrap">
-                <div class="btnEdit">Edit</div>
+                <div class="btnEdit" @click="editRecruit(rec)">Edit</div>
                 <div class="btnDelete">Delete</div>
               </div>
 
@@ -57,7 +57,7 @@
      </div>
     </div>
   </div>
- 
+ <FormRecruitManag v-show="isShow" @hideForm="closeFormRecruit" :RecruitSL="RecruitSelect" :recruitID="recruitID"></FormRecruitManag>
 </template>
 <style scoped>
 .body-header {
@@ -152,22 +152,38 @@
 </style>
 
 <script>
+import FormRecruitManag from '../base/FormRecruitManag.vue'
 import axios from 'axios';
 
-// import FomrD from '../base/FormDetail.vue';
 export default {
-  components: {},
+  components: {
+    FormRecruitManag
+  },
   data() {
     return {
       isShow: false,
       recruitment: {},
-     
+      formMode: 1,
+      RecruitSelect:{},
+      recruitID:"",
     };
   },
   created() {
     this.getRecruitment()
   },
   methods:{
+    editRecruit(rec){
+      this.RecruitSelect=rec
+      this.recruitID=rec.RecruitmentID
+     this.isShow=true
+     this.formMode=2
+    },
+    closeFormRecruit(value){
+      this.isShow=value
+    },
+    btnShowRecruit(){
+      this.isShow = !this.isShow
+    },
     getRecruitment(){
       try {
        
@@ -175,7 +191,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Recruitment"
+          "https://localhost:7029/api/Recruitment"
          )
          .then(function (res) {
           me.recruitment=res.data
@@ -185,7 +201,7 @@ export default {
          })
         
          .catch(function () {
-           console.log(1);
+          //  console.log(1);
          });
      } catch (error) {
        console.log(error);

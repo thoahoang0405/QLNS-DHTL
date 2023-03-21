@@ -13,14 +13,14 @@
         <div class="column">
           <div class="input__box">
             <label for="">Mã sinh viên <span class="important">*</span></label>
-            <input class="masv" type="text" v-model="students.StudentCode" />
+            <input @blur="validate" class="masv" type="text" v-model="students.StudentCode" />
             <div class="invalid-feedback" v-if="errors.masv">
               {{ errors.masv }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Tên sinh viên <span class="important">*</span></label>
-            <input class="ten" type="text" v-model="students.StudentName" />
+            <input @blur="validate" class="ten" type="text" v-model="students.StudentName" />
             <div class="invalid-feedback" v-if="errors.ten">
               {{ errors.ten }}
             </div>
@@ -114,14 +114,14 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Khoa</label>
+            <label for="">Khoa<span class="important">*</span></label>
             <combobox
               class="khoa"
               :value="students.FacultyName"
               :items="faculty"
               :code="'FacultyID'"
               :fieldName="'FacultyName'"
-              @selectedItem="selectItemCbb"
+              @selectedItem="selectItemFaculty"
             ></combobox>
             <!-- <combobox class="khoa " v-model="desc.khoa"></combobox> -->
             <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
@@ -130,8 +130,8 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Lớp</label>
-            <input class="lop" type="text" v-model="students.class" />
+            <label for="">Lớp<span class="important">*</span></label>
+            <input class="lop" type="text" v-model="students.Class" />
             <div class="invalid-feedback" v-if="errors.lop">
               {{ errors.lop }}
             </div>
@@ -142,48 +142,38 @@
           <div class="input__box">
             <label for="">Chương trình đào tạo</label>
             <combobox
-              class="daotao"
-              :value="students.EducationProgtamName"
-              :items="dataItem"
-              :code="'id'"
-              :fieldName="'daotao'"
-              @selectedItem="selectItemCbb"
+              class="chuongtrinhdaotao"
+              :value="students.EducationProgramName"
+              :items="educationProgram"
+              :code="'EducationProgramID'"
+              :fieldName="'EducationProgramName'"
+              @selectedItem="selectItemEducationProgramName"
             ></combobox>
           </div>
-          <!-- <div class="input__box">
-                        <label for="">Chương trình đào tạo</label>
-                        <input class="daotao" type="text" v-model="desc.daotao">
-                        <div class="invalid-feedback" v-if="errors.daotao">{{ errors.daotao }}</div>
-                    </div> -->
           <div class="input__box">
             <label for="">Xếp loại</label>
-            <input
+            <combobox
               class="xeploai"
-              type="text"
-              v-model="students.ClassificationName"
-            />
-            <div class="invalid-feedback" v-if="errors.xeploai">
+              :value="students.Classification"
+              :items="classification"
+              :code="'ClassificationID'"
+              :fieldName="'Classification'"
+              @selectedItem="selectItemClassification"
+            ></combobox>
+            <!-- <div class="invalid-feedback" v-if="errors.xeploai">
               {{ errors.xeploai }}
-            </div>
+            </div> -->
           </div>
           <div class="input__box">
             <label for="">Trạng thái</label>
             <combobox
               class="trangthai"
-              :value="students.StatusName"
-              :items="dataItem"
-              :code="'id'"
-              :fieldName="'trangthai'"
-              @selectedItem="selectItemCbb"
+              :value="students.StatusStudentName"
+              :items="statusname"
+              :code="'StatusStudentID'"
+              :fieldName="'StatusStudentName'"
+              @selectedItem="selectItemStatusName"
             ></combobox>
-            <!-- <combobox
-                            class="trangthai"
-                            :value="employee.StatusName"
-                            :items="statusname"
-                            :code="'StatusNameID'"
-                            :fieldName="'StatusName'"
-                            @selectedItem="selectItemStatusName"
-                        ></combobox> -->
           </div>
           <!-- <div class="input__box">
                         <label for="">Trạng thái</label>
@@ -218,18 +208,20 @@ import { useToast } from "vue-toastification";
 export default {
   data() {
     return {
-      statusname: {},
-      department: {},
-      formMode: 1,
-      faculty: {},
+        department: {},
+        formMode: 1,
+        faculty: {},
+        classification: {},
+        educationProgram: {},
+        statusname: {},
       isShowNotifi: false,
-      dataItem: [
-        { id: 1, khoa: "CNTT" },
-        { id: 2, khoa: "QTKD" },
-        { id: 3, khoa: "Kinh tế" },
-        { id: 4, khoa: "Cơ Khí" },
-      ],
-      dataFields: { value: "id", text: "khoa" },
+    //   dataItem: [
+    //     { id: 1, khoa: "CNTT" },
+    //     { id: 2, khoa: "QTKD" },
+    //     { id: 3, khoa: "Kinh tế" },
+    //     { id: 4, khoa: "Cơ Khí" },
+    //   ],
+    //   dataFields: { value: "id", text: "khoa" },
       students: {},
       errors: {
         masv: "",
@@ -249,29 +241,15 @@ export default {
         xeploai: "",
         trangthai: "",
       },
-      // desc: {
-      //     masv: '',
-      //     ten: '',
-      //     gioitinh: '',
-      //     ngaysinh: '',
-      //     cmnd: '',
-      //     email: '',
-      //     sodt: '',
-      //     khoa: '',
-      //     sotaikhoan: '',
-      //     tennganhang: '',
-      //     diachi: '',
-      //     // khoa: '',
-      //     lop: '',
-      //     daotao: '',
-      //     xeploai: '',
-      //     trangthai: '',
-      // }
     };
   },
   props: ["student", "code", "FormMode", "loadData"],
   created() {
     this.getFaculty();
+    this.getStatus();
+    this.getEducationProgram();
+    this.selectItemClassification();
+    this.getNewCode();
   },
   watch: {
     student: function (value) {
@@ -291,19 +269,66 @@ export default {
     notifi,
   },
   methods: {
-    /**
-     * gọi api lấy khoa(phải gọi hàm này ở dòng 224 nó mới chạy đc)
-     * xong lên xem combobox khoa t làm ở trên
-     */
     getFaculty() {
       try {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Faculty")
+          .get("https://localhost:7029/api/Faculty")
           .then(function (res) {
             //gán kqua vào object faculty
             me.faculty = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    getEducationProgram() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:7029/api/EducationProgram")
+          .then(function (res) {
+            me.educationProgram = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    selectItemClassification() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:7029/api/Classifications")
+          .then(function (res) {
+            me.classification = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    getStatus() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:7029/api/StatusStudent")
+          .then(function (res) {
+            me.statusname = res.data;
           })
 
           .catch(function () {
@@ -318,7 +343,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Students/NewCode")
+          .get("https://localhost:7029/api/Students/NewCode")
           .then(function (res) {
             me.students.StudentCode = res.data;
           })
@@ -337,7 +362,7 @@ export default {
       const toast = useToast();
       try {
         axios
-          .post("https://localhost:44301/api/Students", me.students)
+          .post("https://localhost:7029/api/Students", me.students)
           .then(function (res) {
             console.log("ok", res.data);
             me.students = {};
@@ -347,14 +372,21 @@ export default {
           })
 
           .catch(function () {
+            // this.validate();
             toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
           });
       } catch (error) {
         console.log(error);
       }
     },
-    selectItemCbb(value) {
+    selectItemFaculty(value) {
       this.students.FacultyName = value.FacultyName;
+    },
+    selectItemStatusName(value) {
+      this.students.StatusName = value.StatusName;
+    },
+    selectItemEducationProgramName(value) {
+      this.students.EducationProgramName = value.EducationProgramName;
     },
     btnHidden() {
       this.isShow = !this.isShow;
@@ -455,59 +487,55 @@ export default {
         ngaytotnghiep: "",
       };
 
-      if (!this.desc.masv) {
-        this.errors.masv = "Không được để trống!";
-        isValid = false;
-      }
-      if (!this.desc.ten) {
+      if (!this.students.StudentName) {
         this.errors.ten = "Không được để trống!";
         isValid = false;
       }
-      if (!this.desc.gioitinh) {
+      if (!this.students.Gender) {
         this.errors.gioitinh = "Không được để trống!";
         isValid = false;
       }
-      if (!this.desc.ngaysinh) {
+      if (!this.students.DateOfBirth) {
         this.errors.ngaysinh = "Không được để trống!";
         isValid = false;
       }
-      // else if(this.desc.DateOfBirth > new Date() && this.desc.DateOfBirth){
+      // else if(this.students.DateOfBirth > new Date() && this.students.DateOfBirth){
       //     this.errors.DateOfBirth = "aaa";
       //     isValid = false;
       // }
-      if (!this.desc.sodt) {
+      if (!this.students.Phonenumber) {
         this.errors.sodt = "Không được để trống!";
         isValid = false;
-      } else if (!this.isNumber(this.desc.sodt)) {
-        this.errors.sodt = "Yêu cầu nhập số";
+      } else if (!this.isNumber(this.students.Phonenumber)) {
+        this.errors.Phonenumber = "Yêu cầu nhập số";
         isValid = false;
-      } else if (this.desc.sodt.length < 10) {
+      } else if (this.students.Phonenumber.length < 10) {
         this.errors.sodt = "Không được nhỏ hơn 10 số";
         isValid = false;
       }
-      if (!this.desc.cmnd) {
-        this.errors.cmnd = "Không được để trống!";
+      if (!this.students.IdentityNumber) {
+        this.errors.sodt = "Không được để trống!";
         isValid = false;
-      } else if (!this.isNumber(this.desc.cmnd)) {
-        this.errors.cmnd = "Yêu cầu nhập số";
+      } else if (!this.isNumber(this.students.IdentityNumber)) {
+        this.errors.sodt = "Yêu cầu nhập số";
         isValid = false;
       }
-      if (!this.desc.email) {
+      if (!this.students.Email) {
         this.errors.email = "Không được để trống!";
         isValid = false;
-      } else if (!this.isEmail(this.desc.email)) {
+      } else if (!this.isEmail(this.students.Email)) {
         this.errors.email = "Yêu cầu nhập kiểu email";
         isValid = false;
       }
-      if (!this.desc.diachi) {
+      if (!this.students.Adress) {
         this.errors.diachi = "Không được để trống!";
         isValid = false;
       }
-      // if(!this.desc.lop) {
-      //     this.errors.lop = "Không được để trống!";
-      //     isValid = false;
-      // }
-      if (!this.desc.khoa) {
+      if(!this.students.Class) {
+          this.errors.lop = "Không được để trống!";
+          isValid = false;
+      }
+      if (!this.students.FacultyName) {
         this.errors.khoa = "Không được để trống!";
         isValid = false;
       }
@@ -529,7 +557,7 @@ export default {
     //         var me = this;
 
     //         axios
-    //         .get("https://localhost:44301/api/StatusStudent")
+    //         .get("https://localhost:7029/api/StatusStudent")
     //         .then(function (res) {
     //             me.statusname = res.data;
     //         })
@@ -565,7 +593,7 @@ export default {
       // const toast = useToast();
       // this.$emit("hideForm", false);
       // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
-      this.validate();
+    //   this.validate();
       this.$emit("save", this.desc);
       console.log(this.desc);
     },
@@ -581,14 +609,14 @@ export default {
       }
     },
 
-    selectItemStatusName(value) {
-        /**
-         * object employee ở đâu 
-         * phần này vào db 2 bảng student với statusStudent xem lại cột
-         */
-      this.employee.StatusNameID = value.StatusNameID;
-      this.employee.StatusName = value.StatusName;
-    },
+    // selectItemStatusName(value) {
+    //     /**
+    //      * object employee ở đâu 
+    //      * phần này vào db 2 bảng student với statusStudent xem lại cột
+    //      */
+    //   this.students.StatusNameID = value.StatusNameID;
+    //   this.students.StatusName = value.StatusName;
+    // },
   },
 };
 </script>
