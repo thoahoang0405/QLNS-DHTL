@@ -7,7 +7,16 @@
   cursor: pointer;
  
 }
-
+.icon-warning{
+  background: url('../../assets/icon/icons8-warning-40.png') no-repeat;
+  width: 40px;
+	height: 40px;
+}
+.icon-load{
+  background: url('../../assets/icon/Sprites.64af8f61.svg') no-repeat -1098px -146px;
+	width: 20px;
+	height: 21px;
+}
 .icon-print {
   background: url("../../assets/icon/qlts-icon.svg") no-repeat -331px -67px;
   width: 18px;

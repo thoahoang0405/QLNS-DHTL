@@ -28,9 +28,9 @@
           <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm nhân viên</button>
         </div>
 
-        <button class="btn-excel">
-          <div class="icon icon-excel">
-            <div class="tooltip-excel">Xuất ra excel</div>
+        <button @click="getPagingEmployee" class="btn-excel">
+          <div class="icon icon-load">
+            <div class="tooltip-excel">Lấy lại dữ liệu</div>
           </div>
         </button>
         
@@ -128,7 +128,7 @@
             >
               <div class="edit-text"></div>
               <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
-                <div class="icon icon-delete"></div>
+                <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
         </tbody>
@@ -212,9 +212,12 @@
       </div>
     </div>
   </div>
+  <popUp v-show="isShowPopup" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
 <Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="employeeID"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
+<!-- <div id="load" ></div> -->
 </template>
 <style>
+@import url('../../css/page/loading.css');
   .btn-add:hover {
     opacity: 0.8;
   }
@@ -229,9 +232,12 @@ import axios from "axios";
 import Form from "../base/FormEmployee.vue"
 import $ from "jquery";
 import Combobox from "../base/BaseCombobox2.vue";
+import popUp from "../base/BasePopupDelete.vue"
+import { useToast } from "vue-toastification";
+
 export default {
   components: {
-    Paginate,Form,Combobox
+    Paginate,Form,Combobox,popUp
   },
   data() {
     return {
@@ -245,6 +251,7 @@ export default {
       totalRecord: 0,
       pageDefault: 20,
       department:{},
+      isShowLoad:false,
       position:{},
       departmentID:"",
       positionID:"",
@@ -253,6 +260,9 @@ export default {
       newCode: "",
       formMode: 1,
       employeeID:"",
+      isShowPopup:false,
+      empCodeDelete:"",
+      empID:""
     };
   },
   created() {
@@ -268,8 +278,34 @@ export default {
     },
   },
   methods: {
-    
-    
+    deleteEmployee(emp){
+      this.isShowPopup=!this.isShow
+      this.empCodeDelete= emp.EmployeeCode
+      this.empID=emp.EmployeeID
+    },
+    deleteEmp(value){
+      this.isShowPopup=value
+      var me = this;
+      const toast = useToast();
+      try{
+       axios
+         .delete(
+          `https://localhost:44301/api/Employees/${me.empID}`
+         )
+         .then(function (res) {
+          console.log(res);
+          toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+          me.getPagingEee()
+         })
+        
+         .catch(function () {
+          toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+    },
     editEmployee(emp){
       this.employeeSelect=emp
       this.employeeID=emp.EmployeeID
@@ -280,7 +316,7 @@ export default {
       try {
        
         var me = this;
-       
+       me.isShowLoad=true
         axios
           .get(
             `https://localhost:44301/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
@@ -292,6 +328,7 @@ export default {
             me.employees = res.data.Data;
             console.log( me.totalPage);
             console.log(me.employees);
+            me.isShowLoad=false
             
           })
          
@@ -390,6 +427,7 @@ export default {
       this.formMode=1;
       this.isShow = !this.isShow
     },
+    
     getNewCode(){
       try {
        

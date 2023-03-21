@@ -12,7 +12,12 @@
         <div class="add">
           <button class="btn-add btn-hover-blue">+ Thêm tin tuyển dụng</button>
         </div>
-
+        <button @click=" getRecruitment" class="btn-excel">
+          <div class="icon icon-load">
+            <div class="tooltip-excel">Lấy lại dữ liệu</div>
+          </div>
+        </button>
+        
         <!-- <button class="btn-excel">
           <div class="icon icon-excel">
             <div class="tooltip-excel">Xuất ra excel</div>

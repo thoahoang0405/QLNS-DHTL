@@ -13,7 +13,12 @@
           <div class="add">
             <button @click="btnAddStudent" class="btn-add btn-hover-blue">+ Thêm hợp đồng</button>
           </div>
-  
+          <button @click="getpagingStudent" class="btn-excel">
+          <div class="icon icon-load">
+            <div class="tooltip-excel">Lấy lại dữ liệu</div>
+          </div>
+        </button>
+        
         
           
         </div>

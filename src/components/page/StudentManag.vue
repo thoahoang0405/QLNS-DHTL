@@ -27,9 +27,9 @@
           <button @click="btnAddStudent" class="btn-add btn-hover-blue">+ Thêm sinh viên</button>
         </div>
 
-        <button class="btn-excel">
-          <div class="icon icon-excel">
-            <div class="tooltip-excel">Xuất ra excel</div>
+        <button @click="getpagingStudent" class="btn-excel">
+          <div class="icon icon-load">
+            <div class="tooltip-excel">Lấy lại dữ liệu</div>
           </div>
         </button>
         
