@@ -488,13 +488,13 @@ export default {
 
     validate() {
       
-      if (!this.employee.EmployeeCode) {
-        this.errors.manv = " Mã nhân viên không được để trống!";
-        this.isValid = false;
-      }else{
-        this.errors.manv = "";
-        this.isValid = true;
-      }
+      // if (!this.employee.EmployeeCode) {
+      //   this.errors.manv = " Mã nhân viên không được để trống!";
+      //   this.isValid = false;
+      // }else{
+      //   this.errors.manv = "";
+      //   this.isValid = true;
+      // }
      
       if (!this.employee.EmployeeName) {
         this.errors.ten = "Tên nhân viên Không được để trống!";

@@ -65,7 +65,6 @@
               <th>Tên ngân hàng</th>
               <th>Địa chỉ</th>
               <th>Khoa</th>
-           
               <th>Trạng thái</th>
               <th>Cấp bậc lương</th>
               <th>Phòng ban</th>
@@ -128,7 +127,7 @@
             >
               <div class="edit-text"></div>
               <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
-                <div class="icon icon-delete"></div>
+              <div class="icon icon-delete"></div>
             </td>
           </tr>
         </tbody>
