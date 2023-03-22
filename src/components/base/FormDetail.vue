@@ -269,6 +269,30 @@ export default {
     notifi,
   },
   methods: {
+    addHopDong(){
+      try {
+        // var me = this;
+
+        axios
+          .post("https://localhost:44301/api/Contract",{
+            "ContractID": 0,
+            "ContractName": 0,
+            "SignDay": 0,
+            "EffectiveDate": 0,
+            "ExpirationDate": 0,
+            "EmployeeID": 0
+          })
+          .then(function (res) {
+            console.log(res)
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getFaculty() {
       try {
         var me = this;

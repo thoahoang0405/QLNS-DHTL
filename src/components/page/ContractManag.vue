@@ -656,7 +656,7 @@ thead tr{
        
         axios
           .get(
-            `https://localhost:7029/api/Contract/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Contract/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -711,5 +711,6 @@ thead tr{
       },
     },
   };
+  
   </script>
   
