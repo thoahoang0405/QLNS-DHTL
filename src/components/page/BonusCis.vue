@@ -26,70 +26,51 @@
   
           <table>
             <tr>
-              <td width="20%">Khối <span class="color-red">*</span></td>
+              <td width="180px">Khoa: <span class="color-red">*</span></td>
               <td>
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{ dataSinhVienPunish.FacultyName }}
               </td>
-              <td width="10%">Lớp <span class="color-red">*</span></td>
+              <td style="width: 70px;" width="10%">Lớp: <span class="color-red">*</span></td>
+              <td colspan="1">
+                {{dataSinhVienPunish.Class}}
+              </td>
+            </tr>
+            <tr>
+              <td >Sinh viên: <span class="color-red">*</span></td>
+              <td colspan="4">
+                {{dataSinhVienPunish.StudentName}}
+              </td>
+              <!-- <td width="10%">MSV <span class="color-red">*</span></td>
               <td colspan="2">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </td>
+                <input type="text" v-model="dataSinhVienPunish.UserID">
+              </td> -->
             </tr>
             <tr>
-              <td>Học sinh <span class="color-red">*</span></td>
+              <td>Thêm hình thức kỷ luật <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienPunish.Form">
               </td>
             </tr>
             <tr>
-              <td>Hình thức kỷ luật <span class="color-red">*</span></td>
+              <td>Thêm nơi kỷ luật <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienPunish.Location">
               </td>
             </tr>
             <tr>
-              <td>Nơi kỷ luật <span class="color-red">*</span></td>
+              <td>Chọn ngày kỷ luật <span class="color-red">*</span></td>
+              <td><input type="date" name="" id="" v-model="dataSinhVienPunish.DisciplineDate"/></td>
+           
+            </tr>
+            <tr>
+              <td>Thêm lý do kỷ luật <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>Ngày kỷ luật <span class="color-red">*</span></td>
-              <td><input type="date" name="" id="" /></td>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td colspan="2">Được lưu vào học bạ</td>
-            </tr>
-            <tr>
-              <td>Nội dung kỷ luật <span class="color-red">*</span></td>
-              <td colspan="4">
-                <input type="text" name="" id="" />
+                <input type="text" name="" id="" v-model="dataSinhVienPunish.Reason"/>
               </td>
             </tr>
             <tr>
               <td class="btn-group" colspan="5">
-                <button class="btn-action">Lưu</button>
+                <button @click.stop="SavePunish" class="btn-action">Lưu</button>
                 <button @click="thongbao" class="btn-action">Đóng</button>
               </td>
             </tr>
@@ -126,71 +107,48 @@
   
           <table>
             <tr>
-              <td width="20%">Khối <span class="color-red">*</span></td>
-              <td>
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+              <td width="180px">Khoa: <span class="color-red">*</span></td>
+              <td  style="width: 200px">
+                {{ dataSinhVienBonus.FacultyName }}
               </td>
-              <td width="10%">Lớp <span class="color-red">*</span></td>
-              <td colspan="2">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+              <td  width="70px">Lớp: <span class="color-red">*</span></td>
+              <td colspan="1">
+                {{dataSinhVienBonus.Class}}
               </td>
             </tr>
             <tr>
-              <td>Học sinh <span class="color-red">*</span></td>
-              <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+              <td>Sinh viên <span class="color-red">*</span></td>
+              <td colspan="1">
+                {{dataSinhVienBonus.StudentName}}
               </td>
             </tr>
             <tr>
               <td>Hình thức khen thưởng <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienBonus.Form">
               </td>
             </tr>
             <tr>
               <td>Nơi khen thưởng <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienBonus.Location">
               </td>
             </tr>
             <tr>
               <td>Ngày khen thưởng <span class="color-red">*</span></td>
-              <td><input type="date" name="" id="" /></td>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td colspan="2">Được lưu vào học bạ</td>
+              <td><input type="date" v-model="dataSinhVienBonus.BonusDate" name="" id="" /></td>
+            
             </tr>
             <tr>
               <td>Nội dung khen thưởng <span class="color-red">*</span></td>
               <td colspan="4">
-                <input type="text" name="" id="" />
+                <input type="text" v-model="dataSinhVienBonus.Reason"  name="" id="" />
               </td>
             </tr>
             <tr>
               <td class="btn-group" colspan="5">
-                <button class="btn-action">Lưu</button>
-                <button @click="thongbao" class="btn-action">Đóng</button>
+                <button class="btn-action" @click.stop="SaveBonus">Lưu</button>
+                <button @click="isOpenPopupBonus = false" class="btn-action">Đóng</button>
               </td>
             </tr>
           </table>
@@ -268,7 +226,7 @@
               <td>{{ item.Gender }}</td>
               <td>{{ item.FacultyName }}</td>
               <td>{{ item.Class }}</td>
-              <td>{{ item.ClassificationName }}</td>
+              <td>{{ item.ClassifiOpenPopupBonuscationName }}</td>
               
               <td
                 ref="func"
@@ -277,13 +235,13 @@
                 colspan="12"
               >
                 <div class="edit-text"></div>
-                <button class="bonus"  @click="OpenPopupPunish()">
-                 Khen thưởng
+                <button class="bonus"  @click="OpenPopupPunish(item)">
+                 Kỉ luật
                 </button>
-                <button class="dis" @click="OpenPopupBonus()">
-                Kỉ luật
+                <button class="dis" @click="OpenPopupBonus(item)">
+                  Khen thưởng
                 </button>
-              </td>
+              </td> 
               
             </tr>
           </tbody>
@@ -368,6 +326,7 @@
   import axios from "axios"
   import $ from "jquery"
   import Paginate from "vuejs-paginate-next";
+  import { useToast } from "vue-toastification";
   export default {
     data() {
       return {
@@ -380,6 +339,8 @@
         totalRecord:0,
         students:{},
         isShowDrop:false,
+        dataSinhVienPunish:[],
+        dataSinhVienBonus:{}
 
       };
     },
@@ -398,14 +359,62 @@
    
   },
     methods: {
+      SavePunish(){
+        var me= this
+        const toast = useToast();
+        try {
+        
+          axios
+            .post(
+              "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupPunish=false
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
+      SaveBonus(){
+        var me= this
+        const toast = useToast();
+        try {
+          axios
+            .post(
+              "https://localhost:44301/api/Bonus",
+              
+                this.dataSinhVienBonus
+              
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupBonus()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
       thongbao() {
         alert("Xác nhận đóng");
       },
-      OpenPopupBonus() {
+      OpenPopupBonus(item) {
         this.isOpenPopupBonus = true;
+        this.dataSinhVienBonus = item
       },
-      OpenPopupPunish() {
+      OpenPopupPunish(item) {
         this.isOpenPopupPunish = true;
+        this.dataSinhVienPunish = item
       },
       getpagingStudent() {
       try {
@@ -414,7 +423,7 @@
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -565,6 +574,9 @@ li.page-item.disabled {
   .bonus-form {
     /* padding-left: 20px; */
   }
+  table{
+    width: 90%;
+  }
   table,
   tr,
   td {
@@ -581,7 +593,9 @@ li.page-item.disabled {
   .color-red {
     color: red;
   }
-  
+  .btn-action:hover{
+    background: #74bbd4;
+  }
   .btn-action {
     width: 100px;
     height: 50px;
@@ -604,14 +618,14 @@ li.page-item.disabled {
     background-color: rgba(0, 0, 0, 0.5);
   }
   .popup-bonus {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(17 17 17 / 16%);
     z-index: 2;
     cursor: pointer;
   }
@@ -624,7 +638,8 @@ li.page-item.disabled {
     right: 15%;
     z-index: 99999;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px;
+    box-shadow: 5px 5px 5px ;
+    background-color: #fff;
   }
   .title-heading {
     /* background-color: silver; */
@@ -642,6 +657,9 @@ li.page-item.disabled {
     align-items: center;
     background-color: white;
     margin-bottom: 0 !important;
+    margin-top: 10px;
+    width: 96%;
+    margin-left: 4px;
   }
   svg:hover {
     color: red;
@@ -649,11 +667,16 @@ li.page-item.disabled {
   .btn-close-popup::hover {
     color: red !important;
   }
+  input{
+    width: 300px;
+  }
   table[data-v-07d000ee], tr[data-v-07d000ee], td[data-v-07d000ee] {
     border: none;
     padding: 0px 0px 5px 5px;
-   
+   margin-bottom: 5px;
     margin-top: 0px;
+    margin-left: 4px;
+   
 }
   .sticky-right-top {
     position: sticky;

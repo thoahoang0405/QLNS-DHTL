@@ -230,6 +230,7 @@
       @cancelNotifi="FormCancel"
     ></notifi>
     <popUpDup @closeNotifi="closePoup" v-show="isShowPop"></popUpDup>
+    
   </div>
 
   <!-- thongbao -->
@@ -328,7 +329,7 @@ export default {
   },
   methods: {
     save(){
-      if(this.formMode==1){
+     
         this.getAllEmployee()
         this.validateDateOfBirth()
         this.validateEmail()
@@ -337,12 +338,14 @@ export default {
 
         this.validateName()
         if(this.isValid==true){
+          if(this.formMode==1){
           this.addEmployee()
         }
         
-      }else{
+      else{
         this.editEmployee()
       }
+    }
 
     },
     closePoup(value){
