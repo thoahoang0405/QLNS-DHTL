@@ -289,12 +289,12 @@ export default {
       try{
        axios
          .delete(
-          `https://localhost:44301/api/Employees/${me.empID}`
+          `https://localhost:7029/api/Employees/${me.empID}`
          )
          .then(function (res) {
           console.log(res);
           toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-          me.getPagingEee()
+          me.getPagingEmployee()
          })
         
          .catch(function () {

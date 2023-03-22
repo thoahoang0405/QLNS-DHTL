@@ -215,13 +215,6 @@ export default {
         educationProgram: {},
         statusname: {},
       isShowNotifi: false,
-    //   dataItem: [
-    //     { id: 1, khoa: "CNTT" },
-    //     { id: 2, khoa: "QTKD" },
-    //     { id: 3, khoa: "Kinh tế" },
-    //     { id: 4, khoa: "Cơ Khí" },
-    //   ],
-    //   dataFields: { value: "id", text: "khoa" },
       students: {},
       errors: {
         masv: "",
@@ -243,7 +236,7 @@ export default {
       },
     };
   },
-  props: ["student", "code", "FormMode", "loadData"],
+  props: ["student", "code", "FormMode", "loadData","studentId"],
   created() {
     this.getFaculty();
     this.getStatus();
@@ -253,12 +246,10 @@ export default {
   },
   watch: {
     student: function (value) {
-      this.students = value;
       value.DateOfBirth=this.formatDate(value.DateOfBirth)
-        this.students.DateOfBirth=value.DateOfBirth
-        this.students.EmployeeID=value.EmployeeID
-     
-  
+      this.students.DateOfBirth=value.DateOfBirth
+      this.students.StudentID=value.StudentID
+      this.students = value;
     },
     code: function (vl) {
       this.students.StudentCode = vl;
@@ -397,29 +388,29 @@ export default {
         console.log(error);
       }
     },
-    editStudent() {
-      var me = this;
-      console.log(me.students);
-      me.students.Gender = parseInt(me.students.Gender);
-      const toast = useToast();
-      try {
-        axios
-          .put(`https://localhost:44301/api/Students/${this.students.StudentID}`, this.students)
-          .then(function (res) {
-            console.log("ok", res.data);
-            me.$emit("hideForm", false);
-            toast.success("sửa dữ liệu thành công", { timeout: 2000 });
-            me.loadData();
-          })
+    // editStudent(){
+    //   var me = this;
+    //     console.log(me.students);
+    //     me.students.Gender=parseInt( me.students.Gender)
+    //   const toast = useToast();
+    //   try {
+    //     axios
+    //       .put(`https://localhost:7029/api/Students/${me.students.StudentID}`, me.students)
+    //       .then(function (res) {
+    //         console.log("ok", res.data);
+    //         toast.success("Sửa dữ liệu thành công", { timeout: 2000 });
+    //         me.$emit("hideForm", false);
+    //         me.loadData()
+    //       })
+         
+    //       .catch(function () {
+    //         toast.error("Sửa dữ liệu thất bại", { timeout: 2000 });
+    //       });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
 
-          .catch(function () {
-            // this.validate();
-            toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // },
     selectItemFaculty(value) {
       this.students.FacultyName = value.FacultyName;
     },
@@ -429,6 +420,7 @@ export default {
     selectItemEducationProgramName(value) {
       this.students.EducationProgramName = value.EducationProgramName;
     },
+    
     btnHidden() {
       this.isShow = !this.isShow;
     },

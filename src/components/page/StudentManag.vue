@@ -81,7 +81,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="(item,index) in students" :key="item.StudentID" @dblclick="btnEditStudent(item)" >
+          <tr ref="row" v-for="(item,index) in students" :key="item.StudentCode" @dblclick="editStudent(item)" >
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
@@ -119,7 +119,7 @@
               colspan="12"
             >
               <div class="edit-text"></div>
-              <div class="icon icon-edit" @click="btnEditStudent(item)"></div>
+              <div class="icon icon-edit" @click="editStudent(item)"></div>
                 <div class="icon icon-delete" @click="deleteClick(item)"></div>
             </td>
           </tr>
@@ -201,8 +201,15 @@
     </div>
    
   </div>
+<<<<<<< HEAD
 <Form v-show="isShowForm" :FormMode="formMode" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :student="studentSelected"></Form>
 <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
+=======
+  <!-- <popUp v-show="isShowConfirm" :mnv="stuCodeDelete" @closeNotifi="deleteStu"></popUp> -->
+<Form v-show="isShowForm" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :studentId="studentID"  :student="studentSelected" :FormMode="formMode"></Form>
+<!-- <PopupConfirm :masv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm> -->
+<PopupConfirm :masv="stuCodeDelete" v-show="isShowConfirm" @closeNotifi="deleteStu"> </PopupConfirm>
+>>>>>>> efe4a494a6659dd23fb4d63ba37f3568b182ee07
 
 </template>
 <style scoped>
@@ -214,17 +221,19 @@
 <script>
 import Paginate from "vuejs-paginate-next";
 import Form from "../base/FormDetail.vue"
-import PopupConfirm from "../base/BasePopupDelete.vue"
+// import PopupConfirm from "../base/BasePopupDelete.vue"
+import PopupConfirm from "../base/deleteStudent.vue"
 import $ from "jquery";
 import Combobox from "../base/BaseCombobox2.vue";
 import axios from "axios";
+import { useToast } from "vue-toastification";
+
 export default {
   components: {
     Paginate,Form,PopupConfirm,Combobox
   },
   data() {
     return {
-   
       isActive: "20",
       studentSelected: [],
       pageNumber: 1,
@@ -243,7 +252,14 @@ export default {
       classificationID:"",
       txtSearch:"",
       newCode: "",
+<<<<<<< HEAD
       formMode: 1,
+=======
+      formMode:1,
+      studentID: "",
+      stuCodeDelete: "",
+      // isShowPopup:false,
+>>>>>>> efe4a494a6659dd23fb4d63ba37f3568b182ee07
     };
   },
   watch: {
@@ -259,6 +275,41 @@ export default {
     this.getPosition()
   },
   methods: {
+    deleteClick(item){
+      this.stuCodeDelete= item.StudentCode
+      this.msvDelete=item.StudentID
+      console.log(this.stuCodeDelete);
+      this.isShowConfirm=!this.isShow;
+     
+      // console.log(item.msv);
+      //sao v
+
+     
+    },
+    deleteStu(value){
+      this.isShowConfirm=value
+      var me = this;
+      const toast = useToast();
+      try{
+       axios
+         .delete(
+          `https://localhost:7029/api/Students/${me.msvDelete}`
+         )
+         .then(function (res) {
+          console.log(res);
+          toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+          me.getpagingStudent()
+         })
+        
+         .catch(function () {
+          toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+    },
+
     getpagingStudent() {
       try {
        
@@ -405,17 +456,15 @@ export default {
         console.log(error);
       }
     },
-    btnEditStudent(item){
+    editStudent(item){
+      this.studentID=item.StudentID
+      console.log(item.StudentID);
+      this.formMode=2
       this.isShowForm = !this.isShowForm;
       this.studentSelected=item
       this.formMode=2
     },
-    deleteClick(item){
-      this.isShowConfirm=!this.isShowConfirm;
-      console.log(item.msv);
-      this.msvDelete=item.msv
-
-    },
+    
     cancelConfirm(value){
       this.isShowConfirm=value
     },
