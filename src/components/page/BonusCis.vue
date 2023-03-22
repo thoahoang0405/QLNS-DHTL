@@ -26,17 +26,17 @@
   
           <table>
             <tr>
-              <td width="20%">Khoa <span class="color-red">*</span></td>
+              <td width="180px">Khoa: <span class="color-red">*</span></td>
               <td>
                 {{ dataSinhVienPunish.FacultyName }}
               </td>
-              <td width="10%">Lớp <span class="color-red">*</span></td>
-              <td colspan="2">
+              <td style="width: 70px;" width="10%">Lớp: <span class="color-red">*</span></td>
+              <td colspan="1">
                 {{dataSinhVienPunish.Class}}
               </td>
             </tr>
             <tr>
-              <td >Sinh viên <span class="color-red">*</span></td>
+              <td >Sinh viên: <span class="color-red">*</span></td>
               <td colspan="4">
                 {{dataSinhVienPunish.StudentName}}
               </td>
@@ -60,10 +60,7 @@
             <tr>
               <td>Chọn ngày kỷ luật <span class="color-red">*</span></td>
               <td><input type="date" name="" id="" v-model="dataSinhVienPunish.DisciplineDate"/></td>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td colspan="2">Được lưu vào học bạ</td>
+           
             </tr>
             <tr>
               <td>Thêm lý do kỷ luật <span class="color-red">*</span></td>
@@ -73,7 +70,7 @@
             </tr>
             <tr>
               <td class="btn-group" colspan="5">
-                <button @click.stop="SavePunish(dataSinhVienPunish)" class="btn-action">Lưu</button>
+                <button @click.stop="SavePunish" class="btn-action">Lưu</button>
                 <button @click="thongbao" class="btn-action">Đóng</button>
               </td>
             </tr>
@@ -110,18 +107,18 @@
   
           <table>
             <tr>
-              <td width="20%">Khoa <span class="color-red">*</span></td>
-              <td>
+              <td width="180px">Khoa: <span class="color-red">*</span></td>
+              <td  style="width: 200px">
                 {{ dataSinhVienBonus.FacultyName }}
               </td>
-              <td width="10%">Lớp <span class="color-red">*</span></td>
-              <td colspan="2">
+              <td  width="70px">Lớp: <span class="color-red">*</span></td>
+              <td colspan="1">
                 {{dataSinhVienBonus.Class}}
               </td>
             </tr>
             <tr>
               <td>Sinh viên <span class="color-red">*</span></td>
-              <td colspan="4">
+              <td colspan="1">
                 {{dataSinhVienBonus.StudentName}}
               </td>
             </tr>
@@ -140,10 +137,7 @@
             <tr>
               <td>Ngày khen thưởng <span class="color-red">*</span></td>
               <td><input type="date" v-model="dataSinhVienBonus.BonusDate" name="" id="" /></td>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td colspan="2">Được lưu vào học bạ</td>
+            
             </tr>
             <tr>
               <td>Nội dung khen thưởng <span class="color-red">*</span></td>
@@ -153,8 +147,8 @@
             </tr>
             <tr>
               <td class="btn-group" colspan="5">
-                <button class="btn-action" @click.stop="SaveBonus(dataSinhVienBonus)">Lưu</button>
-                <button @click="thongbao" class="btn-action">Đóng</button>
+                <button class="btn-action" @click.stop="SaveBonus">Lưu</button>
+                <button @click="isOpenPopupBonus = false" class="btn-action">Đóng</button>
               </td>
             </tr>
           </table>
@@ -332,6 +326,7 @@
   import axios from "axios"
   import $ from "jquery"
   import Paginate from "vuejs-paginate-next";
+  import { useToast } from "vue-toastification";
   export default {
     data() {
       return {
@@ -345,7 +340,7 @@
         students:{},
         isShowDrop:false,
         dataSinhVienPunish:[],
-        dataSinhVienBonus:[]
+        dataSinhVienBonus:{}
 
       };
     },
@@ -364,10 +359,14 @@
    
   },
     methods: {
-      SavePunish(data){
+      SavePunish(){
+        var me= this
+        const toast = useToast();
         try {
+        
           axios
             .post(
+<<<<<<< HEAD
               "https://localhost:7029/api/Discipline",{
                 "DisciplineID": 0,
                 "Reason": data.Reason,
@@ -376,21 +375,30 @@
                 "Form": data.Form,
                 "UserID": data.StudentID
               }
+=======
+              "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
+>>>>>>> 0f8ac04c938659f1e613cca066b66e11fe80e679
             )
             .then(function (res) {
               console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupPunish=false
             })
             .catch(function () {
               console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
             });
           } catch (error) {
             console.log(error);
           }
       },
-      SaveBonus(data){
+      SaveBonus(){
+        var me= this
+        const toast = useToast();
         try {
           axios
             .post(
+<<<<<<< HEAD
               "https://localhost:7029/api/Bonus",{
                 BonusID: 0,
                 Reason: data.Reason,
@@ -399,12 +407,21 @@
                 Form: data.Form,
                 UserID: data.StudentID
               }
+=======
+              "https://localhost:44301/api/Bonus",
+              
+                this.dataSinhVienBonus
+              
+>>>>>>> 0f8ac04c938659f1e613cca066b66e11fe80e679
             )
             .then(function (res) {
               console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupBonus()
             })
             .catch(function () {
               console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
             });
           } catch (error) {
             console.log(error);
@@ -579,6 +596,9 @@ li.page-item.disabled {
   .bonus-form {
     /* padding-left: 20px; */
   }
+  table{
+    width: 90%;
+  }
   table,
   tr,
   td {
@@ -595,7 +615,9 @@ li.page-item.disabled {
   .color-red {
     color: red;
   }
-  
+  .btn-action:hover{
+    background: #74bbd4;
+  }
   .btn-action {
     width: 100px;
     height: 50px;
@@ -618,14 +640,14 @@ li.page-item.disabled {
     background-color: rgba(0, 0, 0, 0.5);
   }
   .popup-bonus {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(17 17 17 / 16%);
     z-index: 2;
     cursor: pointer;
   }
@@ -638,7 +660,8 @@ li.page-item.disabled {
     right: 15%;
     z-index: 99999;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px;
+    box-shadow: 5px 5px 5px ;
+    background-color: #fff;
   }
   .title-heading {
     /* background-color: silver; */
@@ -656,6 +679,9 @@ li.page-item.disabled {
     align-items: center;
     background-color: white;
     margin-bottom: 0 !important;
+    margin-top: 10px;
+    width: 96%;
+    margin-left: 4px;
   }
   svg:hover {
     color: red;
@@ -663,11 +689,16 @@ li.page-item.disabled {
   .btn-close-popup::hover {
     color: red !important;
   }
+  input{
+    width: 300px;
+  }
   table[data-v-07d000ee], tr[data-v-07d000ee], td[data-v-07d000ee] {
     border: none;
     padding: 0px 0px 5px 5px;
-   
+   margin-bottom: 5px;
     margin-top: 0px;
+    margin-left: 4px;
+   
 }
   .sticky-right-top {
     position: sticky;

@@ -201,10 +201,8 @@
     </div>
    
   </div>
-  <!-- <popUp v-show="isShowConfirm" :mnv="stuCodeDelete" @closeNotifi="deleteStu"></popUp> -->
-<Form v-show="isShowForm" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :studentId="studentID"  :student="studentSelected" :FormMode="formMode"></Form>
-<!-- <PopupConfirm :masv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm> -->
-<PopupConfirm :masv="stuCodeDelete" v-show="isShowConfirm" @closeNotifi="deleteStu"> </PopupConfirm>
+<Form v-show="isShowForm" :FormMode="formMode" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :student="studentSelected"></Form>
+<PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
 
 </template>
 <style scoped>
@@ -247,10 +245,7 @@ export default {
       classificationID:"",
       txtSearch:"",
       newCode: "",
-      formMode:1,
-      studentID: "",
-      stuCodeDelete: "",
-      // isShowPopup:false,
+      formMode: 1,
     };
   },
   watch: {
@@ -308,7 +303,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -347,7 +342,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Faculty"
+          "https://localhost:44301/api/Faculty"
          )
          .then(function (res) {
           me.faculty=res.data
@@ -368,7 +363,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Classifications"
+          "https://localhost:44301/api/Classifications"
          )
          .then(function (res) {
           me.classification=res.data
@@ -427,6 +422,7 @@ export default {
     },
     btnAddStudent(){
       this.isShowForm = !this.isShowForm;
+      this.formMode=1
       this.getNewCode()
     },
     getNewCode() {
@@ -434,7 +430,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Students/NewCode")
+          .get("https://localhost:44301/api/Students/NewCode")
           .then(function (res) {
             me.newCode = res.data;
           })
@@ -452,6 +448,7 @@ export default {
       this.formMode=2
       this.isShowForm = !this.isShowForm;
       this.studentSelected=item
+      this.formMode=2
     },
     
     cancelConfirm(value){
