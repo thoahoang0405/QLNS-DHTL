@@ -26,70 +26,54 @@
   
           <table>
             <tr>
-              <td width="20%">Khối <span class="color-red">*</span></td>
+              <td width="20%">Khoa <span class="color-red">*</span></td>
               <td>
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{ dataSinhVienPunish.FacultyName }}
               </td>
               <td width="10%">Lớp <span class="color-red">*</span></td>
               <td colspan="2">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{dataSinhVienPunish.Class}}
               </td>
             </tr>
             <tr>
-              <td>Học sinh <span class="color-red">*</span></td>
+              <td >Sinh viên <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{dataSinhVienPunish.StudentName}}
               </td>
+              <!-- <td width="10%">MSV <span class="color-red">*</span></td>
+              <td colspan="2">
+                <input type="text" v-model="dataSinhVienPunish.UserID">
+              </td> -->
             </tr>
             <tr>
-              <td>Hình thức kỷ luật <span class="color-red">*</span></td>
+              <td>Thêm hình thức kỷ luật <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienPunish.Form">
               </td>
             </tr>
             <tr>
-              <td>Nơi kỷ luật <span class="color-red">*</span></td>
+              <td>Thêm nơi kỷ luật <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienPunish.Location">
               </td>
             </tr>
             <tr>
-              <td>Ngày kỷ luật <span class="color-red">*</span></td>
-              <td><input type="date" name="" id="" /></td>
+              <td>Chọn ngày kỷ luật <span class="color-red">*</span></td>
+              <td><input type="date" name="" id="" v-model="dataSinhVienPunish.DisciplineDate"/></td>
               <td>
                 <input type="checkbox" name="" id="" />
               </td>
               <td colspan="2">Được lưu vào học bạ</td>
             </tr>
             <tr>
-              <td>Nội dung kỷ luật <span class="color-red">*</span></td>
+              <td>Thêm lý do kỷ luật <span class="color-red">*</span></td>
               <td colspan="4">
-                <input type="text" name="" id="" />
+                <input type="text" name="" id="" v-model="dataSinhVienPunish.Reason"/>
               </td>
             </tr>
             <tr>
               <td class="btn-group" colspan="5">
-                <button class="btn-action">Lưu</button>
+                <button @click.stop="SavePunish(dataSinhVienPunish)" class="btn-action">Lưu</button>
                 <button @click="thongbao" class="btn-action">Đóng</button>
               </td>
             </tr>
@@ -126,56 +110,36 @@
   
           <table>
             <tr>
-              <td width="20%">Khối <span class="color-red">*</span></td>
+              <td width="20%">Khoa <span class="color-red">*</span></td>
               <td>
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{ dataSinhVienBonus.FacultyName }}
               </td>
               <td width="10%">Lớp <span class="color-red">*</span></td>
               <td colspan="2">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{dataSinhVienBonus.Class}}
               </td>
             </tr>
             <tr>
-              <td>Học sinh <span class="color-red">*</span></td>
+              <td>Sinh viên <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                {{dataSinhVienBonus.StudentName}}
               </td>
             </tr>
             <tr>
               <td>Hình thức khen thưởng <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienBonus.Form">
               </td>
             </tr>
             <tr>
               <td>Nơi khen thưởng <span class="color-red">*</span></td>
               <td colspan="4">
-                <select class="w-full" name="" id="">
-                  <option value="1">Lựa chọn</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+                <input type="text" v-model="dataSinhVienBonus.Location">
               </td>
             </tr>
             <tr>
               <td>Ngày khen thưởng <span class="color-red">*</span></td>
-              <td><input type="date" name="" id="" /></td>
+              <td><input type="date" v-model="dataSinhVienBonus.BonusDate" name="" id="" /></td>
               <td>
                 <input type="checkbox" name="" id="" />
               </td>
@@ -184,12 +148,12 @@
             <tr>
               <td>Nội dung khen thưởng <span class="color-red">*</span></td>
               <td colspan="4">
-                <input type="text" name="" id="" />
+                <input type="text" v-model="dataSinhVienBonus.Reason"  name="" id="" />
               </td>
             </tr>
             <tr>
               <td class="btn-group" colspan="5">
-                <button class="btn-action">Lưu</button>
+                <button class="btn-action" @click.stop="SaveBonus(dataSinhVienBonus)">Lưu</button>
                 <button @click="thongbao" class="btn-action">Đóng</button>
               </td>
             </tr>
@@ -268,7 +232,7 @@
               <td>{{ item.Gender }}</td>
               <td>{{ item.FacultyName }}</td>
               <td>{{ item.Class }}</td>
-              <td>{{ item.ClassificationName }}</td>
+              <td>{{ item.ClassifiOpenPopupBonuscationName }}</td>
               
               <td
                 ref="func"
@@ -277,13 +241,13 @@
                 colspan="12"
               >
                 <div class="edit-text"></div>
-                <button class="bonus"  @click="OpenPopupPunish()">
-                 Khen thưởng
+                <button class="bonus"  @click="OpenPopupPunish(item)">
+                 Kỉ luật
                 </button>
-                <button class="dis" @click="OpenPopupBonus()">
-                Kỉ luật
+                <button class="dis" @click="OpenPopupBonus(item)">
+                  Khen thưởng
                 </button>
-              </td>
+              </td> 
               
             </tr>
           </tbody>
@@ -380,6 +344,8 @@
         totalRecord:0,
         students:{},
         isShowDrop:false,
+        dataSinhVienPunish:[],
+        dataSinhVienBonus:[]
 
       };
     },
@@ -398,14 +364,62 @@
    
   },
     methods: {
+      SavePunish(data){
+        try {
+          axios
+            .post(
+              "https://localhost:44301/api/Discipline",{
+                "DisciplineID": 0,
+                "Reason": data.Reason,
+                "Location": data.Location,
+                "DisciplineDate": data.DisciplineDate,
+                "Form": data.Form,
+                "UserID": data.StudentID
+              }
+            )
+            .then(function (res) {
+              console.log(res)
+            })
+            .catch(function () {
+              console.log("error");
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
+      SaveBonus(data){
+        try {
+          axios
+            .post(
+              "https://localhost:44301/api/Bonus",{
+                BonusID: 0,
+                Reason: data.Reason,
+                Location: data.Location,
+                BonusDate: data.BonusDate,
+                Form: data.Form,
+                UserID: data.StudentID
+              }
+            )
+            .then(function (res) {
+              console.log(res)
+            })
+            .catch(function () {
+              console.log("error");
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
       thongbao() {
         alert("Xác nhận đóng");
       },
-      OpenPopupBonus() {
+      OpenPopupBonus(item) {
         this.isOpenPopupBonus = true;
+        this.dataSinhVienBonus = item
       },
-      OpenPopupPunish() {
+      OpenPopupPunish(item) {
         this.isOpenPopupPunish = true;
+        this.dataSinhVienPunish = item
       },
       getpagingStudent() {
       try {
@@ -414,7 +428,7 @@
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           

@@ -263,19 +263,28 @@ export default {
     notifi,
   },
   methods: {
-    formatDate(date) {
+    addHopDong(){
       try {
-        if (date) {
-          date = new Date(date);
-          let newDate = date.getDate();
-          let month = date.getMonth() + 1;
-          let year = date.getFullYear();
-          newDate = newDate < 10 ? `0${newDate}` : newDate;
-          month = month < 10 ? `0${month}` : month;
-          return `${year}-${month}-${newDate}`;
-        }
+        // var me = this;
+
+        axios
+          .post("https://localhost:44301/api/Contract",{
+            "ContractID": 0,
+            "ContractName": 0,
+            "SignDay": 0,
+            "EffectiveDate": 0,
+            "ExpirationDate": 0,
+            "EmployeeID": 0
+          })
+          .then(function (res) {
+            console.log(res)
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
       } catch (error) {
-        return "";
+        console.log(error);
       }
     },
     getFaculty() {
