@@ -154,7 +154,7 @@
             <label for="">Xếp loại</label>
             <combobox
               class="xeploai"
-              :value="students.Classification"
+              :value="students.ClassificationName"
               :items="classification"
               :code="'ClassificationID'"
               :fieldName="'Classification'"
@@ -168,7 +168,7 @@
             <label for="">Trạng thái</label>
             <combobox
               class="trangthai"
-              :value="students.StatusStudentName"
+              :value="students.StatusName"
               :items="statusname"
               :code="'StatusStudentID'"
               :fieldName="'StatusStudentName'"
@@ -253,9 +253,12 @@ export default {
   },
   watch: {
     student: function (value) {
-      this.desc = value;
       this.students = value;
-      this.desc.masv = value.msv;
+      value.DateOfBirth=this.formatDate(value.DateOfBirth)
+        this.students.DateOfBirth=value.DateOfBirth
+        this.students.EmployeeID=value.EmployeeID
+     
+  
     },
     code: function (vl) {
       this.students.StudentCode = vl;
@@ -269,12 +272,27 @@ export default {
     notifi,
   },
   methods: {
+    formatDate(date) {
+      try {
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${year}-${month}-${newDate}`;
+        }
+      } catch (error) {
+        return "";
+      }
+    },
     getFaculty() {
       try {
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Faculty")
+          .get("https://localhost:44301/api/Faculty")
           .then(function (res) {
             //gán kqua vào object faculty
             me.faculty = res.data;
@@ -292,7 +310,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/EducationProgram")
+          .get("https://localhost:44301/api/EducationProgram")
           .then(function (res) {
             me.educationProgram = res.data;
           })
@@ -309,7 +327,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Classifications")
+          .get("https://localhost:44301/api/Classifications")
           .then(function (res) {
             me.classification = res.data;
           })
@@ -326,7 +344,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/StatusStudent")
+          .get("https://localhost:44301/api/StatusStudent")
           .then(function (res) {
             me.statusname = res.data;
           })
@@ -343,7 +361,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Students/NewCode")
+          .get("https://localhost:44301/api/Students/NewCode")
           .then(function (res) {
             me.students.StudentCode = res.data;
           })
@@ -362,12 +380,35 @@ export default {
       const toast = useToast();
       try {
         axios
-          .post("https://localhost:7029/api/Students", me.students)
+          .post("https://localhost:44301/api/Students", me.students)
           .then(function (res) {
             console.log("ok", res.data);
             me.students = {};
             me.getNewCode();
             toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+            me.loadData();
+          })
+
+          .catch(function () {
+            // this.validate();
+            toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    editStudent() {
+      var me = this;
+      console.log(me.students);
+      me.students.Gender = parseInt(me.students.Gender);
+      const toast = useToast();
+      try {
+        axios
+          .put(`https://localhost:44301/api/Students/${this.students.StudentID}`, this.students)
+          .then(function (res) {
+            console.log("ok", res.data);
+            me.$emit("hideForm", false);
+            toast.success("sửa dữ liệu thành công", { timeout: 2000 });
             me.loadData();
           })
 
@@ -403,24 +444,7 @@ export default {
     closeForm() {
       // this.$emit("hideForm", false);
       (this.isShowNotifi = true),
-        (this.desc = {
-          masv: "",
-          ten: "",
-          gioitinh: "",
-          ngaysinh: "",
-          cmnd: "",
-          email: "",
-          sodt: "",
-          khoa: "",
-          sotaikhoan: "",
-          tennganhang: "",
-          diachi: "",
-          // khoa: '',
-          lop: "",
-          daotao: "",
-          xeploai: "",
-          trangthai: "",
-        });
+      
       this.errors = {
         masv: "",
         ten: "",
@@ -557,7 +581,7 @@ export default {
     //         var me = this;
 
     //         axios
-    //         .get("https://localhost:7029/api/StatusStudent")
+    //         .get("https://localhost:44301/api/StatusStudent")
     //         .then(function (res) {
     //             me.statusname = res.data;
     //         })
@@ -589,13 +613,15 @@ export default {
     save() {
       if (this.formMode == 1) {
         this.addStudent();
+      }else{
+        this.editStudent()
       }
       // const toast = useToast();
       // this.$emit("hideForm", false);
       // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
     //   this.validate();
-      this.$emit("save", this.desc);
-      console.log(this.desc);
+      // this.$emit("save", this.desc);
+      // console.log(this.desc);
     },
     checkButton() {
       var getSelectedValue = document.querySelector('input[name="gt"]:checked');

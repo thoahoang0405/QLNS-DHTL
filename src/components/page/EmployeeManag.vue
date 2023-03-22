@@ -318,7 +318,7 @@ export default {
        me.isShowLoad=true
         axios
           .get(
-            `https://localhost:7029/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -345,7 +345,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Departments"
+          "https://localhost:44301/api/Departments"
          )
          .then(function (res) {
           me.department=res.data
@@ -366,7 +366,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Position"
+          "https://localhost:44301/api/Position"
          )
          .then(function (res) {
           me.position=res.data
@@ -434,7 +434,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Employees/NewCode"
+          "https://localhost:44301/api/Employees/NewCode"
          )
          .then(function (res) {
           me.newCode=res.data
