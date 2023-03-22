@@ -74,9 +74,12 @@
         align-items: center;
         margin-top: 30px;
     }
+    .icon-warning {
+        width: 52px;
+    }
     .warring i {
         font-size: 60px;
-        width:52px;
+        width: 52px;
         height: 40px;
         color: #F4A733;
     }

@@ -56,7 +56,6 @@
               class="ngaysinh"
               type="date"
               v-model="employee.DateOfBirth"
-
             />
             <div class="invalid-feedback" v-if="errors.ngaysinh!=''">
               {{ errors.ngaysinh }}
@@ -81,7 +80,7 @@
 
         <div class="column">
           <div class="input__box">
-            <label for="">Số điện thoại<span class="important">*</span></label>
+            <label for="">Số điện thoại</label>
             <input class="sodt" type="text" v-model="employee.Phonenumber" />
             <div class="invalid-feedback" v-if="errors.sodt">
               {{ errors.sodt }}
@@ -111,7 +110,7 @@
             </div> -->
           </div>
           <div class="input__box">
-            <label for="">Địa chỉ<span class="important">*</span></label>
+            <label for="">Địa chỉ</label>
             <input @blur="validate" class="diachi" type="text" v-model="employee.Adress" />
             <div class="invalid-feedback" v-if="errors.diachi">
               {{ errors.diachi }}
@@ -430,25 +429,6 @@ this.isShowPop=value
     closeForm() {
       // this.isShowNotifi = true
       this.$emit("hideForm", false);
-      // this.desc = {
-        
-      //   ten: "",
-      //   ngaysinh: "",
-      //   cmnd: "",
-      //   email: "",
-      //   sodt: "",
-      //   masothue: "",
-      //   sotaikhoan: "",
-      //   tennganhang: "",
-      //   diachi: "",
-      //   khoa: "",
-      //   trangthai: "",
-      //   capbacluong: "",
-      //   phongban: "",
-      //   daotao: "",
-      //   tinhtrang: "",
-      //   vitri: "",
-      // };
       this.errors = {
         ten: "",
         ngaysinh: "",
@@ -540,7 +520,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Employees")
+          .get("https://localhost:7029/api/Employees")
           .then(function (res) {
           
             for (const item of res.data) {

@@ -6,7 +6,7 @@
                         <i class="icon-warning"></i>
                     
                     
-                    <div class="warrning-title">Bạn có chắc chắn xóa sinh viên có mã  {{ msv }} không?</div>
+                    <div class="warrning-title">Bạn có chắc chắn xóa nhân viên có mã  {{ msv }} không?</div>
                 </div>
                 <div class="btn-wrap">
                     <div class="btnNotifi btn-secondary" @click="CancelNotifi">Hủy</div>
@@ -74,9 +74,12 @@
         align-items: center;
         margin-top: 30px;
     }
+    .icon-warning {
+            width: 52px;
+    }
     .warring i {
         font-size: 60px;
-        width:52px;
+        width: 52px;
         height: 40px;
         color: #F4A733;
     }
@@ -131,6 +134,7 @@
         box-sizing: border-box;
         cursor: pointer;
     }
+    
     @media screen and (max-width: 767.98px) {
         .notification{
             font-size: 15px;
@@ -141,9 +145,8 @@
         .warring {
             margin-top: 6px;
         }
-        .warring i {
-            font-size: 50px;
-        }
+        
+        
         .btnNotifi {
             width: 80px;
             margin-top: 20px;

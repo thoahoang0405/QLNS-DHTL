@@ -13,20 +13,20 @@
         <div class="column">
           <div class="input__box">
             <label for="">Mã sinh viên <span class="important">*</span></label>
-            <input @blur="validate" class="masv" type="text" v-model="students.StudentCode" />
+            <input @blur="validateStudentCode" class="masv" :class="errors.masv!=''? 'borderRed' : ''" type="text" v-model="students.StudentCode" />
             <div class="invalid-feedback" v-if="errors.masv">
               {{ errors.masv }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Tên sinh viên <span class="important">*</span></label>
-            <input @blur="validate" class="ten" type="text" v-model="students.StudentName" />
+            <input @blur="validateName" :class="errors.ten!=''? 'borderRed' : ''" type="text" v-model="students.StudentName" />
             <div class="invalid-feedback" v-if="errors.ten">
               {{ errors.ten }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Giới tính <span class="important">*</span></label>
+            <label for="">Giới tính</label>
             <div class="radio__box">
               <input
                 type="radio"
@@ -49,7 +49,7 @@
           <div class="input__box">
             <label for="">Ngày sinh <span class="important">*</span></label>
             <input
-              class="ngaysinh"
+            @blur="validateDateOfBirth" :class="errors.ngaysinh!=''? 'borderRed' : ''"
               type="date"
               v-model="students.DateOfBirth"
             />
@@ -59,7 +59,7 @@
           </div>
           <div class="input__box">
             <label for="">Cmnd/cccd <span class="important">*</span></label>
-            <input class="cmnd" type="text" v-model="students.IdentityNumber" />
+            <input @blur="validateIdentity" :class="errors.cmnd!=''? 'borderRed' : ''" type="text" v-model="students.IdentityNumber" />
             <div class="invalid-feedback" v-if="errors.cmnd">
               {{ errors.cmnd }}
             </div>
@@ -68,13 +68,13 @@
         <div class="column">
           <div class="input__box">
             <label for="">Email <span class="important">*</span></label>
-            <input class="email" type="text" v-model="students.Email" />
+            <input @blur="validateEmail" :class="errors.email!=''? 'borderRed' : ''" type="text" v-model="students.Email" />
             <div class="invalid-feedback" v-if="errors.email">
               {{ errors.email }}
             </div>
-          </div>
+</div>
           <div class="input__box">
-            <label for="">Số điện thoại <span class="important">*</span></label>
+            <label for="">Số điện thoại</label>
             <input class="sodt" type="text" v-model="students.Phonenumber" />
             <div class="invalid-feedback" v-if="errors.sodt">
               {{ errors.sodt }}
@@ -105,7 +105,7 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Địa chỉ <span class="important">*</span></label>
+            <label for="">Địa chỉ</label>
             <input class="diachi" type="text" v-model="students.Adress" />
             <div class="invalid-feedback" v-if="errors.diachi">
               {{ errors.diachi }}
@@ -114,7 +114,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Khoa<span class="important">*</span></label>
+            <label for="">Khoa</label>
             <combobox
               class="khoa"
               :value="students.FacultyName"
@@ -130,7 +130,7 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Lớp<span class="important">*</span></label>
+            <label for="">Lớp</label>
             <input class="lop" type="text" v-model="students.Class" />
             <div class="invalid-feedback" v-if="errors.lop">
               {{ errors.lop }}
@@ -150,11 +150,11 @@
               @selectedItem="selectItemEducationProgramName"
             ></combobox>
           </div>
-          <div class="input__box">
+<div class="input__box">
             <label for="">Xếp loại</label>
             <combobox
               class="xeploai"
-              :value="students.Classification"
+              :value="students.ClassificationName"
               :items="classification"
               :code="'ClassificationID'"
               :fieldName="'Classification'"
@@ -168,7 +168,7 @@
             <label for="">Trạng thái</label>
             <combobox
               class="trangthai"
-              :value="students.StatusStudentName"
+              :value="students.StatusName"
               :items="statusname"
               :code="'StatusStudentID'"
               :fieldName="'StatusStudentName'"
@@ -211,10 +211,18 @@ export default {
         department: {},
         formMode: 1,
         faculty: {},
+        isValid: false,
         classification: {},
         educationProgram: {},
         statusname: {},
       isShowNotifi: false,
+    //   dataItem: [
+    //     { id: 1, khoa: "CNTT" },
+    //     { id: 2, khoa: "QTKD" },
+    //     { id: 3, khoa: "Kinh tế" },
+    //     { id: 4, khoa: "Cơ Khí" },
+    //   ],
+    //   dataFields: { value: "id", text: "khoa" },
       students: {},
       errors: {
         masv: "",
@@ -236,7 +244,7 @@ export default {
       },
     };
   },
-  props: ["student", "code", "FormMode", "loadData","studentId"],
+  props: ["student", "code", "FormMode", "loadData"],
   created() {
     this.getFaculty();
     this.getStatus();
@@ -246,10 +254,12 @@ export default {
   },
   watch: {
     student: function (value) {
-      value.DateOfBirth=this.formatDate(value.DateOfBirth)
-      this.students.DateOfBirth=value.DateOfBirth
-      this.students.StudentID=value.StudentID
       this.students = value;
+value.DateOfBirth=this.formatDate(value.DateOfBirth)
+        this.students.DateOfBirth=value.DateOfBirth
+        this.students.EmployeeID=value.EmployeeID
+     
+  
     },
     code: function (vl) {
       this.students.StudentCode = vl;
@@ -263,28 +273,19 @@ export default {
     notifi,
   },
   methods: {
-    addHopDong(){
+    formatDate(date) {
       try {
-        // var me = this;
-
-        axios
-          .post("https://localhost:44301/api/Contract",{
-            "ContractID": 0,
-            "ContractName": 0,
-            "SignDay": 0,
-            "EffectiveDate": 0,
-            "ExpirationDate": 0,
-            "EmployeeID": 0
-          })
-          .then(function (res) {
-            console.log(res)
-          })
-
-          .catch(function () {
-            console.log(1);
-          });
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${year}-${month}-${newDate}`;
+        }
       } catch (error) {
-        console.log(error);
+        return "";
       }
     },
     getFaculty() {
@@ -378,11 +379,13 @@ export default {
       console.log(me.students);
       me.students.Gender = parseInt(me.students.Gender);
       const toast = useToast();
-      try {
+     
+         try {
         axios
           .post("https://localhost:7029/api/Students", me.students)
           .then(function (res) {
             console.log("ok", res.data);
+           
             me.students = {};
             me.getNewCode();
             toast.success("thêm dữ liệu thành công", { timeout: 2000 });
@@ -396,30 +399,32 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      
+     
     },
-    // editStudent(){
-    //   var me = this;
-    //     console.log(me.students);
-    //     me.students.Gender=parseInt( me.students.Gender)
-    //   const toast = useToast();
-    //   try {
-    //     axios
-    //       .put(`https://localhost:7029/api/Students/${me.students.StudentID}`, me.students)
-    //       .then(function (res) {
-    //         console.log("ok", res.data);
-    //         toast.success("Sửa dữ liệu thành công", { timeout: 2000 });
-    //         me.$emit("hideForm", false);
-    //         me.loadData()
-    //       })
-         
-    //       .catch(function () {
-    //         toast.error("Sửa dữ liệu thất bại", { timeout: 2000 });
-    //       });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+    editStudent() {
+      var me = this;
+      console.log(me.students);
+      me.students.Gender = parseInt(me.students.Gender);
+      const toast = useToast();
+      try {
+        axios
+          .put(`https://localhost:7029/api/Students/${this.students.StudentID}`, this.students)
+          .then(function (res) {
+            console.log("ok", res.data);
+            me.$emit("hideForm", false);
+            toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+            me.loadData();
+          })
 
-    // },
+          .catch(function () {
+            // this.validate();
+            toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     selectItemFaculty(value) {
       this.students.FacultyName = value.FacultyName;
     },
@@ -429,7 +434,6 @@ export default {
     selectItemEducationProgramName(value) {
       this.students.EducationProgramName = value.EducationProgramName;
     },
-    
     btnHidden() {
       this.isShow = !this.isShow;
     },
@@ -441,28 +445,10 @@ export default {
       this.$emit("hideForm", false);
     },
     // gửi lệnh ẩn form từ bên này sang trang chính
-
     closeForm() {
       // this.$emit("hideForm", false);
       (this.isShowNotifi = true),
-        (this.desc = {
-          masv: "",
-          ten: "",
-          gioitinh: "",
-          ngaysinh: "",
-          cmnd: "",
-          email: "",
-          sodt: "",
-          khoa: "",
-          sotaikhoan: "",
-          tennganhang: "",
-          diachi: "",
-          // khoa: '',
-          lop: "",
-          daotao: "",
-          xeploai: "",
-          trangthai: "",
-        });
+      
       this.errors = {
         masv: "",
         ten: "",
@@ -487,139 +473,92 @@ export default {
       };
     },
 
-    // employeeDetail: function (value) {
-    //     value.DateOfBirth = this.fomartDate(value.DateOfBirth);
-    //     this.desc.DateOfBirth = value.DateOfBirth;
-    // },
-    // fomartDate(date) {
-    // try {
-    //     if (date) {
-    //     date = new Date(date);
-    //     let newDate = date.getDate();
-    //     let month = date.getMonth() + 1;
-    //     let year = date.getFullYear();
-    //     newDate = newDate < 10 ? `0${newDate}` : newDate;
-    //     month = month < 10 ? `0${month}` : month;
-    //     return `${year}-${month}-${newDate}`;
-    //     }
-    // } catch (error) {
-    //     return "";
-    // }
-    // },
-    validate() {
-      // e.preventDefault();
-      let isValid = true;
-      this.errors = {
-        masv: "",
-        ten: "",
-        gioitinh: "",
-        ngaysinh: "",
-        khoa: "",
-        cmnd: "",
-        ngaycap: "",
-        noicap: "",
-        email: "",
-        sodt: "",
-        sotaikhoan: "",
-        diachi: "",
-        kyhoc: "",
-        khenthuong: "",
-        daotao: "",
-        ngaynhaphoc: "",
-        ngaytotnghiep: "",
-      };
-
+    validateStudentCode() {
+      
+      if (!this.students.StudentCode) {
+        this.errors.masv = " Mã sinh viên không được để trống!";
+        this.isValid=false
+       
+      }else{
+        this.isValid=true
+        this.errors.masv = "";
+       
+      }
+      },
+    validateName() {
       if (!this.students.StudentName) {
-        this.errors.ten = "Không được để trống!";
-        isValid = false;
+        this.errors.ten = "Tên sinh viên Không được để trống!";
+       this.isValid=false
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }else{
+        this.isValid=true
+        this.errors.ten = "";
       }
-      if (!this.students.Gender) {
-        this.errors.gioitinh = "Không được để trống!";
-        isValid = false;
-      }
-      if (!this.students.DateOfBirth) {
-        this.errors.ngaysinh = "Không được để trống!";
-        isValid = false;
-      }
-      // else if(this.students.DateOfBirth > new Date() && this.students.DateOfBirth){
-      //     this.errors.DateOfBirth = "aaa";
-      //     isValid = false;
-      // }
-      if (!this.students.Phonenumber) {
-        this.errors.sodt = "Không được để trống!";
-        isValid = false;
-      } else if (!this.isNumber(this.students.Phonenumber)) {
-        this.errors.Phonenumber = "Yêu cầu nhập số";
-        isValid = false;
-      } else if (this.students.Phonenumber.length < 10) {
-        this.errors.sodt = "Không được nhỏ hơn 10 số";
-        isValid = false;
-      }
-      if (!this.students.IdentityNumber) {
-        this.errors.sodt = "Không được để trống!";
-        isValid = false;
-      } else if (!this.isNumber(this.students.IdentityNumber)) {
-        this.errors.sodt = "Yêu cầu nhập số";
-        isValid = false;
-      }
-      if (!this.students.Email) {
-        this.errors.email = "Không được để trống!";
-        isValid = false;
-      } else if (!this.isEmail(this.students.Email)) {
-        this.errors.email = "Yêu cầu nhập kiểu email";
-        isValid = false;
-      }
-      if (!this.students.Adress) {
-        this.errors.diachi = "Không được để trống!";
-        isValid = false;
-      }
-      if(!this.students.Class) {
-          this.errors.lop = "Không được để trống!";
-          isValid = false;
-      }
-      if (!this.students.FacultyName) {
-        this.errors.khoa = "Không được để trống!";
-        isValid = false;
-      }
-
-      // var getSelectedValue = document.querySelector(
-      //     'input[name="gioitinh"]:checked');
-
-      // if(getSelectedValue != null) {
-      //     document.getElementById("disp").innerHTML
-      //         = getSelectedValue.value
-      //         + " season is selected";
-      // }
-
-      return isValid;
     },
+    validateDateOfBirth(){
+    if (this.students.DateOfBirth) {
+        this.students.DateOfBirth = new Date(this.students.DateOfBirth) 
+        if (this.students.DateOfBirth > new Date() && this.students.DateOfBirth) {
+        this.isValid=false
+        this.errors.ngaysinh="Ngày sinh không được lớn hơn ngày hiện tại!"
+     
+      }else{
+        this.isValid=true
+      }  
+      }
+      
+    },
+    getAllStudent(){
+      try {
+        var me = this;
 
-    // getStatusName() {
-    //     try {
-    //         var me = this;
+        axios
+          .get("https://localhost:7029/api/Students")
+          .then(function (res) {
+          
+            for (const item of res.data) {
+            
+             if(me.students.StudentCode==item.StudentCode){
+              this.isValid=false
+              me.isShowPop=!me.isShowPop
+             
+             }else{
+              this.isValid=true
+             }
+            }
+          })
 
-    //         axios
-    //         .get("https://localhost:7029/api/StatusStudent")
-    //         .then(function (res) {
-    //             me.statusname = res.data;
-    //         })
-
-    //         .catch(function () {
-    //             console.log(1);
-    //         });
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    //     },
-    // isDate(date){
-    //     date = new Date(date);
-    //     let newDate = date.getDate();
-    //     let month = date.getMonth() + 1;
-    //     let year = date.getFullYear();
-    //     newDate = newDate < 10 ? `0${newDate}` : newDate;
-    //     month = month < 10 ? `0${month}` : month;
-    //     return `${year}-${month}-${newDate}`;
-    // },
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+     },
+    validateIdentity() {
+      if (!this.students.IdentityNumber) {
+        this.isValid=false
+        this.errors.cmnd = "CCCD Không được để trống!";
+       
+      }else{
+        this.isValid=true
+        this.errors.cmnd = "";
+       
+      }
+    },
+    validateEmail() {
+      if (!this.students.Email) {
+        this.errors.email = "Email Không được để trống!";
+       
+      }
+      else if ((this.students.Email)&&(!this.isEmail(this.students.Email))){
+        this.errors.email = "Email Không đúng định dạng!";
+       
+      }else{
+        this.errors.email = "";
+       
+      }
+    },
     isNumber(value) {
       return /^\d*$/.test(value);
     },
@@ -629,16 +568,31 @@ export default {
       return validRegex.test(value);
     },
     save() {
-      if (this.formMode == 1) {
+        this.getAllStudent()
+        this.validateStudentCode()
+        this.validateName()
+        this.validateEmail()
+        this.validateIdentity()
+        this.validateDateOfBirth()
+        console.log(this.isValid);
+     if(this.isValid==true){
+        if (this.formMode == 1) {
         this.addStudent();
-      }else{
-          // this.editStudent()
+        }else{
+          this.editStudent()
         }
+     }
+    
+      
+     
+
+      
       // const toast = useToast();
       // this.$emit("hideForm", false);
       // toast.success("Thêm dữ liệu thành công", { timeout: 2000 });
     //   this.validate();
       // this.$emit("save", this.desc);
+      // console.log(this.desc);
     },
     checkButton() {
       var getSelectedValue = document.querySelector('input[name="gt"]:checked');
@@ -736,7 +690,7 @@ label {
 .form-bottom {
   display: flex;
   justify-content: flex-end;
-  padding: 14px;
+padding: 14px;
   background-color: #d9d9d9;
   gap: 28px;
   margin-top: 14px;
