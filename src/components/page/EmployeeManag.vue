@@ -127,11 +127,7 @@
             >
               <div class="edit-text"></div>
               <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
-<<<<<<< HEAD
-              <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
-=======
                 <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
->>>>>>> 8b43e7c0514729ed797c738a65901ec36b42d2d8
             </td>
           </tr>
         </tbody>
@@ -235,10 +231,7 @@ import axios from "axios";
 import Form from "../base/FormEmployee.vue"
 import $ from "jquery";
 import Combobox from "../base/BaseCombobox2.vue";
-<<<<<<< HEAD
-=======
 import popUp from "../base/BasePopupDelete.vue"
->>>>>>> 8b43e7c0514729ed797c738a65901ec36b42d2d8
 import { useToast } from "vue-toastification";
 
 export default {
@@ -284,24 +277,6 @@ export default {
     },
   },
   methods: {
-<<<<<<< HEAD
-    deleteEmployee() {
-      const toast = useToast();
-      if(confirm('Bạn có chắc chắn xóa sinh viên có mã không?')){
-        console.log()
-        axios.delete(`https://localhost:7029/api/Employees/${this.employees.EmployeeID}`)
-          .then(res => {
-            console.log(res.EmployeeID)
-            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-          })
-          .catch(function () {
-            toast.error("Xóa dữ liệu thất bại", { timeout: 2000 });
-          });
-
-      }
-    },
-    
-=======
     deleteEmployee(emp){
       this.isShowPopup=!this.isShow
       this.empCodeDelete= emp.EmployeeCode
@@ -314,12 +289,12 @@ export default {
       try{
        axios
          .delete(
-          `https://localhost:44301/api/Employees/${me.empID}`
+          `https://localhost:7029/api/Employees/${me.empID}`
          )
          .then(function (res) {
           console.log(res);
           toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-          me.getPagingEee()
+          me.getPagingEmployee()
          })
         
          .catch(function () {
@@ -330,7 +305,6 @@ export default {
        console.log(error);
      }
     },
->>>>>>> 8b43e7c0514729ed797c738a65901ec36b42d2d8
     editEmployee(emp){
       this.employeeSelect=emp
       this.employeeID=emp.EmployeeID

@@ -254,10 +254,7 @@ export default {
       salary: {},
       formMode: 1,
       isShowNotifi: false,
-<<<<<<< HEAD
-=======
       isShowPop:false,
->>>>>>> 8b43e7c0514729ed797c738a65901ec36b42d2d8
       isShow: false,
       isValid:true,
       errors: {
