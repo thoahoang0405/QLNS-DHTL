@@ -48,7 +48,6 @@ export default {
         {
           icon: "icon-student",
           name: "Quản lý sinh viên",
-    
           dropdown: false,
           to: "/sinhvien",
         },
@@ -67,16 +66,22 @@ export default {
           to: "/thuong",
         },
         {
-          icon: "icon-recruiter",
-          name: "Quản lý tuyển dụng",
+          icon: "icon-document",
+          name: "Quản lý",
           dropdown: true,
           to: "/tuyendung",
         },
         {
-          icon: "icon-document",
+          icon: "icon-recruiter",
           name: "Quản lý hợp đồng",
           dropdown: false,
           to: "/hopdong",
+        },
+        {
+          icon: "icon-document",
+          name: "Đào tạo",
+          dropdown: false,
+          to: "/hocvan",
         },
        
       ],

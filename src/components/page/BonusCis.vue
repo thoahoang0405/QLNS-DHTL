@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-  
+          
           <table>
             <tr>
               <td width="180px">Khoa: <span class="color-red">*</span></td>
@@ -366,18 +366,7 @@
         
           axios
             .post(
-<<<<<<< HEAD
-              "https://localhost:7029/api/Discipline",{
-                "DisciplineID": 0,
-                "Reason": data.Reason,
-                "Location": data.Location,
-                "DisciplineDate": data.DisciplineDate,
-                "Form": data.Form,
-                "UserID": data.StudentID
-              }
-=======
-              "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
->>>>>>> 0f8ac04c938659f1e613cca066b66e11fe80e679
+              "https://localhost:7029/api/Discipline",this.dataSinhVienPunish
             )
             .then(function (res) {
               console.log(res)
@@ -398,21 +387,10 @@
         try {
           axios
             .post(
-<<<<<<< HEAD
-              "https://localhost:7029/api/Bonus",{
-                BonusID: 0,
-                Reason: data.Reason,
-                Location: data.Location,
-                BonusDate: data.BonusDate,
-                Form: data.Form,
-                UserID: data.StudentID
-              }
-=======
-              "https://localhost:44301/api/Bonus",
+              "https://localhost:7029/api/Bonus",
               
                 this.dataSinhVienBonus
               
->>>>>>> 0f8ac04c938659f1e613cca066b66e11fe80e679
             )
             .then(function (res) {
               console.log(res)
@@ -518,6 +496,12 @@ th {
     height: 44px;
     box-sizing: border-box;
   }
+
+  tbody tr td {
+    color: #111;
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+  }
 ul.pagination a {
     text-decoration: none;
     color: #111;
@@ -600,13 +584,18 @@ li.page-item.disabled {
     width: 90%;
   }
   table,
-  tr,
-  td {
-    border: none;
-    padding: 0px 5px 5px 5px;
-    background-color: white;
-    margin-top: 0px;
-  }
+tr {
+  border: none;
+  padding: 0px 5px 5px 5px;
+  background-color: white;
+  margin-top: 0px;
+}
+
+td {
+  border: none;
+  background-color: white;
+  margin-top: 0px;
+}
   
   .width-half {
     width: 50%;
@@ -705,17 +694,17 @@ li.page-item.disabled {
     z-index: 0;
     right: 0;
     top: 0;
-    background-color: #b1cbed;
+    background-color: #e5e8ec;
 }
 .sticky-left-top {
     position: sticky;
     z-index: 0;
     left: 0;
     top: 0;
-    background-color: #b1cbed;
+    background-color: #e5e8ec;
 }
 thead tr{
-  background-color: #b1cbed;
+  background-color: #e5e8ec;
 }
 .bonus{
   padding: 2px 6px;

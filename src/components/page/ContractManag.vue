@@ -1,28 +1,421 @@
 <template>
+  <!-- chuc vu -->
     <div class="body">
+      <div class="popup-bonus" v-if="isOpenPopupPosition">
+        <div class="bonus-form">
+          <div class="head-popup">
+            <h3 class="title-heading">Chức vụ</h3>
+            <div class="btn-close-popup" @click.stop="isOpenPopupPosition = false">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="education-header">
+            <div class="maNV">Mã nhân viên: abc</div>
+            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="btnWrap">
+              <div class="btnAdd" @click="OpenPopupFormAddPosition(item)">Thêm</div>
+              <div class="btnEdit" @click="OpenPopupFormEditPosition(item)">Sửa</div>
+            </div>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mã chức vụ</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Tên chức vụ</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Thời gian bắt đầu</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Thời gian kết thúc</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Định mức giảng dạy</label>
+                  <input type="text"/>
+                </div>
+              </div>
+            </form>
+            <div class="btnDelete" style="bottom: -140px;">Xóa</div>
+          </div>
+        </div>
+      </div>
+      <!-- them chuc vu -->
+      <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
+        <div class="bonus-form">
+          <div class="head-popup">
+            <h3 class="title-heading">Thêm chức vụ</h3>
+            <div class="btn-close-popup" @click.stop="isOpenPopupFormAddPosition = false">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <div class="education-header">
+            <div class="maNV">Mã nhân viên: abc</div>
+            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="btnWrap">
+              <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+              <div class="btnEdit">Sửa</div> -->
+            </div>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mã chức vụ</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Tên chức vụ</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Thời gian bắt đầu</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Thời gian kết thúc</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Định mức giảng dạy</label>
+                  <input type="text"/>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="btnCancel" @click.stop="isOpenPopupFormAddPosition = false">Hủy</div>
+          <div class="btnSave">Lưu</div>
+        </div>
+      </div>
+      <!-- sua chuc vu-->
+      <div class="popup-bonus" v-if="isOpenPopupFormEditPosition">
+        <div class="bonus-form">
+          <div class="head-popup">
+            <h3 class="title-heading">Sửa chức vụ</h3>
+            <div class="btn-close-popup" @click.stop="isOpenPopupFormEditPosition = false">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="education-header">
+            <div class="maNV">Mã nhân viên: abc</div>
+            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="btnWrap">
+              <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+              <div class="btnEdit">Sửa</div> -->
+            </div>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mã chức vụ</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Tên chức vụ</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Thời gian bắt đầu</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Thời gian kết thúc</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Định mức giảng dạy</label>
+                  <input type="text"/>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="btnCancel" @click.stop="isOpenPopupFormEditPosition = false">Hủy</div>
+          <div class="btnSave">Lưu</div>
+        </div>
+      </div>
+      <!-- end open popup chuc vu   -->
+
+      <!-- hop dong -->
+      <div class="popup-bonus" v-if="isOpenPopupContract">
+        <div class="bonus-form">
+          <div class="head-popup">
+            <h3 class="title-heading">Thông tin hợp đồng</h3>
+            <div class="btn-close-popup" @click.stop="isOpenPopupContract = false">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="education-header">
+            <div class="maNV">Mã nhân viên: abc</div>
+            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="btnWrap">
+              <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+              <div class="btnEdit" @click="OpenPopupFormEditContract(item)">Sửa</div>
+            </div>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mã hợp đồng</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Tên hợp đồng</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Ngày kí</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Ngày bắt đầu</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Ngày kết thúc</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mô tả</label>
+                  <textarea style="width: 97%;height: 60px;margin-top: 5px;"></textarea>
+                </div>
+              </div>
+            </form>
+            <div class="btnDelete" style="bottom: -16px">Xóa</div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- them hop dong -->
+      <div class="popup-bonus" v-if="isOpenPopupFormAddContract">
+        <div class="bonus-form">
+          <div class="head-popup">
+            <h3 class="title-heading">Thêm hợp đồng</h3>
+            <div class="btn-close-popup" @click.stop="isOpenPopupFormAddContract = false">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="education-header">
+            <div class="maNV">Mã nhân viên: abc</div>
+            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="btnWrap">
+              <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+              <div class="btnEdit">Sửa</div> -->
+            </div>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mã hợp đồng</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Tên hợp đồng</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Ngày kí</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Ngày bắt đầu</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Ngày kết thúc</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mô tả</label>
+                  <textarea style="width: 97%;height: 60px;margin-top: 5px;"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="btnCancel" @click.stop="isOpenPopupFormAddContract = false">Hủy</div>
+          <div class="btnSave">Lưu</div>
+        </div>
+      </div>
+      <!-- sua hop dong-->
+      <div class="popup-bonus" v-if="isOpenPopupFormEditContract">
+        <div class="bonus-form">
+          <div class="head-popup">
+            <h3 class="title-heading">Sửa hợp đồng</h3>
+            <div class="btn-close-popup" @click.stop="isOpenPopupFormEditContract = false">
+              <div class="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="education-header">
+            <div class="maNV">Mã nhân viên: abc</div>
+            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="btnWrap">
+              <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+              <div class="btnEdit">Sửa</div> -->
+            </div>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mã hợp đồng</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Tên hợp đồng</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Ngày kí</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Ngày bắt đầu</label>
+                  <input type="text"/>
+                </div>
+                <div class="input__box">
+                  <label for="">Ngày kết thúc</label>
+                  <input type="text"/>
+                </div>
+              </div>
+              <div class="column">
+                <div class="input__box">
+                  <label for="">Mô tả</label>
+                  <textarea style="width: 97%;height: 60px;margin-top: 5px;"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="btnCancel" @click.stop="isOpenPopupFormEditContract = false">Hủy</div>
+          <div class="btnSave">Lưu</div>
+        </div>
+      </div>
+      <!-- end hop dong -->
+
       <h3 class="header-bd">Quản lý hợp đồng</h3>
       <div class="body-header">
         <div class="row-input">
           <div class="input">
-            <input type="text" class="search" placeholder="Tìm kiếm hợp đồng"  v-model="txtSearch"  @keypress.enter="getpagingStudent"/>
+            <input type="text" class="search" placeholder="Tìm kiếm"  v-model="txtSearch"  @keypress.enter="getPagingEmployee"  />
             <div class="icon-search icon"></div>
           </div>
-        
-        </div>
-        <div class="button-function">
-          <div class="add">
-            <button @click="btnAddStudent" class="btn-add btn-hover-blue">+ Thêm hợp đồng</button>
-          </div>
-          <button @click="getpagingStudent" class="btn-excel">
-          <div class="icon icon-load">
-            <div class="tooltip-excel">Lấy lại dữ liệu</div>
-          </div>
-        </button>
-        
-        
-          
         </div>
       </div>
+      <!-- table -->
       <div id="m-table" class="m-table">
         <table id="tbEmployee" class="table">
           <thead>
@@ -39,25 +432,18 @@
                   style="width: 18px; height: 18px"
                 />
               </th>
-              <th class="text-center" style="min-width: 40px;">STT</th>
-              <th>Tên hợp đồng</th>
-              <th>Ngày ký</th>
-              <th>Ngày bắt đầu</th>
-              <th>Ngày hết hạn</th>
-             
-              <th
-                class="th-item-final sticky-right-top"
-                colspan="12"
-                style="min-width: 100px; text-align: center"
-              >
-                <div class="th-item">
-                  <span class="table-text">Chức năng </span>
-                </div>
-              </th>
+              <th class="text-center" style="min-width: 40px">STT</th>
+              <th>Mã nhân viên </th>
+              <th>Họ và tên</th>
+              <th>Ngày sinh</th>
+              <th>Giới tính</th>
+              <th>Gmail</th>
+              <th>Chức vụ</th>
+              <th>Hợp đồng</th>
             </tr>
           </thead>
           <tbody>
-            <tr ref="row" v-for="(item,index) of contract" :key="item.ContractID" >
+            <tr v-for="(item,i) of students" :key="item.StudentID" ref="row">
               <td
                 ref="rowCheck"
                 class="checkbox sticky-left"
@@ -71,20 +457,21 @@
                   style="width: 18px; height: 18px"
                 />
               </td>
-              <td class="text-center">{{ index + 1}}</td>
-              <td>{{ item.ContractName }} </td>
-              <td>{{ formatDate(item.SignDay) }}</td>
-              <td>{{ formatDate(item.EffectiveDate) }}</td>
-              <td>{{ formatDate(item.ExpirationDate) }}</td>
-              <td
-                ref="func"
-                class="td-item-final td-func sticky-right"
-                style="position: sticky; right: 0; background-color: #fff"
-                colspan="12"
-              >
-                <div class="edit-text"></div>
-                <button class="btnEditContract" @click="btnEditStudent(item)">Sửa </button>
-                  <button class="btnDeleteContract" @click="deleteClick(item)">Xóa</button>
+              <td class="text-center">{{ i+1 }}</td>
+              <td>{{ item.StudentCode }}</td>
+              <td>{{ item.StudentName }}</td>
+              <td>{{ item.DateOfBirth }}</td>
+              <td>{{ item.Gender }}</td>
+              <td></td>
+              <td>
+                <div class="desc"  @click="OpenPopupPosition(item)">
+                  Xem chi tiết
+                </div>
+              </td>
+              <td>
+                <div class="desc" @click="OpenPopupContract(item)">
+                  Xem chi tiết
+                </div>
               </td>
             </tr>
           </tbody>
@@ -148,7 +535,7 @@
           </div>
           <div>
             <Paginate
-              v-model="page"
+              v-model="pageNumber"
               :page-count="totalPage"
               :page-range="3"
               :margin-pages="1"
@@ -162,451 +549,38 @@
           </div>
         </div>
       </div>
-      <!-- <div id="table">
-          <div class="table">
-            <table>
-              <thead>
-                <tr>
-                  <th class="text-center width-fit">
-                    <input type="checkbox" />
-                  </th>
-  
-                  <th class="stt">STT <div class="tooltip-stt">Số thứ tự</div>
-                  </th>
-  
-                  <th>Mã sinh viên</th>
-                  <th>Họ và tên</th>
-                  <th>Giới tính</th>
-                  <th>Ngày sinh</th>
-                  <th>Số CMND/CCCD</th>
-                  <th>Email</th>
-                  <th>Số điện thoại</th>
-                  <th>Số tài khoản</th>
-                  <th>Địa chỉ</th>
-                  <th>Khoa</th>
-                  <th>Kì học</th>
-                  <th>Khen thưởng
-                  </th>
-                  <th>Kỉ luật</th>
-                  <th>Học bổng</th>
-                  <th>Trạng thái</th>
-                  <th>Tên đăng nhập</th>
-                  <th>mật khẩu</th>
-                  <th>Chức năng</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    <input type="checkbox" />
-                  </td>
-                  <td class="text-center">1</td>
-                  <td>1951061039</td>
-                  <td>Hoàng Thị Thỏa</td>
-                  <td>Nữ</td>
-                  <td>04/05/2001</td>
-                  <td >hoangthoa@gmail.com</td>
-                  <td >0827264382</td>
-                  <td >046576578</td>
-                  <td >Nam Định</td>
-                  <td>Công nghệ thông tin</td>
-                  
-                  <td>kì II-2022</td>
-                  <td>Sinh viên tiên tiến</td>
-                  <td></td>
-                  <td></td>
-                  <td>Đang học</td>
-                  <td>1951061039</td>
-                  <td>948388922</td>
-                  <td>
-                    <div class="function-table">
-                      <div class="icon icon-edit"></div>
-                      <div class="icon icon-delete"></div>
-                    </div>
-                  </td>
-                </tr>
-        
-              </tbody>
-            </table>
-            <div class="table-footer">
-              <div class="tb-footer-left">
-                <div class="total-record">
-                  Tổng số: <strong>200 </strong>bản ghi
-                </div>
-  
-                <div class="paging-combobox">
-                  
-                  
-                    <input type="text" class="page" placeholder="20">
-                    <div class="icon icon-down-bold"></div>
-                  
-                
-                </div>
-               
-                <div class="paging">
-                  <div class="icon icon-prev"></div>
-                  <p>1</p>
-                  <strong>2</strong>
-                  <p>...</p>
-                  <p>100</p>
-                  <div class="icon icon-next"></div>
-                </div>
-              </div>
-              <div class="tb-footer-right">
-                <div class="total-count"><strong>10</strong></div>
-                <div class="total-price"><strong>100.000.000</strong></div>
-                <div class="total-price"><strong>100.000.000</strong></div>
-                <div class="total-price"><strong>100.000.000</strong></div>
-              </div>
-            </div>
-          </div>
-        </div> -->
     </div>
-  <Form v-show="isShowForm" @hideForm="hideFormDetail" :student="studentSelected"></Form>
-  <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
-  
+    <Form v-show="isShow" @hideForm="closeForm"></Form>
   </template>
-  <style scoped>
-    .btn-add:hover {
-      opacity: 0.8;
-    }
-    .table {
-    width: 100%;
-    }
-    tbody tr:hover {
-    background-color: #9ed6e4 !important;
-  }
-  tbody tr:hover .checkbox,
-  tbody tr:hover .td-item-final {
-    background-color: #9ed6e4 !important;
-  }
-  .sticky-right-top {
-    position: sticky;
-    z-index: 0;
-    right: 0;
-    top: 0;
-    background-color: #b1cbed;
-}
-.sticky-left-top {
-    position: sticky;
-    z-index: 0;
-    left: 0;
-    top: 0;
-    background-color: #b1cbed;
-}
-thead tr{
-    background-color: #b1cbed;
-}
-.btnEditContract{
-    background-color: #4889dd;
-    border: 1px solid #4889dd ;
-    color: #fff;
-    border-radius: 3px;
-   padding: 2px 5px;
-    height: 20px;
-}
-.btnDeleteContract{
-    background-color: red;
-    border: 1px solid red ;
-    color: #fff;
-    border-radius: 3px;
-   padding: 2px 5px;
-    height: 20px;
-}
-  </style>
   <script>
+  import axios from "axios"
+  import $ from "jquery"
   import Paginate from "vuejs-paginate-next";
-  import Form from "../base/FormDetail.vue"
-  import PopupConfirm from "../base/BasePopupDelete.vue"
-  import $ from "jquery";
-  import axios from "axios";
+  import { useToast } from "vue-toastification";
   export default {
-    components: {
-      Paginate,Form,PopupConfirm
-    },
     data() {
       return {
-        list: [
-          {
-            id: 1,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 2,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 3,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 4,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 5,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 6,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 7,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 8,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 9,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 10,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 11,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-          {
-            id: 12,
-            msv: '1951061106',
-            ten: 'Ngô Văn Tùng',
-            gioitinh: 'Nam',
-            ngaysinh: '18/03/2001',
-            cmnd: '038743874',
-            email: 'ngotung@gmail.com',
-            sodt: '9999999999',
-            sotaikhoan: '8888888888',
-            diachi: 'Bắc Ninh',
-            khoa: 'Công nghệ thông tin',
-            kyhoc: 'kì II-2022',
-            khenthuong: '	Sinh viên tiên tiến',
-            kyluat: '',
-            hocbong: '',
-            trangthai: 'Đang học',
-            // ngaycap: '1/1/2019',
-            // noicap: '1/1/2024',
-            tendangnhap: '1951061106',
-            matkhau: '1111111111',
-          },
-        ],
-        isActive: "10",
-        studentSelected: [],
+        isOpenPopupContract: false,
+        isOpenPopupFostering: false,
+        isOpenPopupPosition: false,
+        isOpenPopupFormAddPosition: false,
+        isOpenPopupFormEditPosition: false,
+        isOpenPopupFormAddContract: false,
+        isOpenPopupFormEditContract: false,
+        pageDefault:10,
         pageNumber: 1,
-        page: 1,
         txtSearch:"",
-        totalPage: 0,
-        isShowConfirm: false,
-        isShowForm: false,
-        isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
-        isShowDrop: false,
-        // isShowNotifi: false,
-        pageDefault: 10,
-        msvDelete: "",
-        contract:{},
+        totalPage:1,
+        totalRecord:0,
+        students:{},
+        isShowDrop:false,
+        dataSinhVienPunish:[],
+        dataSinhVienBonus:{}
+
       };
+    },
+    components: {
+      Paginate
     },
     watch: {
     txtSearch: function () {
@@ -620,39 +594,90 @@ thead tr{
    
   },
     methods: {
-      clickAdd(item) {
-        this.list.push(item)
+      SavePunish(){
+        var me= this
+        const toast = useToast();
+        try {
+        
+          axios
+            .post(
+              "https://localhost:7029/api/Discipline",this.dataSinhVienPunish
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupPosition=false
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
       },
-      formatDate(date) {
-      try {
-        if (date) {
-          date = new Date(date);
-          let newDate = date.getDate();
-          let month = date.getMonth() + 1;
-          let year = date.getFullYear();
-          newDate = newDate < 10 ? `0${newDate}` : newDate;
-          month = month < 10 ? `0${month}` : month;
-          return `${newDate}-${month}-${year}`;
-        }
-      } catch (error) {
-        return "";
-      }
-    },
-      showPage(is) {
-        this.isShowDrop = is;
+      SaveBonus(){
+        var me= this
+        const toast = useToast();
+        try {
+          axios
+            .post(
+              "https://localhost:7029/api/Bonus",
+              
+                this.dataSinhVienBonus
+              
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupContract()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
       },
-      btnAddStudent(){
-        this.isShowForm = !this.isShowForm
+      thongbao() {
+        alert("Xác nhận đóng");
       },
-      btnEditStudent(item){
-        this.isShowForm = !this.isShowForm
-        this.studentSelected=item
+      OpenPopupContract(item) {
+        this.isOpenPopupContract = true;
+        this.dataSinhVienBonus = item
       },
-      deleteClick(item){
-        this.isShowConfirm=!this.isShowConfirm
-        console.log(item.msv);
-        this.msvDelete=item.msv
-  
+      OpenPopupFostering(item) {
+        this.isOpenPopupFostering = true;
+        this.dataSinhVienBonus = item
+      },
+      OpenPopupPosition(item) {
+        this.isOpenPopupPosition = true;
+        this.dataSinhVienPunish = item
+      },
+      OpenPopupFormAddPosition(item) {
+        this.isOpenPopupFormAddPosition = true;
+        this.dataSinhVienPunish = item
+      },
+      OpenPopupFormEditPosition(item) {
+        this.isOpenPopupFormEditPosition = true;
+        this.dataSinhVienPunish = item
+      },
+      OpenPopupFormAddContract(item) {
+        this.isOpenPopupFormAddContract = true;
+        this.dataSinhVienPunish = item
+      },
+      OpenPopupFormEditContract(item) {
+        this.isOpenPopupFormEditContract = true;
+        this.dataSinhVienPunish = item
+      },
+      OpenPopupFormAddFostering(item) {
+        this.isOpenPopupFormAddFostering = true;
+        this.dataSinhVienPunish = item
+      },
+      OpenPopupFormEditFostering(item) {
+        this.isOpenPopupFormEditFostering = true;
+        this.dataSinhVienPunish = item
       },
       getpagingStudent() {
       try {
@@ -661,14 +686,16 @@ thead tr{
        
         axios
           .get(
-            `https://localhost:7029/api/Contract/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&pageNumber=${this.pageNumber}`
+            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
-            me.contract = res.data.Data;
-            console.log(res.data.Data);
+            me.students = res.data.Data;
+            
+           
+            
           })
          
           .catch(function () {
@@ -678,44 +705,398 @@ thead tr{
         console.log(error);
       }
     },
-      cancelConfirm(value){
-        this.isShowConfirm=value
-      },
-      //nhận lệnh ẩn từ bên form chi tiết
-      closeFormDetail(value){
-        console.log(value);
-        this.isShow=value
-      },
-      hideFormDetail(value){
-  this.isShowForm=value
-      },
-      btnDropUp() {
-        $(".icon-dropup").toggleClass("iconrotate");
-        if (!this.isShowDrop) {
-          this.showPage(true);
-          $(".icon-dropup").addClass("iconrotate");
-        } else {
-          this.showPage(false);
-          $(".icon-dropup").removeClass("iconrotate");
-        }
-      },
-      getPageDefault(e) {
-        this.isActive = e.target.getAttribute("pageSize");
-        this.pageDefault = e.target.getAttribute("pageSize");
+    showPage(is) {
+      this.isShowDrop = is;
+    },
+    btnDropUp() {
+      $(".icon-dropup").toggleClass("iconrotate");
+      if (!this.isShowDrop) {
+        this.showPage(true);
+        $(".icon-dropup").addClass("iconrotate");
+      } else {
         this.showPage(false);
         $(".icon-dropup").removeClass("iconrotate");
-        this.getpagingStudent();
-        if (this.pageDefault > this.totalRecord) {
-          this.pageDefault = this.totalRecord;
-        }
-      },
-  
-      clickCallback(pageNum) {
-        this.pageNumber = pageNum;
-        this.getpagingStudent();
-      },
+      }
+    },
+    getPageDefault(e) {
+      this.isActive = e.target.getAttribute("pageSize");
+      this.pageDefault = e.target.getAttribute("pageSize");
+      this.showPage(false);
+      $(".icon-dropup").removeClass("iconrotate");
+      this.getpagingStudent();
+      if (this.pageDefault > this.totalRecord) {
+        this.pageDefault = this.totalRecord;
+      }
+    },
+
+    clickCallback(pageNum) {
+      this.pageNumber = pageNum;
+      this.getpagingStudent();
+    },
     },
   };
-  
   </script>
+  <style scoped>
+  .btnSave {
+    background-color: #7EA1F9;
+    position: absolute;
+    right: 40px;
+    bottom: 10px;
+  }
+  .btnCancel {
+    color: #000;
+    border: 1px solid #ccc;
+    position: absolute;
+    right: 150px;
+    bottom: 10px;
+  }
+  .btnCancel:hover {
+    background-color: red;
+    color: #fff;
+  }
+  .btnSave:hover {
+    border: 1px solid #7EA1F9;
+    color: #000;
+    background-color: #fff;
+  }
+  .column input {
+    width: 80%;
+  }
+  .input__box {
+    display: block;
+  }
+  .title-heading {
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+  }
+  .education-header {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+  }
+  .btnWrap {
+    display: flex;
+    column-gap: 10px;
+  }
+  .btnAdd,
+  .btnEdit {
+    padding: 3px 25px;
+    background: #7EA1F9;
+    border-radius: 5px;
+    color: #fff;
+    border: 1px solid #7EA1F9;
+  }
+  .btnAdd:hover,
+  .btnEdit:hover {
+    border: 1px solid #7EA1F9;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .btnDelete {
+    padding: 3px 25px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: red;
+    right: 40px;
+    position: absolute;
+    bottom: 15px;
+  }
+  .btnDelete:hover {
+    border: 1px solid red;
+    background-color: #fff;
+    color: #000;
+  }
+   ul.pagination {
+    display: flex;
+    color: #111;
+    list-style-type: none;
+}
+
+th {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    text-align: left;
+    padding: 0px 10px;
+    height: 35px;
+    box-sizing: border-box;
+  }
+  td {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    padding: 0px 10px;
+    text-align: left;
+    height: 44px;
+    box-sizing: border-box;
+  }
+ul.pagination a {
+    text-decoration: none;
+    color: #111;
+    width: 200px ;
+}
+.content-page {
+    min-width: 170px;
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: 9px;
+    position: relative;
+}
+.page-link{
+  margin: 5px;
+}
+.paging-left {
+    color: #111;
+    margin-left: 5px;
+    margin-top: 20px;
+
+
+    text-align: center;
+}
+.page-item:first-child {
+ 
+ 
+  color: #727272;
+}
+.page-item:last-child {
+ 
+  color: #727272;
+}
+
+.page-item {
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  justify-content: center;
+}
+
+li.page-item.disabled {
+  color: #bbb;
+}
+.page-item.active {
+  font-weight: 700;
+  text-align: center;
+  background-color: #eeeaea;
+  color: #000;
+}
+
+.page-item.active a {
+  width: 20px;
+  text-align: center;
+}
+
+.before-text {
+  color: rgb(104, 102, 102);
+  margin: 8px;
+  margin-top: 10px;
+}
+
+.after-text {
+  color: #111;
+  margin: 8px;
+  margin-top: 10px;
+}
+.page{
+  margin-top: 10px;
+  margin-right: 20px;
+}
+ 
+  table{
+    width: 90%;
+  }
+  table,
+  tr {
+    border: none;
+    padding: 0px 5px 5px 5px;
+    background-color: white;
+    margin-top: 0px;
+  }
+
+  td {
+    border: none;
+    background-color: white;
+    margin-top: 0px;
+  }
+
+  tbody tr td {
+    color: #111;
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+  }
+  
+  .width-half {
+    width: 50%;
+  }
+  
+  .color-red {
+    color: red;
+  }
+  .btn-action:hover{
+    background: #74bbd4;
+  }
+  .btn-action {
+    width: 100px;
+    height: 50px;
+    background: #3a98b9;
+    margin-right: 10px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  .btn-group {
+    text-align: center;
+  }
+  .w-full {
+    width: 100%;
+    height: 35px;
+  }
+  .mask {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .popup-bonus {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(17 17 17 / 16%);
+    z-index: 2;
+    cursor: pointer;
+  }
+  .bonus-form {
+    padding: 0px 20px;
+    position: absolute;
+    width: 66vw;
+    height: 490px;
+    /* height: auto; */
+    margin: 0 auto;
+    top: 15%;
+    right: 15%;
+    z-index: 99999;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px ;
+    background-color: #fff;
+  }
+  .head-popup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 0 !important;
+    margin-top: 10px;
+    width: 96%;
+    margin-left: 4px;
+  }
+  svg:hover {
+    color: red;
+  }
+  .btn-close-popup::hover {
+    color: red !important;
+  }
+  input{
+    width: 300px;
+  }
+  table[data-v-07d000ee], tr[data-v-07d000ee], td[data-v-07d000ee] {
+    border: none;
+    padding: 0px 0px 5px 5px;
+   margin-bottom: 5px;
+    margin-top: 0px;
+    margin-left: 4px;
+   
+}
+  .sticky-right-top {
+    position: sticky;
+    z-index: 0;
+    right: 0;
+    top: 0;
+    background-color: #e5e8ec;
+}
+.sticky-left-top {
+    position: sticky;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    background-color: #e5e8ec;
+}
+thead tr{
+  background-color: #e5e8ec;
+}
+/* .dis,
+.bonus{
+  padding: 2px 6px;
+  font-size: 11px;
+  height: 30px;
+  box-sizing: border-box;
+  min-width: 80px;
+  margin-right: 4px;
+  border-radius: 2.5px;
+  color: #f5f2f2;
+  border: none;
+  margin-top: 2px;
+}
+.bonus {
+  background-color: #0cc71b;
+}
+.dis {
+  background-color: #426cf7;
+
+}
+.bonus:hover{
+  background-color: #ffff;
+  color: #0fdb20;
+  border: 1px solid #0fdb20;
+} */
+
+/* .dis:hover{
+  background-color: #ffff;
+  color: #426cf7;
+  border: 1px solid #426cf7;
+} */
+.desc {
+  color: red;
+  cursor: pointer;
+  font-weight: 600;
+}
+.desc:hover {
+  text-decoration: underline;
+}
+tbody tr:hover .checkbox, tbody tr:hover .td-item-final{
+  background-color: #fff !important;
+}
+
+#form {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  position: fixed;
+  display: flex;
+  /* display: none; */
+}
+
+.form input {
+  width: 90%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.form {
+  width: fit-content;
+  height: fit-content;
+  background-color: #fff;
+  margin: auto auto;
+  border-radius: 8px;
+}
+  </style>
   

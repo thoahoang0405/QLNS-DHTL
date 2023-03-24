@@ -6,7 +6,9 @@ import Employee from './components/page/EmployeeManag.vue'
 import Bonus from "./components/page/BonusCis.vue";
 import Home from "./components/page/HomePage.vue"
 import LoginPage from "../src/components/page/LoginPage.vue";
-import Axios from "axios"
+import Axios from "axios";
+import Education from "./components/page/EducationManag.vue";
+
 
 const routes =  [
   {
@@ -19,14 +21,14 @@ const routes =  [
         component: Home,
         
         children: [
-            {
-              path: "/sinhvien",
-              component: Student,
-            },
-            {
-              path: "/nhanvien",
-              component: Employee,
-            },
+          {
+            path: "/nhanvien",
+            component: Employee,
+          },
+          {
+            path: "/sinhvien",
+            component: Student,
+          },
             {
               path: "/thuong",
               component: Bonus,
@@ -38,6 +40,10 @@ const routes =  [
             {
               path: "/hopdong",
               component: Document,
+            },
+            {
+              path: "/hocvan",
+              component: Education,
             },
             
           ],

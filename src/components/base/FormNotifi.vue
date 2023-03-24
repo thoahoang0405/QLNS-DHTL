@@ -51,7 +51,7 @@
         top: 50%;
         transform: translate(-50%,-50%);
         background-color: #fff;
-        width: 358px;
+        width: 420px;
         height: 150px;
         padding: 20px;
         border-radius: 2px;
@@ -65,7 +65,7 @@
     }
     .warring i {
         font-size: 60px;
-        width:43px;
+        width: 52px;
         height: 40px;
         color: #F4A733;
     }

@@ -202,7 +202,8 @@
    
   </div>
 <Form v-show="isShowForm" :FormMode="formMode" @hideForm="hideFormDetail" :code="newCode" :loadData="getpagingStudent" :student="studentSelected"></Form>
-<PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm>
+<PopupConfirm :masv="stuCodeDelete" v-show="isShowConfirm" @closeNotifi="deleteStu"> </PopupConfirm>
+<!-- <PopupConfirm :msv="msvDelete" v-show="isShowConfirm" @cancelNotifi="cancelConfirm"> </PopupConfirm> -->
 
 </template>
 <style scoped>
@@ -246,6 +247,9 @@ export default {
       txtSearch:"",
       newCode: "",
       formMode: 1,
+      studentID: "",
+      stuCodeDelete: "",
+
     };
   },
   watch: {
@@ -303,7 +307,7 @@ export default {
        
         axios
           .get(
-            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -342,7 +346,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Faculty"
+          "https://localhost:7029/api/Faculty"
          )
          .then(function (res) {
           me.faculty=res.data
@@ -363,7 +367,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api/Classifications"
+          "https://localhost:7029/api/Classifications"
          )
          .then(function (res) {
           me.classification=res.data
@@ -430,7 +434,7 @@ export default {
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Students/NewCode")
+          .get("https://localhost:7029/api/Students/NewCode")
           .then(function (res) {
             me.newCode = res.data;
           })

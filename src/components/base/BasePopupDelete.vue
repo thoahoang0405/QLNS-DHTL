@@ -1,7 +1,7 @@
 <template>
     <div class="notification-wrap">
             <div class="notification">
-                <div class="warring">
+                <div class="warringgg">
                   
                         <i class="icon-warning"></i>
                     
@@ -68,7 +68,7 @@
         border-radius: 2px;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     }
-    .warring{
+    .warringgg{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -77,9 +77,9 @@
     .icon-warning {
             width: 52px;
     }
-    .warring i {
+    .warringgg i {
         font-size: 60px;
-        width: 52px;
+        width: 44px;
         height: 40px;
         color: #F4A733;
     }

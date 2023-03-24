@@ -3,7 +3,7 @@
     <form class="form">
       <div class="form-top">
         <div class="form-title">
-          <h3 class="title">Thêm/sửa thông tin nhân viên</h3>
+          <h2 class="title">Thêm nhân viên</h2>
           <span class="close" @click="closeForm">X</span>
         </div>
       </div>
@@ -46,29 +46,27 @@
             </div>
           </div>
         </div>
-
         <div class="column">
           <div class="input__box">
             <label for="">Ngày sinh </label>
             <input
             :class="errors.ngaysinh!=''? 'borderRed' : ''"
-          @blur="validateDateOfBirth"
-              class="ngaysinh"
-              type="date"
-              v-model="employee.DateOfBirth"
+            @blur="validateDateOfBirth"
+            class="ngaysinh"
+            type="date"
+            v-model="employee.DateOfBirth"
             />
             <div class="invalid-feedback" v-if="errors.ngaysinh!=''">
               {{ errors.ngaysinh }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Cmnd/cccd <span>*</span></label>
-            <input @blur="validateIdentity" class="cmnd" type="text" :class="errors.cmnd!=''? 'borderRed' : ''" v-model="employee.IdentityNumber" />
-            <div class="invalid-feedback" v-if="errors.cmnd!=''">
-              {{ errors.cmnd }}
+            <label for="">Số điện thoại</label>
+            <input class="sodt" type="text" v-model="employee.Phonenumber" />
+            <div class="invalid-feedback" v-if="errors.sodt">
+              {{ errors.sodt }}
             </div>
           </div>
-
           <div class="input__box">
             <label for="">Email <span>*</span></label>
             <input @blur="validateEmail" :class="errors.email!=''? 'borderRed' : ''"  class="email" type="text" v-model="employee.Email" />
@@ -80,36 +78,6 @@
 
         <div class="column">
           <div class="input__box">
-            <label for="">Số điện thoại</label>
-            <input class="sodt" type="text" v-model="employee.Phonenumber" />
-            <div class="invalid-feedback" v-if="errors.sodt">
-              {{ errors.sodt }}
-            </div>
-          </div>
-          <div class="input__box">
-            <label for="">Mã số thuế</label>
-            <input class="masothue" type="text" v-model="employee.TaxCode" />
-            <!-- <div class="invalid-feedback" v-if="errors.masothue">
-              {{ errors.masothue }}
-            </div> -->
-          </div>
-          <div class="input__box">
-            <label for="">Số tài khoản</label>
-            <input class="sotaikhoan" type="text" v-model="employee.BankAccountNumber" />
-            <!-- <div class="invalid-feedback" v-if="errors.sotaikhoan">
-              {{ errors.sotaikhoan }}
-            </div> -->
-          </div>
-        </div>
-        <div class="column column-s">
-          <div class="input__box">
-            <label for="">Tên ngân hàng</label>
-            <input class="tennganhang" type="text" v-model="employee.BankAccountName" />
-            <!-- <div class="invalid-feedback" v-if="errors.tennganhang">
-              {{ errors.tennganhang }}
-            </div> -->
-          </div>
-          <div class="input__box">
             <label for="">Địa chỉ</label>
             <input @blur="validate" class="diachi" type="text" v-model="employee.Adress" />
             <div class="invalid-feedback" v-if="errors.diachi">
@@ -117,76 +85,46 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Tình trạng hôn nhân</label>
-            <input class="tinhtrang" type="text" v-model="employee.MaritalStatus" />
-            <div class="invalid-feedback" v-if="errors.tinhtrang">
-              {{ errors.tinhtrang }}
+            <label for="">Dân tộc</label>
+            <input class="dantoc" type="text" v-model="employee.Nation" />
+            <div class="invalid-feedback" v-if="errors.dantoc">
+              {{ errors.dantoc }}
+            </div>
+          </div>
+          <div class="input__box">
+            <label for="">Tôn giáo</label>
+            <input class="tongiao" type="text" v-model="employee.Religion" />
+            <div class="invalid-feedback" v-if="errors.tongiao">
+              {{ errors.tongiao }}
             </div>
           </div>
         </div>
-        <div class="column column-s">
+
+        <div class="column">
           <div class="input__box">
-            <label for="">Trạng thái</label>
-            <combobox
-              class="trangthai"
-              :value="employee.StatusEmployeeName"
-              :items="statusEmployee"
-              :code="'StatusEmployeeID'"
-              :fieldName="'StatusEmployeeName'"
-              @selectedItem="selectItemStatus"
-            ></combobox>
-            <div class="invalid-feedback" v-if="errors.trangthai">
-              {{ errors.trangthai }}
+            <label for="">Cmnd/cccd <span>*</span></label>
+            <input @blur="validateIdentity" class="cmnd" type="text" :class="errors.cmnd!=''? 'borderRed' : ''" v-model="employee.IdentityNumber" />
+            <div class="invalid-feedback" v-if="errors.cmnd!=''">
+              {{ errors.cmnd }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Cấp bậc lương</label>
-            <combobox
-              class="capbacluong"
-              :value="employee.SalaryName"
-              :items="salary"
-              :code="'SalaryID'"
-              :fieldName="'SalaryName'"
-              @selectedItem="selectItemSalary"
-            ></combobox>
-            <div class="invalid-feedback" v-if="errors.capbacluong">
-              {{ errors.capbacluong }}
-            </div>
+            <label for="">Ngày cấp</label>
+            <input class="ngaycap" type="text" />
           </div>
           <div class="input__box">
-            <label for="">Phòng ban</label>
-            <combobox
-              class="phongban"
-              :value="employee.DepartmentName"
-              :items="department"
-              :code="'DeparmentID'"
-              :fieldName="'DepartmentName'"
-              @selectedItem="selectItemDepartment"
-            ></combobox>
-            <div class="invalid-feedback" v-if="errors.phongban">
-              {{ errors.phongban }}
-            </div>
+            <label for="">Nơi cấp</label>
+            <input class="noicap" type="text"  />
           </div>
         </div>
 
         <div class="column column-s">
           <div class="input__box">
-            <label for="">Chứng chỉ đào tạo</label>
-            <combobox
-              class="daotao"
-              :value="employee.TrainingCertificateName"
-              :items="certificate"
-              :code="'TrainingCertificationID'"
-              :fieldName="'TrainingCertificationName'"
-              @selectedItem="selectItemCertifi"
-            ></combobox>
-            <div class="invalid-feedback" v-if="errors.chungchidaotao">
-              {{ errors.chungchidaotao }}
-            </div>
-            <!-- <input class="daotao" type="text" v-model="desc.daotao"> -->
+            <label for="">Mã khoa <span>*</span></label>
+            <input class="makhoa" type="text"  v-model="employee.FacultyID" />
           </div>
           <div class="input__box">
-            <label for="">Khoa</label>
+            <label for="">Tên Khoa</label>
             <combobox
               class="khoa"
               :value="employee.FacultyName"
@@ -197,21 +135,6 @@
             ></combobox>
             <div class="invalid-feedback" v-if="errors.khoa">
               {{ errors.khoa }}
-            </div>
-            <!-- <input class="khoa" type="text" v-model="desc.khoa"> -->
-          </div>
-          <div class="input__box">
-            <label for="">Vị trí</label>
-            <combobox
-              class="vtri"
-              :value="employee.PositionsName"
-              :items="position"
-              :code="'PositionsID'"
-              :fieldName="'PositionsName'"
-              @selectedItem="selectItemPosition"
-            ></combobox>
-            <div class="invalid-feedback" v-if="errors.vitri">
-              {{ errors.vitri }}
             </div>
           </div>
        
@@ -268,6 +191,8 @@ export default {
         sotaikhoan: "",
         tennganhang: "",
         diachi: "",
+        dantoc: "",
+        tongiao: "",
         khoa: "",
         trangthai: "",
         capbacluong: "",
@@ -733,7 +658,7 @@ label span{
   height: fit-content;
   background-color: #fff;
   margin: auto auto;
-  border-radius: 8px;
+  border-radius: 18px;
   width: 800px;
   /* display: none; */
 }
@@ -742,11 +667,13 @@ label span{
 }
 .form-title {
   padding: 0 13px;
-  background-color: #d9d9d9;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: #fff !important;
 }
 .close {
   cursor: pointer;
@@ -754,27 +681,42 @@ label span{
   font-size: 18px;
   color: #726c6c;
 }
+.close:hover {
+  color: red;
+}
 .input__box {
   width: 100%;
   margin-bottom: 10px;
 }
 .form-bottom {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   display: flex;
   justify-content: flex-end;
   padding: 8px;
-  background-color: #d9d9d9;
+  background-color: #fff !important;
   gap: 28px;
   margin-top: 2px;
 }
 .btn-cancel {
-  background-color: #fff;
+  border: 1px solid #ccc;
+}
+.btn-cancel:hover {
+  background-color: red;
+  color: #fff;
 }
 .btn-save {
+  border: 1px solid #1a8fdd;
   background-color: #1a8fdd;
   color: #fff;
 }
+.btn-save:hover {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #1a8fdd;
+}
 .btn {
-  padding: 10px 30px;
+  padding: 10px 20px;
   cursor: pointer;
   border-radius: 2px;
   height: 36px;
@@ -819,4 +761,5 @@ label span{
   .borderRed{
   border: 1px solid red !important;
 }
+
 </style>

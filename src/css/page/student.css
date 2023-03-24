@@ -76,9 +76,6 @@
     color: #fff;
     outline: none;
   }
-  .btn-add:hover {
-  }
-  
   .btn-excel {
     background-color: #ffffff;
     width: 36px;
@@ -216,10 +213,8 @@
     width: 100%;
   }
   thead tr th {
-    min-width: 150px;
+    min-width: 170px;
     
-  }
-  tbody tr {
   }
   .row-active {
     background-color: #e5f3ff !important;

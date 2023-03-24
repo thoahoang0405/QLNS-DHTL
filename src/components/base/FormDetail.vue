@@ -293,7 +293,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Faculty")
+          .get("https://localhost:7029/api/Faculty")
           .then(function (res) {
             //gán kqua vào object faculty
             me.faculty = res.data;
@@ -311,7 +311,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/EducationProgram")
+          .get("https://localhost:7029/api/EducationProgram")
           .then(function (res) {
             me.educationProgram = res.data;
           })
@@ -328,7 +328,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Classifications")
+          .get("https://localhost:7029/api/Classifications")
           .then(function (res) {
             me.classification = res.data;
           })
@@ -345,7 +345,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/StatusStudent")
+          .get("https://localhost:7029/api/StatusStudent")
           .then(function (res) {
             me.statusname = res.data;
           })
@@ -362,7 +362,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Students/NewCode")
+          .get("https://localhost:7029/api/Students/NewCode")
           .then(function (res) {
             me.students.StudentCode = res.data;
           })
@@ -382,7 +382,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
      
          try {
         axios
-          .post("https://localhost:44301/api/Students", me.students)
+          .post("https://localhost:7029/api/Students", me.students)
           .then(function (res) {
             console.log("ok", res.data);
            
