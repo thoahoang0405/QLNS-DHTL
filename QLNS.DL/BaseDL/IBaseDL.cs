@@ -39,7 +39,7 @@ namespace QLNS.BL.BaseBL
         /// <param name="id"></param>
         /// <returns></returns>
       
-        public T GetRecordByID(Guid id);
+        public IEnumerable<dynamic> GetRecordByID(Guid id);
 
         /// <summary>
         /// API lấy mã mới

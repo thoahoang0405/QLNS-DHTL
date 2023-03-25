@@ -10,9 +10,9 @@ using QLNS.COMMON.Entities;
 
 namespace QLNS.DL
 {
-    public class DepartmentDL : BaseDL<Department>, IDepartmentDL
+    public class DepartmentDL : BaseDL<ngachluong>, IDepartmentDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
        
     }
 }

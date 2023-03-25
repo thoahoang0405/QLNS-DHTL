@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-public interface IContractBL: IBaseBL<Contract>
-{
-        public PagingData<Contract> FilterContract(string? keyword, int? pageSize, int? pageNumber = 1);
-}
+    public interface IContractBL : IBaseBL<hopdong>
+    {
+
+    }
 }
 

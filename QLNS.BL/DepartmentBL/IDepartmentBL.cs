@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-public interface IDepartmentBL: IBaseBL<Department>
+public interface IDepartmentBL: IBaseBL<ngachluong>
 {
 }
 }

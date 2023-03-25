@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface ITranningCertificationBL : IBaseBL<TranningCertification>
+    public interface ITranningCertificationBL : IBaseBL<phucap>
     {
     }
 }

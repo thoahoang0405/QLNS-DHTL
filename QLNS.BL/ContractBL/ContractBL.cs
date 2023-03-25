@@ -13,7 +13,7 @@ using QLNS.Common.Entities;
 
 namespace QLNS.BL
 {
-    public class ContractBL : BaseBL<Contract>, IContractBL
+    public class ContractBL : BaseBL<hopdong>, IContractBL
     {
         private IContractDL _contractDL;
         public ContractBL(IContractDL contractDL) : base(contractDL)
@@ -22,9 +22,6 @@ namespace QLNS.BL
             _contractDL = contractDL;
             
         }
-        public PagingData<Contract> FilterContract(string? keyword, int? pageSize, int? pageNumber = 1)
-        {
-            return _contractDL.FilterContract(keyword, pageSize, pageNumber);
-        }
+        
     }
 }

@@ -11,7 +11,7 @@ using QLNS.DL;
 
 namespace QLNS.BL
 {
-    public class DepartmentBL : BaseBL<Department>, IDepartmentBL
+    public class DepartmentBL : BaseBL<ngachluong>, IDepartmentBL
     {
         private IDepartmentDL _departmentDL;
         public DepartmentBL(IDepartmentDL departmentDL) : base(departmentDL)

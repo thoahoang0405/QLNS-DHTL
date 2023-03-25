@@ -106,9 +106,9 @@ namespace QLNS.DHTL.BaseController
         [HttpGet]
         public IActionResult GetAllRecords()
         {
-            try
+            //try
 
-            {
+            //{
                 var records = _baseBL.GetAllRecords();
 
                 if (records != null)
@@ -120,11 +120,11 @@ namespace QLNS.DHTL.BaseController
                     return StatusCode(StatusCodes.Status404NotFound);
                 }
 
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, HandleError.GenerateExceptionResult(ex, HttpContext));
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return StatusCode(StatusCodes.Status500InternalServerError, HandleError.GenerateExceptionResult(ex, HttpContext));
+            //}
         }
 
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class RecruitmentBL : BaseBL<Recruitment>, IRecruitmentBL
+    public class RecruitmentBL : BaseBL<hoatdong>, IRecruitmentBL
     {
         private IRecruitmentDL _classificationDL;
         public RecruitmentBL(IRecruitmentDL baseDL) : base(baseDL)

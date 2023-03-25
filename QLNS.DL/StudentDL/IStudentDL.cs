@@ -1,6 +1,7 @@
 ﻿using QLNS.BL.BaseBL;
 using QLNS.Common.entities;
 using QLNS.Common.Entities;
+using QLNS.COMMON.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace QLNS.DL
 {
-    public interface IStudentDL:IBaseDL<Student>
+    public interface IStudentDL:IBaseDL<hocvan>
     {
         
-        public PagingData<Student> FilterStudent(string? keyword, int? pageSize, Guid? facultyID, Guid? classificationID, int? pageNumber = 1);
+       
     }
 }

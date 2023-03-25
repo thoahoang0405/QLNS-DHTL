@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class PositionBL : BaseBL<Position>, IPositionBL
+    public class PositionBL : BaseBL<chucvu>, IPositionBL
     {
         private IPositionDL _classificationDL;
         public PositionBL(IPositionDL baseDL) : base(baseDL)

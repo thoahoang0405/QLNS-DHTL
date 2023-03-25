@@ -11,7 +11,7 @@ using QLNS.Common.Entities;
 
 namespace QLNS.BL
 {
-    public class EmployeeBL : BaseBL<Employee>, IEmployeeBL
+    public class EmployeeBL : BaseBL<nhanvien>, IEmployeeBL
     {
         private IEmployeeDL _employeeDL;
         public EmployeeBL(IEmployeeDL baseDL) : base(baseDL)
@@ -19,9 +19,9 @@ namespace QLNS.BL
             _employeeDL = baseDL;
            
         }
-        public PagingData<Employee> FilterEmployee(string? keyword, int? pageSize, Guid? departmentID, Guid? positionID, int? pageNumber = 1)
+        public PagingData<nhanvien> FilterEmployee(string? keyword, int? pageSize, Guid? IDKhoa, int? pageNumber)
         {
-            return _employeeDL.FilterEmployee(keyword, pageSize,departmentID,positionID, pageNumber);
+            return _employeeDL.FilterEmployee(keyword, pageSize,IDKhoa, pageNumber);
         }
     }
 }

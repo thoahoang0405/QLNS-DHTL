@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class StatusStudentDL : BaseDL<StatusStudent>, IStatusStudentDL
+    public class StatusStudentDL : BaseDL<quanhegiadinh>, IStatusStudentDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
        
     }
 }

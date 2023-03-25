@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IPositionBL : IBaseBL<Position>
+    public interface IPositionBL : IBaseBL<chucvu>
     {
     }
 }

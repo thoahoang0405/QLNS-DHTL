@@ -71,9 +71,9 @@ namespace QLNS.BL.BaseBL
         /// <param name="id"></param>
         /// <returns></returns>
        
-        public T GetRecordByID(Guid id)
+        public IEnumerable<dynamic> GetRecordByID(Guid id)
         {
-            return (T)(_baseDL.GetRecordByID(id));
+            return _baseDL.GetRecordByID(id);
         }
 
 

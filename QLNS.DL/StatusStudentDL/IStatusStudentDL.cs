@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IStatusStudentDL : IBaseDL<StatusStudent>
+    public interface IStatusStudentDL : IBaseDL<quanhegiadinh>
     {
     }
 }

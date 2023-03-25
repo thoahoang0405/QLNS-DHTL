@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IBonusBL : IBaseBL<Bonus>
+    public interface IBonusBL : IBaseBL<khenthuong>
     {
-        public PagingData<Bonus> FilterBonus(string? keyword, int? pageSize, int? pageNumber = 1);
+      
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class TranningCertificationBL : BaseBL<TranningCertification>, ITranningCertificationBL
+    public class TranningCertificationBL : BaseBL<phucap>, ITranningCertificationBL
     {
         private ITranningCertificationDL _classificationDL;
         public TranningCertificationBL(ITranningCertificationDL baseDL) : base(baseDL)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class FacultyBL : BaseBL<Faculty>, IFacultyBL
+    public class FacultyBL : BaseBL<khoa>, IFacultyBL
     {
         private IFacultyDL _facultyDL;
         public FacultyBL(IFacultyDL facultyDL) : base(facultyDL)

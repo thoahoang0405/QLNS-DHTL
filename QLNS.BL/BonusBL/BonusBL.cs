@@ -11,16 +11,13 @@ using QLNS.Common.Entities;
 
 namespace QLNS.BL
 {
-    public class BonusBL : BaseBL<Bonus>, IBonusBL
+    public class BonusBL : BaseBL<khenthuong>, IBonusBL
     {
         private IBonusDL _bonusDL;
         public BonusBL(IBonusDL baseDL) : base(baseDL)
         {
             _bonusDL = baseDL;
         }
-        public PagingData<Bonus> FilterBonus(string? keyword, int? pageSize, int? pageNumber = 1)
-        {
-            return _bonusDL.FilterBonus(keyword, pageSize, pageNumber);
-        }
+      
     }
 }

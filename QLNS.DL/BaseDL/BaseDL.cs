@@ -14,7 +14,7 @@ namespace QLNS.BL.BaseBL
     {
 
         #region Field
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
         #endregion
 
         #region method
@@ -158,15 +158,15 @@ namespace QLNS.BL.BaseBL
         /// <param name=""></param>
         /// <returns></returns>
       
-        public T GetRecordByID(Guid id)
+        public IEnumerable<dynamic> GetRecordByID(Guid id)
         {
             using (var sqlConnection = new MySqlConnection(connectionDB))
             {
                 var idName = typeof(T).GetProperties().First().Name;
                 string className = typeof(T).Name;
-                string sqlCommand = $"SELECT * FROM {className} Where {idName}='{id}'";
+                string sqlCommand = $"SELECT * FROM {className} Where IDNhanVien='{id}'";
                 var parameters = new DynamicParameters();
-                return sqlConnection.QueryFirstOrDefault<T>(sqlCommand, parameters);
+                return sqlConnection.Query(sqlCommand, parameters);
 
 
             }

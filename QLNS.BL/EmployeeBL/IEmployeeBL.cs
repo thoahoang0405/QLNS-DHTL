@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IEmployeeBL : IBaseBL<Employee>
+    public interface IEmployeeBL : IBaseBL<nhanvien>
     {
-        public PagingData<Employee> FilterEmployee(string? keyword, int? pageSize, Guid? departmentID, Guid? positionID, int? pageNumber = 1);
+        public PagingData<nhanvien> FilterEmployee(string? keyword, int? pageSize, Guid? IDKhoa, int? pageNumber);
     }
 }

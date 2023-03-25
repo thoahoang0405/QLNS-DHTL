@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IClassificationDL:IBaseDL<Classification>
+    public interface IClassificationDL:IBaseDL<boiduong>
     {
     }
 }

@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IDisciplineBL : IBaseBL<Discipline>
+    public interface IDisciplineBL : IBaseBL<kiluat>
     {
-        public PagingData<Discipline> FilterDiscipline(string? keyword, int? pageSize, int? pageNumber = 1);
     }
+      
 }

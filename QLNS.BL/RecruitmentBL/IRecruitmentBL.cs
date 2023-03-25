@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IRecruitmentBL : IBaseBL<Recruitment>
+    public interface IRecruitmentBL : IBaseBL<hoatdong>
     {
     }
 }

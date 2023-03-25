@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class StatusStudentBL : BaseBL<StatusStudent>, IStatusStudentBL
+    public class StatusStudentBL : BaseBL<quanhegiadinh>, IStatusStudentBL
     {
         private IStatusStudentDL _classificationDL;
         public StatusStudentBL(IStatusStudentDL baseDL) : base(baseDL)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IEducationProgramDL : IBaseDL<EducationProgram>
+    public interface IEducationProgramDL : IBaseDL<daotao>
     {
     }
 }

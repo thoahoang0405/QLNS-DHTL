@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class SalaryBL : BaseBL<Salary>, ISalaryBL
+    public class SalaryBL : BaseBL<luong>, ISalaryBL
     {
         private ISalaryDL _classificationDL;
         public SalaryBL(ISalaryDL baseDL) : base(baseDL)

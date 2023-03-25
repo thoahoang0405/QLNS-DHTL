@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class EducationProgramBL : BaseBL<EducationProgram>, IEducationProgramBL
+    public class EducationProgramBL : BaseBL<daotao>, IEducationProgramBL
     {
         private IEducationProgramDL _classificationDL;
         public EducationProgramBL(IEducationProgramDL baseDL) : base(baseDL)

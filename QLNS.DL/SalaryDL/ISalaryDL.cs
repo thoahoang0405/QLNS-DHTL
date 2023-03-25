@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface ISalaryDL : IBaseDL<Salary>
+    public interface ISalaryDL : IBaseDL<luong>
     {
     }
 }

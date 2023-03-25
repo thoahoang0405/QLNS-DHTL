@@ -12,15 +12,15 @@ using QLNS.Common.Entities;
 
 namespace QLNS.DL
 {
-    public class EmployeeDL : BaseDL<Employee>, IEmployeeDL
+    public class EmployeeDL : BaseDL<nhanvien>, IEmployeeDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns.V1; User Id = root;Password=123456 ";
-        public PagingData<Employee> FilterEmployee(string? keyword, int? pageSize, Guid? departmentID, Guid? positionID, int? pageNumber = 1)
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
+        public PagingData<nhanvien> FilterEmployee(string? keyword, int? pageSize, Guid? IDKhoa,  int? pageNumber = 1)
         {
 
-            string storedProcedureName = "Proc_Employee_GetPaging";
+            string storedProcedureName = "Proc_nhanvien_GetPaging";
             var parameters = new DynamicParameters();
-            parameters.Add("v_Sort", "EmployeeCode ASC");
+            parameters.Add("v_Sort", "NgaySua DESC");
 
             parameters.Add("v_Limit", pageSize);
             parameters.Add("v_Offset", (pageNumber - 1) * pageSize);
@@ -30,19 +30,17 @@ namespace QLNS.DL
             string whereClause = "";
             if (keyword != null)
             {
-                orConditions.Add($"EmployeeCode LIKE '%{keyword}%'");
-                orConditions.Add($"EmployeeName LIKE '%{keyword}%'");
+                orConditions.Add($"MaNV LIKE '%{keyword}%'");
+                orConditions.Add($"TenNV LIKE '%{keyword}%'");
+                orConditions.Add($"IDKhoa LIKE '%{keyword}%'");
 
             }
-           if(departmentID != Guid.Empty)
+            if (IDKhoa != Guid.Empty)
             {
-                andConditions.Add($"DepartmentID = '{departmentID}'");
+                andConditions.Add($"IDKhoa = '{IDKhoa}'");
             }
-            if(positionID != Guid.Empty)
-            {
-                andConditions.Add($"PositionsID = '{positionID}'");
-            }
-            if (orConditions.Count > 0)
+        
+                if (orConditions.Count > 0)
             {
                 whereClause = $"({string.Join(" OR ", orConditions)})";
                 
@@ -70,7 +68,7 @@ namespace QLNS.DL
                 var multipleResults = sqlConnection.QueryMultiple(storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
                 if (multipleResults != null)
                 {
-                    var employees = multipleResults.Read<Employee>().ToList();
+                    var nhanviens = multipleResults.Read<nhanvien>().ToList();
                     var TotalRecords = multipleResults.Read<long>().Single();
 
                     int TotalPagesAll = 1;
@@ -79,7 +77,7 @@ namespace QLNS.DL
                     {
                        
                             TotalPagesAll = (int)(decimal)(TotalRecords / pageSize);
-                            if (TotalPagesAll % pageSize != 0)
+                            if (TotalRecords % pageSize != 0)
                             {
                                 TotalPagesAll = TotalPagesAll + 1;
                             }
@@ -88,9 +86,9 @@ namespace QLNS.DL
 
 
 
-                    return new PagingData<Employee>()
+                    return new PagingData<nhanvien>()
                     {
-                        Data = employees,
+                        Data = nhanviens,
                         TotalRecords = TotalRecords,
 
                         TotalPages = TotalPagesAll

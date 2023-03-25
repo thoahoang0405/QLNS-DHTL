@@ -11,16 +11,13 @@ using QLNS.Common.Entities;
 
 namespace QLNS.BL
 {
-    public class DisciplineBL : BaseBL<Discipline>, IDisciplineBL
+    public class DisciplineBL : BaseBL<kiluat>, IDisciplineBL
     {
         private IDisciplineDL _classificationDL;
         public DisciplineBL(IDisciplineDL baseDL) : base(baseDL)
         {
             _classificationDL = baseDL;
         }
-        public PagingData<Discipline> FilterDiscipline(string? keyword, int? pageSize, int? pageNumber = 1)
-        {
-            return _classificationDL.FilterDiscipline(keyword, pageSize, pageNumber);
-        }
+      
     }
 }

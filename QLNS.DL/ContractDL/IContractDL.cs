@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace QLNS.DL.ContractDL
 {
-    public interface IContractDL:IBaseDL<Contract>
+    public interface IContractDL:IBaseDL<hopdong>
     {
-        public PagingData<Contract> FilterContract(string? keyword, int? pageSize, int? pageNumber = 1);
+        
     }
 }

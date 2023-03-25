@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public class ClassificationBL : BaseBL<Classification>, IClassificationBL
+    public class ClassificationBL : BaseBL<boiduong>, IClassificationBL
     {
         private IClassificationDL _classificationDL;
         public ClassificationBL(IClassificationDL baseDL) : base(baseDL)
