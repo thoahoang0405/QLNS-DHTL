@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Student from "./components/page/StudentManag.vue"
+
 import Recruit from "./components/page/RecruitManag.vue";
 import Document from "./components/page/ContractManag.vue";
 import Employee from './components/page/EmployeeManag.vue'
@@ -25,10 +25,7 @@ const routes =  [
             path: "/nhanvien",
             component: Employee,
           },
-          {
-            path: "/sinhvien",
-            component: Student,
-          },
+         
             {
               path: "/thuong",
               component: Bonus,
@@ -58,7 +55,7 @@ const router = createRouter({
     if (to.fullPath == "/login") return true;
   
     const response = await Axios({
-      url: "https://localhost:7029/api/Authors",
+      url: "https://localhost:44301/api/Authors",
       method: "Get",
     }).catch(() => {
       return null;

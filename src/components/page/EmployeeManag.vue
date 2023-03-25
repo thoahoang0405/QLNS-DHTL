@@ -449,7 +449,7 @@
         <Combobox
           :items="department"
          
-          :fieldName="'DepartmentName'"
+          :fieldName="'TenKhoa'"
          
           @selectedItem="selectItemCbb"
         ></Combobox>
@@ -494,21 +494,17 @@
               <th>Mã nhân viên</th>
               <th>Họ và tên</th>
               <th>Ngày sinh</th>
-              <th>Email</th>
-              <!-- <th>Số điện thoại</th>
-              <th>Mã số thuế</th>
-              <th>Số tài khoản</th>
-              <th>Tên ngân hàng</th>
+              <th>Giới tính</th>
+              <th>Tôn giáo</th>
+              <th>Dân tộc</th>
+              <th>CCCD</th>
+              <th>Ngày Cấp</th>
+              <th>Nơi Cấp</th>
+              <th>Email </th>
               <th>Địa chỉ</th>
-              <th>Khoa</th>
-              <th>Trạng thái</th>
-              <th>Cấp bậc lương</th>
-              <th>Phòng ban</th>
-              <th>Chứng chỉ đào tạo</th>
-              <th>Tình trạng hôn nhân</th>
-              <th>Vị trí</th> -->
-              <th>Sơ yếu lý lịch</th>
-              <th>Trạng thái</th>
+              <th>SĐT</th>
+              <th>Tên Khoa</th>
+             
             <th
               class="th-item-final sticky-right-top"
               colspan="12"
@@ -536,14 +532,25 @@
               />
             </td>
             <td class="text-center">{{ index+1 }}</td>
-            <td>{{ emp.EmployeeCode }}</td>
-            <td>{{ emp.EmployeeName }}</td>
-            <!-- <td>{{ gender(emp.Gender) }}</td> -->
-            <td>{{ formatDate(emp.DateOfBirth) }}</td>
-            <!-- <td>{{ emp.IdentityNumber }}</td> -->
+            <td>{{ emp.MaNV }}</td>
+            <td>{{ emp.TenNV }}</td>
+           
+            <td>{{ formatDate(emp.NgaySinh) }}</td>
+            <td>{{ gender(emp.GioiTinh) }}</td>
+            <td>{{ emp.TonGiao }}</td>
+            <td>{{ emp.DanToc }}</td>
+            <td>{{ emp.CCCD }}</td>
+            <td>{{ formatDate(emp.NgayCap) }}</td>
+            <td>{{ emp.NoiCap }}</td>
+            
             <td>{{ emp.Email }}</td>
-            <td class="desc" @click="OpenPopupCurriculumVitae(item)">Xem chi tiết</td>
-            <td class="desc" @click="OpenPopupState(item)">Xem chi tiết</td>
+            <td>{{ emp.DiaChi }}</td>
+            <td>{{ emp.SDT }}</td>
+            <td>{{ emp.TenKhoa }}</td>
+            <!-- <td>{{ emp.DepartmentName }}</td>
+            <td>{{ emp.TrainingCertificateName}}</td> -->
+            <!-- <td class="desc" @click="OpenPopupCurriculumVitae(item)">Xem chi tiết</td>
+            <td class="desc" @click="OpenPopupState(item)">Xem chi tiết</td> -->
             <!-- <td>{{ emp.Phonenumber }}</td>
             <td>{{ emp.TaxCode }}</td>
             <td>{{ emp.BankAccountNumber }}</td>
@@ -565,7 +572,7 @@
               colspan="12"
             >
               <div class="edit-text"></div> 
-              <!-- <div class="icon icon-edit" @click="editEmployee(emp)" ></div> -->
+              <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
                 <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
@@ -913,13 +920,14 @@ export default {
       isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
       isShowDrop: false,
       totalRecord: 0,
+      IDKhoa:"",
       pageDefault: 20,
       department:{},
       isShowLoad:false,
       position:{},
       departmentID:"",
       positionID:"",
-      txtSearch:"",
+      txtSearch:" ",
       employeeSelect:{},
       newCode: "",
       formMode: 1,
@@ -1003,10 +1011,11 @@ export default {
        me.isShowLoad=true
         axios
           .get(
-            `https://localhost:7029/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
+           
           )
           .then(function (res) {
-          
+          console.log(res);
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
             me.employees = res.data.Data;
@@ -1030,7 +1039,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Departments"
+          "https://localhost:44301/api/khoa"
          )
          .then(function (res) {
           me.department=res.data
@@ -1082,10 +1091,10 @@ export default {
     },
     selectItemCbb(value) {
     
-      if (value.DepartmentID) {
-        this.departmentID = value.DepartmentID;
+      if (value.IDKhoa) {
+        this.IDKhoa = value.IDKhoa;
       } else {
-        this.departmentID = "";
+        this.IDKhoa = "";
         this.getPagingEmployee();
       }
       this.getPagingEmployee();

@@ -458,10 +458,10 @@
                 />
               </td>
               <td class="text-center">{{ i+1 }}</td>
-              <td>{{ item.StudentCode }}</td>
-              <td>{{ item.StudentName }}</td>
-              <td>{{ item.DateOfBirth }}</td>
-              <td>{{ item.Gender }}</td>
+              <td>{{ item.MaNV }}</td>
+              <td>{{ item.TenNV }}</td>
+              <td>{{ item.NgaySinh }}</td>
+              <td>{{ item.GioiTinh }}</td>
               <td></td>
               <td>
                 <div class="desc"  @click="OpenPopupPosition(item)">
@@ -679,6 +679,34 @@
         this.isOpenPopupFormEditFostering = true;
         this.dataSinhVienPunish = item
       },
+      getPagingEmployee() {
+      try {
+       
+        var me = this;
+       me.isShowLoad=true
+        axios
+          .get(
+            `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
+           
+          )
+          .then(function (res) {
+          console.log(res);
+            me.totalPage = res.data.TotalPages;
+            me.totalRecord = res.data.TotalRecords;
+            me.employees = res.data.Data;
+            console.log( me.totalPage);
+            console.log(me.employees);
+            me.isShowLoad=false
+            
+          })
+         
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
       getpagingStudent() {
       try {
        
@@ -686,7 +714,7 @@
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           

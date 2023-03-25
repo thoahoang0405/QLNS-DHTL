@@ -45,12 +45,7 @@ export default {
       activeTo: "",
       items: [
       
-        {
-          icon: "icon-student",
-          name: "Quản lý sinh viên",
-          dropdown: false,
-          to: "/sinhvien",
-        },
+       
         {
           icon: "icon-user",
           name: "Quản lý nhân viên",

@@ -25,10 +25,10 @@
             </div>
           </div>
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
-              <div class="btnAdd" @click="OpenPopupFormAddEducation(item)">Thêm</div>
+              <div class="btnAdd" @click="OpenPopupFormAddEducation">Thêm</div>
               <!-- <div class="btnEdit">Sửa</div> -->
             </div>
           </div>
@@ -36,19 +36,21 @@
             <tr>
               <th>Trình độ lý luận chính trị</th>
               <th>Trình quản lý giáo dục</th>
+              <th>Trình độ ngoại ngữ</th>
               <th>Trình độ tin học</th>
               <th>Chứng chỉ ngoại ngữ</th>
               <th>Tình trạng học vấn</th>
-              <th style="width: 60px;">Chức năng</th>
+              <th style="width: 100px;">Chức năng</th>
             </tr>
             <tr>
             </tr>
-            <tr>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+            <tr v-for="item of hocvan" :key="item.IDHocVan">
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TrinhDoLLCT }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TrinhDoQLGD }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TrinhDoQLNN }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TrinhDoTinHoc }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.ChungChiNgoaiNgu }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TinhTrangHocVan }}</td>
               
               <td 
               ref="func"
@@ -57,7 +59,7 @@
               colspan="12"
               >
                 <div class="icon icon-edit" @click="OpenPopupFormEditEducation(item)"></div>
-                <div class="icon icon-delete"></div>
+                <div class="icon icon-delete" @click="deleteEducation(item)"></div>
               </td>
             </tr>
           </table>
@@ -65,7 +67,7 @@
       </div>
       <!-- them hoc van -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddEducation">
-        <div class="bonus-form">
+        <div class="action-form">
           <div class="head-popup">
             <h3 class="title-heading">Thêm trình độ học vấn</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormAddEducation = false">
@@ -89,46 +91,52 @@
           </div>
           
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Trình độ chính trị: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoLLCT">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Trình quản lý giáo dục: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoQLGD">
            </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Trình độ tin học: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoQLNN">
             </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Chứng chỉ ngoại ngữ: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoTinHoc">
+            </div>
+          </div>
+          <div class="column">
+            <div class="input__box">
+              <label for="">Chứng chỉ ngoại ngữ: </label>
+              <input type="text" v-model="suaHocVan.ChungChiNgoaiNgu">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Tình trạng học vấn: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TinhTrangHocVan">
             </div>
           </div>
           <div class="btnCancel" @click.stop="isOpenPopupFormAddEducation = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          <div class="btnSave" @click="btnAddEducation">Lưu</div>
         </div>
       </div>
       <!-- sua hoc van-->
       <div class="popup-bonus" v-if="isOpenPopupFormEditEducation">
-        <div class="bonus-form">
+        <div class="action-form">
           <div class="head-popup">
             <h3 class="title-heading">Sửa trình độ học vấn</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormEditEducation = false">
@@ -151,41 +159,41 @@
             </div>
           </div>
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Trình độ chính trị: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoQLNN">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Trình quản lý giáo dục: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoQLGD">
            </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Trình độ tin học: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TrinhDoTinHoc">
             </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Chứng chỉ ngoại ngữ: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.ChungChiNgoaiNgu">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Tình trạng học vấn: </label>
-              <input type="text">
+              <input type="text" v-model="suaHocVan.TinhTrangHocVan">
             </div>
           </div>
           <div class="btnCancel" @click.stop="isOpenPopupFormEditEducation = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          <div class="btnSave" @click="editEducation">Lưu</div>
         </div>
       </div>
       <!-- end open popup hoc van   -->
@@ -215,10 +223,10 @@
             </div>
           </div>
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
-              <div class="btnAdd" @click="OpenPopupFormAddTrain(item)">Thêm</div>
+              <div class="btnAdd" @click="OpenPopupFormAddTrain">Thêm</div>
               <!-- <div class="btnEdit">Sửa</div> -->
             </div>
           </div>
@@ -230,7 +238,7 @@
               <th>Chuyên ngành</th>
               <th>Hình thức đào tạo</th>
               <th>Bằng cấp</th>
-              <th style="width: 60px;">Chức năng</th>
+              <th style="width: 100px;">Chức năng</th>
             </tr>
             <tr>
             </tr>
@@ -257,7 +265,7 @@
       </div>
       <!-- them dao tao -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddTrain">
-        <div class="bonus-form">
+        <div class="action-form">
           <div class="head-popup">
             <h3 class="title-heading">Thêm quá trình đào tạo</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormAddTrain = false">
@@ -326,7 +334,7 @@
       </div>
       <!-- sua dao tao-->
       <div class="popup-bonus" v-if="isOpenPopupFormEditTrain">
-        <div class="bonus-form">
+        <div class="action-form">
           <div class="head-popup">
             <h3 class="title-heading">Sửa quá trình đào tạo</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormEditTrain = false">
@@ -420,8 +428,8 @@
           </div>
   
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
               <div class="btnAdd" @click="OpenPopupFormAddFostering(item)">Thêm</div>
               <!-- <div class="btnEdit">Sửa</div> -->
@@ -434,7 +442,7 @@
               <th>Nội dung </th>
               <th>Nơi bồi dưỡng</th>
               <th>Bằng cấp</th>
-              <th style="width: 60px;">Chức năng</th>
+              <th style="width:100px;">Chức năng</th>
             </tr>
             <tr>
             </tr>
@@ -459,7 +467,7 @@
       </div>
       <!-- them boi duong -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddFostering">
-        <div class="bonus-form">
+        <div class="action-form">
           <div class="head-popup">
             <h3 class="title-heading">Thêm quá trình bồi dưỡng</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormAddFostering = false">
@@ -483,8 +491,8 @@
           </div>
           
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__box">
@@ -522,7 +530,7 @@
       </div>
       <!-- sua boi duong-->
       <div class="popup-bonus" v-if="isOpenPopupFormEditFostering">
-        <div class="bonus-form">
+        <div class="action-form">
           <div class="head-popup">
             <h3 class="title-heading">Sửa quá trình bồi dưỡng</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormEditFostering = false">
@@ -647,10 +655,10 @@
                 />
               </td>
               <td class="text-center">{{ i+1 }}</td>
-              <td>{{ item.StudentCode }}</td>
-              <td>{{ item.StudentName }}</td>
-              <td>{{ item.DateOfBirth }}</td>
-              <td>{{ item.Gender }}</td>
+              <td>{{ item.MaNV }}</td>
+              <td>{{ item.TenNV }}</td>
+              <td>{{ item.NgaySinh }}</td>
+              <td>{{ item.GioiTinh }}</td>
               <td></td>
               <!-- <td>{{ item.FacultyName }}</td> -->
               <!-- <td>{{ item.Class }}</td> -->
@@ -789,6 +797,14 @@
         totalPage:1,
         totalRecord:0,
         students:{},
+        suaHocVan:{},
+        themHocvan:{},
+        hocvan:{},
+        daotao:{},
+        boiduong:{},
+        IDNV:"",
+        MaNV:"",
+        TenNV:"",
         isShowDrop:false,
         dataSinhVienPunish:[],
         dataSinhVienBonus:{}
@@ -861,27 +877,161 @@
       },
       OpenPopupTrain(item) {
         this.isOpenPopupTrain = true;
-        this.dataSinhVienBonus = item
+        this.IDNV = item.IDNhanVien
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
+        try {
+       
+       var me = this;
+      
+       axios
+         .get(
+            `https://localhost:44301/api/daotao/${this.IDNV}`
+         )
+         .then(function (res) {
+         me.hocvan=res.data
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
       },
       OpenPopupFostering(item) {
         this.isOpenPopupFostering = true;
-        this.dataSinhVienBonus = item
+        this.IDNV = item.IDNhanVien
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
+        try {
+       
+       var me = this;
+      
+       axios
+         .get(
+            `https://localhost:44301/api/boiduong/${this.IDNV}`
+         )
+         .then(function (res) {
+         me.hocvan=res.data
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
       },
       OpenPopupEducation(item) {
         this.isOpenPopupEducation = true;
-        this.dataSinhVienPunish = item
+        this.IDNV = item.IDNhanVien
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
+        try {
+       
+       var me = this;
+      
+       axios
+         .get(
+            `https://localhost:44301/api/hocvan/${this.IDNV}`
+         )
+         .then(function (res) {
+         me.hocvan=res.data
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
       },
-      OpenPopupFormAddEducation(item) {
+      OpenPopupFormAddEducation() {
         this.isOpenPopupFormAddEducation = true;
-        this.dataSinhVienPunish = item
+        this.suaHocVan={},
+        this.suaHocVan.IDNhanVien=this.IDNV
+      },
+      btnAddEducation(){
+        var me= this
+        const toast = useToast();
+        me.suaHocVan.IDNhanVien=me.IDNV
+        console.log(me.suaHocVan);
+        try {
+        
+          axios
+            .post(
+              "https://localhost:44301/api/hocvan",this.suaHocVan
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupFormAddEducation = false;
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
+      editEducation(){
+        var me= this
+        const toast = useToast();
+        me.suaHocVan.IDNhanVien=me.IDNV
+        console.log(me.suaHocVan);
+        try {
+        
+          axios
+            .put(
+              `https://localhost:44301/api/hocvan/${this.suaHocVan.IDHocVan}`,this.suaHocVan
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupFormEditEducation = false;
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+
+      },
+      deleteEducation(item){
+       
+        var idDelete= item.IDNhanVien
+      const toast = useToast();
+      try{
+       axios
+         .delete(
+          `https://localhost:44301/api/hocvan/${idDelete}`
+         )
+         .then(function (res) {
+          console.log(res);
+          toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+          
+         })
+        
+         .catch(function () {
+          toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
       },
       OpenPopupFormEditEducation(item) {
         this.isOpenPopupFormEditEducation = true;
-        this.dataSinhVienPunish = item
+        console.log(item);
+        this.suaHocVan = item
       },
-      OpenPopupFormAddTrain(item) {
+      OpenPopupFormAddTrain() {
         this.isOpenPopupFormAddTrain = true;
-        this.dataSinhVienPunish = item
+        // this.dataSinhVienPunish = item
       },
       OpenPopupFormEditTrain(item) {
         this.isOpenPopupFormEditTrain = true;
@@ -902,7 +1052,7 @@
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+             `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -1169,11 +1319,26 @@ li.page-item.disabled {
     cursor: pointer;
     /* height: 600px; */
   }
-  .bonus-form {
+  .action-form{
     padding: 0px 20px;
     position: absolute;
     width: 50vw;
-    height: 590px;
+    height: 550px;
+    /* height: auto; */
+    margin: 0 auto;
+    top: 15%;
+    right: 15%;
+    z-index: 99999;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px ;
+    background-color: #fff;
+
+  }
+  .bonus-form {
+    padding: 0px 20px;
+    position: absolute;
+    width: 80vw;
+    height: 550px;
     /* height: auto; */
     margin: 0 auto;
     top: 15%;
