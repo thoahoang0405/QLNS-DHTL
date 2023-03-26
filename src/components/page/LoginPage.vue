@@ -58,7 +58,7 @@ export default {
     },
     async onClickLogin() {
       const response = await axios({
-        url: "https://localhost:7029/api/Authors/sign-in",
+        url: "https://localhost:44301/api/Authors/sign-in",
         method: "Post",
         data: {
           userName: this.userName,
@@ -72,7 +72,7 @@ export default {
       localStorage.setItem("Token", response.data);
       axios.defaults.headers.common["Authorization"] =
         "Bearer " + localStorage.getItem("Token");
-      this.$router.push("/sinhvien");
+      this.$router.push("/nhanvien");
     },
   },
 };
