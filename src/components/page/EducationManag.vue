@@ -1172,7 +1172,7 @@ li.page-item.disabled {
   .bonus-form {
     padding: 0px 20px;
     position: absolute;
-    width: 50vw;
+    width: 70vw;
     height: 590px;
     /* height: auto; */
     margin: 0 auto;

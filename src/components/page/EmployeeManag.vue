@@ -521,7 +521,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="(emp, index) of employees" :key="emp.EmployeeCode">
+          <tr ref="row" v-for="(emp, index) of employees" :key="emp.IDNhanVien">
             <td
               ref="rowCheck"
               class="checkbox sticky-left"
@@ -536,10 +536,10 @@
               />
             </td>
             <td class="text-center">{{ index+1 }}</td>
-            <td>{{ emp.EmployeeCode }}</td>
-            <td>{{ emp.EmployeeName }}</td>
+            <td>{{ emp.MaNV }}</td>
+            <td>{{ emp.TenNV }}</td>
             <!-- <td>{{ gender(emp.Gender) }}</td> -->
-            <td>{{ formatDate(emp.DateOfBirth) }}</td>
+            <td>{{ formatDate(emp.NgaySinh) }}</td>
             <!-- <td>{{ emp.IdentityNumber }}</td> -->
             <td>{{ emp.Email }}</td>
             <td class="desc" @click="OpenPopupCurriculumVitae(item)">Xem chi tiết</td>
@@ -651,7 +651,7 @@
     </div>
   </div>
   <popUp v-show="isShowPopup" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
-<Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="employeeID"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
+<Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
 <!-- <div id="load" ></div> -->
 </template>
 <style>
@@ -910,7 +910,7 @@ export default {
       page: 1,
       employees:{},
       totalPage: 1,
-      isShow: false, //gán v-show=isShow hoặc v-show =false để ẩn form
+      isShow: false,
       isShowDrop: false,
       totalRecord: 0,
       pageDefault: 20,
@@ -923,7 +923,7 @@ export default {
       employeeSelect:{},
       newCode: "",
       formMode: 1,
-      employeeID:"",
+      IDNhanVien:"",
       isShowPopup:false,
       empCodeDelete:"",
       empID:""
@@ -931,7 +931,7 @@ export default {
   },
   created() {
     this.getPagingEmployee()
-    this.getDepartment()
+    // this.getDepartment()
     this.getPosition()
   },
   watch: {
@@ -964,8 +964,8 @@ export default {
     },
     deleteEmployee(emp){
       this.isShowPopup=!this.isShow
-      this.empCodeDelete= emp.EmployeeCode
-      this.empID=emp.EmployeeID
+      this.empCodeDelete= emp.IDNhanVien
+      this.empID=emp.IDNhanVien
     },
     deleteEmp(value){
       this.isShowPopup=value
@@ -974,7 +974,7 @@ export default {
       try{
        axios
          .delete(
-          `https://localhost:7029/api/Employees/${me.empID}`
+          `https://localhost:7029/api/nhanvien/${me.empID}`
          )
          .then(function (res) {
           console.log(res);
@@ -992,7 +992,7 @@ export default {
     },
     editEmployee(emp){
       this.employeeSelect=emp
-      this.employeeID=emp.EmployeeID
+      this.IDNhanVien=emp.IDNhanVien
      this.isShow=true
      this.formMode=2
     },
@@ -1003,7 +1003,7 @@ export default {
        me.isShowLoad=true
         axios
           .get(
-            `https://localhost:7029/api/Employees/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
+            `https://localhost:7029/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&departmentID=${this.departmentID}&positionID=${this.positionID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
@@ -1023,27 +1023,27 @@ export default {
         console.log(error);
       }
     },
-    getDepartment(){
-      try {
+    // getDepartment(){
+    //   try {
        
-       var me = this;
+    //    var me = this;
       
-       axios
-         .get(
-          "https://localhost:7029/api/Departments"
-         )
-         .then(function (res) {
-          me.department=res.data
-         })
+    //    axios
+    //      .get(
+    //       "https://localhost:7029/api/Departments"
+    //      )
+    //      .then(function (res) {
+    //       me.department=res.data
+    //      })
         
-         .catch(function () {
-           console.log(1);
-         });
-     } catch (error) {
-       console.log(error);
-     }
+    //      .catch(function () {
+    //        console.log(1);
+    //      });
+    //  } catch (error) {
+    //    console.log(error);
+    //  }
 
-    },
+    // },
     getPosition(){
       try {
        
@@ -1119,7 +1119,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Employees/NewCode"
+          "https://localhost:7029​/api​/nhanvien​/NewCode"
          )
          .then(function (res) {
           me.newCode=res.data
@@ -1170,7 +1170,6 @@ export default {
         this.pageDefault = this.totalRecord;
       }
     },
-
     clickCallback(pageNum) {
       this.pageNumber = pageNum;
       this.getPagingEmployee()

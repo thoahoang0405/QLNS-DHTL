@@ -213,7 +213,7 @@ export default {
         this.employee=value
         value.DateOfBirth=this.formatDate(value.DateOfBirth)
         this.employee.DateOfBirth=value.DateOfBirth
-        this.employee.EmployeeID=value.EmployeeID
+        this.employee.IDNhanVien=value.IDNhanVien
     },
     code: function(vl){
         this.employee.EmployeeCode=vl
@@ -309,7 +309,7 @@ this.isShowPop=value
       const toast = useToast();
       try {
         axios
-          .put(`https://localhost:7029/api/Employees/${this.employee.EmployeeID}`, me.employee)
+          .put(`https://localhost:7029/api/Employees/${this.employee.IDNhanVien}`, me.employee)
           .then(function (res) {
             console.log("ok", res.data);
             me.$emit("hideForm", false);
@@ -685,6 +685,7 @@ label span{
   color: red;
 }
 .input__box {
+  display: block;
   width: 100%;
   margin-bottom: 10px;
 }
