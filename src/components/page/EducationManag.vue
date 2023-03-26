@@ -659,7 +659,7 @@
               <td>{{ item.TenNV }}</td>
               <td>{{ item.NgaySinh }}</td>
               <td>{{ item.GioiTinh }}</td>
-              <td></td>
+              <td>{{ item.Email }}</td>
               <!-- <td>{{ item.FacultyName }}</td> -->
               <!-- <td>{{ item.Class }}</td> -->
               <!-- <td>{{ item.ClassifiOpenPopupBonuscationName }}</td> -->
@@ -833,7 +833,7 @@
         
           axios
             .post(
-              "https://localhost:7029/api/Discipline",this.dataSinhVienPunish
+              "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
             )
             .then(function (res) {
               console.log(res)
@@ -854,7 +854,7 @@
         try {
           axios
             .post(
-              "https://localhost:7029/api/Bonus",
+              "https://localhost:44301/api/Bonus",
               
                 this.dataSinhVienBonus
               
@@ -1322,11 +1322,7 @@ li.page-item.disabled {
   .action-form{
     padding: 0px 20px;
     position: absolute;
-<<<<<<< HEAD
-    width: 70vw;
-    height: 590px;
-=======
-    width: 50vw;
+    width: 68vw;
     height: 550px;
     /* height: auto; */
     margin: 0 auto;
@@ -1343,7 +1339,6 @@ li.page-item.disabled {
     position: absolute;
     width: 80vw;
     height: 550px;
->>>>>>> 064032a5824e1723812e576727d1abcd89291cac
     /* height: auto; */
     margin: 0 auto;
     top: 15%;

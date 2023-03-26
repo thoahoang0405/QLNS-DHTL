@@ -130,7 +130,7 @@
         <div class="bonus-form">
           <div class="head-popup">
             <h2 class="title-heading">Sửa sơ yếu lý lịch</h2>
-            <div class="btn-close-popup" @click.stop="isOpenPopupFormEditCurriculumVitae = false">
+            <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifiCV = true">
               <div class="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -236,15 +236,42 @@
             
             </div>
           </form>
-          <div class="btnCancel" @click.stop="isOpenPopupFormEditCurriculumVitae = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isOpenPopupEditNotifiCV = true">Hủy</div>
           <div class="btnSave">Lưu</div>
         </div>
+    </div>
+    <!-- Cảnh báo thêm lý lịch-->
+    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifi = false, isOpenPopupAddState=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifi = false">Không</div>
+          </div>
       </div>
+      </div>
+    <!-- cảnh báo sửa lý lịch-->
+    <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifiCV = false, isOpenPopupFormEditCurriculumVitae=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">Không</div>
+          </div>
+      </div>
+    </div>
+    <!--  -->
     <!-- trang thai -->
     <div class="popup-bonus" v-if="isOpenPopupState">
         <div class="bonus-form">
           <div class="head-popup">
-            <h2 class="title-heading">Trình độ học vấn</h2>
+            <h2 class="title-heading">Trạng thái</h2>
             <div class="btn-close-popup" @click.stop="isOpenPopupState = false">
               <div class="icon">
                 <svg
@@ -316,7 +343,7 @@
         <div class="bonus-form">
           <div class="head-popup">
             <h2 class="title-heading">Thêm trạng thái</h2>
-            <div class="btn-close-popup" @click.stop="isOpenPopupAddState = false">
+            <div class="btn-close-popup" @click.stop="isOpenPopupAddNotifi = true">
               <div class="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -370,7 +397,7 @@
               <input type="date">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupAddState = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
           <div class="btnSave">Lưu</div>
         </div>
       </div>
@@ -379,7 +406,7 @@
         <div class="bonus-form">
           <div class="head-popup">
             <h2 class="title-heading">Sửa trạng thái</h2>
-            <div class="btn-close-popup" @click.stop="isOpenPopupEditState = false">
+            <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifi = true">
               <div class="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -432,12 +459,38 @@
               <input type="date">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupEditState = false">Hủy</div>
+          <!-- <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div> -->
+          <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div>
           <div class="btnSave">Lưu</div>
         </div>
       </div>
+      <!-- Cảnh báo thêm trạng thái-->
+      <div class="notification-wrap" v-if="isOpenPopupAddNotifi">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifi = false, isOpenPopupAddState=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifi = false">Không</div>
+          </div>
+      </div>
+      </div>
+    <!-- cảnh báo sửa trạng thái-->
+    <div class="notification-wrap" v-if="isOpenPopupEditNotifi">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifi = false, isOpenPopupEditState=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifi = false">Không</div>
+          </div>
+      </div>
+    </div>
     <!--  -->
-
     <h3 class="header-bd">Quản lý nhân viên</h3>
     <div class="body-header">
       <div class="row-input">
@@ -504,6 +557,8 @@
               <th>Địa chỉ</th>
               <th>SĐT</th>
               <th>Tên Khoa</th>
+              <th>Sơ yếu lý lịch</th>
+              <th>Trạng thái</th>
              
             <th
               class="th-item-final sticky-right-top"
@@ -537,28 +592,26 @@
             <!-- <td>{{ gender(emp.Gender) }}</td> -->
             <td>{{ formatDate(emp.DateOfBirth) }}</td>
             <!-- <td>{{ emp.IdentityNumber }}</td> -->
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>{{ emp.Email }}</td>
             <td>{{ emp.DiaChi }}</td>
             <td>{{ emp.SDT }}</td>
             <td>{{ emp.TenKhoa }}</td>
-            <!-- <td>{{ emp.DepartmentName }}</td>
-            <td>{{ emp.TrainingCertificateName}}</td> -->
-            <!-- <td class="desc" @click="OpenPopupCurriculumVitae(item)">Xem chi tiết</td>
-            <td class="desc" @click="OpenPopupState(item)">Xem chi tiết</td> -->
-            <!-- <td>{{ emp.Phonenumber }}</td>
-            <td>{{ emp.TaxCode }}</td>
-            <td>{{ emp.BankAccountNumber }}</td>
-            <td>{{ emp.BankAccountName }}</td>
-            
-            <td>{{ emp.Adress }}</td>
-            <td>{{ emp.FacultyName }}</td>
-            <td>{{ emp.StatusEmployeeName }}</td>
-            <td>{{ emp.SalaryName }}</td>
-            <td>{{ emp.DepartmentName }}</td>
-            <td>{{ emp.TrainingCertificateName}}</td>
-            <td>{{ emp.MaritalStatus }}</td>
-            <td>{{ emp.PositionsName }}</td> -->
-           
+            <td>
+                <div class="desc" @click="OpenPopupCurriculumVitae(item)">
+                  Xem chi tiết
+                </div>
+            </td>
+            <td>
+                <div class="desc" @click="OpenPopupState(item)">
+                  Xem chi tiết
+                </div>
+            </td>
             <td
               ref="func"
               class="td-item-final td-func sticky-right; align-items: center;"
@@ -566,7 +619,7 @@
               colspan="12"
             >
               <div class="edit-text"></div> 
-              <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
+              <!-- <div class="icon icon-edit" @click="editEmployee(emp)" ></div> -->
                 <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
@@ -872,6 +925,9 @@
     color: #000;
     background-color: #fff;
   }
+  .input__box {
+    display: block;
+  }
   .input__boxx {
     display: block;
     width: 100%;
@@ -885,6 +941,92 @@
   .input__state input {
     width: 80%;
   }
+  .notification-wrap {
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: fixed;
+    display: flex;
+  
+    }
+    .notification{
+        z-index: 3;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-90%,-80%);
+        background-color: #fff;
+        width: 420px;
+        height: 150px;
+        padding: 20px;
+        border-radius: 2px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+    .warring{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    .warring i {
+        font-size: 60px;
+        width: 52px;
+        height: 40px;
+        color: #F4A733;
+    }
+    .warrning-title{
+        text-align: center;
+        font-size: 16px;
+        margin-left: 8px;
+    }
+    .btn-wrap {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        column-gap: 20px;
+    }
+    .btnNotifi{   
+        display: flex;
+        width: 100px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 38px;
+        border-radius: 2px;
+        height: 25px;
+        cursor: pointer;
+    }
+    .btnNotifi:hover {
+        opacity: 0.8;
+        color: red;
+    }
+    .btn-secondary{
+        border: 1px solid #1A8FDD;
+    }
+    .btn-primary{
+        margin-right: 40px;
+        background-color: #1A8FDD;
+        color: #fff;
+    }
+    @media screen and (max-width: 767.98px) {
+        .notification{
+            font-size: 15px;
+            width: 300px;
+            height: 130px;
+            padding: 14px;
+        }
+        .warring {
+            margin-top: 6px;
+        }
+        .warring i {
+            font-size: 50px;
+        }
+        .btnNotifi {
+            width: 80px;
+            margin-top: 20px;
+        }
+    }
 </style>
 <script>
 import Paginate from "vuejs-paginate-next";
@@ -906,6 +1048,10 @@ export default {
       isOpenPopupState: false,
       isOpenPopupAddState: false,
       isOpenPopupEditState: false,
+      isOpenPopupEditNotifi: false,
+      isOpenPopupAddNotifi: false,
+      isOpenPopupAddNotifiCV: false,
+      isOpenPopupEditNotifiCV: false,
       isActive: "20",
       pageNumber: 1,
       page: 1,
@@ -928,7 +1074,9 @@ export default {
       IDNhanVien:"",
       isShowPopup:false,
       empCodeDelete:"",
-      empID:""
+      empID:"",
+      MaNV:"",
+      TenNV:"",
     };
   },
   created() {
@@ -964,6 +1112,22 @@ export default {
       this.isOpenPopupEditState = true;
       this.dataSinhVienPunish = item
     },
+    OpenPopupAddNotifi(item) {
+      this.isOpenPopupAddNotifi = true;
+      this.dataSinhVienPunish = item
+    },
+    OpenPopupEditNotifi(item) {
+      this.isOpenPopupEditNotifi = true;
+      this.dataSinhVienPunish = item
+    },
+    OpenPopupAddNotifiCV(item) {
+      this.isOpenPopupAddNotifiCV = true;
+      this.dataSinhVienPunish = item
+    },
+    OpenPopupEditNotifiCV(item) {
+      this.isOpenPopupEditNotifiCV = true;
+      this.dataSinhVienPunish = item
+    },
     deleteEmployee(emp){
       this.isShowPopup=!this.isShow
       this.empCodeDelete= emp.IDNhanVien
@@ -976,7 +1140,7 @@ export default {
       try{
        axios
          .delete(
-          `https://localhost:7029/api/nhanvien/${me.empID}`
+          `https://localhost:44301/api/nhanvien/${me.empID}`
          )
          .then(function (res) {
           console.log(res);
@@ -1026,27 +1190,7 @@ export default {
         console.log(error);
       }
     },
-    // getDepartment(){
-    //   try {
-       
-    //    var me = this;
-      
-       axios
-         .get(
-          "https://localhost:44301/api/khoa"
-         )
-         .then(function (res) {
-          me.department=res.data
-         })
-        
-    //      .catch(function () {
-    //        console.log(1);
-    //      });
-    //  } catch (error) {
-    //    console.log(error);
-    //  }
-
-    // },
+    
     getPosition(){
       try {
        
@@ -1054,7 +1198,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029/api/Position"
+          "https://localhost:44301/api/Position"
          )
          .then(function (res) {
           me.position=res.data
@@ -1122,7 +1266,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:7029​/api​/nhanvien​/NewCode"
+          "https://localhost:44301/api​/nhanvien​/NewCode"
          )
          .then(function (res) {
           me.newCode=res.data

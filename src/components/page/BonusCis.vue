@@ -366,7 +366,7 @@
         
           axios
             .post(
-              "https://localhost:7029/api/Discipline",this.dataSinhVienPunish
+              "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
             )
             .then(function (res) {
               console.log(res)
@@ -387,7 +387,7 @@
         try {
           axios
             .post(
-              "https://localhost:7029/api/Bonus",
+              "https://localhost:44301/api/Bonus",
               
                 this.dataSinhVienBonus
               
@@ -423,7 +423,7 @@
        
         axios
           .get(
-            `https://localhost:7029/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
+            `https://localhost:44301/api/Students/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&facultyID=${this.facultyID}&classificationID=${this.classificationID}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
           
