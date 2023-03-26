@@ -21,7 +21,7 @@ namespace QLNS.Common.entities
         public string MaNV { get; set; }
         public string TenNV { get; set; }
         public DateTime? NgaySinh { get; set; }
-        public Gender? GioiTinh { get; set; }
+        public int? GioiTinh { get; set; }
        
         public string? TonGiao { get; set; }
         public string? DanToc { get; set; }
