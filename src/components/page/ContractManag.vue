@@ -230,49 +230,9 @@
           </div>
       </div>
     </div>
-
-    <!-- cảnh báo thêm hợp đồng -->
-    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
-    <div class="notification">
-        <div class="warring">
-            <i class="icon-warning"></i>
-            <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
-        </div>
-        <div class="btn-wrap">
-            <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifiCV = false, isOpenPopupFormAddContract=false)" >Hủy</div>
-            <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifiCV = false">Không</div>
-        </div>
-    </div>
-    </div>
-    <!-- cảnh báo xóa hợp đồng-->
-    <div class="notification-wrap" v-if="isOpenPopupDeleteNotifiCV">
-      <div class="notification">
-          <div class="warring">
-              <i class="icon-warning"></i>
-              <div class="warrning-title">Thông tin hợp đồng của sinh viên. Bạn có muốn xóa thông tin không?</div>
-          </div>
-          <div class="btn-wrap">
-              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupDeleteNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
-              <div class="btnNotifi btn-primary" @click="isOpenPopupDeleteNotifiCV = false">Không</div>
-          </div>
-      </div>
-    </div>
-    <!-- cảnh báo sửa hợp đồng-->
-    <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
-      <div class="notification">
-          <div class="warring">
-              <i class="icon-warning"></i>
-              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
-          </div>
-          <div class="btn-wrap">
-              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
-              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">Không</div>
-          </div>
-      </div>
-    </div>
-
-      <!-- hop dong -->
-      <div class="popup-bonus" v-if="isOpenPopupContract">
+    <!-- hợp đồng -->
+    <!-- hop dong -->
+    <div class="popup-bonus" v-if="isOpenPopupContract">
         <div class="bonus-form">
           <div class="head-popup">
             <h3 class="title-heading">Thông tin hợp đồng</h3>
@@ -480,6 +440,47 @@
         </div>
       </div>
       <!-- end hop dong -->
+    <!-- cảnh báo thêm hợp đồng -->
+    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+    <div class="notification">
+        <div class="warring">
+            <i class="icon-warning"></i>
+            <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+        </div>
+        <div class="btn-wrap">
+            <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifiCV = false, isOpenPopupFormAddContract=false)" >Hủy</div>
+            <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifiCV = false">Không</div>
+        </div>
+    </div>
+    </div>
+    <!-- cảnh báo xóa hợp đồng-->
+    <div class="notification-wrap" v-if="isOpenPopupDeleteNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin hợp đồng của sinh viên. Bạn có muốn xóa thông tin không?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupDeleteNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupDeleteNotifiCV = false">Không</div>
+          </div>
+      </div>
+    </div>
+    <!-- cảnh báo sửa hợp đồng-->
+    <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">Không</div>
+          </div>
+      </div>
+    </div>
+
+      
 
       <h3 class="header-bd">Quản lý hợp đồng</h3>
       <div class="body-header">

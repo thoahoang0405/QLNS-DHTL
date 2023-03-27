@@ -1249,18 +1249,12 @@ export default {
         console.log(error);
       }
     },
-<<<<<<< HEAD
     
     // getPosition(){
     //   try {
-=======
-    getDepartment(){
-      try {
->>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
        
     //    var me = this;
       
-<<<<<<< HEAD
     //    axios
     //      .get(
     //       "https://localhost:44301/api/Position"
@@ -1268,15 +1262,6 @@ export default {
     //      .then(function (res) {
     //       me.position=res.data
     //      })
-=======
-       axios
-         .get(
-          "https://localhost:44301/api/khoa"
-         )
-         .then(function (res) {
-          me.department=res.data
-         })
->>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
         
     //      .catch(function () {
     //        console.log(1);
@@ -1311,7 +1296,6 @@ export default {
     //   }
     //   this.getPagingEmployee();
      
-<<<<<<< HEAD
     // },
     selectItemCategory(value) {
       console.log(value.PositionsID);
@@ -1324,10 +1308,6 @@ export default {
       }
       this.getPagingEmployee();
     },
-=======
-    },
-  
->>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
     showPage(is) {
       this.isShowDrop = is;
     },

@@ -888,24 +888,6 @@
       getTrain(){
         try {
        
-<<<<<<< HEAD
-          var me = this;
-          
-          axios
-            .get(
-                `https://localhost:44301/api/daotao/${this.IDNV}`
-            )
-            .then(function (res) {
-            me.hocvan=res.data
-            })
-            
-            .catch(function () {
-              console.log(1);
-            });
-        } catch (error) {
-          console.log(error);
-        }
-=======
        var me = this;
       
        axios
@@ -951,7 +933,6 @@
      } catch (error) {
        console.log(error);
      }
->>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
       },
       OpenPopupFostering(item) {
         this.isOpenPopupFostering = true;
