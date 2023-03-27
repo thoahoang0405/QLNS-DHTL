@@ -87,16 +87,16 @@
     margin-left: 8px;
     outline: none;
   }
-  .btn-excel .icon-load,
+  .btn-excel .icon-excell,
   .btn-excel .icon-delete {
     margin: 0 auto;
     outline: none;
     /* position: relative; */
   }
   .btn-excel:focus,
-  .btn-excel .icon-load:hover,
+  .btn-excel .icon-excell:hover,
   .btn-excel .icon-delete:hover,
-  .btn-excel .icon-load:focus,
+  .btn-excel .icon-excell:focus,
   .btn-excel .icon-delete:focus{
     opacity: 0.6;
     outline: none;
@@ -115,7 +115,7 @@
     margin-left: -60px;
     min-width: 70px;
   }
-  .icon-load:hover .tooltip-excel,
+  .icon-excell:hover .tooltip-excel,
   .icon-delete:hover .tooltip-delete{
     display: block;
     opacity: 1 !important;
@@ -213,7 +213,7 @@
     width: 100%;
   }
   thead tr th {
-    min-width: 170px;
+    min-width: 142px;
     
   }
   .row-active {

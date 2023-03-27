@@ -454,22 +454,16 @@
           @selectedItem="selectItemCbb"
         ></Combobox>
       
-        <Combobox
-          :items="position"       
-          :fieldName="'PositionsName'"
-          @selectedItem="selectItemCategory"
-         
-        ></Combobox>
       </div>
       <div class="button-function">
         <div class="add">
           <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm nhân viên</button>
         </div>
 
-        <button @click="getPagingEmployee" class="btn-excel">
-          <div class="icon icon-load">
-            <div class="tooltip-excel">Lấy lại dữ liệu</div>
-          </div>
+        <button class="btn-excel">
+          <a class="icon icon-excell" :href="`https://localhost:44301/api/nhanvien/ExportExcel?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`" download>
+            <div class="tooltip-excel">Xuất ra file excel</div>
+          </a>
         </button>
         
       </div>
@@ -975,6 +969,7 @@ export default {
       this.empCodeDelete= emp.EmployeeCode
       this.empID=emp.EmployeeID
     },
+   
     deleteEmp(value){
       this.isShowPopup=value
       var me = this;
@@ -1053,27 +1048,7 @@ export default {
      }
 
     },
-    getPosition(){
-      try {
-       
-       var me = this;
-      
-       axios
-         .get(
-          "https://localhost:7029/api/Position"
-         )
-         .then(function (res) {
-          me.position=res.data
-         })
-        
-         .catch(function () {
-           console.log(1);
-         });
-     } catch (error) {
-       console.log(error);
-     }
-
-    },
+   
     formatDate(date) {
       try {
         if (date) {
@@ -1100,17 +1075,7 @@ export default {
       this.getPagingEmployee();
      
     },
-    selectItemCategory(value) {
-      console.log(value.PositionsID);
-      if (value.PositionsID) {
-        this.positionID = value.PositionsID;
-        
-      } else {
-        this.positionID= "";
-        this.getPagingEmployee();
-      }
-      this.getPagingEmployee();
-    },
+  
     showPage(is) {
       this.isShowDrop = is;
     },
