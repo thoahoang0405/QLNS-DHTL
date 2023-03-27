@@ -493,7 +493,7 @@
       </div>
       <!-- table -->
       <div id="m-table" class="m-table">
-        <table id="tbEmployee" class="table">
+        <table id="tbEmployee" class="table" style="width: 100%;">
           <thead>
             <tr>
               <th
