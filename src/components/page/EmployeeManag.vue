@@ -581,10 +581,11 @@
               />
             </td>
             <td class="text-center">{{ index+1 }}</td>
-            <td>{{ emp.EmployeeCode }}</td>
-            <td>{{ emp.EmployeeName }}</td>
+            <td>{{ emp.MaNV }}</td>
+            <td>{{ emp.TenNV }}</td>
             <!-- <td>{{ gender(emp.Gender) }}</td> -->
-            <td>{{ formatDate(emp.DateOfBirth) }}</td>
+            <td>{{ formatDate(emp.NgaySinh) }}</td>
+            <td>{{ gender(emp.gioiTinh) }}</td>
             <!-- <td>{{ emp.IdentityNumber }}</td> -->
             <td></td>
             <td></td>
@@ -601,11 +602,11 @@
                   Xem chi tiết
                 </div>
             </td>
-            <td>
+            <!-- <td>
                 <div class="desc" @click="OpenPopupState(item)">
                   Xem chi tiết
                 </div>
-            </td>
+            </td> -->
             <td
               ref="func"
               class="td-item-final td-func sticky-right; align-items: center;"
@@ -613,7 +614,7 @@
               colspan="12"
             >
               <div class="edit-text"></div> 
-              <!-- <div class="icon icon-edit" @click="editEmployee(emp)" ></div> -->
+              <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
                 <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
@@ -1075,8 +1076,8 @@ export default {
   },
   created() {
     this.getPagingEmployee()
-    // this.getDepartment()
-    this.getPosition()
+    this.getDepartment()
+    // this.getPosition()
   },
   watch: {
     txtSearch: function () {

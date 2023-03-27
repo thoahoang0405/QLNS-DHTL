@@ -92,15 +92,20 @@
     }
     .btnNotifi:hover {
         opacity: 0.8;
-        color: red;
+        color: #fff;
     }
     .btn-secondary{
         border: 1px solid #1A8FDD;
+        height: 25px;
+    }
+    .btn-primary:hover{
+        color: #1A8FDD;
     }
     .btn-primary{
         margin-right: 40px;
         background-color: #1A8FDD;
         color: #fff;
+        height: 25px;
     }
     @media screen and (max-width: 767.98px) {
         .notification{
