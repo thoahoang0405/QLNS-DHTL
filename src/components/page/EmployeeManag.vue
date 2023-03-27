@@ -507,22 +507,16 @@
           @selectedItem="selectItemCbb"
         ></Combobox>
       
-        <Combobox
-          :items="position"       
-          :fieldName="'PositionsName'"
-          @selectedItem="selectItemCategory"
-         
-        ></Combobox>
       </div>
       <div class="button-function">
         <div class="add">
           <button @click="btnShow" class="btn-add btn-hover-blue">+ Thêm nhân viên</button>
         </div>
 
-        <button @click="getPagingEmployee" class="btn-excel">
-          <div class="icon icon-load">
-            <div class="tooltip-excel">Lấy lại dữ liệu</div>
-          </div>
+        <button class="btn-excel">
+          <a class="icon icon-excell" :href="`https://localhost:44301/api/nhanvien/ExportExcel?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`" download>
+            <div class="tooltip-excel">Xuất ra file excel</div>
+          </a>
         </button>
         
       </div>
@@ -1198,6 +1192,7 @@ export default {
       this.empCodeDelete= emp.IDNhanVien
       this.empID=emp.IDNhanVien
     },
+   
     deleteEmp(value){
       this.isShowPopup=value
       var me = this;
@@ -1254,12 +1249,18 @@ export default {
         console.log(error);
       }
     },
+<<<<<<< HEAD
     
     // getPosition(){
     //   try {
+=======
+    getDepartment(){
+      try {
+>>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
        
     //    var me = this;
       
+<<<<<<< HEAD
     //    axios
     //      .get(
     //       "https://localhost:44301/api/Position"
@@ -1267,6 +1268,15 @@ export default {
     //      .then(function (res) {
     //       me.position=res.data
     //      })
+=======
+       axios
+         .get(
+          "https://localhost:44301/api/khoa"
+         )
+         .then(function (res) {
+          me.department=res.data
+         })
+>>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
         
     //      .catch(function () {
     //        console.log(1);
@@ -1301,6 +1311,7 @@ export default {
     //   }
     //   this.getPagingEmployee();
      
+<<<<<<< HEAD
     // },
     selectItemCategory(value) {
       console.log(value.PositionsID);
@@ -1313,6 +1324,10 @@ export default {
       }
       this.getPagingEmployee();
     },
+=======
+    },
+  
+>>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
     showPage(is) {
       this.isShowDrop = is;
     },

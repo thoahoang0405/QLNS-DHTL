@@ -65,6 +65,7 @@
           </table>
         </div>
       </div>
+      <popUp v-show="isShowPopup" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteOK"></popUp>
       <!-- them hoc van -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddEducation">
         <div class="action-form">
@@ -242,13 +243,13 @@
             </tr>
             <tr>
             </tr>
-            <tr>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+            <tr v-for="item of daotao" :key="item.IDDaoTao">
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.ThoiGianBatDau) }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.ThoiGianKetThuc) }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.NoiDaoTao }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.ChuyenNganh }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.HinhThucDaoTao }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.BangCap }}</td>
               <td 
               ref="func"
               class="td-item-final td-func"
@@ -256,13 +257,14 @@
               colspan="12"
               >
                 <div class="icon icon-edit" @click="OpenPopupFormEditTrain(item)"></div>
-                <div class="icon icon-delete"></div>
+                <div class="icon icon-delete" @click="deleteTrain(item)"></div>
               </td>
             </tr>
           </table>
           
         </div>
       </div>
+       <popUp v-show="isShowPopup" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteTrainOK"></popUp>
       <!-- them dao tao -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddTrain">
         <div class="action-form">
@@ -295,41 +297,41 @@
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian bắt đầu: </label>
-              <input type="date">
+              <input type="date" v-model="suaDaotao.ThoiGianBatDau">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian kết thúc: </label>
-              <input type="date">
+              <input type="date" format="dd/mm/yyyy" placeholder="dd-mm-yyyy" v-model="suaDaotao.ThoiGianKetThuc">
            </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Nơi đào tạo: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.NoiDaoTao">
             </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Chuyên ngành: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.ChuyenNganh">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Hình thức đào tạo: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.HinhThucDaoTao">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Học vấn: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.BangCap">
             </div>
           </div>
           <div class="btnCancel" @click.stop="isOpenPopupFormAddTrain = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          <div class="btnSave" @click="btnAddTraning">Lưu</div>
         </div>
       </div>
       <!-- sua dao tao-->
@@ -363,41 +365,41 @@
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian bắt đầu: </label>
-              <input type="date">
+              <input type="date" v-model="suaDaotao.ThoiGianBatDau">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian kết thúc: </label>
-              <input type="date">
+              <input type="date" v-model="suaDaotao.ThoiGianKetThuc">
            </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Nơi đào tạo: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.NoiDaoTao">
             </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Chuyên ngành: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.ChuyenNganh">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Hình thức đào tạo: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.HinhThucDaoTao">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Học vấn: </label>
-              <input type="text">
+              <input type="text" v-model="suaDaotao.BangCap">
             </div>
           </div>
           <div class="btnCancel" @click.stop="isOpenPopupFormEditTrain = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          <div class="btnSave" @click="editTrain">Lưu</div>
         </div>
       </div>
       <!-- end dao tao -->
@@ -446,12 +448,15 @@
             </tr>
             <tr>
             </tr>
-            <tr>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+            <tr v-for="item of boiduong" :key="item.IDBoiDuong">
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.ThoiGianBatDau) }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.ThoiGianKetThuc) }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.NoiDungBoiDuong }}</td>
+
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.DiaDiem }}</td>
+
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.VanBangChungChi }}</td>
+
               <td 
               ref="func"
               class="td-item-final td-func"
@@ -459,12 +464,13 @@
               colspan="12"
               >
                 <div class="icon icon-edit" @click="OpenPopupFormEditFostering(item)"></div>
-                <div class="icon icon-delete"></div>
+                <div class="icon icon-delete" @click="deleteFos(item)"></div>
               </td>
             </tr>
           </table>
         </div>
       </div>
+      <popUp v-show="isShowPopup" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteFosOK"></popUp>
       <!-- them boi duong -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddFostering">
         <div class="action-form">
@@ -497,35 +503,35 @@
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian bắt đầu: </label>
-              <input type="date">
+              <input type="date" v-model="suaBoiDuong.ThoiGianBatDau">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian kết thúc: </label>
-              <input type="date">
+              <input type="date"  v-model="suaBoiDuong.ThoiGianKetThuc">
            </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Nội dung: </label>
-              <input type="text">
+              <input type="text"  v-model="suaBoiDuong.NoiDungBoiDuong">
             </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Nơi bồi dưỡng: </label>
-              <input type="text">
+              <input type="text"  v-model="suaBoiDuong.DiaDiem">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Bằng cấp: </label>
-              <input type="text">
+              <input type="text"  v-model="suaBoiDuong.VanBangChungChi">
             </div>
           </div>
           <div class="btnCancel" @click.stop="isOpenPopupFormAddFostering = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          <div class="btnSave" @click="btnAddFos">Lưu</div>
         </div>
       </div>
       <!-- sua boi duong-->
@@ -559,35 +565,35 @@
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian bắt đầu: </label>
-              <input type="date">
+              <input type="date" v-model="suaBoiDuong.ThoiGianBatDau">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Thời gian kết thúc: </label>
-              <input type="date">
+              <input type="date"  v-model="suaBoiDuong.ThoiGianKetThuc">
            </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Nội dung: </label>
-              <input type="text">
+              <input type="text"  v-model="suaBoiDuong.NoiDungBoiDuong">
             </div>
           </div> 
           <div class="column">
             <div class="input__box">
               <label for="">Nơi bồi dưỡng: </label>
-              <input type="text">
+              <input type="text"  v-model="suaBoiDuong.DiaDiem">
             </div>
           </div>
           <div class="column">
             <div class="input__box">
               <label for="">Bằng cấp: </label>
-              <input type="text">
+              <input type="text"  v-model="suaBoiDuong.VanBangChungChi">
             </div>
           </div>
           <div class="btnCancel" @click.stop="isOpenPopupFormEditFostering = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          <div class="btnSave" @click="btnEditFos">Lưu</div>
         </div>
       </div>
       <!--end boi duong  -->
@@ -618,12 +624,12 @@
                   style="width: 18px; height: 18px"
                 />
               </th>
-              <th class="text-center" style="min-width: 40px">STT</th>
-              <th>Mã nhân viên </th>
+              <th class="text-center" style="min-width: 40px; text-align: center">STT</th>
+              <th style="width: 40px">Mã nhân viên </th>
               <th>Họ và tên</th>
               <th>Ngày sinh</th>
-              <th>Giới tính</th>
-              <th>Gmail</th>
+              <th style="width: 40px">Giới tính</th>
+            
               <th>Trình độ học vấn</th>
               <th>Quá trình đào tạo</th>
               <th>Quá trình bồi dưỡng</th>
@@ -640,7 +646,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item,i) of students" :key="item.StudentID" ref="row">
+            <tr v-for=" (item,i) of students" :key="item.StudentID" ref="row">
               <td
                 ref="rowCheck"
                 class="checkbox sticky-left"
@@ -655,16 +661,13 @@
                 />
               </td>
               <td class="text-center">{{ i+1 }}</td>
-              <td>{{ item.MaNV }}</td>
+              <td style="width: 40px">{{ item.MaNV }}</td>
               <td>{{ item.TenNV }}</td>
-              <td>{{ item.NgaySinh }}</td>
-              <td>{{ item.GioiTinh }}</td>
-              <td>{{ item.Email }}</td>
-              <!-- <td>{{ item.FacultyName }}</td> -->
-              <!-- <td>{{ item.Class }}</td> -->
-              <!-- <td>{{ item.ClassifiOpenPopupBonuscationName }}</td> -->
+              <td>{{ formatDate(item.NgaySinh)}}</td>
+              <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
+              
               <td>
-                <div class="desc"  @click="OpenPopupEducation(item)">
+                <div class="desc "  @click="OpenPopupEducation(item)">
                   Xem chi tiết
                 </div>
               </td>
@@ -779,6 +782,7 @@
   import $ from "jquery"
   import Paginate from "vuejs-paginate-next";
   import { useToast } from "vue-toastification";
+  import popUp from "../base/BasePopupDelete2.vue"
   export default {
     data() {
       return {
@@ -798,31 +802,36 @@
         totalRecord:0,
         students:{},
         suaHocVan:{},
-        themHocvan:{},
+        suaDaotao:{},
+        suaBoiDuong:{},
         hocvan:{},
         daotao:{},
         boiduong:{},
+        isShowPopup:false,
         IDNV:"",
         MaNV:"",
         TenNV:"",
         isShowDrop:false,
+        mess:"",
         dataSinhVienPunish:[],
-        dataSinhVienBonus:{}
+        dataSinhVienBonus:{},
 
-      };
+        idDelete:"",
+      }
     },
     components: {
-      Paginate
+      Paginate,popUp
     },
     watch: {
     txtSearch: function () {
       if (this.txtSearch == "") {
-        this.getpagingStudent();
+        this.getPagingEmployee();
       }
     },
+   
   },
   created(){
-    this.getpagingStudent()
+    this.getPagingEmployee()
    
   },
     methods: {
@@ -875,13 +884,11 @@
       thongbao() {
         alert("Xác nhận đóng");
       },
-      OpenPopupTrain(item) {
-        this.isOpenPopupTrain = true;
-        this.IDNV = item.IDNhanVien
-        this.MaNV = item.MaNV
-        this.TenNV = item.TenNV
+
+      getTrain(){
         try {
        
+<<<<<<< HEAD
           var me = this;
           
           axios
@@ -898,22 +905,15 @@
         } catch (error) {
           console.log(error);
         }
-      },
-      OpenPopupFostering(item) {
-        this.isOpenPopupFostering = true;
-        this.IDNV = item.IDNhanVien
-        this.MaNV = item.MaNV
-        this.TenNV = item.TenNV
-        try {
-       
+=======
        var me = this;
       
        axios
          .get(
-            `https://localhost:44301/api/boiduong/${this.IDNV}`
+            `https://localhost:44301/api/daotao/${this.IDNV}`
          )
          .then(function (res) {
-         me.hocvan=res.data
+         me.daotao=res.data
          })
         
          .catch(function () {
@@ -923,11 +923,51 @@
        console.log(error);
      }
       },
+      OpenPopupTrain(item) {
+        this.isOpenPopupTrain = true;
+        this.IDNV = item.IDNhanVien
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
+        this.getTrain()
+       
+      },
+      getFos(){
+        try {
+       
+       var me = this;
+      
+       axios
+         .get(
+            `https://localhost:44301/api/boiduong/${this.IDNV}`
+         )
+         .then(function (res) {
+         me.boiduong=res.data
+         console.log(me.boiduong);
+         })
+        
+         .catch(function () {
+           console.log(1);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+>>>>>>> 7cbf746b42291ed2f3d5cb51218b451fd23ef3a6
+      },
+      OpenPopupFostering(item) {
+        this.isOpenPopupFostering = true;
+        this.IDNV = item.IDNhanVien
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
+        this.getFos()
+      },
       OpenPopupEducation(item) {
         this.isOpenPopupEducation = true;
         this.IDNV = item.IDNhanVien
         this.MaNV = item.MaNV
         this.TenNV = item.TenNV
+        this.getEdu()
+      },
+      getEdu(){
         try {
        
        var me = this;
@@ -965,8 +1005,10 @@
             )
             .then(function (res) {
               console.log(res)
-              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
               me.isOpenPopupFormAddEducation = false;
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.getEdu()
+         
             })
             .catch(function () {
               console.log("error");
@@ -989,8 +1031,10 @@
             )
             .then(function (res) {
               console.log(res)
-              toast.success("sửa dữ liệu thành công", { timeout: 2000 });
               me.isOpenPopupFormEditEducation = false;
+              toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+              me.getEdu()
+             
             })
             .catch(function () {
               console.log("error");
@@ -1001,24 +1045,34 @@
           }
 
       },
+
       deleteEducation(item){
-       
-        var idDelete= item.IDNhanVien
+        this.isShowPopup=true
+       this.idDelete=item.IDHocVan
+       this.mess="Bạn có chắc chắn muốn xóa thông tin học vấn này không?"
+    
+      },
+      noDelete(value){
+       this.isShowPopup=value
+      },
+      deleteOK(value){
+        this.isShowPopup=value
+        var me=this
       const toast = useToast();
       try{
        axios
          .delete(
-          `https://localhost:44301/api/hocvan/${idDelete}`
+          `https://localhost:44301/api/hocvan/${this.idDelete}`
          )
          .then(function (res) {
           console.log(res);
           toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-          
+          me.getEdu()
          })
         
          .catch(function () {
           toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
-           console.log(1);
+           
          });
      } catch (error) {
        console.log(error);
@@ -1031,21 +1085,191 @@
       },
       OpenPopupFormAddTrain() {
         this.isOpenPopupFormAddTrain = true;
+        this.suaDaotao={}
+        this.suaDaotao.IDNhanVien=this.IDNV
         // this.dataSinhVienPunish = item
+      },
+      btnAddTraning(){
+        var me= this
+        const toast = useToast();
+        me.suaDaotao.IDNhanVien=me.IDNV
+  
+        try {
+        
+          axios
+            .post(
+              "https://localhost:44301/api/daotao",this.suaDaotao
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupFormAddTrain = false;
+              me.getTrain()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
+      editTrain(){
+        var me= this
+        const toast = useToast();
+        me.suaDaotao.IDNhanVien=me.IDNV
+    
+   
+        try {
+        
+          axios
+            .put(
+              `https://localhost:44301/api/daotao/${this.suaDaotao.IDDaoTao}`,this.suaDaotao
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupFormEditTrain = false;
+              me.getTrain()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+
+      },
+      deleteTrain(item){
+        this.isShowPopup=true
+       this.idDelete=item.IDDaoTao
+       this.mess="Bạn có chắc chắn muốn xóa thông tin đào tạo này không?"
+      },
+      deleteTrainOK(value){
+        this.isShowPopup=value
+        var me=this
+      const toast = useToast();
+      try{
+       axios
+         .delete(
+          `https://localhost:44301/api/daotao/${this.idDelete}`
+         )
+         .then(function (res) {
+          console.log(res);
+          toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+          me.getTrain()
+         })
+        
+         .catch(function () {
+          toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+           
+         });
+     } catch (error) {
+       console.log(error);
+     }
       },
       OpenPopupFormEditTrain(item) {
         this.isOpenPopupFormEditTrain = true;
-        this.dataSinhVienPunish = item
+        this.suaDaotao = item
+        item.ThoiGianBatDau=this.formatDate(item.ThoiGianBatDau)
+        this.suaDaotao.ThoiGianBatDau=item.ThoiGianBatDau
+        item.ThoiGianKetThuc=this.formatDate(item.ThoiGianKetThuc)
+        this.suaDaotao.ThoiGianKetThuc=item.ThoiGianKetThuc
       },
-      OpenPopupFormAddFostering(item) {
+      OpenPopupFormAddFostering() {
         this.isOpenPopupFormAddFostering = true;
-        this.dataSinhVienPunish = item
+        this.suaBoiDuong={},   
+        this.suaBoiDuong.IDNhanVien=this.IDNV
+      },
+
+      btnAddFos(){
+        var me= this
+        const toast = useToast();
+    
+        me.suaBoiDuong.IDNhanVien=me.IDNV
+      
+        try {
+        
+          axios
+            .post(
+              "https://localhost:44301/api/boiduong",this.suaBoiDuong
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupFormAddFostering = false;
+              me.getFos()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
       },
       OpenPopupFormEditFostering(item) {
         this.isOpenPopupFormEditFostering = true;
-        this.dataSinhVienPunish = item
+        this.suaBoiDuong = item
+        item.ThoiGianBatDau=this.formatDate(item.ThoiGianBatDau)
+        this.suaBoiDuong.ThoiGianBatDau=item.ThoiGianBatDau
+        item.ThoiGianKetThuc=this.formatDate(item.ThoiGianKetThuc)
+        this.suaBoiDuong.ThoiGianKetThuc=item.ThoiGianKetThuc
       },
-      getpagingStudent() {
+      btnEditFos(){
+        var me= this
+        const toast = useToast();
+        me.suaBoiDuong.IDNhanVien=me.IDNV
+        try {
+        
+          axios
+            .put(
+              `https://localhost:44301/api/daotao/${this.suaBoiDuong.IDDaoTao}`,this.suaBoiDuong 
+            )
+            .then(function (res) {
+              console.log(res)
+              toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+              me.isOpenPopupFormEditFostering = false;
+              me.getFos()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
+            });
+          } catch (error) {
+            console.log(error);
+          }
+      },
+      deleteFos(item){
+        this.isShowPopup=true
+       this.idDelete=item.IDBoiDuong
+       this.mess="Bạn có chắc chắn muốn xóa thông tin bồi dưỡng này không?"
+      },
+      deleteFosOK(value){
+        this.isShowPopup=value
+        var me=this
+      const toast = useToast();
+      try{
+       axios
+         .delete(
+          `https://localhost:44301/api/boiduong/${this.idDelete}`
+         )
+         .then(function (res) {
+          console.log(res);
+          toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+          me.getFos()
+         })
+        
+         .catch(function () {
+          toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+           
+         });
+     } catch (error) {
+       console.log(error);
+     }
+      },
+      getPagingEmployee() {
       try {
         var me = this;
         axios
@@ -1063,6 +1287,35 @@
           });
       } catch (error) {
         console.log(error);
+      }
+    },
+    gender(gender){
+      switch (gender) {
+        case 0:
+          gender="Nam"
+          break;
+          case 1:
+            gender="Nữ"
+          break;
+        default:
+          break;
+      }
+      return gender;
+    },
+    
+    formatDate(date) {
+      try {
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${year}-${month}-${newDate}`; 
+        }
+      } catch (error) {
+        return "";
       }
     },
     showPage(is) {
@@ -1083,7 +1336,7 @@
       this.pageDefault = e.target.getAttribute("pageSize");
       this.showPage(false);
       $(".icon-dropup").removeClass("iconrotate");
-      this.getpagingStudent();
+      this.getPagingEmployee();
       if (this.pageDefault > this.totalRecord) {
         this.pageDefault = this.totalRecord;
       }
@@ -1091,7 +1344,7 @@
 
     clickCallback(pageNum) {
       this.pageNumber = pageNum;
-      this.getpagingStudent();
+      this.getPagingEmployee();
     },
     },
   };
@@ -1104,7 +1357,7 @@
     padding: 5px;
     border-radius: 5px;
     color: #fff;
-    background-color: #7EA1F9;
+    background-color: #5d82e0;
     position: absolute;
     right: 40px;
     bottom: 20px;
@@ -1310,6 +1563,8 @@ li.page-item.disabled {
     bottom: 0;
     background-color: rgb(17 17 17 / 16%);
     z-index: 2;
+    /* position: fixed;
+    display: flex; */
     cursor: pointer;
     /* height: 600px; */
   }
@@ -1319,9 +1574,9 @@ li.page-item.disabled {
     width: 68vw;
     height: 550px;
     /* height: auto; */
-    margin: 0 auto;
-    top: 15%;
-    right: 15%;
+   
+    top: 10%;
+    right: 20%;
     z-index: 99999;
     border-radius: 20px;
     box-shadow: 5px 5px 5px ;
@@ -1334,9 +1589,9 @@ li.page-item.disabled {
     width: 80vw;
     height: 550px;
     /* height: auto; */
-    margin: 0 auto;
-    top: 15%;
-    right: 15%;
+  
+    top: 10%;
+    right: 10%;
     z-index: 99999;
     border-radius: 20px;
     box-shadow: 5px 5px 5px ;
@@ -1430,15 +1685,17 @@ tbody tr:hover .checkbox, tbody tr:hover .td-item-final{
 }
 
 .btnCancel {
-    color: #000;
-    border: 1px solid #ccc;
+    color: red;
+    
     position: absolute;
     right: 150px;
+    border: 1px solid red;
     bottom: 20px;
   }
   .btnCancel:hover {
     background-color: red;
     color: #fff;
+    
   }
   </style>
   

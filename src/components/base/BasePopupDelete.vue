@@ -74,9 +74,9 @@
         align-items: center;
         margin-top: 30px;
     }
-    .icon-warning {
+    /* .icon-warning {
             width: 52px;
-    }
+    } */
     .warringgg i {
         font-size: 60px;
         width: 44px;
