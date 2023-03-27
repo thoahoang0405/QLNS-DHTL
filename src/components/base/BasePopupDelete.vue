@@ -1,6 +1,6 @@
 <template>
     <div class="notification-wrap">
-            <div class="notification">
+            <div class="notificationn">
                 <div class="warringgg">
                   
                         <i class="icon-warning"></i>
@@ -55,7 +55,7 @@
     display: flex;
   
     }
-    .notification{
+    .notificationn{
         z-index: 3;
         position: absolute;
         left: 50%;

@@ -882,22 +882,22 @@
         this.TenNV = item.TenNV
         try {
        
-       var me = this;
-      
-       axios
-         .get(
-            `https://localhost:44301/api/daotao/${this.IDNV}`
-         )
-         .then(function (res) {
-         me.hocvan=res.data
-         })
-        
-         .catch(function () {
-           console.log(1);
-         });
-     } catch (error) {
-       console.log(error);
-     }
+          var me = this;
+          
+          axios
+            .get(
+                `https://localhost:44301/api/daotao/${this.IDNV}`
+            )
+            .then(function (res) {
+            me.hocvan=res.data
+            })
+            
+            .catch(function () {
+              console.log(1);
+            });
+        } catch (error) {
+          console.log(error);
+        }
       },
       OpenPopupFostering(item) {
         this.isOpenPopupFostering = true;
@@ -1047,21 +1047,15 @@
       },
       getpagingStudent() {
       try {
-       
         var me = this;
-       
         axios
           .get(
              `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
-          
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
             me.students = res.data.Data;
-            
-           
-            
           })
          
           .catch(function () {

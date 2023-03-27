@@ -1,12 +1,24 @@
 <template>
-  
+  <!-- Cảnh báo thêm lý lịch-->
+    <!-- <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifi = false, isOpenPopupAddState=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifi = false">Không</div>
+          </div>
+      </div>
+    </div> -->
   <!--  -->
   <div id="form">
     <form class="form">
       <div class="form-top">
         <div class="form-title">
           <h2 class="title">Thêm nhân viên</h2>
-          <span class="close" @click="closeForm">X</span>
+          <span class="close" @click.stop="closeForm">X</span>
         </div>
       </div>
       <div class="form-Wrap">
@@ -170,6 +182,7 @@ import popUpDup from "../base/PopUpDuplicateCode.vue"
 export default {
   data() {
     return {
+      isOpenPopupAddNotifiCV: false,
       employee: {},
       faculty: {},
       department: {},
@@ -226,17 +239,17 @@ export default {
     
   },
   created() {
-    this.getDepartment();
-    this.getFaculty();
-    this.getPosition();
-    this.getSalary();
-    this.getstatus();
-    this.getCerti();
+    // this.getDepartment();
+    // this.getFaculty();
+    // this.getPosition();
+    // this.getSalary();
+    // this.getstatus();
+    // this.getCerti();
   },
   methods: {
     save(){
      
-        this.getAllEmployee()
+        // this.getAllEmployee()
         this.validateDateOfBirth()
         this.validateEmail()
         this.validateEmployeeCode()
@@ -264,7 +277,7 @@ this.isShowPop=value
       
        axios
          .get(
-          "https://localhost:7029/api/Employees/NewCode"
+          "https://localhost:44301/api/Employees/NewCode"
          )
          .then(function (res) {
           me.employee.EmployeeCode=res.data
@@ -286,7 +299,7 @@ this.isShowPop=value
       
         try {
         axios
-          .post("https://localhost:7029/api/Employees", me.employee)
+          .post("https://localhost:44301/api/Employees", me.employee)
           .then(function (res) {
             console.log("ok", res.data);
             me.employee={}
@@ -311,7 +324,7 @@ this.isShowPop=value
       const toast = useToast();
       try {
         axios
-          .put(`https://localhost:7029/api/Employees/${this.employee.IDNhanVien}`, me.employee)
+          .put(`https://localhost:44301/api/Employees/${this.employee.IDNhanVien}`, me.employee)
           .then(function (res) {
             console.log("ok", res.data);
             me.$emit("hideForm", false);
@@ -445,33 +458,33 @@ this.isShowPop=value
         this.isValid = true;
       }
     },
-     getAllEmployee(){
-      try {
-        var me = this;
+    //  getAllEmployee(){
+    //   try {
+    //     var me = this;
 
-        axios
-          .get("https://localhost:7029/api/Employees")
-          .then(function (res) {
+    //     axios
+    //       .get("https://localhost:44301/api/Employees")
+    //       .then(function (res) {
           
-            for (const item of res.data) {
+    //         for (const item of res.data) {
             
-             if(me.employee.EmployeeCode==item.EmployeeCode){
+    //          if(me.employee.EmployeeCode==item.EmployeeCode){
              
-              me.isShowPop=!me.isShowPop
-              me.isValid=false
-             }else{
-              me.isValid=true
-             }
-            }
-          })
+    //           me.isShowPop=!me.isShowPop
+    //           me.isValid=false
+    //          }else{
+    //           me.isValid=true
+    //          }
+    //         }
+    //       })
 
-          .catch(function () {
-            console.log(1);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-     },
+    //       .catch(function () {
+    //         console.log(1);
+    //       });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    //  },
     checkButton() {
       var getSelectedValue = document.querySelector('input[name="gt"]:checked');
 
@@ -492,7 +505,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Departments")
+          .get("https://localhost:44301/api/Departments")
           .then(function (res) {
             me.department = res.data;
           })
@@ -510,7 +523,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Position")
+          .get("https://localhost:44301/api/Position")
           .then(function (res) {
             me.position = res.data;
           })
@@ -528,7 +541,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Salary")
+          .get("https://localhost:44301/api/Salary")
           .then(function (res) {
             me.salary = res.data;
           })
@@ -545,7 +558,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/TranningCertification")
+          .get("https://localhost:44301/api/TranningCertification")
           .then(function (res) {
             me.certificate = res.data;
           })
@@ -562,7 +575,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/StatusEmployee")
+          .get("https://localhost:44301/api/StatusEmployee")
           .then(function (res) {
             me.statusEmployee = res.data;
           })
@@ -579,7 +592,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:7029/api/Faculty")
+          .get("https://localhost:44301/api/Faculty")
           .then(function (res) {
             me.faculty = res.data;
           })
@@ -614,6 +627,10 @@ this.isShowPop=value
     selectItemFaculty(value) {
       this.employee.FacultyID = value.FacultyID;
       this.employee.FacultyName = value.FacultyName;
+    },
+    OpenPopupAddNotifiCV(item) {
+      this.isOpenPopupAddNotifiCV = true;
+      this.dataSinhVienPunish = item
     },
   },
 };
