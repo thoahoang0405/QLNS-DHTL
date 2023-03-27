@@ -1,198 +1,251 @@
 <template>
   <!-- chuc vu -->
     <div class="body">
-      <div class="popup-bonus" v-if="isOpenPopupPosition">
-        <div class="bonus-form">
-          <div class="head-popup">
-            <h3 class="title-heading">Chức vụ</h3>
-            <div class="btn-close-popup" @click.stop="isOpenPopupPosition = false">
-              <div class="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
+    <div class="popup-bonus" v-if="isOpenPopupPosition">
+      <div class="bonus-form">
+        <div class="head-popup">
+          <h3 class="title-heading">Chức vụ</h3>
+          <div class="btn-close-popup" @click.stop="isOpenPopupPosition = false">
+            <div class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </div>
-          </div>
-          <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
-            <div class="btnWrap">
-              <div class="btnAdd" @click="OpenPopupFormAddPosition(item)">Thêm</div>
-              <div class="btnEdit" @click="OpenPopupFormEditPosition(item)">Sửa</div>
-            </div>
-          </div>
-          <div class="form">
-            <form action="">
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Mã chức vụ</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Tên chức vụ</label>
-                  <input type="text"/>
-                </div>
-              </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Thời gian bắt đầu</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Thời gian kết thúc</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Định mức giảng dạy</label>
-                  <input type="text"/>
-                </div>
-              </div>
-            </form>
-            <div class="btnDelete" style="bottom: -140px;">Xóa</div>
           </div>
         </div>
-      </div>
-      <!-- them chuc vu -->
-      <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
-        <div class="bonus-form">
-          <div class="head-popup">
-            <h3 class="title-heading">Thêm chức vụ</h3>
-            <div class="btn-close-popup" @click.stop="isOpenPopupFormAddPosition = false">
-              <div class="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+        <div class="education-header">
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+          <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
+          <div class="btnWrap">
+            <div class="btnAdd" @click="OpenPopupFormAddPosition(item)">Thêm</div>
+            <div class="btnEdit" @click="OpenPopupFormEditPosition(item)">Sửa</div>
+          </div>
+        </div>
+        <div class="form">
+          <form action="">
+            <div class="column">
+              <div class="input__box">
+                <label for="">Mã chức vụ</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Tên chức vụ</label>
+                <input type="text"/>
               </div>
             </div>
-          </div>
-          
-          <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
-            <div class="btnWrap">
-              <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-              <div class="btnEdit">Sửa</div> -->
+            <div class="column">
+              <div class="input__box">
+                <label for="">Thời gian bắt đầu</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Thời gian kết thúc</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Định mức giảng dạy</label>
+                <input type="text"/>
+              </div>
             </div>
-          </div>
-          <div class="form">
-            <form action="">
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Mã chức vụ</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Tên chức vụ</label>
-                  <input type="text"/>
-                </div>
-              </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Thời gian bắt đầu</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Thời gian kết thúc</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Định mức giảng dạy</label>
-                  <input type="text"/>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormAddPosition = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
+          </form>
+          <div class="btnDelete" style="bottom: -140px;">Xóa</div>
         </div>
       </div>
-      <!-- sua chuc vu-->
-      <div class="popup-bonus" v-if="isOpenPopupFormEditPosition">
-        <div class="bonus-form">
-          <div class="head-popup">
-            <h3 class="title-heading">Sửa chức vụ</h3>
-            <div class="btn-close-popup" @click.stop="isOpenPopupFormEditPosition = false">
-              <div class="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
+    </div>
+    <!-- them chuc vu -->
+    <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
+      <div class="bonus-form">
+        <div class="head-popup">
+          <h3 class="title-heading">Thêm chức vụ</h3>
+          <div class="btn-close-popup" @click.stop="isOpenPopupAddNotifi = true">
+            <div class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </div>
           </div>
-          <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
-            <div class="btnWrap">
-              <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-              <div class="btnEdit">Sửa</div> -->
-            </div>
-          </div>
-          <div class="form">
-            <form action="">
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Mã chức vụ</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Tên chức vụ</label>
-                  <input type="text"/>
-                </div>
-              </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Thời gian bắt đầu</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Thời gian kết thúc</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Định mức giảng dạy</label>
-                  <input type="text"/>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormEditPosition = false">Hủy</div>
-          <div class="btnSave">Lưu</div>
         </div>
+        
+        <div class="education-header">
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+          <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
+          <div class="btnWrap">
+            <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+            <div class="btnEdit">Sửa</div> -->
+          </div>
+        </div>
+        <div class="form">
+          <form action="">
+            <div class="column">
+              <div class="input__box">
+                <label for="">Mã chức vụ</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Tên chức vụ</label>
+                <input type="text"/>
+              </div>
+            </div>
+            <div class="column">
+              <div class="input__box">
+                <label for="">Thời gian bắt đầu</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Thời gian kết thúc</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Định mức giảng dạy</label>
+                <input type="text"/>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
+        <div class="btnSave">Lưu</div>
       </div>
-      <!-- end open popup chuc vu   -->
+    </div>
+    <!-- sua chuc vu-->
+    <div class="popup-bonus" v-if="isOpenPopupFormEditPosition">
+      <div class="bonus-form">
+        <div class="head-popup">
+          <h3 class="title-heading">Sửa chức vụ</h3>
+          <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifi = true">
+            <div class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="education-header">
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+          <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
+          <div class="btnWrap">
+            <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
+            <div class="btnEdit">Sửa</div> -->
+          </div>
+        </div>
+        <div class="form">
+          <form action="">
+            <div class="column">
+              <div class="input__box">
+                <label for="">Mã chức vụ</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Tên chức vụ</label>
+                <input type="text"/>
+              </div>
+            </div>
+            <div class="column">
+              <div class="input__box">
+                <label for="">Thời gian bắt đầu</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Thời gian kết thúc</label>
+                <input type="text"/>
+              </div>
+              <div class="input__box">
+                <label for="">Định mức giảng dạy</label>
+                <input type="text"/>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div>
+        <div class="btnSave">Lưu</div>
+      </div>
+    </div>
+    <!-- end open popup chuc vu   -->
+    <!-- cảnh báo thêm chức vụ -->
+    <div class="notification-wrap" v-if="isOpenPopupAddNotifi">
+    <div class="notification">
+        <div class="warring">
+            <i class="icon-warning"></i>
+            <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+        </div>
+        <div class="btn-wrap">
+            <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifi = false, isOpenPopupFormAddPosition=false)" >Hủy</div>
+            <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifi = false">Không</div>
+        </div>
+    </div>
+    </div>
+    <!-- cảnh báo sửa chức vụ-->
+    <div class="notification-wrap" v-if="isOpenPopupEditNotifi">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifi = false, isOpenPopupFormEditPosition=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifi = false">Không</div>
+          </div>
+      </div>
+    </div>
+
+    <!-- cảnh báo thêm hợp đồng -->
+    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+    <div class="notification">
+        <div class="warring">
+            <i class="icon-warning"></i>
+            <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+        </div>
+        <div class="btn-wrap">
+            <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifiCV = false, isOpenPopupFormAddContract=false)" >Hủy</div>
+            <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifiCV = false">Không</div>
+        </div>
+    </div>
+    </div>
+    <!-- cảnh báo sửa hợp đồng-->
+    <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">Không</div>
+          </div>
+      </div>
+    </div>
 
       <!-- hop dong -->
       <div class="popup-bonus" v-if="isOpenPopupContract">
@@ -219,8 +272,8 @@
             </div>
           </div>
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
               <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
               <div class="btnEdit" @click="OpenPopupFormEditContract(item)">Sửa</div>
@@ -269,7 +322,7 @@
         <div class="bonus-form">
           <div class="head-popup">
             <h3 class="title-heading">Thêm hợp đồng</h3>
-            <div class="btn-close-popup" @click.stop="isOpenPopupFormAddContract = false">
+            <div class="btn-close-popup" @click.stop="isOpenPopupAddNotifiCV = true">
               <div class="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -289,8 +342,8 @@
             </div>
           </div>
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
               <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
               <div class="btnEdit">Sửa</div> -->
@@ -330,7 +383,7 @@
               </div>
             </form>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormAddContract = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isOpenPopupAddNotifiCV = true">Hủy</div>
           <div class="btnSave">Lưu</div>
         </div>
       </div>
@@ -339,7 +392,7 @@
         <div class="bonus-form">
           <div class="head-popup">
             <h3 class="title-heading">Sửa hợp đồng</h3>
-            <div class="btn-close-popup" @click.stop="isOpenPopupFormEditContract = false">
+            <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifiCV = true">
               <div class="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -359,8 +412,8 @@
             </div>
           </div>
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
               <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
               <div class="btnEdit">Sửa</div> -->
@@ -400,7 +453,7 @@
               </div>
             </form>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormEditContract = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isOpenPopupEditNotifiCV = true">Hủy</div>
           <div class="btnSave">Lưu</div>
         </div>
       </div>
@@ -462,7 +515,7 @@
               <td>{{ item.TenNV }}</td>
               <td>{{ item.NgaySinh }}</td>
               <td>{{ item.GioiTinh }}</td>
-              <td></td>
+              <td>{{ item.Email }}</td>
               <td>
                 <div class="desc"  @click="OpenPopupPosition(item)">
                   Xem chi tiết
@@ -567,6 +620,10 @@
         isOpenPopupFormEditPosition: false,
         isOpenPopupFormAddContract: false,
         isOpenPopupFormEditContract: false,
+        isOpenPopupEditNotifi: false,
+        isOpenPopupAddNotifi: false,
+        isOpenPopupAddNotifiCV: false,
+        isOpenPopupEditNotifiCV: false,
         pageDefault:10,
         pageNumber: 1,
         txtSearch:"",
@@ -601,7 +658,7 @@
         
           axios
             .post(
-              "https://localhost:7029/api/Discipline",this.dataSinhVienPunish
+              "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
             )
             .then(function (res) {
               console.log(res)
@@ -622,7 +679,7 @@
         try {
           axios
             .post(
-              "https://localhost:7029/api/Bonus",
+              "https://localhost:44301/api/Bonus",
               
                 this.dataSinhVienBonus
               
@@ -646,14 +703,20 @@
       OpenPopupContract(item) {
         this.isOpenPopupContract = true;
         this.dataSinhVienBonus = item
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
       },
       OpenPopupFostering(item) {
         this.isOpenPopupFostering = true;
         this.dataSinhVienBonus = item
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
       },
       OpenPopupPosition(item) {
         this.isOpenPopupPosition = true;
         this.dataSinhVienPunish = item
+        this.MaNV = item.MaNV
+        this.TenNV = item.TenNV
       },
       OpenPopupFormAddPosition(item) {
         this.isOpenPopupFormAddPosition = true;
@@ -679,6 +742,22 @@
         this.isOpenPopupFormEditFostering = true;
         this.dataSinhVienPunish = item
       },
+      OpenPopupAddNotifi(item) {
+      this.isOpenPopupAddNotifi = true;
+      this.dataSinhVienPunish = item
+    },
+    OpenPopupEditNotifi(item) {
+      this.isOpenPopupEditNotifi = true;
+      this.dataSinhVienPunish = item
+    },
+    OpenPopupAddNotifiCV(item) {
+      this.isOpenPopupAddNotifiCV = true;
+      this.dataSinhVienPunish = item
+    },
+    OpenPopupEditNotifiCV(item) {
+      this.isOpenPopupEditNotifiCV = true;
+      this.dataSinhVienPunish = item
+    },
       getPagingEmployee() {
       try {
        
@@ -1005,7 +1084,7 @@ li.page-item.disabled {
   .bonus-form {
     padding: 0px 20px;
     position: absolute;
-    width: 66vw;
+    width: 50vw;
     height: 490px;
     /* height: auto; */
     margin: 0 auto;

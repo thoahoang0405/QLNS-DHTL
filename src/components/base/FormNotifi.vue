@@ -10,7 +10,7 @@
                     <div class="btnNotifi btn-primary" @click="noClick">Không</div>
                 </div>
             </div>
-        </div>
+    </div>
 </template>
 
 <script>
