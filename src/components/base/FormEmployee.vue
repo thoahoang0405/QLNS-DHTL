@@ -134,16 +134,16 @@
         <div class="column column-s">
           <div class="input__box">
             <label for="">Mã khoa <span>*</span></label>
-            <input class="makhoa" type="text"  v-model="employee.FacultyID" />
+            <input class="makhoa" type="text"  v-model="employee.IDKhoa" />
           </div>
           <div class="input__box">
             <label for="">Tên Khoa</label>
             <combobox
               class="khoa"
-              :value="employee.FacultyName"
+              :value="employee.TenKhoa"
               :items="faculty"
-              :code="'FacultyID'"
-              :fieldName="'FacultyName'"
+              :code="'IDKhoa'"
+              :fieldName="'TenKhoa'"
               @selectedItem="selectItemFaculty"
             ></combobox>
             <div class="invalid-feedback" v-if="errors.khoa">
@@ -172,7 +172,7 @@
 </template>
 
 <script>
-// import notifi from "./FormNotifi.vue"
+ import notifi from "./FormNotifi.vue"
 import combobox from "../base/BaseCombobox.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
@@ -219,8 +219,8 @@ export default {
   },
   props: ["employeeSL","code", "FormMode","loadData", "employeeId"],
   components: {
-    combobox,popUpDup
-    //    notifi
+    combobox,popUpDup,
+        notifi
   },
   watch: {
     employeeSL: function(value){
@@ -369,8 +369,8 @@ this.isShowPop=value
     },
     //gửi lệnh ẩn form từ bên này sang trang chính
     closeForm() {
-      // this.isShowNotifi = true
-      this.$emit("hideForm", false);
+       this.isShowNotifi = true
+      // this.$emit("hideForm", false);
       this.errors = {
         ten: "",
         ngaysinh: "",
@@ -591,7 +591,7 @@ this.isShowPop=value
         var me = this;
 
         axios
-          .get("https://localhost:44301/api/Faculty")
+          .get("https://localhost:44301/api/khoa")
           .then(function (res) {
             me.faculty = res.data;
           })
@@ -624,8 +624,8 @@ this.isShowPop=value
       this.employee.StatusEmployeeName = value.StatusEmployeeName;
     },
     selectItemFaculty(value) {
-      this.employee.FacultyID = value.FacultyID;
-      this.employee.FacultyName = value.FacultyName;
+      this.employee.IDKhoa = value.IDKhoa;
+      this.employee.TenKhoa = value.TenKhoa;
     },
     OpenPopupAddNotifiCV(item) {
       this.isOpenPopupAddNotifiCV = true;

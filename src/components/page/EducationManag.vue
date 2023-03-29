@@ -65,10 +65,10 @@
           </table>
         </div>
       </div>
-      <popUp v-show="isShowPopup" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteOK"></popUp>
+      <popUp v-show="isShowPopupEdu" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteOK"></popUp>
       <!-- them hoc van -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddEducation">
-        <div class="action-form">
+        <div class="action-form" @keypress.enter="btnAddEducation">
           <div class="head-popup">
             <h3 class="title-heading">Thêm trình độ học vấn</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormAddEducation = false">
@@ -131,13 +131,18 @@
               <input type="text" v-model="suaHocVan.TinhTrangHocVan">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormAddEducation = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isShowNotifi=true">Hủy</div>
           <div class="btnSave" @click="btnAddEducation">Lưu</div>
         </div>
       </div>
+      <Notifi
+      v-show="isShowNotifi"
+      @closeNotifi="closeNo"
+      @cancelNotifi="cancelForm"
+    ></Notifi>
       <!-- sua hoc van-->
       <div class="popup-bonus" v-if="isOpenPopupFormEditEducation">
-        <div class="action-form">
+        <div class="action-form" @keypress.enter="editEducation">
           <div class="head-popup">
             <h3 class="title-heading">Sửa trình độ học vấn</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormEditEducation = false">
@@ -193,10 +198,15 @@
               <input type="text" v-model="suaHocVan.TinhTrangHocVan">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormEditEducation = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isShowEditEdu=true">Hủy</div>
           <div class="btnSave" @click="editEducation">Lưu</div>
         </div>
       </div>
+      <Notifi
+      v-show="isShowEditEdu"
+      @closeNotifi="closeNo"
+      @cancelNotifi="cancelFormEditEdu"
+    ></Notifi>
       <!-- end open popup hoc van   -->
 
       <!-- dao tao -->
@@ -264,10 +274,11 @@
           
         </div>
       </div>
-       <popUp v-show="isShowPopup" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteTrainOK"></popUp>
+      
+       <popUp v-show="isShowPopupTrain" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteTrainOK"></popUp>
       <!-- them dao tao -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddTrain">
-        <div class="action-form">
+        <div class="action-form" @keypress.enter="btnAddTraning">
           <div class="head-popup">
             <h3 class="title-heading">Thêm quá trình đào tạo</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormAddTrain = false">
@@ -291,8 +302,8 @@
           </div>
           
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__box">
@@ -330,13 +341,18 @@
               <input type="text" v-model="suaDaotao.BangCap">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormAddTrain = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isShowAddTrain=true">Hủy</div>
           <div class="btnSave" @click="btnAddTraning">Lưu</div>
         </div>
       </div>
+      <Notifi
+      v-show="isShowAddTrain"
+      @closeNotifi="closeNo"
+      @cancelNotifi="cancelFormAddTrain"
+    ></Notifi>
       <!-- sua dao tao-->
       <div class="popup-bonus" v-if="isOpenPopupFormEditTrain">
-        <div class="action-form">
+        <div class="action-form" @keypress.enter="editTrain">
           <div class="head-popup">
             <h3 class="title-heading">Sửa quá trình đào tạo</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormEditTrain = false">
@@ -359,8 +375,8 @@
             </div>
           </div>
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__box">
@@ -398,10 +414,15 @@
               <input type="text" v-model="suaDaotao.BangCap">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormEditTrain = false">Hủy</div>
+          <div class="btnCancel"  @click.stop="isShowEditTrain=true">Hủy</div>
           <div class="btnSave" @click="editTrain">Lưu</div>
         </div>
       </div>
+      <Notifi
+      v-show="isShowEditTrain"
+      @closeNotifi="closeNo"
+      @cancelNotifi="cancelFormEditTrain"
+    ></Notifi>
       <!-- end dao tao -->
 
       <!-- boi duong -->
@@ -470,10 +491,15 @@
           </table>
         </div>
       </div>
-      <popUp v-show="isShowPopup" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteFosOK"></popUp>
+      <Notifi
+      v-show="isShowAddFos"
+      @closeNotifi="closeNo"
+      @cancelNotifi="cancelFormAddFos"
+    ></Notifi>
+      <popUp v-show="isShowPopupFos" :msv="mess" @cancelNotifi="noDelete"  @closeNotifi="deleteFosOK"></popUp>
       <!-- them boi duong -->
       <div class="popup-bonus" v-if="isOpenPopupFormAddFostering">
-        <div class="action-form">
+        <div class="action-form"  @keypress.enter="btnAddFos">
           <div class="head-popup">
             <h3 class="title-heading">Thêm quá trình bồi dưỡng</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormAddFostering = false">
@@ -530,13 +556,18 @@
               <input type="text"  v-model="suaBoiDuong.VanBangChungChi">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormAddFostering = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isShowAddFos=true" >Hủy</div>
           <div class="btnSave" @click="btnAddFos">Lưu</div>
         </div>
       </div>
+      <Notifi
+      v-show="isShowEditFos"
+      @closeNotifi="closeNo"
+      @cancelNotifi="cancelFormEditFos"
+    ></Notifi>
       <!-- sua boi duong-->
       <div class="popup-bonus" v-if="isOpenPopupFormEditFostering">
-        <div class="action-form">
+        <div class="action-form"  @keypress.enter="btnEditFos">
           <div class="head-popup">
             <h3 class="title-heading">Sửa quá trình bồi dưỡng</h3>
             <div class="btn-close-popup" @click.stop="isOpenPopupFormEditFostering = false">
@@ -592,7 +623,7 @@
               <input type="text"  v-model="suaBoiDuong.VanBangChungChi">
             </div>
           </div>
-          <div class="btnCancel" @click.stop="isOpenPopupFormEditFostering = false">Hủy</div>
+          <div class="btnCancel" @click.stop="isShowEditFos=true">Hủy</div>
           <div class="btnSave" @click="btnEditFos">Lưu</div>
         </div>
       </div>
@@ -629,10 +660,13 @@
               <th>Họ và tên</th>
               <th>Ngày sinh</th>
               <th style="width: 40px">Giới tính</th>
+              <th style="width: 40px">Giới tính</th>
+            <div class="th-item-final sticky-right-top"> 
+              <th style="height: 42px; padding-top: 11px">Trình độ học vấn</th>
+              <th >Quá trình đào tạo</th>
+              <th >Quá trình bồi dưỡng</th>
+            </div>
             
-              <th>Trình độ học vấn</th>
-              <th>Quá trình đào tạo</th>
-              <th>Quá trình bồi dưỡng</th>
               <!-- <th
                 class="th-item-final sticky-right-top"
                 colspan="12"
@@ -665,22 +699,25 @@
               <td>{{ item.TenNV }}</td>
               <td>{{ formatDate(item.NgaySinh)}}</td>
               <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
+              <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
+             <div class="th-item-final sticky-right-top">
+              <td>
+                <div colspan="1" style="width: 121px;  box-sizing: border-box;" class="desc text-center"  @click="OpenPopupEducation(item)">
+                  Xem chi tiết
+                </div >
+              </td>
+              <td>
+                <div colspan="1" style="width: 121px; box-sizing: border-box;" class="desc text-center" @click="OpenPopupTrain(item)">
+                  Xem chi tiết
+                </div>
+              </td>
+              <td>
+                <div colspan="1" style="width: 121px; box-sizing: border-box;"  class="desc text-center" @click="OpenPopupFostering(item)">
+                  Xem chi tiết
+                </div>
+              </td>
+             </div>
               
-              <td>
-                <div class="desc "  @click="OpenPopupEducation(item)">
-                  Xem chi tiết
-                </div>
-              </td>
-              <td>
-                <div class="desc" @click="OpenPopupTrain(item)">
-                  Xem chi tiết
-                </div>
-              </td>
-              <td>
-                <div class="desc" @click="OpenPopupFostering(item)">
-                  Xem chi tiết
-                </div>
-              </td>
               <!-- <td
                 ref="func"
                 class="td-item-final td-func sticky-right"
@@ -783,6 +820,7 @@
   import Paginate from "vuejs-paginate-next";
   import { useToast } from "vue-toastification";
   import popUp from "../base/BasePopupDelete2.vue"
+ import Notifi from "../base/FormNotifi.vue"
   export default {
     data() {
       return {
@@ -806,8 +844,10 @@
         suaBoiDuong:{},
         hocvan:{},
         daotao:{},
-        boiduong:{},
-        isShowPopup:false,
+        boiduong:{},      
+        isShowPopupEdu:false,
+        isShowPopupFos:false,
+        isShowPopupTrain:false,
         IDNV:"",
         MaNV:"",
         TenNV:"",
@@ -815,12 +855,18 @@
         mess:"",
         dataSinhVienPunish:[],
         dataSinhVienBonus:{},
+        isShowNotifi:false,
+        isShowEditTrain:false,
+        isShowAddTrain:false,
+        isShowEditEdu:false,
+        isShowAddFos:false,
+        isShowEditFos:false,
 
         idDelete:"",
       }
     },
     components: {
-      Paginate,popUp
+      Paginate,popUp,Notifi
     },
     watch: {
     txtSearch: function () {
@@ -884,7 +930,45 @@
       thongbao() {
         alert("Xác nhận đóng");
       },
-
+      cancelForm() {
+      this.isShowNotifi = false;
+      this.isOpenPopupFormAddEducation = false
+    },
+    cancelFormEditEdu(value){
+      this.isShowEditEdu = value;
+      this.isOpenPopupFormEditEducation = false;
+    },
+    cancelFormAddTrain(value){
+      this.isShowAddTrain = value;
+      this.isOpenPopupFormAddTrain = false;
+    },
+    cancelFormEditTrain(value){
+      this.isShowEditTrain = value;
+      this.isOpenPopupFormEditTrain = false;
+    },
+    cancelFormAddFos(value){
+      this.isShowAddFos = value;
+      this.isOpenPopupFormAddFostering = false;
+    },
+    cancelFormEditFos(value){
+      this.isShowEditFos = value;
+      this.isOpenPopupFormEditFostering = false;
+    },
+    closeNo(value) {
+      this.isShowNotifi = value;
+      this.isShowAddFos = value;
+      this.isShowEditFos = value;
+      this.isShowEditTrain = value;
+      this.isShowAddTrain = value;
+      this.isShowEditEdu = value;
+    },
+    hideFormAddEdu(){
+      this.isShowNotifi = !this.isShowNotifi;
+    },
+    hideFormEditEdu(){
+      this.isShowNotifi = true;
+    },
+   
       getTrain(){
         try {
        
@@ -1028,16 +1112,20 @@
       },
 
       deleteEducation(item){
-        this.isShowPopup=true
+        this.idDelete=""
+        console.log(item.IDHocVan);
+        this.isShowPopupEdu=true
        this.idDelete=item.IDHocVan
        this.mess="Bạn có chắc chắn muốn xóa thông tin học vấn này không?"
     
       },
       noDelete(value){
-       this.isShowPopup=value
+       this.isShowPopupEdu=value
+       this.isShowPopupTrain=value
+       this.isShowPopupFos=value
       },
       deleteOK(value){
-        this.isShowPopup=value
+        this.isShowPopupEdu=value
         var me=this
       const toast = useToast();
       try{
@@ -1123,12 +1211,13 @@
 
       },
       deleteTrain(item){
-        this.isShowPopup=true
+        this.idDelete=""
+        this.isShowPopupTrain=true
        this.idDelete=item.IDDaoTao
        this.mess="Bạn có chắc chắn muốn xóa thông tin đào tạo này không?"
       },
       deleteTrainOK(value){
-        this.isShowPopup=value
+        this.isShowPopupTrain=value
         var me=this
       const toast = useToast();
       try{
@@ -1223,12 +1312,13 @@
           }
       },
       deleteFos(item){
-        this.isShowPopup=true
+        this.idDelete=""
+        this.isShowPopupFos=true
        this.idDelete=item.IDBoiDuong
        this.mess="Bạn có chắc chắn muốn xóa thông tin bồi dưỡng này không?"
       },
       deleteFosOK(value){
-        this.isShowPopup=value
+        this.isShowPopupFos=value
         var me=this
       const toast = useToast();
       try{
@@ -1331,6 +1421,26 @@
   };
   </script>
   <style scoped>
+  table, :target {
+    border: none;
+  
+    background-color: white;
+    margin-top: 0px;
+}
+table[data-v-0e273c10], tr[data-v-0e273c10]{
+  padding: 0px 0px 5px 0px;
+}
+th {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    text-align: left;
+    padding: 0px 10px;
+    height: 35px;
+    box-sizing: border-box;
+}
+table {
+    width: 90%;
+}
   .btnSave {
     width: 85px;
     border: 1px solid;
@@ -1436,7 +1546,10 @@ ul.pagination a {
  
   color: #727272;
 }
-
+.text-center{
+  align-items: center;
+  padding-top: 13px;
+}
 .page-item {
   margin: 5px;
   width: 20px;

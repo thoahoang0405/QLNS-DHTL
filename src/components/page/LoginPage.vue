@@ -1,8 +1,8 @@
 <template>
-  <div class="login">
-    <div class="login-content">
+  <div class="login" >
+    <div class="login-content" >
       <div class="login-content-image"></div>
-      <div class="login-content-form">
+      <div class="login-content-form" @keypress.enter="onClickLogin">
         <div class="logo">
           <img src="../../assets/img/Logo-DH-Thuy-Loi.webp" alt="" />
         </div>

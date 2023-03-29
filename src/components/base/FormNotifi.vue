@@ -2,7 +2,10 @@
     <div class="notification-wrap">
             <div class="notification">
                 <div class="warring">
-                    <i class="icon-warning"></i>
+                    <div>
+                         <div class="icon-warning"></div>
+                    </div>
+                   
                     <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
                 </div>
                 <div class="btn-wrap">
@@ -36,7 +39,7 @@
 <style>
 .notification-wrap {
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 4;
+    z-index: 3 !important;
     width: 100%;
     height: 100%;
     margin: auto;
@@ -45,7 +48,7 @@
   
     }
     .notification{
-        z-index: 3;
+        z-index: 5;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -92,15 +95,20 @@
     }
     .btnNotifi:hover {
         opacity: 0.8;
-        color: red;
+        color: #fff;
     }
     .btn-secondary{
         border: 1px solid #1A8FDD;
+        height: 25px;
+    }
+    .btn-primary:hover{
+        color: #1A8FDD;
     }
     .btn-primary{
         margin-right: 40px;
         background-color: #1A8FDD;
         color: #fff;
+        height: 25px;
     }
     @media screen and (max-width: 767.98px) {
         .notification{

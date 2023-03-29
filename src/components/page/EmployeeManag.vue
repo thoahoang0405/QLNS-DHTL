@@ -257,7 +257,10 @@
     <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
       <div class="notification">
           <div class="warring">
-              <i class="icon-warning"></i>
+            <div>
+              <div class="icon-warning"></div>
+            </div>
+           
               <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
           </div>
           <div class="btn-wrap">
@@ -583,12 +586,12 @@
             <td class="text-center">{{ index+1 }}</td>
             <td>{{ emp.MaNV }}</td>
             <td>{{ emp.TenNV }}</td>
-            <td>{{ emp.NgaySinh }}</td>
-            <td>{{ emp.GioiTinh }}</td>
+            <td>{{ formatDate(emp.NgaySinh) }}</td>
+            <td>{{ gender(emp.GioiTinh) }}</td>
             <td>{{  emp.TonGiao }}</td>
             <td>{{  emp.DanToc }}</td>
             <td>{{  emp.CCCD }}</td>
-            <td>{{  emp.NgayCap }}</td>
+            <td>{{  formatDate(emp.NgayCap) }}</td>
             <td>{{  emp.NoiCap }}</td>
             <td>{{ emp.Email }}</td>
             <td>{{ emp.DiaChi }}</td>
@@ -603,7 +606,7 @@
                 <div class="desc" @click="OpenPopupState(emp)">
                   Xem chi tiết
                 </div>
-            </td>
+            </td> 
             <td
               ref="func"
               class="td-item-final td-func sticky-right; align-items: center;"
@@ -696,7 +699,7 @@
       </div>
     </div>
   </div>
-  <popUp v-show="isShowPopup" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
+  <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
 <Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
 <!-- <div id="load" ></div> -->
 </template>
@@ -708,6 +711,10 @@
   .border-red {
   border: 1px solid red;
   }
+  table {
+    
+    margin-top: 0px;
+}
   .desc {
   color: red;
   cursor: pointer;
@@ -1088,6 +1095,9 @@ export default {
     },
   },
   methods: {
+    hideNotifi(value){
+      this.isShowPopup=value
+    },
     OpenPopupCurriculumVitae(emp) {
         this.isOpenPopupCurriculumVitae = true;
         this.dataSinhVienPunish = emp
@@ -1189,7 +1199,7 @@ export default {
     },
     deleteEmployee(emp){
       this.isShowPopup=!this.isShow
-      this.empCodeDelete= emp.IDNhanVien
+      this.empCodeDelete= emp.MaNV
       this.empID=emp.IDNhanVien
     },
    
