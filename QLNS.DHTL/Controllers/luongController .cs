@@ -81,8 +81,8 @@ namespace QLNS.DHTL.Controllers
                     workSheet.Cells[3, 8].Value = " Ngạch lương ";
                     workSheet.Cells[3, 9].Value = " Tên phụ cấp ";
                     workSheet.Cells[3, 10].Value = " Giá trị phụ cấp ";
-                    workSheet.Cells[3, 11].Value = " BHXH ";
-                    workSheet.Cells[3, 12].Value = " BHYT ";
+                    workSheet.Cells[3, 11].Value = " BHXH(%) ";
+                    workSheet.Cells[3, 12].Value = " BHYT(%) ";
                     workSheet.Cells[3, 13].Value = " Phần trăm hưởng lương ";
                     workSheet.Cells[3, 14].Value = " Tháng ";
                     workSheet.Cells[3, 15].Value = " Năm ";
