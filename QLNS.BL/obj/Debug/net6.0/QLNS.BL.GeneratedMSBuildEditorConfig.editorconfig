@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = QLNS.BL
-build_property.ProjectDir = D:\dhtl\ptda\API\QLNS.DHTL\QLNS.BL\
+build_property.ProjectDir = D:\API\QLNS-DHTL\QLNS.BL\

@@ -7,8 +7,9 @@
     "\\QLNS.DL\\BaseDL",
     "\\QLNS.DL\\ContractDL",
     "\\QLNS.DL\\EmployeeDL",
-    "\\QLNS.DL\\StatusStudentDL"
+    "\\QLNS.DL\\StatusStudentDL",
+    "\\QLNS.DL\\TranningCertificationDL"
   ],
-  "SelectedNode": "\\QLNS.DL\\BaseDL\\BaseDL.cs",
+  "SelectedNode": "\\QLNS.DHTL.sln",
   "PreviewInSolutionExplorer": false
 }
