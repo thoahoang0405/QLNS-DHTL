@@ -81,18 +81,18 @@ namespace QLNS.DHTL.Controllers
                     workSheet.DefaultRowHeight = 12;
 
                     workSheet.Row(1).Height = 20;
-                    workSheet.Cells["A1:O1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    workSheet.Cells["A1:P1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     workSheet.Row(1).Style.Font.Bold = true;
-                    workSheet.Cells["A1:O1"].Merge = true;
-                    workSheet.Cells["A1:O1"].Value = "DANH SÁCH NHÂN VIÊN";
-                    workSheet.Cells["A1:O1"].Style.Font.Size = 16;
+                    workSheet.Cells["A1:P1"].Merge = true;
+                    workSheet.Cells["A1:P1"].Value = "DANH SÁCH NHÂN VIÊN";
+                    workSheet.Cells["A1:P1"].Style.Font.Size = 16;
 
 
                     workSheet.Row(3).Height = 15;
                     workSheet.Row(3).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     workSheet.Row(3).Style.Font.Bold = true;
-                    workSheet.Cells["A3:O3"].Style.Font.Size = 13;
-                    workSheet.Cells["A3:O3"].Style.Fill.SetBackground(System.Drawing.Color.LightGray);
+                    workSheet.Cells["A3:P3"].Style.Font.Size = 13;
+                    workSheet.Cells["A3:P3"].Style.Fill.SetBackground(System.Drawing.Color.LightGray);
                     workSheet.Cells[3, 1].Value = "STT";
                     workSheet.Cells[3, 2].Value = " ID nhân viên ";
                     workSheet.Cells[3, 3].Value = " Mã nhân viên ";
@@ -107,8 +107,9 @@ namespace QLNS.DHTL.Controllers
                     workSheet.Cells[3, 12].Value = " Email ";
                     workSheet.Cells[3, 13].Value = " Địa chỉ ";
                     workSheet.Cells[3, 14].Value = " Số Điện Thoại ";
-                    workSheet.Cells[3, 15].Value = " Tên Khoa ";
-                  
+                    workSheet.Cells[3, 15].Value = " Mã Khoa ";
+                    workSheet.Cells[3, 16].Value = " Tên Khoa ";
+
 
 
                     int index = 4;
@@ -148,9 +149,7 @@ namespace QLNS.DHTL.Controllers
                         workSheet.Cells[index, 14].Value = employee.SDT;
                         workSheet.Cells[index, 15].Value = employee.MaKhoa;
                         workSheet.Cells[index, 16].Value = employee.TenKhoa;
-                        //workSheet.Cells[index, 16].Value = employee.BankAccount;
-                        //workSheet.Cells[index, 17].Value = employee.BankName;
-                        //workSheet.Cells[index, 18].Value = employee.BankBranch;
+                      
                         for (var i = 1; i < 17; i++)
                         {
                             workSheet.Cells[index, i].Style.Border.BorderAround(ExcelBorderStyle.Thin);
