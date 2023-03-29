@@ -25,14 +25,14 @@
         <div class="column">
           <div class="input__box">
             <label for="">Mã nhân viên <span>*</span></label>
-            <input @blur="validateEmployeeCode" class="manv" :class="errors.manv!=''? 'borderRed' : ''" type="text" v-model="employee.EmployeeCode" />
+            <input @blur="validateEmployeeCode" class="manv" :class="errors.manv!=''? 'borderRed' : ''" type="text" v-model="employee.MaNV" />
             <div v-if="errors.manv!=''" class="invalid-feedback">
               {{ errors.manv }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Tên nhân viên <span>*</span></label>
-            <input @blur="validateName" :class="errors.ten!=''? 'borderRed' : ''" class="ten" type="text" v-model="employee.EmployeeName" />
+            <input @blur="validateName" :class="errors.ten!=''? 'borderRed' : ''" class="ten" type="text" v-model="employee.TenNV" />
             <div class="invalid-feedback" v-if="errors.ten!=''">
               {{ errors.ten }}
             </div>
@@ -43,14 +43,14 @@
               <input
                 type="radio"
                 id="nam"
-                v-model="employee.Gender"
+                v-model="employee.GioiTinh"
                 value="0"
               />
               <label class="nam" for="">Nam</label>
               <input
                 type="radio"
                 id="nu"
-                v-model="employee.Gender"
+                v-model="employee.GioiTinh"
                 value="1"
               />
               <label class="nu" for="">Nữ</label>
@@ -65,10 +65,9 @@
             <label for="">Ngày sinh </label>
             <input
             :class="errors.ngaysinh!=''? 'borderRed' : ''"
-            @blur="validateDateOfBirth"
             class="ngaysinh"
             type="date"
-            v-model="employee.DateOfBirth"
+            v-model="employee.NgaySinh"
             />
             <div class="invalid-feedback" v-if="errors.ngaysinh!=''">
               {{ errors.ngaysinh }}
@@ -76,7 +75,7 @@
           </div>
           <div class="input__box">
             <label for="">Số điện thoại</label>
-            <input class="sodt" type="text" v-model="employee.Phonenumber" />
+            <input class="sodt" type="text" v-model="employee.SDT" />
             <div class="invalid-feedback" v-if="errors.sodt">
               {{ errors.sodt }}
             </div>
@@ -93,21 +92,21 @@
         <div class="column">
           <div class="input__box">
             <label for="">Địa chỉ</label>
-            <input @blur="validate" class="diachi" type="text" v-model="employee.Adress" />
+            <input @blur="validate" class="diachi" type="text" v-model="employee.DiaChi" />
             <div class="invalid-feedback" v-if="errors.diachi">
               {{ errors.diachi }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Dân tộc</label>
-            <input class="dantoc" type="text" v-model="employee.Nation" />
+            <input class="dantoc" type="text" v-model="employee.DanToc" />
             <div class="invalid-feedback" v-if="errors.dantoc">
               {{ errors.dantoc }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Tôn giáo</label>
-            <input class="tongiao" type="text" v-model="employee.Religion" />
+            <input class="tongiao" type="text" v-model="employee.TonGiao" />
             <div class="invalid-feedback" v-if="errors.tongiao">
               {{ errors.tongiao }}
             </div>
@@ -117,7 +116,7 @@
         <div class="column">
           <div class="input__box">
             <label for="">Cmnd/cccd <span>*</span></label>
-            <input @blur="validateIdentity" class="cmnd" type="text" :class="errors.cmnd!=''? 'borderRed' : ''" v-model="employee.IdentityNumber" />
+            <input @blur="validateIdentity" class="cmnd" type="text" :class="errors.cmnd!=''? 'borderRed' : ''" v-model="employee.CCCD" />
             <div class="invalid-feedback" v-if="errors.cmnd!=''">
               {{ errors.cmnd }}
             </div>
@@ -231,7 +230,7 @@ export default {
         this.employee.IDNhanVien=value.IDNhanVien
     },
     code: function(vl){
-        this.employee.EmployeeCode=vl
+        this.employee.MaNV=vl
     },
     FormMode: function(value){
         this.formMode=value
@@ -399,7 +398,7 @@ this.isShowPop=value
 
     validateEmployeeCode() {
       
-      if (!this.employee.EmployeeCode) {
+      if (!this.employee.MaNV) {
         this.errors.manv = " Mã nhân viên không được để trống!";
         this.isValid = false;
       }else{
@@ -408,7 +407,7 @@ this.isShowPop=value
       }
       },
       validateName() {
-      if (!this.employee.EmployeeName) {
+      if (!this.employee.TenNV) {
         this.errors.ten = "Tên nhân viên Không được để trống!";
         this.isValid = false;
         // document.getElementsByClassName('ten').classList.add('borderRed')
@@ -420,7 +419,7 @@ this.isShowPop=value
       }
     },
     validateIdentity() {
-      if (!this.employee.IdentityNumber) {
+      if (!this.employee.CCCD) {
         this.errors.cmnd = "CCCD Không được để trống!";
         this.isValid = false;
       }else{
@@ -447,10 +446,10 @@ this.isShowPop=value
       return validRegex.test(value);
     },
     validateDateOfBirth(){
-    if (this.employee.DateOfBirth) {
-        this.employee.DateOfBirth = new Date(this.employee.DateOfBirth)
+    if (this.employee.NgaySinh) {
+        this.employee.NgaySinh = new Date(this.employee.NgaySinh)
       }
-      if (this.employee.DateOfBirth > new Date() && this.employee.DateOfBirth) {
+      if (this.employee.NgaySinh > new Date() && this.employee.NgaySinh) {
         this.isValid = false;
         this.errors.ngaysinh="Ngày sinh không được lớn hơn ngày hiện tại!"
      

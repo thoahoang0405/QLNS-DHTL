@@ -1325,7 +1325,7 @@ export default {
       
        axios
          .get(
-          "https://localhost:44301/api​/nhanvien​/NewCode"
+          "https://localhost:44301/api/nhanvien/NewCode"
          )
          .then(function (res) {
           me.newCode=res.data
