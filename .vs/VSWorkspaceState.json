@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ConsoleApp1",
+    "\\QLNS.COMMON",
+    "\\QLNS.COMMON\\Entities",
     "\\QLNS.DHTL",
     "\\QLNS.DL",
     "\\QLNS.DL\\BaseDL",
@@ -10,6 +11,6 @@
     "\\QLNS.DL\\StatusStudentDL",
     "\\QLNS.DL\\TranningCertificationDL"
   ],
-  "SelectedNode": "\\QLNS.DHTL.sln",
+  "SelectedNode": "\\QLNS.COMMON\\Entities\\hocvan.cs",
   "PreviewInSolutionExplorer": false
 }

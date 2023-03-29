@@ -12,14 +12,17 @@ namespace QLNS.COMMON.Entities
     public class hocvan
     {
         
+
        [Key]
         public Guid IDHocVan { get; set; }
         public Guid IDNhanVien { get; set; }
         public string? TrinhDoLLCT { get; set; }
         public string? TrinhDoQLGD { get; set; }
+        public string? TrinhDoQLNN { get; set; }
         public string? TrinhDoTinHoc { get; set; }
         public string? ChungChiNgoaiNgu { get; set; }
-       
-        
+        public string? TinhTrangHocVan { get; set; }
+
+
     }
 }

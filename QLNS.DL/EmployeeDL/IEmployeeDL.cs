@@ -11,6 +11,6 @@ namespace QLNS.DL
 {
     public interface IEmployeeDL : IBaseDL<nhanvien>
     {
-        public PagingData<nhanvien> FilterEmployee(string? keyword, int? pageSize, Guid? IDKhoa,  int? pageNumber);
+        public PagingData<nhanvien> FilterEmployee(string? keyword, int? pageSize, Guid? IDKhoa, int? pageNumber = 1);
     }
 }
