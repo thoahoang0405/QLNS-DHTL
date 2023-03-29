@@ -1,9 +1,11 @@
 <template>
     <div class="notification-wrap">
-            <div class="notification">
+            <div class="notificationn">
                 <div class="warringgg">
-                  
-                        <i class="icon-warning"></i>
+                  <div>
+                    <div class="icon-warning"></div>
+                  </div>
+                       
                     
                     
                     <div class="warrning-title">Bạn có chắc chắn xóa nhân viên có mã  {{ msv }} không?</div>
@@ -55,7 +57,7 @@
     display: flex;
   
     }
-    .notification{
+    .notificationn{
         z-index: 3;
         position: absolute;
         left: 50%;

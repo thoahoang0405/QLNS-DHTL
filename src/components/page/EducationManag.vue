@@ -640,7 +640,7 @@
       </div>
       <!-- table -->
       <div id="m-table" class="m-table">
-        <table id="tbEmployee" class="table">
+        <table id="tbEmployee" class="table" style="width: 100%;">
           <thead>
             <tr>
               <th
@@ -660,10 +660,13 @@
               <th>Họ và tên</th>
               <th>Ngày sinh</th>
               <th style="width: 40px">Giới tính</th>
+              <th style="width: 40px">Giới tính</th>
+            <div class="th-item-final sticky-right-top"> 
+              <th style="height: 42px; padding-top: 11px">Trình độ học vấn</th>
+              <th >Quá trình đào tạo</th>
+              <th >Quá trình bồi dưỡng</th>
+            </div>
             
-              <th>Trình độ học vấn</th>
-              <th>Quá trình đào tạo</th>
-              <th>Quá trình bồi dưỡng</th>
               <!-- <th
                 class="th-item-final sticky-right-top"
                 colspan="12"
@@ -696,22 +699,25 @@
               <td>{{ item.TenNV }}</td>
               <td>{{ formatDate(item.NgaySinh)}}</td>
               <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
+              <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
+             <div class="th-item-final sticky-right-top">
+              <td>
+                <div colspan="1" style="width: 121px;  box-sizing: border-box;" class="desc text-center"  @click="OpenPopupEducation(item)">
+                  Xem chi tiết
+                </div >
+              </td>
+              <td>
+                <div colspan="1" style="width: 121px; box-sizing: border-box;" class="desc text-center" @click="OpenPopupTrain(item)">
+                  Xem chi tiết
+                </div>
+              </td>
+              <td>
+                <div colspan="1" style="width: 121px; box-sizing: border-box;"  class="desc text-center" @click="OpenPopupFostering(item)">
+                  Xem chi tiết
+                </div>
+              </td>
+             </div>
               
-              <td>
-                <div class="desc "  @click="OpenPopupEducation(item)">
-                  Xem chi tiết
-                </div>
-              </td>
-              <td>
-                <div class="desc" @click="OpenPopupTrain(item)">
-                  Xem chi tiết
-                </div>
-              </td>
-              <td>
-                <div class="desc" @click="OpenPopupFostering(item)">
-                  Xem chi tiết
-                </div>
-              </td>
               <!-- <td
                 ref="func"
                 class="td-item-final td-func sticky-right"
@@ -1336,15 +1342,12 @@
       },
       getPagingEmployee() {
       try {
-       
         var me = this;
-       
         axios
           .get(
              `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
-          
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
             me.students = res.data.Data;
@@ -1418,6 +1421,26 @@
   };
   </script>
   <style scoped>
+  table, :target {
+    border: none;
+  
+    background-color: white;
+    margin-top: 0px;
+}
+table[data-v-0e273c10], tr[data-v-0e273c10]{
+  padding: 0px 0px 5px 0px;
+}
+th {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    text-align: left;
+    padding: 0px 10px;
+    height: 35px;
+    box-sizing: border-box;
+}
+table {
+    width: 90%;
+}
   .btnSave {
     width: 85px;
     border: 1px solid;
@@ -1523,7 +1546,10 @@ ul.pagination a {
  
   color: #727272;
 }
-
+.text-center{
+  align-items: center;
+  padding-top: 13px;
+}
 .page-item {
   margin: 5px;
   width: 20px;

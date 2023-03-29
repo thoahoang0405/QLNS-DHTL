@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <!-- so yeu ly lich -->
-    <div class="popup-bonus" v-if="isOpenPopupCurriculumVitae">
+    <!-- <div class="popup-bonus" v-if="isOpenPopupCurriculumVitae">
         <div class="bonus-form">
           <div class="head-popup">
             <h2 class="title-heading">Sơ yếu lý lịch</h2>
@@ -26,19 +26,19 @@
           </div>
           <div>
           <div class="education-header">
-              <div class="maNV">Mã nhân viên: abc</div>
-              <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+              <div class="maNV">Mã nhân viên:  {{ MaNV }}</div>
+              <div class="tenNV">Tên nhân viên:  {{ TenNV }}</div>
               <div class="btnWrap">
                 <div class="btnEdit" @click="OpenPopupFormEditCurriculumVitae(item)">Sửa lý lịch</div>
-                <!-- <div class="btnEdit">Sửa</div> -->
-              </div>
-          </div>
-      <form class="formm">
+                <div class="btnEdit">Sửa</div> -->
+              <!-- </div>
+          </div> -->
+      <!-- <form class="formm" v-for="item of nhanvien" :key="item.IDNhanVien">
         <div class="form-Wrap">
           <div class="column">
             <div class="input__boxx">
               <label for="">Ngày sinh </label>
-              <input
+              <input 
                 class="ngaysinh"
                 type="date"
               />
@@ -46,7 +46,7 @@
             <div class="input__boxx">
               <label for="">Giới tính</label>
               <div class="radio__box">
-                <input
+                <input 
                   type="radio"
                   id="nam"
                   value="0"
@@ -114,7 +114,7 @@
         
         </div>
         
-      </form>
+      </form> -->
     <!-- <notifi
       v-show="isShowNotifi"
       @closeNotifi="closeNo"
@@ -122,9 +122,9 @@
     ></notifi> -->
     <!-- <popUpDup @closeNotifi="closePoup" v-show="isShowPop"></popUpDup> -->
     
-  </div>
+  <!-- </div>
         </div>
-    </div>
+    </div> -->
     <!-- sua ly lich -->
     <div class="popup-bonus" v-if="isOpenPopupFormEditCurriculumVitae">
         <div class="bonus-form">
@@ -150,8 +150,8 @@
             </div>
           </div>
           <div class="education-header">
-              <div class="maNV">Mã nhân viên: abc</div>
-              <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+              <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+              <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
               <div class="btnWrap">
               </div>
           </div>
@@ -241,7 +241,7 @@
         </div>
     </div>
     <!-- Cảnh báo thêm lý lịch-->
-    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+    <!-- <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
       <div class="notification">
           <div class="warring">
               <i class="icon-warning"></i>
@@ -252,12 +252,15 @@
               <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifi = false">Không</div>
           </div>
       </div>
-      </div>
+      </div> -->
     <!-- cảnh báo sửa lý lịch-->
     <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
       <div class="notification">
           <div class="warring">
-              <i class="icon-warning"></i>
+            <div>
+              <div class="icon-warning"></div>
+            </div>
+           
               <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
           </div>
           <div class="btn-wrap">
@@ -292,8 +295,8 @@
             </div>
           </div>
           <div class="education-header">
-            <div class="maNV">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
               <div class="btnAdd" @click="OpenPopupAddState(item)">Thêm</div>
               <div class="btnEdit" @click="OpenPopupEditState(item)">Sửa</div>
@@ -318,12 +321,12 @@
             <!-- <th style="width: 60px;">Chức năng</th> -->
             <tr>
             </tr>
-            <tr>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Độc thân</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Bố làm ruộng, mẹ làm ruộng, chị bán hàng</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">Nghỉ hè</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">12/3/2019</td>
-              <td style="border: 1px solid #c7c7c7; width: 150px;">12/3/2023</td>
+            <tr v-for="emp of tinhtrang" :key="emp.IDTinhTrang">
+              <td style="border: 1px solid #c7c7c7; width: 150px;"></td>
+              <td style="border: 1px solid #c7c7c7; width: 250px;"></td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ emp.TenTinhTrang }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ emp.NgayBD }}</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">{{ emp.NgayKT }}</td>
               
               <!-- <td 
               ref="func"
@@ -364,8 +367,8 @@
           </div>
           
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__state">
@@ -426,8 +429,8 @@
             </div>
           </div>
           <div style="display: flex; font-weight: 600; margin: 20px 0;">
-            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: abc</div>
-            <div class="tenNV">Tên nhân viên: Ngô Văn Tùng</div>
+            <div class="maNV" style="padding-right: 40px;">Mã nhân viên: {{ MaNV }}</div>
+            <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           </div>
           <div class="column">
             <div class="input__state">
@@ -551,7 +554,7 @@
               <th>Địa chỉ</th>
               <th>SĐT</th>
               <th>Tên Khoa</th>
-              <th>Sơ yếu lý lịch</th>
+              <!-- <th>Sơ yếu lý lịch</th> -->
               <th>Trạng thái</th>
              
             <th
@@ -565,7 +568,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <tr ref="row" v-for="(emp, index) of employees" :key="emp.IDNhanVien">
             <td
               ref="rowCheck"
@@ -583,30 +586,27 @@
             <td class="text-center">{{ index+1 }}</td>
             <td>{{ emp.MaNV }}</td>
             <td>{{ emp.TenNV }}</td>
-            <!-- <td>{{ gender(emp.Gender) }}</td> -->
             <td>{{ formatDate(emp.NgaySinh) }}</td>
-            <td>{{ gender(emp.gioiTinh) }}</td>
-            <!-- <td>{{ emp.IdentityNumber }}</td> -->
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ gender(emp.GioiTinh) }}</td>
+            <td>{{  emp.TonGiao }}</td>
+            <td>{{  emp.DanToc }}</td>
+            <td>{{  emp.CCCD }}</td>
+            <td>{{  formatDate(emp.NgayCap) }}</td>
+            <td>{{  emp.NoiCap }}</td>
             <td>{{ emp.Email }}</td>
             <td>{{ emp.DiaChi }}</td>
             <td>{{ emp.SDT }}</td>
             <td>{{ emp.TenKhoa }}</td>
-            <td>
-                <div class="desc" @click="OpenPopupCurriculumVitae(item)">
-                  Xem chi tiết
-                </div>
-            </td>
             <!-- <td>
-                <div class="desc" @click="OpenPopupState(item)">
+                <div class="desc" @click="OpenPopupCurriculumVitae(emp)">
                   Xem chi tiết
                 </div>
             </td> -->
+            <td>
+                <div class="desc" @click="OpenPopupState(emp)">
+                  Xem chi tiết
+                </div>
+            </td> 
             <td
               ref="func"
               class="td-item-final td-func sticky-right; align-items: center;"
@@ -614,8 +614,8 @@
               colspan="12"
             >
               <div class="edit-text"></div> 
-              <div class="icon icon-edit" @click="editEmployee(emp)" ></div>
-                <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
+              <div class="icon icon-edit" @click="OpenPopupFormEditCurriculumVitae(emp)" ></div>
+              <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
         </tbody>
@@ -699,7 +699,7 @@
       </div>
     </div>
   </div>
-  <popUp v-show="isShowPopup" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
+  <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
 <Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
 <!-- <div id="load" ></div> -->
 </template>
@@ -711,6 +711,10 @@
   .border-red {
   border: 1px solid red;
   }
+  table {
+    
+    margin-top: 0px;
+}
   .desc {
   color: red;
   cursor: pointer;
@@ -1072,11 +1076,15 @@ export default {
       empID:"",
       MaNV:"",
       TenNV:"",
+      nhanvien: {},
+      suanhanvien: {},
+      tinhtrang: {},
+      IDNV:"",
     };
   },
   created() {
     this.getPagingEmployee()
-    this.getDepartment()
+    // this.getDepartment()
     // this.getPosition()
   },
   watch: {
@@ -1087,17 +1095,83 @@ export default {
     },
   },
   methods: {
-    OpenPopupCurriculumVitae(item) {
+    hideNotifi(value){
+      this.isShowPopup=value
+    },
+    OpenPopupCurriculumVitae(emp) {
         this.isOpenPopupCurriculumVitae = true;
-        this.dataSinhVienPunish = item
+        this.dataSinhVienPunish = emp
+        this.IDNV = emp.IDNhanVien
+        this.MaNV = emp.MaNV
+        this.TenNV = emp.TenNV
+        try {
+       
+       var me = this;
+       
+       axios
+         .get(
+             `https://localhost:44301/api/nhanvien/${this.IDNV}`
+         )
+         .then(function (res) {
+         me.tinhtrang=res.data
+         })
+         
+         .catch(function () {
+           console.log(1);
+         });
+        } catch (error) {
+          console.log(error);
+        }
     },
-    OpenPopupFormEditCurriculumVitae(item) {
+    OpenPopupFormEditCurriculumVitae(emp) {
       this.isOpenPopupFormEditCurriculumVitae = true;
-      this.dataSinhVienPunish = item
+      this.dataSinhVienPunish = emp;
+      this.IDNV = emp.IDNhanVien
+        this.MaNV = emp.MaNV
+        this.TenNV = emp.TenNV
+        try {
+       
+          var me = this;
+          
+          axios
+            .get(
+                `https://localhost:44301/api/nhanvien/${this.IDNV}`
+            )
+            .then(function (res) {
+            me.hocvan=res.data
+            })
+            
+            .catch(function () {
+              console.log(1);
+            });
+        } catch (error) {
+          console.log(error);
+        }
     },
-    OpenPopupState(item) {
+    OpenPopupState(emp) {
         this.isOpenPopupState = true;
-        this.dataSinhVienPunish = item
+        this.dataSinhVienPunish = emp
+        this.IDNV = emp.IDNhanVien
+        this.MaNV = emp.MaNV
+        this.TenNV = emp.TenNV
+        try {
+       
+       var me = this;
+       
+       axios
+         .get(
+             `https://localhost:44301/api/tinhtrang/${this.IDNV}`
+         )
+         .then(function (res) {
+         me.tinhtrang=res.data
+         })
+         
+         .catch(function () {
+           console.log(1);
+         });
+        } catch (error) {
+          console.log(error);
+        }
     },
     OpenPopupAddState(item) {
         this.isOpenPopupAddState = true;
@@ -1125,7 +1199,7 @@ export default {
     },
     deleteEmployee(emp){
       this.isShowPopup=!this.isShow
-      this.empCodeDelete= emp.IDNhanVien
+      this.empCodeDelete= emp.MaNV
       this.empID=emp.IDNhanVien
     },
    
@@ -1160,7 +1234,6 @@ export default {
     },
     getPagingEmployee() {
       try {
-       
         var me = this;
        me.isShowLoad=true
         axios
@@ -1186,27 +1259,28 @@ export default {
         console.log(error);
       }
     },
-    getDepartment(){
-      try {
+    
+    // getPosition(){
+    //   try {
        
-       var me = this;
+    //    var me = this;
       
-       axios
-         .get(
-          "https://localhost:44301/api/khoa"
-         )
-         .then(function (res) {
-          me.department=res.data
-         })
+    //    axios
+    //      .get(
+    //       "https://localhost:44301/api/Position"
+    //      )
+    //      .then(function (res) {
+    //       me.position=res.data
+    //      })
         
-         .catch(function () {
-           console.log(1);
-         });
-     } catch (error) {
-       console.log(error);
-     }
+    //      .catch(function () {
+    //        console.log(1);
+    //      });
+    //  } catch (error) {
+    //    console.log(error);
+    //  }
 
-    },
+    // },
     formatDate(date) {
       try {
         if (date) {
@@ -1222,18 +1296,28 @@ export default {
         return "";
       }
     },
-    selectItemCbb(value) {
+    // selectItemCbb(value) {
     
-      if (value.IDKhoa) {
-        this.IDKhoa = value.IDKhoa;
+    //   if (value.IDKhoa) {
+    //     this.IDKhoa = value.IDKhoa;
+    //   } else {
+    //     this.IDKhoa = "";
+    //     this.getPagingEmployee();
+    //   }
+    //   this.getPagingEmployee();
+     
+    // },
+    selectItemCategory(value) {
+      console.log(value.PositionsID);
+      if (value.PositionsID) {
+        this.positionID = value.PositionsID;
+        
       } else {
-        this.IDKhoa = "";
+        this.positionID= "";
         this.getPagingEmployee();
       }
       this.getPagingEmployee();
-     
     },
-  
     showPage(is) {
       this.isShowDrop = is;
     },

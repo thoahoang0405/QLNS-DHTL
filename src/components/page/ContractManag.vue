@@ -29,38 +29,36 @@
           <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           <div class="btnWrap">
             <div class="btnAdd" @click="OpenPopupFormAddPosition(item)">Thêm</div>
-            <div class="btnEdit" @click="OpenPopupFormEditPosition(item)">Sửa</div>
+            <!-- <div class="btnEdit" @click="OpenPopupFormEditPosition(item)">Sửa</div> -->
           </div>
         </div>
-        <div class="form">
-          <form action="">
-            <div class="column">
-              <div class="input__box">
-                <label for="">Mã chức vụ</label>
-                <input type="text"/>
-              </div>
-              <div class="input__box">
-                <label for="">Tên chức vụ</label>
-                <input type="text"/>
-              </div>
-            </div>
-            <div class="column">
-              <div class="input__box">
-                <label for="">Thời gian bắt đầu</label>
-                <input type="text"/>
-              </div>
-              <div class="input__box">
-                <label for="">Thời gian kết thúc</label>
-                <input type="text"/>
-              </div>
-              <div class="input__box">
-                <label for="">Định mức giảng dạy</label>
-                <input type="text"/>
-              </div>
-            </div>
-          </form>
-          <div class="btnDelete" style="bottom: -140px;">Xóa</div>
-        </div>
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
+            <tr>
+              <th>Tên chức vụ</th>
+              <th>ĐỊnh mức giảng dạy</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
+              <th style="width: 100px;">Chức năng</th>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td 
+              ref="func"
+              class="td-item-final td-func"
+              style="background-color: #fff; align-items: center; border: 1px solid #c7c7c7; column-gap: 10px;"
+              colspan="12"
+              >
+                <div class="icon icon-edit" @click="OpenPopupFormEditPosition(item)"></div>
+                <div class="icon icon-delete" @click="OpenPopupDeleteNotifi(item)"></div>
+              </td>
+            </tr>
+          </table>
+        <!-- <div class="btnDelete" style="bottom: -140px;">Xóa</div> -->
       </div>
     </div>
     <!-- them chuc vu -->
@@ -219,36 +217,22 @@
           </div>
       </div>
     </div>
-
-    <!-- cảnh báo thêm hợp đồng -->
-    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
-    <div class="notification">
-        <div class="warring">
-            <i class="icon-warning"></i>
-            <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
-        </div>
-        <div class="btn-wrap">
-            <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifiCV = false, isOpenPopupFormAddContract=false)" >Hủy</div>
-            <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifiCV = false">Không</div>
-        </div>
-    </div>
-    </div>
-    <!-- cảnh báo sửa hợp đồng-->
-    <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
+     <!-- cảnh báo xóa chức vụ-->
+     <div class="notification-wrap" v-if="isOpenPopupDeleteNotifi">
       <div class="notification">
           <div class="warring">
               <i class="icon-warning"></i>
-              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+              <div class="warrning-title">Thông tin chức vụ của sinh viên. Bạn có muốn xóa thông tin không?</div>
           </div>
           <div class="btn-wrap">
-              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
-              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">Không</div>
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupDeleteNotifi = false, isOpenPopupFormEditContract=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupDeleteNotifi = false">Không</div>
           </div>
       </div>
     </div>
-
-      <!-- hop dong -->
-      <div class="popup-bonus" v-if="isOpenPopupContract">
+    <!-- hợp đồng -->
+    <!-- hop dong -->
+    <div class="popup-bonus" v-if="isOpenPopupContract">
         <div class="bonus-form">
           <div class="head-popup">
             <h3 class="title-heading">Thông tin hợp đồng</h3>
@@ -276,43 +260,41 @@
             <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
             <div class="btnWrap">
               <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-              <div class="btnEdit" @click="OpenPopupFormEditContract(item)">Sửa</div>
+              <!-- <div class="btnEdit" @click="OpenPopupFormEditContract(item)">Sửa</div> -->
             </div>
           </div>
           <div class="form">
-            <form action="">
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Mã hợp đồng</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Tên hợp đồng</label>
-                  <input type="text"/>
-                </div>
-              </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Ngày kí</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Ngày bắt đầu</label>
-                  <input type="text"/>
-                </div>
-                <div class="input__box">
-                  <label for="">Ngày kết thúc</label>
-                  <input type="text"/>
-                </div>
-              </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Mô tả</label>
-                  <textarea style="width: 97%;height: 60px;margin-top: 5px;"></textarea>
-                </div>
-              </div>
-            </form>
-            <div class="btnDelete" style="bottom: -16px">Xóa</div>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
+            <tr>
+              <th>Mã hợp đồng</th>
+              <th>Tên hợp đồng</th>
+              <th>Ngày ký</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
+              <th>Mô tả</th>
+              <th style="width: 100px;">Chức năng</th>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td style="border: 1px solid #c7c7c7; width: 150px;">Giỏi</td>
+              <td 
+              ref="func"
+              class="td-item-final td-func"
+              style="background-color: #fff; align-items: center; border: 1px solid #c7c7c7; column-gap: 10px;"
+              colspan="12"
+              >
+                <div class="icon icon-edit" @click="OpenPopupFormEditContract(item)"></div>
+                <div class="icon icon-delete" @click="OpenPopupDeleteNotifiCV(item)"></div>
+              </td>
+            </tr>
+          </table>
+            <!-- <div class="btnDelete" style="bottom: -16px">Xóa</div> -->
           </div>
           
         </div>
@@ -458,6 +440,47 @@
         </div>
       </div>
       <!-- end hop dong -->
+    <!-- cảnh báo thêm hợp đồng -->
+    <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+    <div class="notification">
+        <div class="warring">
+            <i class="icon-warning"></i>
+            <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+        </div>
+        <div class="btn-wrap">
+            <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupAddNotifiCV = false, isOpenPopupFormAddContract=false)" >Hủy</div>
+            <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifiCV = false">Không</div>
+        </div>
+    </div>
+    </div>
+    <!-- cảnh báo xóa hợp đồng-->
+    <div class="notification-wrap" v-if="isOpenPopupDeleteNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin hợp đồng của sinh viên. Bạn có muốn xóa thông tin không?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupDeleteNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupDeleteNotifiCV = false">Không</div>
+          </div>
+      </div>
+    </div>
+    <!-- cảnh báo sửa hợp đồng-->
+    <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
+      <div class="notification">
+          <div class="warring">
+              <i class="icon-warning"></i>
+              <div class="warrning-title">Thông tin bạn vừa nhập chưa được lưu. Bạn có muốn hủy thông tin?</div>
+          </div>
+          <div class="btn-wrap">
+              <div class="btnNotifi btn-secondary" @click.stop="(isOpenPopupEditNotifiCV = false, isOpenPopupFormEditContract=false)" >Hủy</div>
+              <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">Không</div>
+          </div>
+      </div>
+    </div>
+
+      
 
       <h3 class="header-bd">Quản lý hợp đồng</h3>
       <div class="body-header">
@@ -470,7 +493,7 @@
       </div>
       <!-- table -->
       <div id="m-table" class="m-table">
-        <table id="tbEmployee" class="table">
+        <table id="tbEmployee" class="table" style="width: 100%;">
           <thead>
             <tr>
               <th
@@ -624,6 +647,8 @@
         isOpenPopupAddNotifi: false,
         isOpenPopupAddNotifiCV: false,
         isOpenPopupEditNotifiCV: false,
+        isOpenPopupDeleteNotifiCV: false,
+        isOpenPopupDeleteNotifi: false,
         pageDefault:10,
         pageNumber: 1,
         txtSearch:"",
@@ -758,34 +783,42 @@
       this.isOpenPopupEditNotifiCV = true;
       this.dataSinhVienPunish = item
     },
-      getPagingEmployee() {
-      try {
-       
-        var me = this;
-       me.isShowLoad=true
-        axios
-          .get(
-            `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
-           
-          )
-          .then(function (res) {
-          console.log(res);
-            me.totalPage = res.data.TotalPages;
-            me.totalRecord = res.data.TotalRecords;
-            me.employees = res.data.Data;
-            console.log( me.totalPage);
-            console.log(me.employees);
-            me.isShowLoad=false
-            
-          })
-         
-          .catch(function () {
-            console.log(1);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+    OpenPopupDeleteNotifiCV(item) {
+      this.isOpenPopupDeleteNotifiCV = true;
+      this.dataSinhVienPunish = item
     },
+    OpenPopupDeleteNotifi(item) {
+      this.isOpenPopupDeleteNotifi = true;
+      this.dataSinhVienPunish = item
+    },
+    //   getPagingEmployee() {
+    //   try {
+       
+    //     var me = this;
+    //    me.isShowLoad=true
+    //     axios
+    //       .get(
+    //         `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
+           
+    //       )
+    //       .then(function (res) {
+    //       console.log(res);
+    //         me.totalPage = res.data.TotalPages;
+    //         me.totalRecord = res.data.TotalRecords;
+    //         me.employees = res.data.Data;
+    //         console.log( me.totalPage);
+    //         console.log(me.employees);
+    //         me.isShowLoad=false
+            
+    //       })
+         
+    //       .catch(function () {
+    //         console.log(1);
+    //       });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
       getpagingStudent() {
       try {
        
