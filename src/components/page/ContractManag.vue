@@ -49,9 +49,11 @@
         <!-- <div class="btnDelete" style="bottom: -140px;">Xóa</div> -->
       </div>
     </div>
+    <popUp v-show="isShowPopupPosition" :msv="mess" @cancelNotifi="noDelete" @closeNotifi="deletePosition"></popUp>
+
     <!-- them chuc vu -->
     <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
-      <div class="bonus-form">
+      <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Thêm chức vụ</h3>
           <div class="btn-close-popup" @click.stop="isOpenPopupAddNotifi = true">
@@ -75,25 +77,21 @@
         </div>
         <div class="form">
           <form action="">
-            <div class="column">
-              <div class="input__box">
-                <label for="">Tên chức vụ</label>
-                <input type="text" v-model="suaChucVu.TenChucVu" />
-              </div>
-              <div class="input__box">
-                <label for="">Thời gian bắt đầu</label>
-                <input type="date" v-model="suaChucVu.ThoiGianBatDau" />
-              </div>
+            <div class="input__box">
+              <label for="">Tên chức vụ</label>
+              <input type="text" v-model="suaChucVu.TenChucVu" />
             </div>
-            <div class="column">
-              <div class="input__box">
-                <label for="">Thời gian kết thúc</label>
-                <input type="date" v-model="suaChucVu.ThoiGianKetThuc" />
-              </div>
-              <div class="input__box">
-                <label for="">Định mức giảng dạy</label>
-                <input type="text" v-model="suaChucVu.DinhMucGiangDay" />
-              </div>
+            <div class="input__box">
+              <label for="">Thời gian bắt đầu</label>
+              <input type="date" v-model="suaChucVu.ThoiGianBatDau" />
+            </div>
+            <div class="input__box">
+              <label for="">Thời gian kết thúc</label>
+              <input type="date" v-model="suaChucVu.ThoiGianKetThuc" />
+            </div>
+            <div class="input__box">
+              <label for="">Định mức giảng dạy</label>
+              <input type="text" v-model="suaChucVu.DinhMucGiangDay" />
             </div>
           </form>
         </div>
@@ -103,7 +101,7 @@
     </div>
     <!-- sua chuc vu-->
     <div class="popup-bonus" v-if="isOpenPopupFormEditPosition">
-      <div class="bonus-form">
+      <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa chức vụ</h3>
           <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifi = true">
@@ -126,25 +124,21 @@
         </div>
         <div class="form">
           <form action="">
-            <div class="column">
-              <div class="input__box">
-                <label for="">Tên chức vụ</label>
-                <input type="text" v-model="suaChucVu.TenChucVu" />
-              </div>
-              <div class="input__box">
-                <label for="">Thời gian bắt đầu</label>
-                <input type="date" v-model="suaChucVu.ThoiGianBatDau" />
-              </div>
+            <div class="input__box">
+              <label for="">Tên chức vụ</label>
+              <input type="text" v-model="suaChucVu.TenChucVu" />
             </div>
-            <div class="column">
-              <div class="input__box">
-                <label for="">Thời gian kết thúc</label>
-                <input type="date" v-model="suaChucVu.ThoiGianKetThuc" />
-              </div>
-              <div class="input__box">
-                <label for="">Định mức giảng dạy</label>
-                <input type="text" v-model="suaChucVu.DinhMucGiangDay" />
-              </div>
+            <div class="input__box">
+              <label for="">Thời gian bắt đầu</label>
+              <input type="date" v-model="suaChucVu.ThoiGianBatDau" />
+            </div>
+            <div class="input__box">
+              <label for="">Thời gian kết thúc</label>
+              <input type="date" v-model="suaChucVu.ThoiGianKetThuc" />
+            </div>
+            <div class="input__box">
+              <label for="">Định mức giảng dạy</label>
+              <input type="text" v-model="suaChucVu.DinhMucGiangDay" />
             </div>
           </form>
         </div>
@@ -187,7 +181,7 @@
       </div>
     </div>
     <!-- cảnh báo xóa chức vụ-->
-    <div class="notification-wrap" v-if="isOpenPopupDeleteNotifi">
+    <!-- <div class="notification-wrap" v-if="isOpenPopupDeleteNotifi">
       <div class="notification">
         <div class="warring">
           <div>
@@ -201,11 +195,11 @@
           <div class="btnNotifi btn-primary" @click="isOpenPopupDeleteNotifi = false">Không</div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- hợp đồng -->
     <!-- hop dong -->
     <div class="popup-bonus" v-if="isOpenPopupContract">
-      <div class="bonus-formm">
+      <div class="bonus-form">
         <div class="head-popup">
           <h3 class="title-heading">Thông tin hợp đồng</h3>
           <div class="btn-close-popup" @click.stop="isOpenPopupContract = false">
@@ -226,8 +220,8 @@
             <!-- <div class="btnEdit" @click="OpenPopupFormEditContract(item)">Sửa</div> -->
           </div>
         </div>
-        <div class="form">
-          <table style="width: 67%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
+        <div class="formm">
+          <table style="width: 100%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
             <tr>
               <th>Tên hợp đồng</th>
               <th>Ngày ký</th>
@@ -257,6 +251,8 @@
 
       </div>
     </div>
+    <popUp v-show="isShowPopupContract" :msv="mess" @cancelNotifi="noDelete" @closeNotifi="deleteNotifiContract"></popUp>
+
     <!-- them hop dong -->
     <div class="popup-bonus" v-if="isOpenPopupFormAddContract">
       <div class="bonus-formm">
@@ -391,7 +387,7 @@
       </div>
     </div>
     <!-- cảnh báo xóa hợp đồng-->
-    <div class="notification-wrap" v-if="isOpenPopupDeleteNotifiCV">
+    <!-- <div class="notification-wrap" v-if="isOpenPopupDeleteNotifiCV">
       <div class="notification">
         <div class="warring">
           <div>
@@ -402,10 +398,10 @@
         <div class="btn-wrap">
           <div class="btnNotifi btn-secondary"
             @click.stop="(isOpenPopupDeleteNotifiCV = false, isOpenPopupFormEditContract = false)">Hủy</div>
-          <div class="btnNotifi btn-primary" @click="isOpenPopupDeleteNotifiCV = false">Không</div>
+          <div class="btnNotifi btn-primary" @click="deleteDeleteNotifiCV">Xóa</div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- cảnh báo sửa hợp đồng-->
     <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
       <div class="notification">
@@ -430,7 +426,7 @@
       <div class="row-input">
         <div class="input">
           <input type="text" class="search" placeholder="Tìm kiếm" v-model="txtSearch"
-            @keypress.enter="getPagingEmployee" />
+            @keypress.enter="getpagingStudent" />
           <div class="icon-search icon"></div>
         </div>
       </div>
@@ -525,6 +521,7 @@ import axios from "axios"
 import $ from "jquery"
 import Paginate from "vuejs-paginate-next";
 import { useToast } from "vue-toastification";
+import popUp from "../base/BasePopupDelete2.vue"
 export default {
   data() {
     return {
@@ -557,10 +554,14 @@ export default {
       TenNV: "",
       suaChucVu: {},
       suaHopDong: {},
+      mess: "",
+      idDelete: "",
+      isShowPopupContract: false,
+      isShowPopupPosition: false
     };
   },
   components: {
-    Paginate
+    Paginate, popUp
   },
   watch: {
     txtSearch: function () {
@@ -574,52 +575,6 @@ export default {
 
   },
   methods: {
-    // SavePunish(){
-    //   var me= this
-    //   const toast = useToast();
-    //   try {
-
-    //     axios
-    //       .post(
-    //         "https://localhost:44301/api/Discipline",this.dataSinhVienPunish
-    //       )
-    //       .then(function (res) {
-    //         console.log(res)
-    //         toast.success("thêm dữ liệu thành công", { timeout: 2000 });
-    //         me.isOpenPopupPosition=false
-    //       })
-    //       .catch(function () {
-    //         console.log("error");
-    //         toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
-    //       });
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    // },
-    // SaveBonus(){
-    //   var me= this
-    //   const toast = useToast();
-    //   try {
-    //     axios
-    //       .post(
-    //         "https://localhost:44301/api/Bonus",
-
-    //           this.dataSinhVienBonus
-
-    //       )
-    //       .then(function (res) {
-    //         console.log(res)
-    //         toast.success("thêm dữ liệu thành công", { timeout: 2000 });
-    //         me.isOpenPopupContract()
-    //       })
-    //       .catch(function () {
-    //         console.log("error");
-    //         toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
-    //       });
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    // },
     thongbao() {
       alert("Xác nhận đóng");
     },
@@ -760,7 +715,7 @@ export default {
       try {
         axios
           .post(
-            "https://localhost:44301/api/chucvu", this.suaHopDong
+            "https://localhost:44301/api/hopdong", this.suaHopDong
           )
           .then(function (res) {
             console.log(res)
@@ -810,39 +765,88 @@ export default {
         console.log(error);
       }
     },
-    OpenPopupFormAddFostering(item) {
+    OpenPopupFormAddFostering() {
       this.isOpenPopupFormAddFostering = true;
-      this.dataSinhVienPunish = item
     },
-    OpenPopupFormEditFostering(item) {
+    OpenPopupFormEditFostering() {
       this.isOpenPopupFormEditFostering = true;
-      this.dataSinhVienPunish = item
     },
-    OpenPopupAddNotifi(item) {
+    OpenPopupAddNotifi() {
       this.isOpenPopupAddNotifi = true;
-      this.dataSinhVienPunish = item
     },
-    OpenPopupEditNotifi(item) {
+    OpenPopupEditNotifi() {
       this.isOpenPopupEditNotifi = true;
-      this.dataSinhVienPunish = item
     },
-    OpenPopupAddNotifiCV(item) {
+    OpenPopupAddNotifiCV() {
       this.isOpenPopupAddNotifiCV = true;
-      this.dataSinhVienPunish = item
     },
-    OpenPopupEditNotifiCV(item) {
+    OpenPopupEditNotifiCV() {
       this.isOpenPopupEditNotifiCV = true;
-      this.dataSinhVienPunish = item
     },
     OpenPopupDeleteNotifiCV(item) {
+      this.idDelete = ""
+      this.isShowPopupContract = true
       this.isOpenPopupDeleteNotifiCV = true;
-      this.dataSinhVienPunish = item
+      this.idDelete = item.IDHopDong
+      this.mess = "Bạn có chắc chắn muốn xóa thông tin hợp đồng này không?"
+    },
+    deleteNotifiContract(value) {
+      this.isShowPopupContract = value
+      var me = this
+      const toast = useToast();
+      try {
+        axios
+          .delete(
+            `https://localhost:44301/api/hopdong/${this.idDelete}`
+          )
+          .then(function (res) {
+            console.log(res);
+            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+            me.getContract()
+          })
+
+          .catch(function () {
+            toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+
+          });
+      } catch (error) {
+        console.log(error);
+      }
     },
     OpenPopupDeleteNotifi(item) {
-      this.isOpenPopupDeleteNotifi = true;
-      this.dataSinhVienPunish = item
+      this.idDelete = ""
+      this.isShowPopupPosition = true
+      // this.isOpenPopupDeleteNotifi = true;
+      this.idDelete = item.IDChucVu
+      this.mess = "Bạn có chắc chắn muốn xóa thông tin chức vụ này không?"
     },
+    deletePosition(value) {
+      this.isShowPopupPosition = value
+      var me = this
+      const toast = useToast();
+      try {
+        axios
+          .delete(
+            `https://localhost:44301/api/chucvu/${this.idDelete}`
+          )
+          .then(function (res) {
+            console.log(res);
+            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+            me.getPosition()
+          })
 
+          .catch(function () {
+            toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    noDelete(value) {
+      this.isShowPopupContract = value
+      this.isShowPopupPosition = value
+    },
     getpagingStudent() {
       try {
 
@@ -1188,12 +1192,12 @@ tbody tr td {
 .bonus-form {
   padding: 0px 20px;
   position: absolute;
-  width: 33vw;
+  width: 50vw;
   height: 490px;
   /* height: auto; */
   margin: 0 auto;
   top: 15%;
-  right: 15%;
+  right: 11.5%;
   z-index: 99999;
   border-radius: 20px;
   box-shadow: 5px 5px 5px;
@@ -1203,12 +1207,12 @@ tbody tr td {
 .bonus-formm {
   padding: 0px 20px;
   position: absolute;
-  width: 33vw;
+  width: 40vw;
   height: 490px;
   /* height: auto; */
   margin: 0 auto;
-  top: 15%;
-  right: 15%;
+  top: 11.5%;
+  right: 28%;
   z-index: 99999;
   border-radius: 20px;
   box-shadow: 5px 5px 5px;
@@ -1327,13 +1331,21 @@ tbody tr:hover .td-item-final {
 }
 
 .form input {
-  width: 90%;
+  width: 100%;
   margin-top: 5px;
   margin-bottom: 10px;
 }
 
 .form {
-  width: fit-content;
+  width: 40%;
+  height: fit-content;
+  background-color: #fff;
+  margin: auto auto;
+  border-radius: 8px;
+}
+
+.formm {
+  width: 100%;
   height: fit-content;
   background-color: #fff;
   margin: auto auto;
