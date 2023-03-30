@@ -393,7 +393,6 @@ export default {
         this.isValid = false;
         // document.getElementsByClassName('ten').classList.add('borderRed')
       }
-
       else {
         this.errors.ten = "";
         this.isValid = true;

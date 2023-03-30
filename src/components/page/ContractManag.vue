@@ -79,7 +79,10 @@
           <form action="">
             <div class="input__box">
               <label for="">Tên chức vụ</label>
-              <input type="text" v-model="suaChucVu.TenChucVu" />
+              <input @blur="validateName" type="text" v-model="suaChucVu.TenChucVu" />
+              <div class="invalid-feedback" v-if="errors.tenchucvu != ''">
+                {{ errors.tenchucvu }}
+              </div>
             </div>
             <div class="input__box">
               <label for="">Thời gian bắt đầu</label>
@@ -91,12 +94,15 @@
             </div>
             <div class="input__box">
               <label for="">Định mức giảng dạy</label>
-              <input type="text" v-model="suaChucVu.DinhMucGiangDay" />
+              <input @blur="validateNorm" type="text" v-model="suaChucVu.DinhMucGiangDay" />
+              <div class="invalid-feedback" v-if="errors.dinhmucgiangday != ''">
+                {{ errors.dinhmucgiangday }}
+              </div>
             </div>
           </form>
         </div>
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
-        <div class="btnSave" @click="btnAddPosition">Lưu</div>
+        <div class="btnSave" @click="savePosition">Lưu</div>
       </div>
     </div>
     <!-- sua chuc vu-->
@@ -127,6 +133,9 @@
             <div class="input__box">
               <label for="">Tên chức vụ</label>
               <input type="text" v-model="suaChucVu.TenChucVu" />
+              <!-- <div class="invalid-feedback" v-if="errors.tenchucvu != ''">
+                {{ errors.tenchucvu }}
+              </div> -->
             </div>
             <div class="input__box">
               <label for="">Thời gian bắt đầu</label>
@@ -139,6 +148,9 @@
             <div class="input__box">
               <label for="">Định mức giảng dạy</label>
               <input type="text" v-model="suaChucVu.DinhMucGiangDay" />
+              <!-- <div class="invalid-feedback" v-if="errors.dinhmucgiangday != ''">
+                {{ errors.dinhmucgiangday }}
+              </div> -->
             </div>
           </form>
         </div>
@@ -281,21 +293,33 @@
             <div class="column">
               <div class="input__box">
                 <label for="">Tên hợp đồng</label>
-                <input type="text" v-model="suaHopDong.TenHD" />
+                <input @blur="validateNameHD" type="text" v-model="suaHopDong.TenHD" />
+                <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
+                  {{ errors.tenhopdong }}
+                </div>
               </div>
               <div class="input__box">
                 <label for="">Ngày kí</label>
-                <input type="date" v-model="suaHopDong.NgayKi" />
+                <input @blur="validateNgayKi" type="date" v-model="suaHopDong.NgayKi" />
+                <div class="invalid-feedback" v-if="errors.ngayki != ''">
+                  {{ errors.ngayki }}
+                </div>
               </div>
             </div>
             <div class="column">
               <div class="input__box">
                 <label for="">Ngày bắt đầu</label>
-                <input type="date" v-model="suaHopDong.NgayBD" />
+                <input @blur="validateNgayBD" type="date" v-model="suaHopDong.NgayBD" />
+                <div class="invalid-feedback" v-if="errors.ngaybatdau != ''">
+                  {{ errors.ngaybatdau }}
+                </div>
               </div>
               <div class="input__box">
                 <label for="">Ngày kết thúc</label>
-                <input type="date" v-model="suaHopDong.NgayKT" />
+                <input @blur="validateNgayKT" type="date" v-model="suaHopDong.NgayKT" />
+                <div class="invalid-feedback" v-if="errors.ngayketthuc != ''">
+                  {{ errors.ngayketthuc }}
+                </div>
               </div>
             </div>
             <div class="column">
@@ -307,7 +331,7 @@
           </form>
         </div>
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifiCV = true">Hủy</div>
-        <div class="btnSave" @click="btnAddContract">Lưu</div>
+        <div class="btnSave" @click="saveContract">Lưu</div>
       </div>
     </div>
     <!-- sua hop dong-->
@@ -334,36 +358,46 @@
           </div>
         </div>
         <div class="form">
-          <div class="form">
-            <form action="">
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Tên hợp đồng</label>
-                  <input type="text" v-model="suaHopDong.TenHD" />
-                </div>
-                <div class="input__box">
-                  <label for="">Ngày kí</label>
-                  <input type="date" v-model="suaHopDong.NgayKi" />
-                </div>
+          <form action="">
+            <div class="column">
+              <div class="input__box">
+                <label for="">Tên hợp đồng</label>
+                <input type="text" v-model="suaHopDong.TenHD" />
+                <!-- <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
+                  {{ errors.tenhopdong }}
+                </div> -->
               </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Ngày bắt đầu</label>
-                  <input type="date" v-model="suaHopDong.NgayBD" />
-                </div>
-                <div class="input__box">
-                  <label for="">Ngày kết thúc</label>
-                  <input type="date" v-model="suaHopDong.NgayKT" />
-                </div>
+              <div class="input__box">
+                <label for="">Ngày kí</label>
+                <input type="date" v-model="suaHopDong.NgayKi" />
+                <!-- <div class="invalid-feedback" v-if="errors.ngayki != ''">
+                  {{ errors.ngayki }}
+                </div> -->
               </div>
-              <div class="column">
-                <div class="input__box">
-                  <label for="">Mô tả</label>
-                  <textarea v-model="suaHopDong.Mota" style="width: 95%;height: 60px;margin-top: 5px;"></textarea>
-                </div>
+            </div>
+            <div class="column">
+              <div class="input__box">
+                <label for="">Ngày bắt đầu</label>
+                <input type="date" v-model="suaHopDong.NgayBD" />
+                <!-- <div class="invalid-feedback" v-if="errors.ngaybatdau != ''">
+                  {{ errors.ngaybatdau }}
+                </div> -->
               </div>
-            </form>
-          </div>
+              <div class="input__box">
+                <label for="">Ngày kết thúc</label>
+                <input type="date" v-model="suaHopDong.NgayKT" />
+                <!-- <div class="invalid-feedback" v-if="errors.ngayketthuc != ''">
+                  {{ errors.ngayketthuc }}
+                </div> -->
+              </div>
+            </div>
+            <div class="column">
+              <div class="input__box">
+                <label for="">Mô tả</label>
+                <textarea v-model="suaHopDong.Mota" style="width: 95%;height: 60px;margin-top: 5px;"></textarea>
+              </div>
+            </div>
+          </form>
         </div>
         <div class="btnCancel" @click.stop="isOpenPopupEditNotifiCV = true">Hủy</div>
         <div class="btnSave" @click="btnEditContract">Lưu</div>
@@ -557,7 +591,17 @@ export default {
       mess: "",
       idDelete: "",
       isShowPopupContract: false,
-      isShowPopupPosition: false
+      isShowPopupPosition: false,
+      isValid: true,
+      formMode: 1,
+      errors: {
+        tenchucvu: '',
+        dinhmucgiangday: '',
+        ngayki: '',
+        tenhopdong: '',
+        ngaybatdau: '',
+        ngayketthuc: '',
+      }
     };
   },
   components: {
@@ -645,6 +689,7 @@ export default {
         this.suaChucVu.IDNhanVien = this.IDNV
     },
     btnAddPosition() {
+
       var me = this
       const toast = useToast();
       me.suaChucVu.IDNhanVien = me.IDNV
@@ -667,6 +712,18 @@ export default {
           });
       } catch (error) {
         console.log(error);
+      }
+    },
+    savePosition() {
+      this.validateName()
+      this.validateNorm()
+      if (this.isValid == true) {
+        if (this.formMode == 1) {
+          this.btnAddPosition()
+        }
+        else {
+          this.btnEditPosition()
+        }
       }
     },
     OpenPopupFormEditPosition(item) {
@@ -730,6 +787,20 @@ export default {
           });
       } catch (error) {
         console.log(error);
+      }
+    },
+    saveContract() {
+      this.validateNameHD()
+      this.validateNgayKi()
+      this.validateNgayBD()
+      this.validateNgayKT()
+      if (this.isValid == true) {
+        if (this.formMode == 1) {
+          this.btnAddContract()
+        }
+        else {
+          this.btnEditContract()
+        }
       }
     },
     OpenPopupFormEditContract(item) {
@@ -916,6 +987,73 @@ export default {
       this.pageNumber = pageNum;
       this.getpagingStudent();
     },
+
+    validateName() {
+      if (!this.suaChucVu.TenChucVu) {
+        this.errors.tenchucvu = "Tên chức vụ Không được để trống!";
+        this.isValid = false;
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      else {
+        this.errors.tenchucvu = "";
+        this.isValid = true;
+      }
+    },
+    validateNorm() {
+      if (!this.suaChucVu.DinhMucGiangDay) {
+        this.errors.dinhmucgiangday = "Định mức giảng dạy không được để trống!";
+        this.isValid = false;
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      else {
+        this.errors.dinhmucgiangday = "";
+        this.isValid = true;
+      }
+    },
+    validateNameHD() {
+      if (!this.suaHopDong.TenHD) {
+        this.errors.tenhopdong = "Tên hợp đồng không được để trống!";
+        this.isValid = false;
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      else {
+        this.errors.tenhopdong = "";
+        this.isValid = true;
+      }
+    },
+    validateNgayKi() {
+      if (!this.suaHopDong.NgayKi) {
+        this.errors.ngayki = "Ngày kí không được để trống!";
+        this.isValid = false;
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      else {
+        this.errors.ngayki = "";
+        this.isValid = true;
+      }
+    },
+    validateNgayBD() {
+      if (!this.suaHopDong.NgayBD) {
+        this.errors.ngaybatdau = "Ngày bắt đầu không được để trống!";
+        this.isValid = false;
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      else {
+        this.errors.ngaybatdau = "";
+        this.isValid = true;
+      }
+    },
+    validateNgayKT() {
+      if (!this.suaHopDong.NgayKT) {
+        this.errors.ngayketthuc = "Ngày kết thúc không được để trống!";
+        this.isValid = false;
+        // document.getElementsByClassName('ten').classList.add('borderRed')
+      }
+      else {
+        this.errors.ngayketthuc = "";
+        this.isValid = true;
+      }
+    },
   },
 
   // 
@@ -923,6 +1061,13 @@ export default {
 };
 </script>
 <style scoped>
+.invalid-feedback {
+  color: red;
+  position: absolute;
+  font-size: 12px;
+  /* border: 2px solid red; */
+}
+
 .btnSave {
   background-color: #7EA1F9;
   position: absolute;
@@ -1208,7 +1353,7 @@ tbody tr td {
   padding: 0px 20px;
   position: absolute;
   width: 40vw;
-  height: 490px;
+  height: 510px;
   /* height: auto; */
   margin: 0 auto;
   top: 11.5%;
@@ -1333,7 +1478,7 @@ tbody tr:hover .td-item-final {
 .form input {
   width: 100%;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .form {
