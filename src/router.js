@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Recruit from "./components/page/RecruitManag.vue";
+import Recruit from "./components/page/SalaryManag.vue";
 import Document from "./components/page/ContractManag.vue";
 import Employee from './components/page/EmployeeManag.vue'
 import Bonus from "./components/page/BonusCis.vue";
@@ -31,7 +31,7 @@ const routes =  [
               component: Bonus,
             },
             {
-              path: "/tuyendung",
+              path: "/luong",
               component: Recruit,
             },
             {

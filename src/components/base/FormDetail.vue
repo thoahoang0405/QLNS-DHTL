@@ -447,30 +447,7 @@ value.DateOfBirth=this.formatDate(value.DateOfBirth)
     // gửi lệnh ẩn form từ bên này sang trang chính
     closeForm() {
       // this.$emit("hideForm", false);
-      (this.isShowNotifi = true),
-      
-      this.errors = {
-        masv: "",
-        ten: "",
-        ngaysinh: "",
-        khoa: "",
-        cmnd: "",
-        ngaycap: "",
-        noicap: "",
-        email: "",
-        sodt: "",
-        masothue: "",
-        sotaikhoan: "",
-        tennganhang: "",
-        trangthai: "",
-        capbacluong: "",
-        phongban: "",
-        tinhtrang: "",
-        diachi: "",
-        daotao: "",
-        khenthuong: "",
-        kyluat: "",
-      };
+      this.$emit("hideForm", false);
     },
 
     validateStudentCode() {

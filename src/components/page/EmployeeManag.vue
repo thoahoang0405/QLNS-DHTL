@@ -701,7 +701,14 @@
   </div>
   <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
 <Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
-<!-- <div id="load" ></div> -->
+<div id="load" v-show="isShowLoad">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </template>
 <style>
 @import url('../../css/page/loading.css');

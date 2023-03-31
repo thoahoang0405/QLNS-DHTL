@@ -627,6 +627,14 @@
       </div>
     </div>
     <Form v-show="isShow" @hideForm="closeForm"></Form>
+    <div id="load" v-show="isShowLoad">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   </template>
   <script>
   import axios from "axios"
@@ -657,8 +665,8 @@
         students:{},
         isShowDrop:false,
         dataSinhVienPunish:[],
-        dataSinhVienBonus:{}
-
+        dataSinhVienBonus:{},
+        isShowLoad:false
       };
     },
     components: {
@@ -823,7 +831,7 @@
       try {
        
         var me = this;
-       
+       this.isShowLoad=true
         axios
           .get(
             `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
@@ -833,7 +841,7 @@
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
             me.students = res.data.Data;
-            
+            this.isShowLoad=false
            
             
           })

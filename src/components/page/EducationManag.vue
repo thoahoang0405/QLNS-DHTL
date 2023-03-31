@@ -813,6 +813,14 @@
       </div>
     </div>
     <Form v-show="isShow" @hideForm="closeForm"></Form>
+    <div id="load" v-show="isShowLoad">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   </template>
   <script>
   import axios from "axios"
@@ -861,7 +869,7 @@
         isShowEditEdu:false,
         isShowAddFos:false,
         isShowEditFos:false,
-
+        isShowLoad:false,
         idDelete:"",
       }
     },
@@ -1343,14 +1351,17 @@
       getPagingEmployee() {
       try {
         var me = this;
+        this.isShowLoad=true
         axios
           .get(
              `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
+            this.isShowLoad=false
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
             me.students = res.data.Data;
+           
           })
          
           .catch(function () {
