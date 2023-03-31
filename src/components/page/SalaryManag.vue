@@ -19,9 +19,7 @@
        
       </div>
       <div class="button-function">
-        <div class="add">
-          <button @click="btnAddOnclick" class="btn-add btn-hover-blue">+ Thêm nhân viên</button>
-        </div>
+       
 
         <button class="btn-excel">
           <a class="icon icon-excell" :href="`https://localhost:44301/api/luong/ExportExcel?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&nam=${this.year}&thang=${this.month}&pageNumber=${this.pageNumber}`" download>

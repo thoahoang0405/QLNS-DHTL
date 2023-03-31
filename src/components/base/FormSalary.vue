@@ -1,6 +1,6 @@
 <template>
   <!-- Cảnh báo thêm lý lịch-->
-    <!-- <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
+  <!-- <div class="notification-wrap" v-if="isOpenPopupAddNotifiCV">
       <div class="notification">
           <div class="warring">
               <i class="icon-warning"></i>
@@ -32,24 +32,28 @@
               :code="'IDCVHT'"
               :fieldName="'TenCVHT'"
               @selectedItem="selectPositionNow"
+              :border="errors.chucvu != '' ? 'borderRed' : ''"
+              @onBlur="validateCV"
             ></combobox>
-            <div v-if="errors.CV!=''" class="invalid-feedback">
-              {{ errors.CV }}
+            <div v-if="errors.chucvu != ''" class="invalid-feedback">
+              {{ errors.chucvu }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Hệ số lương <span>*</span></label>
-            <input @blur="validateName"  class="HSL" type="text" v-model="salary.HeSoLuong" />
-            <div class="invalid-feedback" v-if="errors.HSL!=''">
-              {{ errors.HSL }}
-            </div>
+            <input
+              @blur="validateName"
+              class="HSL"
+              type="text"
+              v-model="salary.HeSoLuong"
+            />
           </div>
-          
         </div>
         <div class="column">
           <div class="input__box">
             <label for="">Tên phụ cấp</label>
             <combobox
+              style="margin-top: 2px"
               class="khoa"
               :value="salary.TenPhuCap"
               :items="phucap"
@@ -57,72 +61,83 @@
               :fieldName="'TenPhuCap'"
               @selectedItem="selectCbb"
             ></combobox>
-            <div class="invalid-feedback" v-if="errors.pc!=''">
-              {{ errors.pc }}
-            </div>
           </div>
           <div class="input__box">
             <label for="">Giá trị phụ cấp</label>
             <input class="sodt" type="text" v-model="salary.GiaTriPhuCap" />
-            <div class="invalid-feedback" v-if="errors.GTPC">
-              {{ errors.GTPC }}
-            </div>
           </div>
-        
         </div>
         <div class="column">
           <div class="input__box">
             <label for="">Ngạch lương</label>
             <combobox
+              style="margin-top: 2px"
               class="khoa"
               :value="salary.MaNgachLuong"
               :items="ngachluong"
               :code="'IDNgachLuong'"
               :fieldName="'MaNgachLuong'"
               @selectedItem="selectS"
+              :border="errors.ngachLuong != '' ? 'borderRed' : ''"
+              @onBlur="validateNgachLuong"
             ></combobox>
+            <div class="invalid-feedback" v-if="errors.ngachLuong">
+              {{ errors.ngachLuong }}
+            </div>
           </div>
           <div class="input__box">
             <label for="">BHYT(%)</label>
             <input class="dantoc" type="text" v-model="salary.BHYT" />
-            <div class="invalid-feedback" v-if="errors.dantoc">
-              {{ errors.dantoc }}
-            </div>
           </div>
-        
         </div>
         <div class="column">
           <div class="input__box">
             <label for="">BHXH(%)</label>
-            <input @blur="validate" class="input-left" type="text" v-model="salary.BHXH" />
-            <div class="invalid-feedback" v-if="errors.diachi">
-              {{ errors.diachi }}
-            </div>
+            <input
+              @blur="validate"
+              class="input-left"
+              type="text"
+              v-model="salary.BHXH"
+            />
           </div>
           <div class="input__box">
             <label for="">Phần trăm hưởng lương(%)</label>
-            <input class="dantoc" type="text" v-model="salary.PhanTramHuongLuong" />
-            <div class="invalid-feedback" v-if="errors.dantoc">
-              {{ errors.dantoc }}
-            </div>
+            <input
+              class="dantoc"
+              type="text"
+              v-model="salary.PhanTramHuongLuong"
+            />
           </div>
-        
         </div>
 
         <div class="column">
-         
           <div class="input__box">
             <label for="">Tháng nhận</label>
-            <input class="ngaycap input-left" v-model="salary.Thang" type="text" />
+            <input
+              class="ngaycap input-left"
+              v-model="salary.Thang"
+              type="text"
+              :class="errors.thang != '' ? 'borderRed' : ''"
+              @blur="validateThang"
+            />
+            <div class="invalid-feedback" v-if="errors.thang">
+              {{ errors.thang }}
+            </div>
           </div>
           <div class="input__box">
             <label for="">Năm nhận</label>
-            <input class="noicap" v-model="salary.Nam" type="text"  />
+            <input
+              class="noicap"
+              v-model="salary.Nam"
+              type="text"
+              :class="errors.nam != '' ? 'borderRed' : ''"
+              @blur="validateNam"
+            />
+            <div class="invalid-feedback" v-if="errors.nam">
+              {{ errors.nam }}
+            </div>
           </div>
         </div>
-
-       
-       
       </div>
       <div class="form-bottom">
         <div class="btn btn-cancel" @click="closeForm">Hủy</div>
@@ -135,19 +150,18 @@
       @cancelNotifi="FormCancel"
     ></notifi>
     <popUpDup @closeNotifi="closePoup" v-show="isShowPop"></popUpDup>
-    
   </div>
 
   <!-- thongbao -->
 </template>
 
 <script>
- import notifi from "./FormNotifi.vue"
+import notifi from "./FormNotifi.vue";
 import combobox from "./BaseCombobox.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 
-import popUpDup from "./PopUpDuplicateCode.vue"
+import popUpDup from "./PopUpDuplicateCode.vue";
 export default {
   data() {
     return {
@@ -160,64 +174,56 @@ export default {
       position: {},
       salary: {},
       formMode: 0,
-      ngachluong:{},
-      titleForm:"",
+      ngachluong: {},
+      titleForm: "",
       isShowNotifi: false,
-      isShowPop:false,
+      isShowPop: false,
       isShow: false,
-      phucap:{},
-      isValid:true,
+      phucap: {},
+      isValid: true,
       errors: {
-        manv: "",
-        ten: "",
-        ngaysinh: "",
-        cmnd: "",
-        email: "",
-        sodt: "",
-        masothue: "",
-        sotaikhoan: "",
-        tennganhang: "",
-        diachi: "",
-        dantoc: "",
-        tongiao: "",
-        khoa: "",
-        trangthai: "",
-        capbacluong: "",
-        phongban: "",
-        chungchidaotao: "",
-        tinhtrang: "",
-        vitri: "",
+        chucvu: "",
+        ngachLuong: "",
+        thang: "",
+        nam: "",
       },
     };
   },
-  props: ["employeeSL","code", "FormMode","loadData","title", "employeeId","IDNV","salarySL"],
+  props: [
+    "employeeSL",
+    "code",
+    "FormMode",
+    "loadData",
+    "title",
+    "employeeId",
+    "IDNV",
+    "salarySL",
+  ],
   components: {
-    combobox,popUpDup,
-        notifi
+    combobox,
+    popUpDup,
+    notifi,
   },
   watch: {
-   
-    code: function(vl){
-        this.salary.EmployeeCode=vl
+    code: function (vl) {
+      this.salary.EmployeeCode = vl;
     },
-    FormMode: function(value){
-        this.formMode=value
+    FormMode: function (value) {
+      this.formMode = value;
     },
-    
   },
   created() {
-   
-    this.formMode=this.FormMode
-    this.titleForm=this.title
-    if(this.formMode==1){
-      this.salary=this.salarySL
+    this.formMode = this.FormMode;
+    this.titleForm = this.title;
+    if (this.formMode == 1) {
+      this.salary = this.salarySL;
     }
-   if(this.formMode==0){
-    this.salary.Nam=new Date().getFullYear()
-    this.salary.Thang= new Date().getMonth()+1
-   }
-    
-    this.salary.IDNhanVien=this.IDNV
+    if (this.formMode == 0) {
+      this.salary.Nam = new Date().getFullYear();
+      this.salary.Thang = new Date().getMonth() + 1;
+    }
+
+    this.salary.IDNhanVien = this.IDNV;
     this.getPositionNow();
     // this.getFaculty();
     // this.getPosition();
@@ -226,98 +232,94 @@ export default {
     // this.getCerti();
   },
   methods: {
-    save(){
-     
-        // // this.getAllEmployee()
-        // this.validateDateOfBirth()
-        // this.validateEmail()
-        // this.validateEmployeeCode()
-        // this.validateIdentity()
-
-        // this.validateName()
-        // if(this.isValid==true){
-          if(this.formMode==0){
-          this.addSalary()
-       
-          }
-      else{
-        this.editSalary()
-      }
-    
-
-    },
-    closePoup(value){
-this.isShowPop=value
-    },
-    getNewCode(){
-      try {
-       
-       var me = this;
-      
-       axios
-         .get(
-          "https://localhost:44301/api/Employees/NewCode"
-         )
-         .then(function (res) {
-          me.employee.EmployeeCode=res.data
-         })
-        
-         .catch(function () {
-           console.log(1);
-         });
-     } catch (error) {
-       console.log(error);
-     }
-    },
-    addSalary(){
-        var me = this;
-      console.log(me.salary);
-       
+    save() {
       const toast = useToast();
-      
-        try {
+      // this.getAllEmployee()
+      this.validateCV();
+      this.validateNgachLuong();
+      this.validateThang();
+      this.validateNam();
+
+      if (this.isValid == true) {
+        if (this.formMode == 0) {
+          this.addSalary();
+        } else {
+          this.editSalary();
+        }
+      } else {
+        toast.error("cần nhập đúng dữ liệu", { timeout: 5000 });
+      }
+    },
+    closePoup(value) {
+      this.isShowPop = value;
+    },
+    getNewCode() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:44301/api/Employees/NewCode")
+          .then(function (res) {
+            me.employee.EmployeeCode = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addSalary() {
+      var me = this;
+
+      console.log(me.salary);
+
+      const toast = useToast();
+
+      try {
         axios
           .post("https://localhost:44301/api/luong", me.salary)
           .then(function (res) {
             console.log("ok", res.data);
-            me.salary={}
-           
+            me.salary = {};
+
             toast.success("thêm dữ liệu thành công", { timeout: 2000 });
             me.$emit("hideFormAdd", false);
             me.$emit("loadData", false);
           })
-         
+
           .catch(function () {
             toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
           });
       } catch (error) {
         console.log(error);
       }
-      
-     
     },
-    editSalary(){
+    editSalary() {
       var me = this;
-       
+
       const toast = useToast();
       try {
         axios
-          .put(`https://localhost:44301/api/luong/${this.salary.IDLuong}`, me.salary)
+          .put(
+            `https://localhost:44301/api/luong/${this.salary.IDLuong}`,
+            me.salary
+          )
           .then(function (res) {
             console.log("ok", res.data);
-          
+
             toast.success("Sửa dữ liệu thành công", { timeout: 2000 });
             me.$emit("hideFormAdd", false);
             me.$emit("loadData", false);
           })
-         
+
           .catch(function () {
             toast.error("Sửa dữ liệu thất bại", { timeout: 2000 });
           });
       } catch (error) {
         console.log(error);
       }
-
     },
     selectItemCbb(value) {
       this.desc.khoa = value.khoa;
@@ -349,7 +351,7 @@ this.isShowPop=value
     },
     //gửi lệnh ẩn form từ bên này sang trang chính
     closeForm() {
-       this.isShowNotifi = true
+      this.isShowNotifi = true;
       // this.$emit("hideForm", false);
       this.errors = {
         ten: "",
@@ -373,70 +375,47 @@ this.isShowPop=value
         kyluat: "",
       };
     },
-    
+
     //gửi lệnh ẩn form từ bên này sang trang chính
 
-    validateEmployeeCode() {
-      
-      if (!this.employee.EmployeeCode) {
-        this.errors.manv = " Mã nhân viên không được để trống!";
+    validateCV() {
+      if (!this.salary.TenCVHT) {
+        this.errors.chucvu = " Chức vụ không được để trống!";
         this.isValid = false;
-      }else{
-        this.errors.manv = "";
+      } else {
+        this.errors.chucvu = "";
         this.isValid = true;
       }
-      },
-      validateName() {
-      if (!this.employee.EmployeeName) {
-        this.errors.ten = "Tên nhân viên Không được để trống!";
+    },
+    validateNgachLuong() {
+      if (!this.salary.MaNgachLuong) {
+        this.errors.ngachLuong = "Ngạch lương Không được để trống!";
         this.isValid = false;
         // document.getElementsByClassName('ten').classList.add('borderRed')
-      }
-      
-      else{
-        this.errors.ten = "";
-        this.isValid = true;
-      }
-    },
-    validateIdentity() {
-      if (!this.employee.IdentityNumber) {
-        this.errors.cmnd = "CCCD Không được để trống!";
-        this.isValid = false;
-      }else{
-        this.errors.cmnd = "";
-        this.isValid = true;
-      }
-    },
-    validateEmail() {
-      if (!this.employee.Email) {
-        this.errors.email = "Email Không được để trống!";
-        this.isValid = false;
-      }
-      else if ((this.employee.Email)&&(!this.isEmail(this.employee.Email))){
-        this.errors.email = "Email Không đúng định dạng!";
-        this.isValid = false;
-      }else{
-        this.errors.email = "";
-        this.isValid = true;
-      }
-    },
-    isEmail(value) {
-      var validRegex =
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      return validRegex.test(value);
-    },
-    validateDateOfBirth(){
-    if (this.employee.DateOfBirth) {
-        this.employee.DateOfBirth = new Date(this.employee.DateOfBirth)
-      }
-      if (this.employee.DateOfBirth > new Date() && this.employee.DateOfBirth) {
-        this.isValid = false;
-        this.errors.ngaysinh="Ngày sinh không được lớn hơn ngày hiện tại!"
-     
       } else {
+        this.errors.ngachLuong = "";
         this.isValid = true;
       }
     },
+    validateThang() {
+      if (!this.salary.Thang) {
+        this.errors.thang = "Tháng nhận Không được để trống!";
+        this.isValid = false;
+      } else {
+        this.errors.thang = "";
+        this.isValid = true;
+      }
+    },
+    validateNam() {
+      if (!this.salary.Nam) {
+        this.errors.nam = "Năm nhận Không được để trống!";
+        this.isValid = false;
+      } else {
+        this.errors.nam = "";
+        this.isValid = true;
+      }
+    },
+
     //  getAllEmployee(){
     //   try {
     //     var me = this;
@@ -444,11 +423,11 @@ this.isShowPop=value
     //     axios
     //       .get("https://localhost:44301/api/Employees")
     //       .then(function (res) {
-          
+
     //         for (const item of res.data) {
-            
+
     //          if(me.employee.EmployeeCode==item.EmployeeCode){
-             
+
     //           me.isShowPop=!me.isShowPop
     //           me.isValid=false
     //          }else{
@@ -532,7 +511,7 @@ this.isShowPop=value
         console.log(error);
       }
     },
-  
+
     getSNL() {
       try {
         var me = this;
@@ -550,56 +529,58 @@ this.isShowPop=value
         console.log(error);
       }
     },
-    
-    selectCbb(value){
-      this.salary.TenPhuCap=value.TenPhuCap
-      this.salary.GiaTriPhuCap= value.GiaTriPhuCap
-      this.salary.IDPhuCap=value.IDPhuCap
+
+    selectCbb(value) {
+      this.salary.TenPhuCap = value.TenPhuCap;
+      this.salary.GiaTriPhuCap = value.GiaTriPhuCap;
+      this.salary.IDPhuCap = value.IDPhuCap;
     },
     selectPositionNow(value) {
       this.salary.IDCVHT = value.IDCVHT;
       this.salary.TenCVHT = value.TenCVHT;
-      this.salary.BHXH=value.BHXH
-      this.salary.BHYT=value.BHYT
-      this.salary.HeSoLuong=value.HeSoLuong
-      this.salary.PhanTramHuongLuong=100 - parseFloat(value.BHXH)  - parseFloat(value.BHYT) 
+      this.salary.BHXH = value.BHXH;
+      this.salary.BHYT = value.BHYT;
+      this.salary.HeSoLuong = value.HeSoLuong;
+      this.salary.PhanTramHuongLuong =
+        100 - parseFloat(value.BHXH) - parseFloat(value.BHYT);
     },
-    selectS(value){
-      this.salary.IDNgachLuong=value.IDNgachLuong
-      this.salary.TenNgachLuong=value.TenNgachLuong
-      this.salary.MaNgachLuong=value.MaNgachLuong
-    }
+    selectS(value) {
+      this.salary.IDNgachLuong = value.IDNgachLuong;
+      this.salary.TenNgachLuong = value.TenNgachLuong;
+      this.salary.MaNgachLuong = value.MaNgachLuong;
+    },
   },
 };
 </script>
-<style >
-
+<style>
 .icon-down-bold {
-    background: url(http://localhost:8080/img/qlts-icon.c1b7328e.svg) no-repeat -72px -338px;
-    width: 8px;
-    height: 10px;
+  background: url(http://localhost:8080/img/qlts-icon.c1b7328e.svg) no-repeat -72px -338px;
+  width: 8px;
+  height: 10px;
 }
 .m-combobox .icon {
-    position: absolute;
-    left: -19px;
-    top: 7px;
-    /* transform: translateX(-50%); */
-    cursor: pointer;
+  position: absolute;
+  left: -19px;
+  top: 7px;
+  /* transform: translateX(-50%); */
+  cursor: pointer;
 }
 
-input-left{
+input-left {
   width: 340px !important;
 }
 label {
   margin: 10px 0;
 }
-label span{
+label span {
   color: red;
 }
+
 .invalid-feedback {
   color: red;
   position: absolute;
-  font-size: 12px;
+  font-size: 11px;
+  margin-top: 6px;
   /* border: 2px solid red; */
 }
 #form {
@@ -663,6 +644,7 @@ label span{
   display: block;
   width: 100%;
   margin-bottom: 10px;
+  position: relative;
 }
 .form-bottom {
   border-bottom-left-radius: 20px;
@@ -729,100 +711,100 @@ label span{
    height: 20px;   
   }
  } */
- /* .khoa {
+/* .khoa {
     margin-top: 4px;
   } */
-  .important {
-    color: red;
-  }
-  .borderRed{
+.important {
+  color: red;
+}
+.borderRed {
   border: 1px solid red !important;
 }
 .notification-wrap {
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 4;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    position: fixed;
-    display: flex;
-  
-    }
-    .notification{
-        z-index: 3;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-        background-color: #fff;
-        width: 420px;
-        height: 150px;
-        padding: 20px;
-        border-radius: 2px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    }
-    .warring{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 30px;
-    }
-    .warring i {
-        font-size: 60px;
-        width: 52px;
-        height: 40px;
-        color: #F4A733;
-    }
-    .warrning-title{
-        text-align: center;
-        font-size: 16px;
-        margin-left: 8px;
-    }
-    .btn-wrap {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        column-gap: 20px;
-    }
-    .btnNotifi{   
-        display: flex;
-        width: 100px;
-        align-items: center;
-        justify-content: center;
-        margin-top: 38px;
-        border-radius: 2px;
-        height: 25px;
-        cursor: pointer;
-    }
-    .btnNotifi:hover {
-        opacity: 0.8;
-        color: red;
-    }
-    .btn-secondary{
-        border: 1px solid #1A8FDD;
-    }
-    .btn-primary{
-        margin-right: 40px;
-        background-color: #1A8FDD;
-        color: #fff;
-    }
-   
-    @media screen and (max-width: 767.98px) {
-        .notification{
-            font-size: 15px;
-            width: 300px;
-            height: 130px;
-            padding: 14px;
-        }
-        .warring {
-            margin-top: 6px;
-        }
-        .warring i {
-            font-size: 50px;
-        }
-        .btnNotifi {
-            width: 80px;
-            margin-top: 20px;
-        }
-    }
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  position: fixed;
+  display: flex;
+}
+.notification {
+  z-index: 3;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 420px;
+  height: 150px;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.warring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.warring i {
+  font-size: 60px;
+  width: 52px;
+  height: 40px;
+  color: #f4a733;
+}
+.warrning-title {
+  text-align: center;
+  font-size: 16px;
+  margin-left: 8px;
+}
+.btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 20px;
+}
+.btnNotifi {
+  display: flex;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 38px;
+  border-radius: 2px;
+  height: 25px;
+  cursor: pointer;
+}
+.btnNotifi:hover {
+  opacity: 0.8;
+  color: red;
+}
+.btn-secondary {
+  border: 1px solid #1a8fdd;
+}
+.btn-primary {
+  margin-right: 40px;
+  background-color: #1a8fdd;
+  color: #fff;
+}
+
+@media screen and (max-width: 767.98px) {
+  .notification {
+    font-size: 15px;
+    width: 300px;
+    height: 130px;
+    padding: 14px;
+  }
+  .warring {
+    margin-top: 6px;
+  }
+  .warring i {
+    font-size: 50px;
+  }
+  .btnNotifi {
+    width: 80px;
+    margin-top: 20px;
+  }
+}
 </style>
