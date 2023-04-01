@@ -7,12 +7,12 @@
                   </div>
                        
                     
-                    
-                    <div class="warrning-title">{{ msv }}</div>
+               
+                    <div class="warrning-title">Chưa có nhân viên nào được chọn để xóa</div>
                 </div>
                 <div class="btn-wrap">
-                    <div class="btnNotifi btn-secondary" @click="CancelNotifi">Hủy</div>
-                    <div class=" btn-primary" @click="noClick">Đồng ý</div>
+                    
+                    <div class=" btn-primary" @click="noClick">Đóng</div>
                 </div>
             </div>
         </div>
@@ -38,11 +38,9 @@
         methods: {
             noClick() {
                 //đồng ý xóa
-                this.$emit('closeNotifi',false)
+                this.$emit('closePopUpWarning',false)
             },
-            CancelNotifi() {
-                this.$emit('cancelNotifi',false)
-            }
+          
         }
     }
 </script>
