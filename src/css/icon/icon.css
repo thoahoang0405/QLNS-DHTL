@@ -349,3 +349,13 @@
 	width: 23px;
 	height: 20px;
 }
+.icon-trainning{
+  background: url('../../assets/icon/icons8-book-reading-30.png') no-repeat;
+  width: 30px;
+  height: 30px;
+}
+.icon-salary{
+  background: url('../../assets/icon/icons8-salary-30.png') no-repeat;
+  width: 30px;
+  height: 30px;
+}

@@ -93,7 +93,11 @@ export default {
       filter:0,
     };
   },
-  
+  created(){
+    this.filter=this.Filter
+    this.dataItems=this.items
+    this.keyword=this.value
+  },
   methods: {
       /**
        * hàm xử lý sự kiện khi blur
@@ -185,9 +189,7 @@ export default {
         this.$el.querySelector(".input").select(); // khi focus thì select
       },
     },
-    created() {
-      // this.placeholder = this.label;
-    },
+   
     watch: {
       Filter: function(value){
         this.filter=value

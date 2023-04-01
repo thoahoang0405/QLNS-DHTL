@@ -17,7 +17,7 @@
     <form class="form">
       <div class="form-top">
         <div class="form-title">
-          <h2 class="title">Thêm nhân viên</h2>
+          <h2 class="title">{{ titleForm }}</h2>
           <span class="close" @click.stop="closeForm">X</span>
         </div>
       </div>
@@ -25,7 +25,7 @@
         <div class="column">
           <div class="input__box">
             <label for="">Mã nhân viên <span>*</span></label>
-            <input @blur="validateEmployeeCode" class="manv" :class="errors.manv != '' ? 'borderRed' : ''" type="text"
+            <input @blur="validateEmployeeCode" class="manv" :class="errors.manv != '' ? 'borderRed' : '' " type="text"
               v-model="employee.MaNV" />
             <div v-if="errors.manv != ''" class="invalid-feedback">
               {{ errors.manv }}
@@ -33,7 +33,7 @@
           </div>
           <div class="input__box">
             <label for="">Tên nhân viên <span>*</span></label>
-            <input @blur="validateName" :class="errors.ten != '' ? 'borderRed' : ''" class="ten" type="text"
+            <input @blur="validateName" :class="errors.ten != '' ? 'borderRed' : '' " class="ten" type="text"
               v-model="employee.TenNV" />
             <div class="invalid-feedback" v-if="errors.ten != ''">
               {{ errors.ten }}
@@ -113,11 +113,11 @@
           </div>
           <div class="input__box">
             <label for="">Ngày cấp</label>
-            <input class="ngaycap" type="text" />
+            <input class="ngaycap" v-model="employee.NgayCap" type="date" />
           </div>
           <div class="input__box">
             <label for="">Nơi cấp</label>
-            <input class="noicap" type="text" />
+            <input class="noicap" v-model="employee.NoiCap" type="text" />
           </div>
         </div>
 
@@ -198,7 +198,7 @@ export default {
       },
     };
   },
-  props: ["employeeSL", "code", "FormMode", "loadData", "employeeId"],
+  props: ["employeeSL", "code", "FormMode", "loadData", "employeeId","titleForm"],
   components: {
     combobox, popUpDup,
     notifi
@@ -206,8 +206,10 @@ export default {
   watch: {
     employeeSL: function (value) {
       this.employee = value
-      value.DateOfBirth = this.formatDate(value.DateOfBirth)
-      this.employee.DateOfBirth = value.DateOfBirth
+      value.NgaySinh = this.formatDate(value.NgaySinh)
+      this.employee.NgaySinh = value.NgaySinh
+      value.NgayCap = this.formatDate(value.NgayCap)
+      this.employee.NgayCap = value.NgayCap
       this.employee.IDNhanVien = value.IDNhanVien
     },
     code: function (vl) {
@@ -283,6 +285,7 @@ export default {
           .then(function (res) {
             console.log("ok", res.data);
             me.employee = {}
+            me.$emit("hideForm", false);
             me.getNewCode()
             toast.success("thêm dữ liệu thành công", { timeout: 2000 });
             me.loadData()
@@ -300,11 +303,11 @@ export default {
     editEmployee() {
       var me = this;
       console.log(me.employee);
-      me.employee.Gender = parseInt(me.employee.Gender)
+      me.employee.GioiTinh = parseInt(me.employee.GioiTinh)
       const toast = useToast();
       try {
         axios
-          .put(`https://localhost:44301/api/Employees/${this.employee.IDNhanVien}`, me.employee)
+          .put(`https://localhost:44301/api/nhanvien/${this.employee.IDNhanVien}`, me.employee)
           .then(function (res) {
             console.log("ok", res.data);
             me.$emit("hideForm", false);
@@ -352,6 +355,7 @@ export default {
     closeForm() {
       this.isShowNotifi = true
       // this.$emit("hideForm", false);
+      this.errors.manv = ""
       this.errors = {
         ten: "",
         ngaysinh: "",

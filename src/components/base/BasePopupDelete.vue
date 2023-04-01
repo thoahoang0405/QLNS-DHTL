@@ -8,7 +8,7 @@
                        
                     
                     
-                    <div class="warrning-title">Bạn có chắc chắn xóa nhân viên có mã  {{ msv }} không?</div>
+                    <div class="warrning-title">{{ msv }}</div>
                 </div>
                 <div class="btn-wrap">
                     <div class="btnNotifi btn-secondary" @click="CancelNotifi">Hủy</div>

@@ -473,6 +473,9 @@
       </div>
     </div>
     <!--  -->
+ <!--  -->
+ <!--  -->
+ <!--  -->
     <h3 class="header-bd">Quản lý nhân viên</h3>
     <div class="body-header">
       <div class="row-input">
@@ -497,15 +500,19 @@
             <div class="tooltip-excel">Xuất ra file excel</div>
           </a>
         </button>
-
+        <button class="btn-excel">
+          <div class="icon icon-delete" @click="onClickDeleteMultiple">
+            <div class="tooltip-delete">Xóa nhiều</div>
+          </div>
+        </button>
       </div>
     </div>
     <div id="m-table" class="m-table">
       <table id="tbEmployee" class="table">
         <thead>
           <tr>
-            <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center">
-              <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px" />
+            <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center" >
+              <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px"    @click="selectedAllItem"  :checked="listEmployee.length == employees.length"/>
             </th>
             <th class="text-center" style="min-width: 40px;">STT</th>
             <th>Mã nhân viên</th>
@@ -532,9 +539,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="(emp, index) of employees" :key="emp.IDNhanVien">
-            <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1">
-              <input ref="check" class="check-item" type="checkbox" style="width: 18px; height: 18px" />
+          <tr ref="row" v-for="(emp, index) of employees" :class="listEmployee.includes(emp) ? 'active' : ''" :key="emp.IDNhanVien">
+            <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1" :class="listEmployee.includes(emp) ? 'active' : ''">
+              <input ref="check" class="check-item" type="checkbox"  style="width: 18px; height: 18px" :checked="listEmployee.includes(emp) ? true : false"
+                  @click="selectItemToList(emp)" />
             </td>
             <td class="text-center">{{ index + 1 }}</td>
             <td>{{ emp.MaNV }}</td>
@@ -560,10 +568,10 @@
                 Xem chi tiết
               </div>
             </td>
-            <td ref="func" class="td-item-final td-func sticky-right; align-items: center;"
+            <td :class="listEmployee.includes(emp) ? 'active' : ''" ref="func" class="td-item-final td-func sticky-right; align-items: center;"
               style="position: sticky; right: 0; background-color: #fff" colspan="12">
               <div class="edit-text"></div>
-              <div class="icon icon-edit" @click="OpenPopupFormEditCurriculumVitae(emp)"></div>
+              <div class="icon icon-edit" @click="editEmployee(emp)"></div>
               <div class="icon icon-delete" @click="deleteEmployee(emp)"></div>
             </td>
           </tr>
@@ -612,9 +620,16 @@
     </div>
   </div>
   <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
-  <Form v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien" :FormMode="formMode"
-    :employeeSL="employeeSelect" :code="newCode"></Form>
-  <!-- <div id="load" ></div> -->
+  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning=false"></Warning>
+<Form :titleform="title" v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
+<div id="load" v-show="isShowLoad">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </template>
 <style>
 @import url('../../css/page/loading.css');
@@ -638,7 +653,9 @@
 .btn-add:hover {
   opacity: 0.8;
 }
-
+.active {
+  background-color: #8fd6e7 !important;
+}
 .border-red {
   border: 1px solid red;
 }
@@ -1035,10 +1052,10 @@ import Combobox from "../base/BaseCombobox2.vue";
 import popUpDelete from "../base/BasePopupDelete2.vue";
 import popUp from "../base/BasePopupDelete.vue";
 import { useToast } from "vue-toastification";
-
+import Warning from "../base/BasePopupWarningDelete.vue"
 export default {
   components: {
-    Paginate, Form, Combobox, popUpDelete, popUp,
+    Paginate, Form, Combobox, popUpDelete, popUp,Warning
   },
   data() {
     return {
@@ -1054,6 +1071,7 @@ export default {
       isActive: "20",
       pageNumber: 1,
       page: 1,
+      isShowWarning:false,
       employees: {},
       totalPage: 1,
       isShow: false,
@@ -1085,6 +1103,7 @@ export default {
       mess: "",
       isdeleteState: false,
       isShowPopupState: false,
+<<<<<<< HEAD
       isValid: true,
       errors: {
         tinhtrang: '',
@@ -1093,6 +1112,10 @@ export default {
         // ngaybatdau: '',
         // ngayketthuc: '',
       }
+=======
+      title:"",
+      listEmployee:[],
+>>>>>>> 35554d9a281d526b56ff397b4f7b9a7ca7364efe
     };
   },
   created() {
@@ -1108,6 +1131,76 @@ export default {
     },
   },
   methods: {
+
+    onClickDeleteMultiple() {
+      try {
+        // kiểm tra danh sách được chọn có bao nhiêu bản ghi và hiển thị thông báo
+
+        if (this.listEmployee.length == 0) {
+          this.isShowWarning=true;
+          
+        } else if (this.listEmployee.length == 1) {
+            
+          this.isShowPopup = !this.isShowPopup
+          this.empCodeDelete ="Bạn có muốn xóa nhân viên có mã " + this.listEmployee[0].MaNV  + "không?"
+          this.empID = this.listEmployee[0].IDNhanVien;
+          
+        } else {
+         
+          this.empCodeDelete = this.listEmployee.length + " nhân viên được chọn. Bạn có chắc chắn muốn xóa không?"
+          this.isShowPopup = !this.isShowPopup
+          
+        }
+        console.log(this.listEmployee);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    selectedAllItem() {
+      try {
+        if (this.listEmployee.length < this.employees.length) {
+          this.listEmployee = this.employees;
+        } else {
+          this.listEmployee = [];
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+     /**
+     * thêm phần tử xóa vào mảng xóa
+     * AUTHOR: HTTHOA (20/03/2023)
+     */
+     selectItemToList(emp) {
+      try {
+        this.currentEmployee = emp;
+
+        if (!this.listEmployee.includes(emp)) {
+          //thực hiện chọn
+          this.listEmployee.push(emp);
+        } else {
+          //thực hiện bỏ chọn
+          this.listEmployee = this.listEmployee.filter((a) => {
+            return a !== emp;
+          });
+
+          this.currentEmployee =
+            this.listEmployee[this.listEmployee.length - 1];
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    /**
+     * hàm chọn 1 item
+     * AUTHOR: HTTHOA(28/02/2023)
+     */
+    selectItem(emp) {
+      this.listEmployee = [];
+      this.listEmployee.push(emp);
+      this.currentEmployee = emp;
+    },
     hideNotifi(value) {
       this.isShowPopup = value
     },
@@ -1309,13 +1402,14 @@ export default {
       this.isShowPopupState = value
     },
     deleteEmployee(emp) {
-      this.isShowPopup = !this.isShow
-      this.empCodeDelete = emp.MaNV
+      this.isShowPopup = !this.isShowPopup
+      this.empCodeDelete = "Bạn có muốn xóa nhân viên có mã " + emp.MaNV  + "không?"
       this.empID = emp.IDNhanVien
     },
     deleteEmp(value) {
       this.isShowPopup = value
-      var me = this;
+      if(this.listEmployee.length == 1){
+         var me = this;
       const toast = useToast();
       try {
         axios
@@ -1335,11 +1429,42 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      }else{
+        this.deleteMultiple()
+      }
+     
+    },
+    deleteMultiple() {
+      try {
+        const toast = useToast();
+        let listEmployeeID = [];
+        var me = this;
+        me.listEmployee.filter((emp) => {
+          listEmployeeID.push(emp.IDNhanVien);
+        });
+
+        axios({
+          url:"https://localhost:44301/api/nhanvien/delete-multiple",
+          method: "delete",
+          data: listEmployeeID,
+        })
+          .then(function (res) {
+            console.log(res.data);
+            toast.success(res.data + " nhân viên được xóa thành công ", { timeout: 2000 });
+            me.getPagingEmployee();
+          })
+          .catch(function () {
+            toast.error("Xóa nhân viên thất bại", { timeout: 2000 });
+          });
+      } catch (error) {
+        console.log(error);
+      }
     },
     editEmployee(emp) {
       this.employeeSelect = emp
       this.IDNhanVien = emp.IDNhanVien
       this.isShow = true
+      this.title="Sửa nhân viên"
       this.formMode = 2
     },
     getPagingEmployee() {
@@ -1409,6 +1534,7 @@ export default {
       this.getNewCode()
       this.formMode = 1;
       this.isShow = !this.isShow
+      this.title="Thêm nhân viên"
     },
 
     getNewCode() {
