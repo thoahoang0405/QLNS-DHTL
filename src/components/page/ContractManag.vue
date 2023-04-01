@@ -1065,6 +1065,7 @@ export default {
   color: red;
   position: absolute;
   font-size: 12px;
+  margin-top: -8px;
   /* border: 2px solid red; */
 }
 

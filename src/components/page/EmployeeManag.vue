@@ -127,7 +127,7 @@
     </div> -->
     <!-- sua ly lich -->
     <div class="popup-bonus" v-if="isOpenPopupFormEditCurriculumVitae">
-      <div class="bonus-form">
+      <div class="bonus-formM">
         <div class="head-popup">
           <h2 class="title-heading">Sửa thông tin nhân viên</h2>
           <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifiCV = true">
@@ -281,30 +281,30 @@
           </div>
         </div>
         <table style="width: 100%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
-          <thead>
-            <tr>
-              <th colspan="2">Quan hệ gia đình</th>
-              <th colspan="4">Trạng thái</th>
-            </tr>
-          </thead>
+          <!-- <thead> -->
+          <!-- <tr> -->
+          <!-- <th colspan="2">Quan hệ gia đình</th> -->
+          <!-- <th colspan="4">Trạng thái</th> -->
+          <!-- </tr> -->
+          <!-- </thead> -->
           <tbody>
             <tr>
               <th>Tình trạng</th>
               <th>Gia đình</th>
-              <th>Tên tình trạng</th>
+              <!-- <th>Tên tình trạng</th>
               <th>Ngày bắt đầu</th>
-              <th>Ngày kết thúc</th>
+              <th>Ngày kết thúc</th> -->
               <th style="width: 100px;">Chức năng</th>
             </tr>
           </tbody>
           <tr>
           </tr>
-          <tr v-for="item of tinhtrang" :key="item.IDTinhTrang">
-            <td style="border: 1px solid #c7c7c7; width: 150px;"></td>
-            <td style="border: 1px solid #c7c7c7; width: 250px;"></td>
-            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TenTinhTrang }}</td>
+          <tr v-for="item of quanhegiadinh" :key="item.IDGiaDinh">
+            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TinhTrang }}</td>
+            <td style="border: 1px solid #c7c7c7; width: 250px;">{{ item.GiaDinh }}</td>
+            <!-- <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TenTinhTrang }}</td>
             <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.NgayBD) }}</td>
-            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.NgayKT) }}</td>
+            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.NgayKT) }}</td> -->
 
             <td ref="func" class="td-item-final td-func"
               style="background-color: #fff; align-items: center; border: 1px solid #c7c7c7;" colspan="12">
@@ -340,35 +340,51 @@
         <div class="column">
           <div class="input__state">
             <label for="">Tình trạng: </label>
-            <input type="text">
+            <input @blur="validateTinhTrang" v-model="suatrangthai.TinhTrang" type="text">
+            <div class="invalid-feedbackk" v-if="errors.tinhtrang != ''">
+              {{ errors.tinhtrang }}
+            </div>
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Gia đình: </label>
-            <textarea style="width: 80%;height: 60px;" type="text"> </textarea>
+            <textarea @blur="validateGiaDinh" v-model="suatrangthai.GiaDinh" style="width: 80%;height: 60px;"
+              type="text"> </textarea>
+            <div class="invalid-feedbackkk" v-if="errors.giadinh != ''">
+              {{ errors.giadinh }}
+            </div>
           </div>
         </div>
-        <div class="column">
+        <!-- <div class="column">
           <div class="input__state">
             <label for="">Tên tình trạng: </label>
-            <input type="text" v-model="suatrangthai.TenTinhTrang">
+            <input @blur="validateTenTinhTrang" type="text" v-model="suatrangthai.TenTinhTrang">
+            <div class="invalid-feedbackk" v-if="errors.tentinhtrang != ''">
+              {{ errors.tentinhtrang }}
+            </div>
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Ngày bắt đầu: </label>
-            <input type="date" v-model="suatrangthai.NgayBD">
+            <input @blur="validateNgayBD" type="date" v-model="suatrangthai.NgayBD">
+            <div class="invalid-feedbackk" v-if="errors.ngaybatdau != ''">
+              {{ errors.ngaybatdau }}
+            </div>
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Ngày kết thúc: </label>
-            <input type="date" v-model="suatrangthai.NgayKT">
+            <input @blur="validateNgayKT" type="date" v-model="suatrangthai.NgayKT">
+            <div class="invalid-feedbackk" v-if="errors.ngayketthuc != ''">
+              {{ errors.ngayketthuc }}
+            </div>
           </div>
-        </div>
+        </div> -->
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
-        <div class="btnSave" @click="btnAddState">Lưu</div>
+        <div class="btnSave" @click="saveState">Lưu</div>
       </div>
     </div>
     <!-- sua trang thai -->
@@ -393,16 +409,16 @@
         <div class="column">
           <div class="input__state">
             <label for="">Tình trạng: </label>
-            <input type="text">
+            <input v-model="suatrangthai.TinhTrang" type="text">
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Gia đình: </label>
-            <textarea style="width: 80%;height: 60px;" type="text"> </textarea>
+            <textarea v-model="suatrangthai.GiaDinh" style="width: 80%;height: 60px;" type="text"> </textarea>
           </div>
         </div>
-        <div class="column">
+        <!-- <div class="column">
           <div class="input__state">
             <label for="">Tên tình trạng: </label>
             <input type="text" v-model="suatrangthai.TenTinhTrang">
@@ -419,7 +435,7 @@
             <label for="">Ngày kết thúc: </label>
             <input type="date" v-model="suatrangthai.NgayKT">
           </div>
-        </div>
+        </div> -->
 
         <!-- <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div> -->
         <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div>
@@ -603,6 +619,22 @@
 <style>
 @import url('../../css/page/loading.css');
 
+.invalid-feedbackk {
+  color: red;
+  position: absolute;
+  font-size: 12px;
+  margin-top: 45px;
+  margin-left: 112px;
+}
+
+.invalid-feedbackkk {
+  color: red;
+  position: absolute;
+  font-size: 12px;
+  margin-top: 70px;
+  margin-left: 112px;
+}
+
 .btn-add:hover {
   opacity: 0.8;
 }
@@ -640,6 +672,23 @@ table {
 }
 
 .bonus-form {
+  left: 50%;
+  transform: translate(-50%, 15%);
+  padding: 0px 20px;
+  position: absolute;
+  width: 40vw;
+  height: 370px;
+  /* height: auto; */
+  margin: 0 auto;
+  top: 15%;
+  right: 15%;
+  z-index: 99999;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px;
+  background-color: #fff;
+}
+
+.bonus-formM {
   left: 50%;
   transform: translate(-50%, -5%);
   padding: 0px 20px;
@@ -1030,11 +1079,20 @@ export default {
       nhanvien: {},
       suanhanvien: {},
       tinhtrang: {},
+      quanhegiadinh: {},
       IDNV: "",
       suatrangthai: {},
       mess: "",
       isdeleteState: false,
       isShowPopupState: false,
+      isValid: true,
+      errors: {
+        tinhtrang: '',
+        giadinh: '',
+        // tentinhtrang: '',
+        // ngaybatdau: '',
+        // ngayketthuc: '',
+      }
     };
   },
   created() {
@@ -1068,7 +1126,7 @@ export default {
             `https://localhost:44301/api/nhanvien/${this.IDNV}`
           )
           .then(function (res) {
-            me.tinhtrang = res.data
+            me.quanhegiadinh = res.data
           })
 
           .catch(function () {
@@ -1105,15 +1163,13 @@ export default {
     },
     getState() {
       try {
-
         var me = this;
-
         axios
           .get(
-            `https://localhost:44301/api/tinhtrang/${this.IDNV}`
+            `https://localhost:44301/api/quanhegiadinh/${this.IDNV}`
           )
           .then(function (res) {
-            me.tinhtrang = res.data
+            me.quanhegiadinh = res.data
           })
 
           .catch(function () {
@@ -1143,7 +1199,7 @@ export default {
       try {
         axios
           .post(
-            "https://localhost:44301/api/tinhtrang", this.suatrangthai
+            "https://localhost:44301/api/quanhegiadinh", this.suatrangthai
           )
           .then(function (res) {
             console.log(res)
@@ -1157,6 +1213,18 @@ export default {
           });
       } catch (error) {
         console.log(error);
+      }
+    },
+    saveState() {
+      this.validateTinhTrang()
+      this.validateGiaDinh()
+      if (this.isValid == true) {
+        if (this.formMode == 1) {
+          this.btnAddState()
+        }
+        else {
+          this.btnEditState()
+        }
       }
     },
     OpenPopupEditState(item) {
@@ -1175,7 +1243,7 @@ export default {
 
         axios
           .put(
-            `https://localhost:44301/api/tinhtrang/${this.suatrangthai.IDTinhTrang}`, this.suatrangthai
+            `https://localhost:44301/api/quanhegiadinh/${this.suatrangthai.IDGiaDinh}`, this.suatrangthai
           )
           .then(function (res) {
             console.log(res)
@@ -1211,7 +1279,7 @@ export default {
       this.idDelete = ""
       this.isShowPopupState = true
       this.isdeleteState = true;
-      this.idDelete = item.IDTinhTrang
+      this.idDelete = item.IDGiaDinh
       this.mess = "Bạn có chắc chắn muốn xóa thông tin tình trạng này không?"
     },
     deleteStateOk(value) {
@@ -1221,7 +1289,7 @@ export default {
       try {
         axios
           .delete(
-            `https://localhost:44301/api/tinhtrang/${this.idDelete}`
+            `https://localhost:44301/api/quanhegiadinh/${this.idDelete}`
           )
           .then(function (res) {
             console.log(res);
@@ -1306,27 +1374,7 @@ export default {
       this.employees.TenKhoa = value.TenKhoa;
       this.employees.MaKhoa = value.MaKhoa
     },
-    // getPosition(){
-    //   try {
 
-    //    var me = this;
-
-    //    axios
-    //      .get(
-    //       "https://localhost:44301/api/Position"
-    //      )
-    //      .then(function (res) {
-    //       me.position=res.data
-    //      })
-
-    //      .catch(function () {
-    //        console.log(1);
-    //      });
-    //  } catch (error) {
-    //    console.log(error);
-    //  }
-
-    // },
     formatDate(date) {
       try {
         if (date) {
@@ -1342,17 +1390,6 @@ export default {
         return "";
       }
     },
-    // selectItemCbb(value) {
-
-    //   if (value.IDKhoa) {
-    //     this.IDKhoa = value.IDKhoa;
-    //   } else {
-    //     this.IDKhoa = "";
-    //     this.getPagingEmployee();
-    //   }
-    //   this.getPagingEmployee();
-
-    // },
     selectItemCategory(value) {
       console.log(value.PositionsID);
       if (value.PositionsID) {
@@ -1435,6 +1472,27 @@ export default {
     clickCallback(pageNum) {
       this.pageNumber = pageNum;
       this.getPagingEmployee()
+    },
+    // 
+    validateTinhTrang() {
+      if (!this.suatrangthai.TinhTrang) {
+        this.errors.tinhtrang = "Tình trạng không được để trống!";
+        this.isValid = false;
+      }
+      else {
+        this.errors.tinhtrang = "";
+        this.isValid = true;
+      }
+    },
+    validateGiaDinh() {
+      if (!this.suatrangthai.GiaDinh) {
+        this.errors.giadinh = "Gia đình không được để trống!";
+        this.isValid = false;
+      }
+      else {
+        this.errors.giadinh = "";
+        this.isValid = true;
+      }
     },
   },
 };
