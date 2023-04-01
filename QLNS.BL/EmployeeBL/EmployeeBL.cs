@@ -98,5 +98,9 @@ namespace QLNS.BL
             }
 
         }
+        public int DeleteMultiple(List<Guid> listId)
+        {
+            return _employeeDL.DeleteMultiple(listId);
+        }
     }
 }

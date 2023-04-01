@@ -15,5 +15,6 @@ namespace QLNS.BL
     {
         public PagingData<nhanvien> FilterEmployee(string? keyword, int pageSize, Guid? IDKhoa, int pageNumber);
         public ImportResult<Guid> ImportFileExcel(IFormFile file);
+        public int DeleteMultiple(List<Guid> listId);
     }
 }

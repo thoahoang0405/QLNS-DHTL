@@ -49,19 +49,20 @@ namespace QLNS.BL
             if (orConditions.Count > 0)
             {
                 whereClause = $"({string.Join(" OR ", orConditions)})";
+                if (andConditions.Count() > 0)
+                {
+                    whereClause = "(" + whereClause + ") AND " + string.Join(" AND ", andConditions);
+                }
 
             }
-
-
-
             else if (andConditions.Count() > 0)
             {
                 whereClause = $"({string.Join(" AND ", andConditions)})";
             }
-            else if (andConditions.Count() > 0 && orConditions.Count() > 0)
-            {
-                whereClause = "(" + whereClause + ") AND " + string.Join(" AND ", andConditions);
-            }
+            //else if (andConditions.Count() > 0 && orConditions.Count() > 0)
+            //{
+            //    whereClause = "(" + whereClause + ") AND " + string.Join(" AND ", andConditions);
+            //}
             else
             {
                 whereClause = "";

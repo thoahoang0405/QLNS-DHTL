@@ -179,6 +179,24 @@ namespace QLNS.DHTL.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Lỗi");
             }
         }
+        [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
+        [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
+        [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [HttpDelete("delete-multiple")]
+        public IActionResult DeleteMultiple(List<Guid> listId)
+        {
+            try
+            {
+                int result = _employeeBL.DeleteMultiple(listId);
+              
+                    return StatusCode(StatusCodes.Status200OK, result);
+              
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "lỗi hệ thống");
+            }
+        }
 
     }
 }

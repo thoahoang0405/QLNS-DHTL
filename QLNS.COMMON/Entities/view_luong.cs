@@ -2,6 +2,7 @@
 {
     public class view_luong
     {
+        public Guid IDNhanVien { get; set; }
        public string TenNgachLuong { get; set; }
        public float HeSoLuong { get; set; }
         public DateTime NgayNhan { get; set; }

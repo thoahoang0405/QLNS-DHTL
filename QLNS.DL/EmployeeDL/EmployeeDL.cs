@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
 using QLNS.Common.Entities;
+using System.Data;
 
 namespace QLNS.DL
 {
@@ -98,5 +99,43 @@ namespace QLNS.DL
             return null;
 
         }
+        public int DeleteMultiple(List<Guid> listId)
+        {
+            // lấy procedure name
+            string procedureNameCommand = "Proc_nhanvien_DeleteMultiple";
+
+
+            // tạo param
+            var parameters = new DynamicParameters();
+
+            var listIdToString = "";
+
+            if (listId == null || listId.Count == 0)
+            {
+                return 0;
+            }
+            listIdToString = $"('{string.Join("','", listId)}')";
+
+            parameters.Add("@v_ListIdToString", listIdToString);
+
+
+            // chạy câu lệnh 
+
+            using (var sqlConnection = new MySqlConnection(connectionDB))
+            {
+             
+                    int result = sqlConnection.Execute(procedureNameCommand, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+                   
+                      
+                        return result;
+
+                    
+
+                
+            }
+        }
+
+
     }
 }
