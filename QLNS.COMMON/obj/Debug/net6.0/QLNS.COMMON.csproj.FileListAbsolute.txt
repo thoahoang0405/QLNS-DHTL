@@ -34,3 +34,15 @@ D:\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.dll
 D:\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\refint\QLNS.COMMON.dll
 D:\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.pdb
 D:\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\ref\QLNS.COMMON.dll
+D:\API\QLNS-DHTL\QLNS.COMMON\bin\Debug\net6.0\QLNS.COMMON.deps.json
+D:\API\QLNS-DHTL\QLNS.COMMON\bin\Debug\net6.0\QLNS.COMMON.dll
+D:\API\QLNS-DHTL\QLNS.COMMON\bin\Debug\net6.0\QLNS.COMMON.pdb
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.csproj.AssemblyReference.cache
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.GeneratedMSBuildEditorConfig.editorconfig
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.AssemblyInfoInputs.cache
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.AssemblyInfo.cs
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.csproj.CoreCompileInputs.cache
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.dll
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\refint\QLNS.COMMON.dll
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\QLNS.COMMON.pdb
+D:\API\QLNS-DHTL\QLNS.COMMON\obj\Debug\net6.0\ref\QLNS.COMMON.dll

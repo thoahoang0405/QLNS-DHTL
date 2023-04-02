@@ -14,7 +14,7 @@ namespace QLNS.DL
 {
     public class StudentDL: BaseDL<hocvan>, IStudentDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=18032001 ";
        
     }
 }

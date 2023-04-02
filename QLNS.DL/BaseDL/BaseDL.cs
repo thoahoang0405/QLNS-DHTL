@@ -14,7 +14,7 @@ namespace QLNS.BL.BaseBL
     {
 
         #region Field
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=18032001 ";
         #endregion
 
         #region method
@@ -189,7 +189,7 @@ namespace QLNS.BL.BaseBL
 
                 // Xử lý sinh mã nhân viên mới tự động tăng
                 // Cắt chuỗi mã nhân viên lớn nhất trong hệ thống để lấy phần số
-                string newCode = "NV" + (Int64.Parse(maxCode.Substring(2)) + 1).ToString();
+                string newCode = "NV000" + (Int64.Parse(maxCode.Substring(2)) + 1).ToString();
 
                 // Trả về dữ liệu cho client
                 return newCode;

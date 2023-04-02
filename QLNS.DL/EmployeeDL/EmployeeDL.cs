@@ -15,8 +15,8 @@ namespace QLNS.DL
 {
     public class EmployeeDL : BaseDL<nhanvien>, IEmployeeDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
-        public PagingData<nhanvien> FilterEmployee(string? keyword, int pageSize, Guid? IDKhoa,  int pageNumber = 1)
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=18032001 ";
+        public PagingData<nhanvien> FilterEmployee(string? keyword, int? pageSize, Guid? IDKhoa,  int? pageNumber = 1)
         {
 
             string storedProcedureName = "Proc_nhanvien_GetPaging";
