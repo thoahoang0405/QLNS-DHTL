@@ -1119,9 +1119,11 @@ export default {
         // tentinhtrang: '',
         // ngaybatdau: '',
         // ngayketthuc: '',
+
       },
-      title: "",
-      listEmployee: [],
+      title:"",
+      listEmployee:[],
+
     };
   },
   created() {
@@ -1178,6 +1180,7 @@ export default {
     * AUTHOR: HTTHOA (20/03/2023)
     */
     selectItemToList(emp) {
+  
       try {
         this.currentEmployee = emp;
 
@@ -1207,6 +1210,7 @@ export default {
       this.currentEmployee = emp;
     },
     hideNotifi(value) {
+      this.listEmployee=[]
       this.isShowPopup = value
     },
     OpenPopupCurriculumVitae(emp) {
