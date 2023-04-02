@@ -35,7 +35,7 @@
           </div>
           <div id="table-dt">
              <div class="table-dt">
-btnAddClick
+
                  <table style="width: 100%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
                    <tr>
                    <th>Chức Vụ</th>
@@ -126,6 +126,10 @@ export default {
     }
   },
   methods :{
+    loadData(){
+      this.getSalaryByID()
+      this.$emit("Load")
+    },
     onClickDelete(item){
       this.isShowPopup=!this.isShowPopup
       this.idDelete=item.IDLuong

@@ -8,7 +8,7 @@
                        
                     
                
-                    <div class="warrning-title">Chưa có nhân viên nào được chọn để xóa</div>
+                    <div class="warrning-title">{{ msg }}</div>
                 </div>
                 <div class="btn-wrap">
                     
@@ -26,7 +26,7 @@
                 msvDl:"",
             }
         },
-        props:["msv"],
+        props:["msg"],
         components: {
         },
         watch: {

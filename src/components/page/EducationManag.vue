@@ -1789,7 +1789,7 @@ tbody tr td {
   /* height: auto; */
 
   top: 10%;
-  right: 20%;
+  right: 14%;
   z-index: 99999;
   border-radius: 20px;
   box-shadow: 5px 5px 5px;

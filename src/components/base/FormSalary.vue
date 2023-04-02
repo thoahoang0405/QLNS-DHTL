@@ -151,7 +151,7 @@
     ></notifi>
     <popUpDup @closeNotifi="closePoup" v-show="isShowPop"></popUpDup>
   </div>
-
+  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning=false" :msg="msgWarning"></Warning>
   <!-- thongbao -->
 </template>
 
@@ -160,14 +160,17 @@ import notifi from "./FormNotifi.vue";
 import combobox from "./BaseCombobox.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
-
+import Warning from './BasePopupWarningDelete.vue'
 import popUpDup from "./PopUpDuplicateCode.vue";
 export default {
   data() {
     return {
+
       isOpenPopupAddNotifiCV: false,
       employee: {},
       faculty: {},
+      msgWarning:"",
+      isShowWarning:false,
       chucvuht: {},
       statusEmployee: {},
       certificate: {},
@@ -180,7 +183,9 @@ export default {
       isShowPop: false,
       isShow: false,
       phucap: {},
-      isValid: true,
+      isValid: false,
+      listData:{},
+      listYear:[],
       errors: {
         chucvu: "",
         ngachLuong: "",
@@ -202,7 +207,7 @@ export default {
   components: {
     combobox,
     popUpDup,
-    notifi,
+    notifi,Warning
   },
   watch: {
     code: function (vl) {
@@ -213,6 +218,7 @@ export default {
     },
   },
   created() {
+   
     this.formMode = this.FormMode;
     this.titleForm = this.title;
     if (this.formMode == 1) {
@@ -228,10 +234,47 @@ export default {
     // this.getFaculty();
     // this.getPosition();
     this.getAllowance();
-    this.getSNL();
+    this.getSNL(); 
+    this.getSalaryByID()
     // this.getCerti();
   },
   methods: {
+    getSalaryByID(){
+      try {
+        var me = this;
+
+        axios
+          .get(`https://localhost:44301/api/luong/${this.salary.IDNhanVien}`)
+          .then(function (res) {
+            console.log(res.data);
+            me.listData=res.data
+          
+          
+       
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    validateYear(){
+      for (const item of this.listData) {         
+            if(this.salary.Nam==item.Nam && this.salary.Thang==item.Thang){
+             
+              this.msgWarning="Thông tin lương " + this.salary.Thang + "/" + this.salary.Nam + " của nhân viên này đã tồn tại"
+              this.isShowWarning=true
+              this.isValid=false
+            
+        }else{            
+              this.msgWarning=""
+              this.isValid=true
+            
+        }
+      }
+    },
     save() {
       const toast = useToast();
       // this.getAllEmployee()
@@ -239,10 +282,12 @@ export default {
       this.validateNgachLuong();
       this.validateThang();
       this.validateNam();
-
+      this.validateYear()
+     console.log(this.isValid);
       if (this.isValid == true) {
+      
         if (this.formMode == 0) {
-          this.addSalary();
+           this.addSalary();
         } else {
           this.editSalary();
         }
@@ -253,6 +298,7 @@ export default {
     closePoup(value) {
       this.isShowPop = value;
     },
+ 
     getNewCode() {
       try {
         var me = this;
@@ -552,7 +598,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .icon-down-bold {
   background: url(http://localhost:8080/img/qlts-icon.c1b7328e.svg) no-repeat -72px -338px;
   width: 8px;
@@ -611,7 +657,9 @@ label span {
   width: fit-content;
   height: fit-content;
   background-color: #fff;
-  margin: auto auto;
+  /* margin: auto auto; */
+  margin-top: 7%;
+  margin-left: 22%;
   border-radius: 18px;
   width: 800px;
   padding: 16px;

@@ -145,7 +145,19 @@
   .menu-body .icon {
     margin: 0 auto;
   }
-
+  .form {
+    width: fit-content;
+    height: fit-content;
+    background-color: #fff;
+    /* margin: auto auto; */
+    margin-top: 7%;
+    margin-left: 22%;
+    border-radius: 18px;
+    width: 800px;
+    padding: 16px;
+    box-shadow: 5px rgba(0, 0, 0, 0.2);
+    /* display: none; */
+  }
    .m-table {
     background-color: #fff;
     height:calc(100% - 130px);

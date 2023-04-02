@@ -639,7 +639,8 @@ label span {
   width: fit-content;
   height: fit-content;
   background-color: #fff;
-  margin: auto auto;
+  margin-top: 7%;
+    margin-left: 22%;
   border-radius: 18px;
   width: 800px;
   /* display: none; */

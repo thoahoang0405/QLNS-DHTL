@@ -127,7 +127,7 @@
     </div> -->
     <!-- sua ly lich -->
     <div class="popup-bonus" v-if="isOpenPopupFormEditCurriculumVitae">
-      <div class="bonus-form">
+      <div class="bonus-formM">
         <div class="head-popup">
           <h2 class="title-heading">Sửa thông tin nhân viên</h2>
           <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifiCV = true">
@@ -281,30 +281,30 @@
           </div>
         </div>
         <table style="width: 100%; border-collapse: collapse; border: 1px solid; margin-top: 12px;">
-          <thead>
-            <tr>
-              <th colspan="2">Quan hệ gia đình</th>
-              <th colspan="4">Trạng thái</th>
-            </tr>
-          </thead>
+          <!-- <thead> -->
+          <!-- <tr> -->
+          <!-- <th colspan="2">Quan hệ gia đình</th> -->
+          <!-- <th colspan="4">Trạng thái</th> -->
+          <!-- </tr> -->
+          <!-- </thead> -->
           <tbody>
             <tr>
               <th>Tình trạng</th>
               <th>Gia đình</th>
-              <th>Tên tình trạng</th>
+              <!-- <th>Tên tình trạng</th>
               <th>Ngày bắt đầu</th>
-              <th>Ngày kết thúc</th>
+              <th>Ngày kết thúc</th> -->
               <th style="width: 100px;">Chức năng</th>
             </tr>
           </tbody>
           <tr>
           </tr>
-          <tr v-for="item of tinhtrang" :key="item.IDTinhTrang">
-            <td style="border: 1px solid #c7c7c7; width: 150px;"></td>
-            <td style="border: 1px solid #c7c7c7; width: 250px;"></td>
-            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TenTinhTrang }}</td>
+          <tr v-for="item of quanhegiadinh" :key="item.IDGiaDinh">
+            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TinhTrang }}</td>
+            <td style="border: 1px solid #c7c7c7; width: 250px;">{{ item.GiaDinh }}</td>
+            <!-- <td style="border: 1px solid #c7c7c7; width: 150px;">{{ item.TenTinhTrang }}</td>
             <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.NgayBD) }}</td>
-            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.NgayKT) }}</td>
+            <td style="border: 1px solid #c7c7c7; width: 150px;">{{ formatDate(item.NgayKT) }}</td> -->
 
             <td ref="func" class="td-item-final td-func"
               style="background-color: #fff; align-items: center; border: 1px solid #c7c7c7;" colspan="12">
@@ -340,35 +340,52 @@
         <div class="column">
           <div class="input__state">
             <label for="">Tình trạng: </label>
-            <input type="text">
+            <input :class="errors.tinhtrang != '' ? 'border-red' : ''" @blur="validateTinhTrang"
+              v-model="suatrangthai.TinhTrang" type="text">
+            <div class="invalid-feedbackk" v-if="errors.tinhtrang != ''">
+              {{ errors.tinhtrang }}
+            </div>
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Gia đình: </label>
-            <textarea style="width: 80%;height: 60px;" type="text"> </textarea>
+            <textarea :class="errors.giadinh != '' ? 'border-red' : ''" @blur="validateGiaDinh"
+              v-model="suatrangthai.GiaDinh" style="width: 80%;height: 60px;" type="text"> </textarea>
+            <div class="invalid-feedbackkk" v-if="errors.giadinh != ''">
+              {{ errors.giadinh }}
+            </div>
           </div>
         </div>
-        <div class="column">
+        <!-- <div class="column">
           <div class="input__state">
             <label for="">Tên tình trạng: </label>
-            <input type="text" v-model="suatrangthai.TenTinhTrang">
+            <input @blur="validateTenTinhTrang" type="text" v-model="suatrangthai.TenTinhTrang">
+            <div class="invalid-feedbackk" v-if="errors.tentinhtrang != ''">
+              {{ errors.tentinhtrang }}
+            </div>
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Ngày bắt đầu: </label>
-            <input type="date" v-model="suatrangthai.NgayBD">
+            <input @blur="validateNgayBD" type="date" v-model="suatrangthai.NgayBD">
+            <div class="invalid-feedbackk" v-if="errors.ngaybatdau != ''">
+              {{ errors.ngaybatdau }}
+            </div>
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Ngày kết thúc: </label>
-            <input type="date" v-model="suatrangthai.NgayKT">
+            <input @blur="validateNgayKT" type="date" v-model="suatrangthai.NgayKT">
+            <div class="invalid-feedbackk" v-if="errors.ngayketthuc != ''">
+              {{ errors.ngayketthuc }}
+            </div>
           </div>
-        </div>
+        </div> -->
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
-        <div class="btnSave" @click="btnAddState">Lưu</div>
+        <div class="btnSave" @click="saveState">Lưu</div>
       </div>
     </div>
     <!-- sua trang thai -->
@@ -393,16 +410,16 @@
         <div class="column">
           <div class="input__state">
             <label for="">Tình trạng: </label>
-            <input type="text">
+            <input v-model="suatrangthai.TinhTrang" type="text">
           </div>
         </div>
         <div class="column">
           <div class="input__state">
             <label for="">Gia đình: </label>
-            <textarea style="width: 80%;height: 60px;" type="text"> </textarea>
+            <textarea v-model="suatrangthai.GiaDinh" style="width: 80%;height: 60px;" type="text"> </textarea>
           </div>
         </div>
-        <div class="column">
+        <!-- <div class="column">
           <div class="input__state">
             <label for="">Tên tình trạng: </label>
             <input type="text" v-model="suatrangthai.TenTinhTrang">
@@ -419,7 +436,7 @@
             <label for="">Ngày kết thúc: </label>
             <input type="date" v-model="suatrangthai.NgayKT">
           </div>
-        </div>
+        </div> -->
 
         <!-- <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div> -->
         <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">Hủy</div>
@@ -457,9 +474,9 @@
       </div>
     </div>
     <!--  -->
- <!--  -->
- <!--  -->
- <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
     <h3 class="header-bd">Quản lý nhân viên</h3>
     <div class="body-header">
       <div class="row-input">
@@ -495,8 +512,9 @@
       <table id="tbEmployee" class="table">
         <thead>
           <tr>
-            <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center" >
-              <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px"    @click="selectedAllItem"  :checked="listEmployee.length == employees.length"/>
+            <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center">
+              <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px"
+                @click="selectedAllItem" :checked="listEmployee.length == employees.length" />
             </th>
             <th class="text-center" style="min-width: 40px;">STT</th>
             <th>Mã nhân viên</th>
@@ -523,10 +541,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr ref="row" v-for="(emp, index) of employees" :class="listEmployee.includes(emp) ? 'active' : ''" :key="emp.IDNhanVien">
-            <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1" :class="listEmployee.includes(emp) ? 'active' : ''">
-              <input ref="check" class="check-item" type="checkbox"  style="width: 18px; height: 18px" :checked="listEmployee.includes(emp) ? true : false"
-                  @click="selectItemToList(emp)" />
+          <tr ref="row" v-for="(emp, index) of employees" :class="listEmployee.includes(emp) ? 'active' : ''"
+            :key="emp.IDNhanVien">
+            <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1"
+              :class="listEmployee.includes(emp) ? 'active' : ''">
+              <input ref="check" class="check-item" type="checkbox" style="width: 18px; height: 18px"
+                :checked="listEmployee.includes(emp) ? true : false" @click="selectItemToList(emp)" />
             </td>
             <td class="text-center">{{ index + 1 }}</td>
             <td>{{ emp.MaNV }}</td>
@@ -552,7 +572,8 @@
                 Xem chi tiết
               </div>
             </td>
-            <td :class="listEmployee.includes(emp) ? 'active' : ''" ref="func" class="td-item-final td-func sticky-right; align-items: center;"
+            <td :class="listEmployee.includes(emp) ? 'active' : ''" ref="func"
+              class="td-item-final td-func sticky-right; align-items: center;"
               style="position: sticky; right: 0; background-color: #fff" colspan="12">
               <div class="edit-text"></div>
               <div class="icon icon-edit" @click="editEmployee(emp)"></div>
@@ -604,9 +625,10 @@
     </div>
   </div>
   <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
-  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning=false"></Warning>
-<Form :titleform="title" v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"  :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
-<div id="load" v-show="isShowLoad">
+  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning=false" :msg="msgWarning"></Warning>
+  <Form :titleform="title" v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"
+    :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
+  <div id="load" v-show="isShowLoad">
     <div class="lds-ring">
       <div></div>
       <div></div>
@@ -615,15 +637,33 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 @import url('../../css/page/loading.css');
+
+.invalid-feedbackk {
+  color: red;
+  position: absolute;
+  font-size: 11px;
+  margin-top: 45px;
+  margin-left: 112px;
+}
+
+.invalid-feedbackkk {
+  color: red;
+  position: absolute;
+  font-size: 11px;
+  margin-top: 70px;
+  margin-left: 112px;
+}
 
 .btn-add:hover {
   opacity: 0.8;
 }
+
 .active {
   background-color: #8fd6e7 !important;
 }
+
 .border-red {
   border: 1px solid red;
 }
@@ -657,6 +697,23 @@ table {
 }
 
 .bonus-form {
+  left: 50%;
+  transform: translate(-50%, 15%);
+  padding: 0px 20px;
+  position: absolute;
+  width: 40vw;
+  height: 370px;
+  /* height: auto; */
+  margin: 0 auto;
+  top: 15%;
+  right: 15%;
+  z-index: 99999;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px;
+  background-color: #fff;
+}
+
+.bonus-formM {
   left: 50%;
   transform: translate(-50%, -5%);
   padding: 0px 20px;
@@ -1006,7 +1063,7 @@ import { useToast } from "vue-toastification";
 import Warning from "../base/BasePopupWarningDelete.vue"
 export default {
   components: {
-    Paginate, Form, Combobox, popUpDelete, popUp,Warning
+    Paginate, Form, Combobox, popUpDelete, popUp, Warning
   },
   data() {
     return {
@@ -1022,13 +1079,14 @@ export default {
       isActive: "20",
       pageNumber: 1,
       page: 1,
-      isShowWarning:false,
+      isShowWarning: false,
       employees: {},
       totalPage: 1,
       isShow: false,
       isShowDrop: false,
       totalRecord: 0,
       IDKhoa: "",
+      msgWarning:"",
       pageDefault: 20,
       department: {},
       isShowLoad: false,
@@ -1048,13 +1106,22 @@ export default {
       nhanvien: {},
       suanhanvien: {},
       tinhtrang: {},
+      quanhegiadinh: {},
       IDNV: "",
       suatrangthai: {},
       mess: "",
       isdeleteState: false,
       isShowPopupState: false,
-      title:"",
-      listEmployee:[],
+      isValid: true,
+      errors: {
+        tinhtrang: '',
+        giadinh: '',
+        // tentinhtrang: '',
+        // ngaybatdau: '',
+        // ngayketthuc: '',
+      },
+      title: "",
+      listEmployee: [],
     };
   },
   created() {
@@ -1077,11 +1144,11 @@ export default {
 
         if (this.listEmployee.length == 0) {
           this.isShowWarning=true;
-          
+          this.msgWarning="Chưa có nhân viên nào được chọn để xóa"
         } else if (this.listEmployee.length == 1) {
             
           this.isShowPopup = !this.isShowPopup
-          this.empCodeDelete ="Bạn có muốn xóa nhân viên có mã " + this.listEmployee[0].MaNV  + "không?"
+          this.empCodeDelete ="Bạn có muốn xóa nhân viên có mã " + this.listEmployee[0].MaNV  + " không?"
           this.empID = this.listEmployee[0].IDNhanVien;
           
         } else {
@@ -1095,7 +1162,6 @@ export default {
         console.log(err);
       }
     },
-
     selectedAllItem() {
       try {
         if (this.listEmployee.length < this.employees.length) {
@@ -1107,11 +1173,11 @@ export default {
         console.log(err);
       }
     },
-     /**
-     * thêm phần tử xóa vào mảng xóa
-     * AUTHOR: HTTHOA (20/03/2023)
-     */
-     selectItemToList(emp) {
+    /**
+    * thêm phần tử xóa vào mảng xóa
+    * AUTHOR: HTTHOA (20/03/2023)
+    */
+    selectItemToList(emp) {
       try {
         this.currentEmployee = emp;
 
@@ -1158,7 +1224,7 @@ export default {
             `https://localhost:44301/api/nhanvien/${this.IDNV}`
           )
           .then(function (res) {
-            me.tinhtrang = res.data
+            me.quanhegiadinh = res.data
           })
 
           .catch(function () {
@@ -1195,15 +1261,13 @@ export default {
     },
     getState() {
       try {
-
         var me = this;
-
         axios
           .get(
-            `https://localhost:44301/api/tinhtrang/${this.IDNV}`
+            `https://localhost:44301/api/quanhegiadinh/${this.IDNV}`
           )
           .then(function (res) {
-            me.tinhtrang = res.data
+            me.quanhegiadinh = res.data
           })
 
           .catch(function () {
@@ -1233,7 +1297,7 @@ export default {
       try {
         axios
           .post(
-            "https://localhost:44301/api/tinhtrang", this.suatrangthai
+            "https://localhost:44301/api/quanhegiadinh", this.suatrangthai
           )
           .then(function (res) {
             console.log(res)
@@ -1247,6 +1311,18 @@ export default {
           });
       } catch (error) {
         console.log(error);
+      }
+    },
+    saveState() {
+      this.validateTinhTrang()
+      this.validateGiaDinh()
+      if (this.isValid == true) {
+        if (this.formMode == 1) {
+          this.btnAddState()
+        }
+        else {
+          this.btnEditState()
+        }
       }
     },
     OpenPopupEditState(item) {
@@ -1265,7 +1341,7 @@ export default {
 
         axios
           .put(
-            `https://localhost:44301/api/tinhtrang/${this.suatrangthai.IDTinhTrang}`, this.suatrangthai
+            `https://localhost:44301/api/quanhegiadinh/${this.suatrangthai.IDGiaDinh}`, this.suatrangthai
           )
           .then(function (res) {
             console.log(res)
@@ -1301,7 +1377,7 @@ export default {
       this.idDelete = ""
       this.isShowPopupState = true
       this.isdeleteState = true;
-      this.idDelete = item.IDTinhTrang
+      this.idDelete = item.IDGiaDinh
       this.mess = "Bạn có chắc chắn muốn xóa thông tin tình trạng này không?"
     },
     deleteStateOk(value) {
@@ -1311,7 +1387,7 @@ export default {
       try {
         axios
           .delete(
-            `https://localhost:44301/api/tinhtrang/${this.idDelete}`
+            `https://localhost:44301/api/quanhegiadinh/${this.idDelete}`
           )
           .then(function (res) {
             console.log(res);
@@ -1332,36 +1408,36 @@ export default {
     },
     deleteEmployee(emp) {
       this.isShowPopup = !this.isShowPopup
-      this.empCodeDelete = "Bạn có muốn xóa nhân viên có mã " + emp.MaNV  + "không?"
+      this.empCodeDelete = "Bạn có muốn xóa nhân viên có mã " + emp.MaNV + " không?"
       this.empID = emp.IDNhanVien
     },
     deleteEmp(value) {
       this.isShowPopup = value
-      if(this.listEmployee.length == 1){
-         var me = this;
-      const toast = useToast();
-      try {
-        axios
-          .delete(
-            `https://localhost:44301/api/nhanvien/${me.empID}`
-          )
-          .then(function (res) {
-            console.log(res);
-            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-            me.getPagingEmployee()
-          })
+      if (this.listEmployee.length == 1) {
+        var me = this;
+        const toast = useToast();
+        try {
+          axios
+            .delete(
+              `https://localhost:44301/api/nhanvien/${me.empID}`
+            )
+            .then(function (res) {
+              console.log(res);
+              toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
+              me.getPagingEmployee()
+            })
 
-          .catch(function () {
-            toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
-            console.log(1);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-      }else{
+            .catch(function () {
+              toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
+              console.log(1);
+            });
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
         this.deleteMultiple()
       }
-     
+
     },
     deleteMultiple() {
       try {
@@ -1373,7 +1449,7 @@ export default {
         });
 
         axios({
-          url:"https://localhost:44301/api/nhanvien/delete-multiple",
+          url: "https://localhost:44301/api/nhanvien/delete-multiple",
           method: "delete",
           data: listEmployeeID,
         })
@@ -1393,7 +1469,7 @@ export default {
       this.employeeSelect = emp
       this.IDNhanVien = emp.IDNhanVien
       this.isShow = true
-      this.title="Sửa nhân viên"
+      this.title = "Sửa nhân viên"
       this.formMode = 2
     },
     getPagingEmployee() {
@@ -1428,27 +1504,7 @@ export default {
       this.employees.TenKhoa = value.TenKhoa;
       this.employees.MaKhoa = value.MaKhoa
     },
-    // getPosition(){
-    //   try {
 
-    //    var me = this;
-
-    //    axios
-    //      .get(
-    //       "https://localhost:44301/api/Position"
-    //      )
-    //      .then(function (res) {
-    //       me.position=res.data
-    //      })
-
-    //      .catch(function () {
-    //        console.log(1);
-    //      });
-    //  } catch (error) {
-    //    console.log(error);
-    //  }
-
-    // },
     formatDate(date) {
       try {
         if (date) {
@@ -1464,17 +1520,6 @@ export default {
         return "";
       }
     },
-    // selectItemCbb(value) {
-
-    //   if (value.IDKhoa) {
-    //     this.IDKhoa = value.IDKhoa;
-    //   } else {
-    //     this.IDKhoa = "";
-    //     this.getPagingEmployee();
-    //   }
-    //   this.getPagingEmployee();
-
-    // },
     selectItemCategory(value) {
       console.log(value.PositionsID);
       if (value.PositionsID) {
@@ -1494,7 +1539,7 @@ export default {
       this.getNewCode()
       this.formMode = 1;
       this.isShow = !this.isShow
-      this.title="Thêm nhân viên"
+      this.title = "Thêm nhân viên"
     },
 
     getNewCode() {
@@ -1558,6 +1603,27 @@ export default {
     clickCallback(pageNum) {
       this.pageNumber = pageNum;
       this.getPagingEmployee()
+    },
+    // 
+    validateTinhTrang() {
+      if (!this.suatrangthai.TinhTrang) {
+        this.errors.tinhtrang = "Tình trạng không được để trống!";
+        this.isValid = false;
+      }
+      else {
+        this.errors.tinhtrang = "";
+        this.isValid = true;
+      }
+    },
+    validateGiaDinh() {
+      if (!this.suatrangthai.GiaDinh) {
+        this.errors.giadinh = "Gia đình không được để trống!";
+        this.isValid = false;
+      }
+      else {
+        this.errors.giadinh = "";
+        this.isValid = true;
+      }
     },
   },
 };

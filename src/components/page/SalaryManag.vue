@@ -1,7 +1,7 @@
 <template>
   <div class="body">
   
-    <h3 class="header-bd">Quản lý nhân viên</h3>
+    <h3 class="header-bd">Quản lý lương</h3>
     <div class="body-header">
       <div class="row-input">
         <div class="input">
@@ -140,7 +140,7 @@
                 :class="{ act: isActive == '20' }"
                 pageSize="20"
                 @click="getPageDefault"
-                :value="pageDefault"
+                
               >
                 20 bản ghi trên 1 trang
               </div>
@@ -149,6 +149,7 @@
                 :class="{ act: isActive == '30' }"
                 pageSize="30"
                 @click="getPageDefault"
+                :value="pageDefault"
               >
                 30 bản ghi trên 1 trang
               </div>
@@ -192,7 +193,7 @@
       </div>
     </div>
   </div>
-  <FormDetail v-if="isShowFormDetail" :idNV="IDNV" :ngaySinh="NgaySinh" :maNV="MaNV" :tenNV="TenNV" :khoa="Khoa" :salarySL="salarySelected"  @hideForm="hideFormDetail"></FormDetail>
+  <FormDetail @load="getSalary" v-if="isShowFormDetail" :idNV="IDNV" :ngaySinh="NgaySinh" :maNV="MaNV" :tenNV="TenNV" :khoa="Khoa" :salarySL="salarySelected"  @hideForm="hideFormDetail"></FormDetail>
   <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
   <div id="load" v-show="isShowLoad">
     <div class="lds-ring">
@@ -230,10 +231,9 @@ export default {
       isShowDrop: false,
       totalRecord: 0,
       IDKhoa:"",
-      pageDefault: 20,
+      pageDefault: 10,
       department:{},
-      isShowLoad:false,
-      
+      isShowLoad:false,     
       departmentID:"",
       positionID:"",
       txtSearch:" ",
@@ -279,7 +279,9 @@ export default {
     },
   },
   methods: {
-   
+    getSalary(){
+      this.getPagingSalary()
+    },
     showDetail(item){
       console.log(item);
       this.isShowFormDetail=!this.isShowFormDetail
@@ -296,7 +298,7 @@ export default {
       try {
         var me = this;
        me.isShowLoad=true
-      //  https://localhost:44301/api/luong/Filter?keyword=a&pageSize=10&nam=2023&thang=2&pageNumber=1
+    
         axios
           .get(
             `https://localhost:44301/api/luong/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&nam=${this.year}&thang=${this.month}&pageNumber=${this.pageNumber}`
@@ -374,7 +376,19 @@ export default {
       }
       return gender;
     },
-    
+    showPage(is) {
+      this.isShowDrop = is;
+    },
+    btnDropUp() {
+      $(".icon-dropup").toggleClass("iconrotate");
+      if (!this.isShowDrop) {
+        this.showPage(true);
+        $(".icon-dropup").addClass("iconrotate");
+      } else {
+        this.showPage(false);
+        $(".icon-dropup").removeClass("iconrotate");
+      }
+    },
     getPageDefault(e) {
       this.isActive = e.target.getAttribute("pageSize");
       this.pageDefault = e.target.getAttribute("pageSize");

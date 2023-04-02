@@ -79,7 +79,8 @@
           <form action="">
             <div class="input__box">
               <label for="">Tên chức vụ</label>
-              <input @blur="validateName" type="text" v-model="suaChucVu.TenChucVu" />
+              <input :class="errors.tenchucvu != '' ? 'border-red' : ''" @blur="validateName" type="text"
+                v-model="suaChucVu.TenChucVu" />
               <div class="invalid-feedback" v-if="errors.tenchucvu != ''">
                 {{ errors.tenchucvu }}
               </div>
@@ -94,7 +95,8 @@
             </div>
             <div class="input__box">
               <label for="">Định mức giảng dạy</label>
-              <input @blur="validateNorm" type="text" v-model="suaChucVu.DinhMucGiangDay" />
+              <input :class="errors.dinhmucgiangday != '' ? 'border-red' : ''" @blur="validateNorm" type="text"
+                v-model="suaChucVu.DinhMucGiangDay" />
               <div class="invalid-feedback" v-if="errors.dinhmucgiangday != ''">
                 {{ errors.dinhmucgiangday }}
               </div>
@@ -293,14 +295,16 @@
             <div class="column">
               <div class="input__box">
                 <label for="">Tên hợp đồng</label>
-                <input @blur="validateNameHD" type="text" v-model="suaHopDong.TenHD" />
+                <input :class="errors.tenhopdong != '' ? 'border-red' : ''" @blur="validateNameHD" type="text"
+                  v-model="suaHopDong.TenHD" />
                 <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
                   {{ errors.tenhopdong }}
                 </div>
               </div>
               <div class="input__box">
                 <label for="">Ngày kí</label>
-                <input @blur="validateNgayKi" type="date" v-model="suaHopDong.NgayKi" />
+                <input :class="errors.ngayki != '' ? 'border-red' : ''" @blur="validateNgayKi" type="date"
+                  v-model="suaHopDong.NgayKi" />
                 <div class="invalid-feedback" v-if="errors.ngayki != ''">
                   {{ errors.ngayki }}
                 </div>
@@ -309,14 +313,16 @@
             <div class="column">
               <div class="input__box">
                 <label for="">Ngày bắt đầu</label>
-                <input @blur="validateNgayBD" type="date" v-model="suaHopDong.NgayBD" />
+                <input :class="errors.ngaybatdau != '' ? 'border-red' : ''" @blur="validateNgayBD" type="date"
+                  v-model="suaHopDong.NgayBD" />
                 <div class="invalid-feedback" v-if="errors.ngaybatdau != ''">
                   {{ errors.ngaybatdau }}
                 </div>
               </div>
               <div class="input__box">
                 <label for="">Ngày kết thúc</label>
-                <input @blur="validateNgayKT" type="date" v-model="suaHopDong.NgayKT" />
+                <input :class="errors.ngayketthuc != '' ? 'border-red' : ''" @blur="validateNgayKT" type="date"
+                  v-model="suaHopDong.NgayKT" />
                 <div class="invalid-feedback" v-if="errors.ngayketthuc != ''">
                   {{ errors.ngayketthuc }}
                 </div>
@@ -470,9 +476,9 @@
       <table id="tbEmployee" class="table" style="width: 100%;">
         <thead>
           <tr>
-            <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center">
+            <!-- <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center">
               <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px" />
-            </th>
+            </th> -->
             <th class="text-center" style="min-width: 40px">STT</th>
             <th>Mã nhân viên </th>
             <th>Họ và tên</th>
@@ -485,9 +491,9 @@
         </thead>
         <tbody>
           <tr v-for="(item, i) of students" :key="item.IDNhanVien" ref="row">
-            <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1">
+            <!-- <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1">
               <input ref="check" class="check-item" type="checkbox" style="width: 18px; height: 18px" />
-            </td>
+            </td> -->
             <td class="text-center">{{ i + 1 }}</td>
             <td>{{ item.MaNV }}</td>
             <td>{{ item.TenNV }}</td>
@@ -591,7 +597,7 @@ export default {
       dataSinhVienBonus: {},
       chucvu: {},
       hopdong: {},
-      isShowLoad:false,
+      isShowLoad: false,
       IDNV: "",
       MaNV: "",
       TenNV: "",
@@ -635,7 +641,7 @@ export default {
       try {
 
         var me = this;
-       
+
         axios
           .get(
             `https://localhost:44301/api/hopdong/${this.IDNV}`
@@ -931,13 +937,13 @@ export default {
       try {
 
         var me = this;
-me.isShowLoad=true
+        me.isShowLoad = true
         axios
           .get(
             `https://localhost:44301/api/nhanvien/Filter?keyword=${this.txtSearch}&pageSize=${this.pageDefault}&IDKhoa=${this.IDKhoa}&pageNumber=${this.pageNumber}`
           )
           .then(function (res) {
-            me.isShowLoad=false
+            me.isShowLoad = false
             me.totalPage = res.data.TotalPages;
             me.totalRecord = res.data.TotalRecords;
             me.students = res.data.Data;
@@ -1074,6 +1080,7 @@ me.isShowLoad=true
   color: red;
   position: absolute;
   font-size: 12px;
+  margin-top: -8px;
   /* border: 2px solid red; */
 }
 
@@ -1504,6 +1511,5 @@ tbody tr:hover .td-item-final {
   background-color: #fff;
   margin: auto auto;
   border-radius: 8px;
-}
-</style>
+}</style>
   
