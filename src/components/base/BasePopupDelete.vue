@@ -2,11 +2,13 @@
     <div class="notification-wrap">
             <div class="notificationn">
                 <div class="warringgg">
-                  
-                        <i class="icon-warning"></i>
+                  <div>
+                    <div class="icon-warning"></div>
+                  </div>
+                       
                     
                     
-                    <div class="warrning-title">Bạn có chắc chắn xóa nhân viên có mã  {{ msv }} không?</div>
+                    <div class="warrning-title">{{ msv }}</div>
                 </div>
                 <div class="btn-wrap">
                     <div class="btnNotifi btn-secondary" @click="CancelNotifi">Hủy</div>

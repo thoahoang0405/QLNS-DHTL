@@ -61,10 +61,10 @@ export default {
           to: "/thuong",
         },
         {
-          icon: "icon-document",
-          name: "Quản lý",
+          icon: "icon-salary",
+          name: "Quản lý lương",
           dropdown: true,
-          to: "/tuyendung",
+          to: "/luong",
         },
         {
           icon: "icon-recruiter",
@@ -73,7 +73,7 @@ export default {
           to: "/hopdong",
         },
         {
-          icon: "icon-document",
+          icon: "icon-trainning",
           name: "Đào tạo",
           dropdown: false,
           to: "/hocvan",
