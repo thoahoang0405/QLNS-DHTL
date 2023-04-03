@@ -25,15 +25,15 @@
         <div class="column">
           <div class="input__box">
             <label for="">Mã nhân viên <span>*</span></label>
-            <input @blur="validateEmployeeCode" class="manv" :class="errors.manv != '' ? 'borderRed' : '' " type="text"
-              v-model="employee.MaNV" />
+            <input disabled @blur="validateEmployeeCode" class="manv" :class="errors.manv != '' ? 'borderRed' : ''"
+              type="text" v-model="employee.MaNV" />
             <div v-if="errors.manv != ''" class="invalid-feedback">
               {{ errors.manv }}
             </div>
           </div>
           <div class="input__box">
             <label for="">Tên nhân viên <span>*</span></label>
-            <input @blur="validateName" :class="errors.ten != '' ? 'borderRed' : '' " class="ten" type="text"
+            <input @blur="validateName" :class="errors.ten != '' ? 'borderRed' : ''" class="ten" type="text"
               v-model="employee.TenNV" />
             <div class="invalid-feedback" v-if="errors.ten != ''">
               {{ errors.ten }}
@@ -198,7 +198,7 @@ export default {
       },
     };
   },
-  props: ["employeeSL", "code", "FormMode", "loadData", "employeeId","titleForm"],
+  props: ["employeeSL", "code", "FormMode", "loadData", "employeeId", "titleForm"],
   components: {
     combobox, popUpDup,
     notifi
@@ -262,7 +262,7 @@ export default {
             "https://localhost:44301/api/nhanvien/NewCode"
           )
           .then(function (res) {
-            me.employee.EmployeeCode = res.data
+            me.employee.MaNV = res.data
           })
 
           .catch(function () {
@@ -631,7 +631,7 @@ label span {
   width: 100%;
   outline: none;
   padding-left: 5px;
-  color: #707070;
+  color: #000;
   margin-top: 7px;
 }
 
@@ -640,7 +640,7 @@ label span {
   height: fit-content;
   background-color: #fff;
   margin-top: 7%;
-    margin-left: 22%;
+  margin-left: 22%;
   border-radius: 18px;
   width: 800px;
   /* display: none; */
@@ -822,7 +822,7 @@ label span {
   justify-content: center;
   margin-top: 38px;
   border-radius: 2px;
-  height: 25px;
+  height: 34px;
   cursor: pointer;
 }
 

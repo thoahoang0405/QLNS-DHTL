@@ -1354,7 +1354,7 @@ tbody tr td {
   padding: 0px 20px;
   position: absolute;
   width: 50vw;
-  height: 490px;
+  height: 534px;
   /* height: auto; */
   margin: 0 auto;
   top: 15%;
@@ -1368,8 +1368,8 @@ tbody tr td {
 .bonus-formm {
   padding: 0px 20px;
   position: absolute;
-  width: 40vw;
-  height: 510px;
+  width: 42vw;
+  height: 534px;
   /* height: auto; */
   margin: 0 auto;
   top: 11.5%;
@@ -1511,5 +1511,6 @@ tbody tr:hover .td-item-final {
   background-color: #fff;
   margin: auto auto;
   border-radius: 8px;
-}</style>
+}
+</style>
   

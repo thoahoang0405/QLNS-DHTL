@@ -625,7 +625,7 @@
     </div>
   </div>
   <popUp v-show="isShowPopup" @cancelNotifi="hideNotifi" :msv="empCodeDelete" @closeNotifi="deleteEmp"></popUp>
-  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning=false" :msg="msgWarning"></Warning>
+  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning = false" :msg="msgWarning"></Warning>
   <Form :titleform="title" v-show="isShow" @hideForm="closeForm" :loadData="getPagingEmployee" :employeeId="IDNhanVien"
     :FormMode="formMode" :employeeSL="employeeSelect" :code="newCode"></Form>
   <div id="load" v-show="isShowLoad">
@@ -770,7 +770,7 @@ svg:hover {
   width: 100%;
   outline: none;
   padding-left: 5px;
-  color: #707070;
+  color: #000;
   margin-top: 7px;
   margin-bottom: 7px;
 }
@@ -1086,7 +1086,7 @@ export default {
       isShowDrop: false,
       totalRecord: 0,
       IDKhoa: "",
-      msgWarning:"",
+      msgWarning: "",
       pageDefault: 20,
       department: {},
       isShowLoad: false,
@@ -1121,8 +1121,8 @@ export default {
         // ngayketthuc: '',
 
       },
-      title:"",
-      listEmployee:[],
+      title: "",
+      listEmployee: [],
 
     };
   },
@@ -1145,19 +1145,19 @@ export default {
         // kiểm tra danh sách được chọn có bao nhiêu bản ghi và hiển thị thông báo
 
         if (this.listEmployee.length == 0) {
-          this.isShowWarning=true;
-          this.msgWarning="Chưa có nhân viên nào được chọn để xóa"
+          this.isShowWarning = true;
+          this.msgWarning = "Chưa có nhân viên nào được chọn để xóa"
         } else if (this.listEmployee.length == 1) {
-            
+
           this.isShowPopup = !this.isShowPopup
-          this.empCodeDelete ="Bạn có muốn xóa nhân viên có mã " + this.listEmployee[0].MaNV  + " không?"
+          this.empCodeDelete = "Bạn có muốn xóa nhân viên có mã " + this.listEmployee[0].MaNV + " không?"
           this.empID = this.listEmployee[0].IDNhanVien;
-          
+
         } else {
-         
+
           this.empCodeDelete = this.listEmployee.length + " nhân viên được chọn. Bạn có chắc chắn muốn xóa không?"
           this.isShowPopup = !this.isShowPopup
-          
+
         }
         console.log(this.listEmployee);
       } catch (err) {
@@ -1180,7 +1180,7 @@ export default {
     * AUTHOR: HTTHOA (20/03/2023)
     */
     selectItemToList(emp) {
-  
+
       try {
         this.currentEmployee = emp;
 
@@ -1210,7 +1210,7 @@ export default {
       this.currentEmployee = emp;
     },
     hideNotifi(value) {
-      this.listEmployee=[]
+      this.listEmployee = []
       this.isShowPopup = value
     },
     OpenPopupCurriculumVitae(emp) {
