@@ -11,7 +11,7 @@ using QLNS.Common.Entities;
 
 namespace QLNS.BL
 {
-    public class DisciplineBL : BaseBL<kiluat>, IDisciplineBL
+    public class DisciplineBL : BaseBL<kyluat>, IDisciplineBL
     {
         private IDisciplineDL _classificationDL;
         public DisciplineBL(IDisciplineDL baseDL) : base(baseDL)

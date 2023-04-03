@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace QLNS.COMMON.Entities
 {
     [Table("kyluat")]
-    public class kiluat
+    public class kyluat
     {
         public Guid IDKyLuat { get; set; }
         public Guid IDNhanVien { get; set; }

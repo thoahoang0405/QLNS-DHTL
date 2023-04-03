@@ -18,7 +18,7 @@ namespace QLNS.COMMON.Entities
         public string? TenKT { get; set; }
         public DateTime? NgayKT { get; set; }
         public string? HinhThucKT { get; set; }
-       
+        public string? DiaDiemKT { get; set; }
         public string? LyDoKT { get; set; }
      
        

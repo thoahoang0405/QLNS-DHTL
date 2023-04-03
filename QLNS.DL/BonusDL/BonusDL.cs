@@ -15,7 +15,7 @@ namespace QLNS.BL
 {
     public class BonusDL : BaseDL<khenthuong>, IBonusDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=18032001 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
        
     }
 }

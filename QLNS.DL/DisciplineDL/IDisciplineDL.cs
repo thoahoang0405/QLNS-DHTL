@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace QLNS.BL
 {
-    public interface IDisciplineDL : IBaseDL<kiluat>
+    public interface IDisciplineDL : IBaseDL<kyluat>
     {
        
     }

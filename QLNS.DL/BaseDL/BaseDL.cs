@@ -14,7 +14,7 @@ namespace QLNS.BL.BaseBL
     {
 
         #region Field
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=18032001 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
         #endregion
 
         #region method

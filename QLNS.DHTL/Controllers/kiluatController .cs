@@ -11,7 +11,7 @@ namespace QLNS.DHTL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class kiluatController : BasesController<kiluat>
+    public class kiluatController : BasesController<kyluat>
     {
         private IDisciplineBL _employeeBL;
         public kiluatController(IDisciplineBL employeeBL) : base(employeeBL)

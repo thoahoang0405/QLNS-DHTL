@@ -13,9 +13,9 @@ using QLNS.Common.Entities;
 
 namespace QLNS.BL
 {
-    public class DisciplineDL : BaseDL<kiluat>, IDisciplineDL
+    public class DisciplineDL : BaseDL<kyluat>, IDisciplineDL
     {
-        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=18032001 ";
+        readonly string connectionDB = "Server= localhost; Port=3306; Database=qlns; User Id = root;Password=123456 ";
        
 
     }
