@@ -2,6 +2,18 @@
     background-color: #f4f7ff;
     padding: 16px;
   }
+  input{
+    border: 1px solid #aaa ;
+    height: 36px;
+    box-sizing: border-box !important;
+  }
+label span{
+  color: red;
+}
+button{
+  height: 36px;
+  box-sizing: border-box !important;
+}
 .body-header {
     display: flex;
     justify-content: space-between;

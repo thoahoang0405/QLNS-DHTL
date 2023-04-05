@@ -78,7 +78,7 @@
         <div class="form">
           <form action="">
             <div class="input__box">
-              <label for="">Tên chức vụ</label>
+              <label for="">Tên chức vụ <span>*</span></label>
               <input :class="errors.tenchucvu != '' ? 'border-red' : ''" @blur="validateName" type="text"
                 v-model="suaChucVu.TenChucVu" />
               <div class="invalid-feedback" v-if="errors.tenchucvu != ''">
@@ -94,7 +94,7 @@
               <input type="date" v-model="suaChucVu.ThoiGianKetThuc" />
             </div>
             <div class="input__box">
-              <label for="">Định mức giảng dạy</label>
+              <label for="">Định mức giảng dạy <span>*</span></label>
               <input :class="errors.dinhmucgiangday != '' ? 'border-red' : ''" @blur="validateNorm" type="text"
                 v-model="suaChucVu.DinhMucGiangDay" />
               <div class="invalid-feedback" v-if="errors.dinhmucgiangday != ''">
@@ -294,7 +294,7 @@
           <form action="">
             <div class="column">
               <div class="input__box">
-                <label for="">Tên hợp đồng</label>
+                <label for="">Tên hợp đồng <span>*</span></label>
                 <input :class="errors.tenhopdong != '' ? 'border-red' : ''" @blur="validateNameHD" type="text"
                   v-model="suaHopDong.TenHD" />
                 <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
@@ -302,7 +302,7 @@
                 </div>
               </div>
               <div class="input__box">
-                <label for="">Ngày kí</label>
+                <label for="">Ngày kí <span>*</span></label>
                 <input :class="errors.ngayki != '' ? 'border-red' : ''" @blur="validateNgayKi" type="date"
                   v-model="suaHopDong.NgayKi" />
                 <div class="invalid-feedback" v-if="errors.ngayki != ''">
@@ -312,7 +312,7 @@
             </div>
             <div class="column">
               <div class="input__box">
-                <label for="">Ngày bắt đầu</label>
+                <label for="">Ngày bắt đầu <span>*</span></label>
                 <input :class="errors.ngaybatdau != '' ? 'border-red' : ''" @blur="validateNgayBD" type="date"
                   v-model="suaHopDong.NgayBD" />
                 <div class="invalid-feedback" v-if="errors.ngaybatdau != ''">
@@ -320,7 +320,7 @@
                 </div>
               </div>
               <div class="input__box">
-                <label for="">Ngày kết thúc</label>
+                <label for="">Ngày kết thúc <span>*</span></label>
                 <input :class="errors.ngayketthuc != '' ? 'border-red' : ''" @blur="validateNgayKT" type="date"
                   v-model="suaHopDong.NgayKT" />
                 <div class="invalid-feedback" v-if="errors.ngayketthuc != ''">
@@ -331,7 +331,7 @@
             <div class="column">
               <div class="input__box">
                 <label for="">Mô tả</label>
-                <textarea v-model="suaHopDong.Mota" style="width: 95%;height: 60px;margin-top: 5px;"></textarea>
+                <textarea v-model="suaHopDong.Mota" style="width: 100%;height: 60px;margin-top: 5px;"></textarea>
               </div>
             </div>
           </form>
@@ -498,7 +498,7 @@
             <td>{{ item.MaNV }}</td>
             <td>{{ item.TenNV }}</td>
             <td>{{ formatDate(item.NgaySinh) }}</td>
-            <td>{{ item.GioiTinh }}</td>
+            <td>{{ gender(item.GioiTinh) }}</td>
             <td>{{ item.Email }}</td>
             <td>
               <div class="desc" @click="OpenPopupPosition(item)">
@@ -634,6 +634,19 @@ export default {
 
   },
   methods: {
+    gender(gender) {
+      switch (gender) {
+        case 0:
+          gender = "Nam"
+          break;
+        case 1:
+          gender = "Nữ"
+          break;
+        default:
+          break;
+      }
+      return gender;
+    },
     thongbao() {
       alert("Xác nhận đóng");
     },
@@ -1080,33 +1093,45 @@ export default {
   color: red;
   position: absolute;
   font-size: 12px;
-  margin-top: -8px;
+  margin-top: -14px;
   /* border: 2px solid red; */
 }
 
-.btnSave {
-  background-color: #7EA1F9;
-  position: absolute;
-  right: 40px;
-  bottom: 10px;
-}
 
 .btnCancel {
-  color: #000;
-  border: 1px solid #ccc;
+  color: #5d82e0;
   position: absolute;
   right: 150px;
-  bottom: 10px;
+  border: 1px solid #5d82e0;
+  bottom: 20px;
+  padding: 4px;
+  min-width: 67px;
+  border-radius: 5px;
+
+  text-align: center;
 }
 
 .btnCancel:hover {
-  background-color: red;
+  background-color: #5d82e0;
   color: #fff;
+}
+
+.btnSave {
+  width: 67px;
+  border: 1px solid;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #5d82e0;
+  position: absolute;
+  right: 40px;
+  bottom: 20px;
 }
 
 .btnSave:hover {
   border: 1px solid #7EA1F9;
-  color: #000;
+  color: #7EA1F9;
   background-color: #fff;
 }
 
@@ -1308,6 +1333,10 @@ tbody tr td {
   color: red;
 }
 
+.border-red {
+  border-color: red;
+}
+
 .btn-action:hover {
   background: #74bbd4;
 }
@@ -1350,15 +1379,21 @@ tbody tr td {
   cursor: pointer;
 }
 
+/* .form {
+  left: -90px;
+  top: 82px;
+  width: 87%;
+} */
+
 .bonus-form {
   padding: 0px 20px;
   position: absolute;
   width: 50vw;
-  height: 534px;
+  height: 590px;
   /* height: auto; */
   margin: 0 auto;
-  top: 15%;
-  right: 11.5%;
+  top: 12%;
+  right: 24%;
   z-index: 99999;
   border-radius: 20px;
   box-shadow: 5px 5px 5px;
@@ -1369,10 +1404,10 @@ tbody tr td {
   padding: 0px 20px;
   position: absolute;
   width: 42vw;
-  height: 534px;
+  height: 590px;
   /* height: auto; */
   margin: 0 auto;
-  top: 11.5%;
+  top: 12%;
   right: 28%;
   z-index: 99999;
   border-radius: 20px;
@@ -1434,37 +1469,6 @@ thead tr {
   background-color: #e5e8ec;
 }
 
-/* .dis,
-.bonus{
-  padding: 2px 6px;
-  font-size: 11px;
-  height: 30px;
-  box-sizing: border-box;
-  min-width: 80px;
-  margin-right: 4px;
-  border-radius: 2.5px;
-  color: #f5f2f2;
-  border: none;
-  margin-top: 2px;
-}
-.bonus {
-  background-color: #0cc71b;
-}
-.dis {
-  background-color: #426cf7;
-
-}
-.bonus:hover{
-  background-color: #ffff;
-  color: #0fdb20;
-  border: 1px solid #0fdb20;
-} */
-
-/* .dis:hover{
-  background-color: #ffff;
-  color: #426cf7;
-  border: 1px solid #426cf7;
-} */
 .desc {
   color: red;
   cursor: pointer;
@@ -1498,7 +1502,8 @@ tbody tr:hover .td-item-final {
 }
 
 .form {
-  width: 40%;
+  position: absolute;
+  width: 88%;
   height: fit-content;
   background-color: #fff;
   margin: auto auto;

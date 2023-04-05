@@ -1,5 +1,4 @@
 <template>
-  <!-- chuc vu -->
   <div class="body">
     <div class="popup-bonus" v-if="isOpenPopupPosition">
       <div class="bonus-form">
@@ -609,9 +608,6 @@
       <table id="tbEmployee" class="table" style="width: 100%">
         <thead>
           <tr>
-            <!-- <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center">
-              <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px" />
-            </th> -->
             <th class="text-center" style="min-width: 40px">STT</th>
             <th>Mã nhân viên</th>
             <th>Họ và tên</th>

@@ -339,7 +339,7 @@
         </div>
         <div class="column">
           <div class="input__state">
-            <label for="">Tình trạng: </label>
+            <label for="">Tình trạng <span>*</span> : </label>
             <input :class="errors.tinhtrang != '' ? 'border-red' : ''" @blur="validateTinhTrang"
               v-model="suatrangthai.TinhTrang" type="text">
             <div class="invalid-feedbackk" v-if="errors.tinhtrang != ''">
@@ -349,7 +349,7 @@
         </div>
         <div class="column">
           <div class="input__state">
-            <label for="">Gia đình: </label>
+            <label for="">Gia đình <span>*</span> : </label>
             <textarea :class="errors.giadinh != '' ? 'border-red' : ''" @blur="validateGiaDinh"
               v-model="suatrangthai.GiaDinh" style="width: 80%;height: 60px;" type="text"> </textarea>
             <div class="invalid-feedbackkk" v-if="errors.giadinh != ''">
@@ -385,7 +385,7 @@
           </div>
         </div> -->
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
-        <div class="btnSave" @click="saveState">Lưu</div>
+        <div class="btnSave" @click="btnAddState">Lưu</div>
       </div>
     </div>
     <!-- sua trang thai -->
@@ -486,7 +486,9 @@
           <div class="icon-search icon"></div>
         </div>
 
-        <Combobox :items="department" :fieldName="'TenKhoa'" @selectedItem="selectItemCbb"></Combobox>
+        <combobox style="margin-top: 0px" class="khoa errorInput" :items="faculty" :code="'IDKhoa'" :fieldName="'TenKhoa'"
+          @selectedItem="selectItemFaculty"></combobox>
+
 
       </div>
       <div class="button-function">
@@ -595,11 +597,11 @@
           <div class="dropup-page">
             <div class="icon-dropup" @click="btnDropUp"></div>
             <div class="item-up" v-show="isShowDrop">
-              <div class="item-dropup" :class="{ act: isActive == '10' }" pageSize="10" @click="getPageDefault">
+              <div class="item-dropup" :class="{ act: isActive == '10' }" pageSize="10" @click="getPageDefault"
+                :value="pageDefault">
                 10 bản ghi trên 1 trang
               </div>
-              <div class="item-dropup" :class="{ act: isActive == '20' }" pageSize="20" @click="getPageDefault"
-                :value="pageDefault">
+              <div class="item-dropup" :class="{ act: isActive == '20' }" pageSize="20" @click="getPageDefault">
                 20 bản ghi trên 1 trang
               </div>
               <div class="item-dropup" :class="{ act: isActive == '30' }" pageSize="30" @click="getPageDefault">
@@ -887,6 +889,15 @@ svg:hover {
   border: 1px solid #7EA1F9;
 }
 
+tbody tr:hover {
+  background-color: #9ed6e4 !important;
+}
+
+tbody tr:hover .checkbox,
+tbody tr:hover .td-item-final {
+  background-color: #9ed6e4 !important;
+}
+
 .btnAdd:hover,
 .btnEdit:hover {
   border: 1px solid #7EA1F9;
@@ -894,7 +905,7 @@ svg:hover {
   color: #000;
 }
 
-.btnCancel,
+/* .btnCancel,
 .btnSave {
   width: 85px;
   border: 1px solid;
@@ -902,32 +913,43 @@ svg:hover {
   padding: 5px;
   border-radius: 5px;
   color: #fff;
+} */
 
+
+.btnCancel {
+  color: #5d82e0;
+  position: absolute;
+  right: 150px;
+  border: 1px solid #5d82e0;
+  bottom: 20px;
+  padding: 4px;
+  min-width: 67px;
+  border-radius: 5px;
+
+  text-align: center;
+}
+
+.btnCancel:hover {
+  background-color: #5d82e0;
+  color: #fff;
 }
 
 .btnSave {
-  background-color: #7EA1F9;
+  width: 67px;
+  border: 1px solid;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #5d82e0;
   position: absolute;
   right: 40px;
   bottom: 20px;
 }
 
-.btnCancel {
-  color: #000;
-  border: 1px solid #ccc;
-  position: absolute;
-  right: 150px;
-  bottom: 20px;
-}
-
-.btnCancel:hover {
-  background-color: red;
-  color: #fff;
-}
-
 .btnSave:hover {
   border: 1px solid #7EA1F9;
-  color: #000;
+  color: #7EA1F9;
   background-color: #fff;
 }
 
@@ -1067,6 +1089,7 @@ export default {
   },
   data() {
     return {
+      faculty: {},
       isOpenPopupCurriculumVitae: false,
       isOpenPopupFormEditCurriculumVitae: false,
       isOpenPopupState: false,
@@ -1076,7 +1099,7 @@ export default {
       isOpenPopupAddNotifi: false,
       isOpenPopupAddNotifiCV: false,
       isOpenPopupEditNotifiCV: false,
-      isActive: "20",
+      isActive: "10",
       pageNumber: 1,
       page: 1,
       isShowWarning: false,
@@ -1130,6 +1153,7 @@ export default {
     this.getPagingEmployee()
     // this.getDepartment()
     // this.getPosition()
+    this.getFaculty()
   },
   watch: {
     txtSearch: function () {
@@ -1139,7 +1163,10 @@ export default {
     },
   },
   methods: {
-
+    selectItemFaculty(value) {
+      this.IDKhoa = value.IDKhoa;
+      this.getPagingEmployee()
+    },
     onClickDeleteMultiple() {
       try {
         // kiểm tra danh sách được chọn có bao nhiêu bản ghi và hiển thị thông báo
@@ -1298,37 +1325,41 @@ export default {
       const toast = useToast();
       me.suatrangthai.IDNhanVien = me.IDNV
       console.log(me.suatrangthai);
-      try {
-        axios
-          .post(
-            "https://localhost:44301/api/quanhegiadinh", this.suatrangthai
-          )
-          .then(function (res) {
-            console.log(res)
-            me.isOpenPopupAddState = false;
-            toast.success("thêm dữ liệu thành công", { timeout: 2000 });
-            me.getState()
-          })
-          .catch(function () {
-            console.log("error");
-            toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    saveState() {
       this.validateTinhTrang()
       this.validateGiaDinh()
       if (this.isValid == true) {
-        if (this.formMode == 1) {
-          this.btnAddState()
-        }
-        else {
-          this.btnEditState()
+        try {
+          axios
+            .post(
+              "https://localhost:44301/api/quanhegiadinh", this.suatrangthai
+            )
+            .then(function (res) {
+              console.log(res)
+              me.isOpenPopupAddState = false;
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.getState()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+        } catch (error) {
+          console.log(error);
         }
       }
     },
+    // saveState() {
+    //   this.validateTinhTrang()
+    //   this.validateGiaDinh()
+    //   if (this.isValid == true) {
+    //     if (this.formMode == 1) {
+    //       this.btnAddState()
+    //     }
+    //     else {
+    //       this.btnEditState()
+    //     }
+    //   }
+    // },
     OpenPopupEditState(item) {
       this.isOpenPopupEditState = true;
       this.suatrangthai = item
@@ -1476,6 +1507,23 @@ export default {
       this.title = "Sửa nhân viên"
       this.formMode = 2
     },
+    getFaculty() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:44301/api/khoa")
+          .then(function (res) {
+            me.faculty = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getPagingEmployee() {
       try {
         var me = this;
@@ -1503,11 +1551,7 @@ export default {
         console.log(error);
       }
     },
-    selectItemFaculty(value) {
-      this.employees.IDKhoa = value.IDKhoa;
-      this.employees.TenKhoa = value.TenKhoa;
-      this.employees.MaKhoa = value.MaKhoa
-    },
+
 
     formatDate(date) {
       try {

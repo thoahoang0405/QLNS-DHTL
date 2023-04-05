@@ -25,42 +25,24 @@
         <div class="column">
           <div class="input__box">
             <label for="">Chức vụ <span>*</span></label>
-            <combobox
-              class="khoa"
-              :value="salary.TenCVHT"
-              :items="chucvuht"
-              :code="'IDCVHT'"
-              :fieldName="'TenCVHT'"
-              @selectedItem="selectPositionNow"
-              :border="errors.chucvu != '' ? 'borderRed' : ''"
-              @onBlur="validateCV"
-            ></combobox>
+            <combobox style="margin-top: 10px" class="khoa errorInput" :value="salary.TenCVHT" :items="chucvuht"
+              :code="'IDCVHT'" :fieldName="'TenCVHT'" @selectedItem="selectPositionNow"
+              :border="errors.chucvu != '' ? 'borderRed' : ''" @onBlur="validateCV">
+            </combobox>
             <div v-if="errors.chucvu != ''" class="invalid-feedback">
               {{ errors.chucvu }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Hệ số lương <span>*</span></label>
-            <input
-              @blur="validateName"
-              class="HSL"
-              type="text"
-              v-model="salary.HeSoLuong"
-            />
+            <label for="">Hệ số lương </label>
+            <input @blur="validateName" class="HSL" type="text" v-model="salary.HeSoLuong" />
           </div>
         </div>
         <div class="column">
           <div class="input__box">
             <label for="">Tên phụ cấp</label>
-            <combobox
-              style="margin-top: 2px"
-              class="khoa"
-              :value="salary.TenPhuCap"
-              :items="phucap"
-              :code="'IDPhuCap'"
-              :fieldName="'TenPhuCap'"
-              @selectedItem="selectCbb"
-            ></combobox>
+            <combobox style="margin-top: 10px" class="khoa" :value="salary.TenPhuCap" :items="phucap" :code="'IDPhuCap'"
+              :fieldName="'TenPhuCap'" @selectedItem="selectCbb"></combobox>
           </div>
           <div class="input__box">
             <label for="">Giá trị phụ cấp</label>
@@ -69,18 +51,10 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Ngạch lương</label>
-            <combobox
-              style="margin-top: 2px"
-              class="khoa"
-              :value="salary.MaNgachLuong"
-              :items="ngachluong"
-              :code="'IDNgachLuong'"
-              :fieldName="'MaNgachLuong'"
-              @selectedItem="selectS"
-              :border="errors.ngachLuong != '' ? 'borderRed' : ''"
-              @onBlur="validateNgachLuong"
-            ></combobox>
+            <label for="">Ngạch lương<span>*</span></label>
+            <combobox style="margin-top: 10px" class="khoa errorInput" :value="salary.MaNgachLuong" :items="ngachluong"
+              :code="'IDNgachLuong'" :fieldName="'MaNgachLuong'" @selectedItem="selectS"
+              :border="errors.ngachLuong != '' ? 'borderRed' : ''" @onBlur="validateNgachLuong"></combobox>
             <div class="invalid-feedback" v-if="errors.ngachLuong">
               {{ errors.ngachLuong }}
             </div>
@@ -93,46 +67,27 @@
         <div class="column">
           <div class="input__box">
             <label for="">BHXH(%)</label>
-            <input
-              @blur="validate"
-              class="input-left"
-              type="text"
-              v-model="salary.BHXH"
-            />
+            <input @blur="validate" class="input-left" type="text" v-model="salary.BHXH" />
           </div>
           <div class="input__box">
             <label for="">Phần trăm hưởng lương(%)</label>
-            <input
-              class="dantoc"
-              type="text"
-              v-model="salary.PhanTramHuongLuong"
-            />
+            <input class="dantoc" type="text" v-model="salary.PhanTramHuongLuong" />
           </div>
         </div>
 
         <div class="column">
           <div class="input__box">
-            <label for="">Tháng nhận</label>
-            <input
-              class="ngaycap input-left"
-              v-model="salary.Thang"
-              type="text"
-              :class="errors.thang != '' ? 'borderRed' : ''"
-              @blur="validateThang"
-            />
+            <label for="">Tháng nhận<span>*</span></label>
+            <input class="ngaycap input-left" v-model="salary.Thang" type="text"
+              :class="errors.thang != '' ? 'borderRed' : ''" @blur="validateThang" />
             <div class="invalid-feedback" v-if="errors.thang">
               {{ errors.thang }}
             </div>
           </div>
           <div class="input__box">
-            <label for="">Năm nhận</label>
-            <input
-              class="noicap"
-              v-model="salary.Nam"
-              type="text"
-              :class="errors.nam != '' ? 'borderRed' : ''"
-              @blur="validateNam"
-            />
+            <label for="">Năm nhận<span>*</span></label>
+            <input class="noicap" v-model="salary.Nam" type="text" :class="errors.nam != '' ? 'borderRed' : ''"
+              @blur="validateNam" />
             <div class="invalid-feedback" v-if="errors.nam">
               {{ errors.nam }}
             </div>
@@ -144,14 +99,10 @@
         <div class="btn btn-save" @click="save">Lưu</div>
       </div>
     </form>
-    <notifi
-      v-show="isShowNotifi"
-      @closeNotifi="closeNo"
-      @cancelNotifi="FormCancel"
-    ></notifi>
+    <notifi v-show="isShowNotifi" @closeNotifi="closeNo" @cancelNotifi="FormCancel"></notifi>
     <popUpDup @closeNotifi="closePoup" v-show="isShowPop"></popUpDup>
   </div>
-  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning=false" :msg="msgWarning"></Warning>
+  <Warning v-show="isShowWarning" @closePopUpWarning="isShowWarning = false" :msg="msgWarning"></Warning>
   <!-- thongbao -->
 </template>
 
@@ -169,8 +120,8 @@ export default {
       isOpenPopupAddNotifiCV: false,
       employee: {},
       faculty: {},
-      msgWarning:"",
-      isShowWarning:false,
+      msgWarning: "",
+      isShowWarning: false,
       chucvuht: {},
       statusEmployee: {},
       certificate: {},
@@ -184,8 +135,9 @@ export default {
       isShow: false,
       phucap: {},
       isValid: false,
-      listData:{},
-      listYear:[],
+      listData: {},
+      listYear: [],
+      isValidYear: false,
       errors: {
         chucvu: "",
         ngachLuong: "",
@@ -207,7 +159,7 @@ export default {
   components: {
     combobox,
     popUpDup,
-    notifi,Warning
+    notifi, Warning
   },
   watch: {
     code: function (vl) {
@@ -218,7 +170,7 @@ export default {
     },
   },
   created() {
-   
+
     this.formMode = this.FormMode;
     this.titleForm = this.title;
     if (this.formMode == 1) {
@@ -234,12 +186,12 @@ export default {
     // this.getFaculty();
     // this.getPosition();
     this.getAllowance();
-    this.getSNL(); 
+    this.getSNL();
     this.getSalaryByID()
     // this.getCerti();
   },
   methods: {
-    getSalaryByID(){
+    getSalaryByID() {
       try {
         var me = this;
 
@@ -247,10 +199,7 @@ export default {
           .get(`https://localhost:44301/api/luong/${this.salary.IDNhanVien}`)
           .then(function (res) {
             console.log(res.data);
-            me.listData=res.data
-          
-          
-       
+            me.listData = res.data
           })
 
           .catch(function () {
@@ -260,18 +209,18 @@ export default {
         console.log(error);
       }
     },
-    validateYear(){
-      for (const item of this.listData) {         
-            if(this.salary.Nam==item.Nam && this.salary.Thang==item.Thang){
-             
-              this.msgWarning="Thông tin lương " + this.salary.Thang + "/" + this.salary.Nam + " của nhân viên này đã tồn tại"
-              this.isShowWarning=true
-              this.isValid=false
-            
-        }else{            
-              this.msgWarning=""
-              this.isValid=true
-            
+    validateYear() {
+      for (const item of this.listData) {
+        if (this.salary.Nam == item.Nam && this.salary.Thang == item.Thang) {
+
+          this.msgWarning = "Thông tin lương " + this.salary.Thang + "/" + this.salary.Nam + " của nhân viên này đã tồn tại"
+          this.isShowWarning = true
+          this.isValidYear = false
+
+        } else {
+          this.msgWarning = ""
+          this.isValidYear = true
+          this.isShowWarning = false
         }
       }
     },
@@ -282,12 +231,18 @@ export default {
       this.validateNgachLuong();
       this.validateThang();
       this.validateNam();
-      this.validateYear()
-     console.log(this.isValid);
+
+      console.log(this.isValid);
       if (this.isValid == true) {
-      
         if (this.formMode == 0) {
-           this.addSalary();
+          this.validateYear()
+          console.log(this.isValidYear);
+          if (this.isValidYear == true) {
+            this.addSalary();
+          } else {
+            console.log("lỗi");
+          }
+
         } else {
           this.editSalary();
         }
@@ -298,7 +253,7 @@ export default {
     closePoup(value) {
       this.isShowPop = value;
     },
- 
+
     getNewCode() {
       try {
         var me = this;
@@ -599,25 +554,35 @@ export default {
 };
 </script>
 <style scoped>
+.bonus-form {
+  padding: 0px 20px;
+  position: absolute;
+  width: 80vw;
+  height: 590px;
+  top: 12%;
+  right: 14%;
+  z-index: 99999;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px;
+  background-color: #fff;
+}
+
 .icon-down-bold {
   background: url(http://localhost:8080/img/qlts-icon.c1b7328e.svg) no-repeat -72px -338px;
   width: 8px;
   height: 10px;
 }
-.m-combobox .icon {
-  position: absolute;
-  left: -19px;
-  top: 7px;
-  /* transform: translateX(-50%); */
-  cursor: pointer;
-}
+
+
 
 input-left {
   width: 340px !important;
 }
+
 label {
   margin: 10px 0;
 }
+
 label span {
   color: red;
 }
@@ -629,6 +594,7 @@ label span {
   margin-top: 6px;
   /* border: 2px solid red; */
 }
+
 #form {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 3;
@@ -639,11 +605,16 @@ label span {
   display: flex;
   /* display: none; */
 }
+
+#form .errorInput input {
+  margin-top: 23px !important;
+}
+
 #form input {
   max-width: 100%;
-  max-height: 26px;
+
   padding-bottom: 6px;
-  border: 1px solid #ccc;
+
   border-radius: 2px;
   outline: none;
   position: relative;
@@ -653,12 +624,12 @@ label span {
   color: #707070;
   margin-top: 7px;
 }
+
 .form {
   width: fit-content;
   height: fit-content;
   background-color: #fff;
-  /* margin: auto auto; */
-  margin-top: 7%;
+  margin-top: 5%;
   margin-left: 22%;
   border-radius: 18px;
   width: 800px;
@@ -666,9 +637,11 @@ label span {
   box-shadow: 5px rgba(0, 0, 0, 0.2);
   /* display: none; */
 }
+
 .form-Wrap {
   padding: 0 20px;
 }
+
 .form-title {
   padding: 0 13px;
   display: flex;
@@ -679,21 +652,33 @@ label span {
   border-top-left-radius: 20px;
   background-color: #fff !important;
 }
+
 .close {
   cursor: pointer;
   font-weight: 600;
   font-size: 18px;
   color: #726c6c;
 }
+
 .close:hover {
   color: red;
 }
+
 .input__box {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   position: relative;
 }
+
+.m-combobox .icon {
+  position: absolute;
+  left: -19px;
+  top: 4px !important;
+  /* transform: translateX(-50%); */
+  cursor: pointer;
+}
+
 .form-bottom {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -704,23 +689,30 @@ label span {
   gap: 28px;
   margin-top: 2px;
 }
+
 .btn-cancel {
-  border: 1px solid #ccc;
+  border: 1px solid #1a8fdd;
+  color: #1a8fdd;
+  background: #fff;
 }
+
 .btn-cancel:hover {
-  background-color: red;
+  background-color: #1a8fdd;
   color: #fff;
 }
+
 .btn-save {
   border: 1px solid #1a8fdd;
   background-color: #1a8fdd;
   color: #fff;
 }
+
 .btn-save:hover {
   background-color: #fff;
-  color: #000;
+  color: #1a8fdd;
   border: 1px solid #1a8fdd;
 }
+
 .btn {
   padding: 10px 20px;
   cursor: pointer;
@@ -729,10 +721,12 @@ label span {
   align-items: center;
   box-sizing: border-box;
 }
+
 .column {
   display: flex;
   column-gap: 20px;
 }
+
 .radio__box {
   display: flex;
   align-items: center;
@@ -740,10 +734,12 @@ label span {
   column-gap: 10px;
   width: 50%;
 }
+
 .radio__box input {
   width: 15px;
   margin: 0;
 }
+
 /* @media screen and (max-width: 520px) {
   .column-s{
    display: block;
@@ -765,9 +761,11 @@ label span {
 .important {
   color: red;
 }
+
 .borderRed {
-  border: 1px solid red !important;
+  border-color: red !important;
 }
+
 .notification-wrap {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 4;
@@ -777,6 +775,7 @@ label span {
   position: fixed;
   display: flex;
 }
+
 .notification {
   z-index: 3;
   position: absolute;
@@ -791,29 +790,34 @@ label span {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
 .warring {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
 }
+
 .warring i {
   font-size: 60px;
   width: 52px;
   height: 40px;
   color: #f4a733;
 }
+
 .warrning-title {
   text-align: center;
   font-size: 16px;
   margin-left: 8px;
 }
+
 .btn-wrap {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   column-gap: 20px;
 }
+
 .btnNotifi {
   display: flex;
   width: 100px;
@@ -824,13 +828,16 @@ label span {
   height: 25px;
   cursor: pointer;
 }
+
 .btnNotifi:hover {
   opacity: 0.8;
   color: red;
 }
+
 .btn-secondary {
   border: 1px solid #1a8fdd;
 }
+
 .btn-primary {
   margin-right: 40px;
   background-color: #1a8fdd;
@@ -844,12 +851,15 @@ label span {
     height: 130px;
     padding: 14px;
   }
+
   .warring {
     margin-top: 6px;
   }
+
   .warring i {
     font-size: 50px;
   }
+
   .btnNotifi {
     width: 80px;
     margin-top: 20px;
