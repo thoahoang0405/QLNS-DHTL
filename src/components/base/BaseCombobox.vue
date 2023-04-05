@@ -240,7 +240,7 @@ export default {
 }
 
 .borderRed {
-  border-color: #e03232 !important;
+  border-color: red !important;
 }
 
 .m-combobox-2 .drop-down .drop-down-body {

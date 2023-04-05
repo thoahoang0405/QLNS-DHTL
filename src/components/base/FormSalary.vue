@@ -200,9 +200,6 @@ export default {
           .then(function (res) {
             console.log(res.data);
             me.listData = res.data
-
-
-
           })
 
           .catch(function () {
@@ -223,7 +220,7 @@ export default {
         } else {
           this.msgWarning = ""
           this.isValidYear = true
-
+          this.isShowWarning = false
         }
       }
     },
@@ -239,8 +236,11 @@ export default {
       if (this.isValid == true) {
         if (this.formMode == 0) {
           this.validateYear()
+          console.log(this.isValidYear);
           if (this.isValidYear == true) {
             this.addSalary();
+          } else {
+            console.log("lỗi");
           }
 
         } else {

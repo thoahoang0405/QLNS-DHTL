@@ -486,7 +486,9 @@
           <div class="icon-search icon"></div>
         </div>
 
-        <Combobox :items="department" :fieldName="'TenKhoa'" @selectedItem="selectItemCbb"></Combobox>
+        <combobox style="margin-top: 0px" class="khoa errorInput" :items="faculty" :code="'IDKhoa'" :fieldName="'TenKhoa'"
+          @selectedItem="selectItemFaculty"></combobox>
+
 
       </div>
       <div class="button-function">
@@ -595,11 +597,11 @@
           <div class="dropup-page">
             <div class="icon-dropup" @click="btnDropUp"></div>
             <div class="item-up" v-show="isShowDrop">
-              <div class="item-dropup" :class="{ act: isActive == '10' }" pageSize="10" @click="getPageDefault">
+              <div class="item-dropup" :class="{ act: isActive == '10' }" pageSize="10" @click="getPageDefault"
+                :value="pageDefault">
                 10 bản ghi trên 1 trang
               </div>
-              <div class="item-dropup" :class="{ act: isActive == '20' }" pageSize="20" @click="getPageDefault"
-                :value="pageDefault">
+              <div class="item-dropup" :class="{ act: isActive == '20' }" pageSize="20" @click="getPageDefault">
                 20 bản ghi trên 1 trang
               </div>
               <div class="item-dropup" :class="{ act: isActive == '30' }" pageSize="30" @click="getPageDefault">
@@ -1087,6 +1089,7 @@ export default {
   },
   data() {
     return {
+      faculty: {},
       isOpenPopupCurriculumVitae: false,
       isOpenPopupFormEditCurriculumVitae: false,
       isOpenPopupState: false,
@@ -1096,7 +1099,7 @@ export default {
       isOpenPopupAddNotifi: false,
       isOpenPopupAddNotifiCV: false,
       isOpenPopupEditNotifiCV: false,
-      isActive: "20",
+      isActive: "10",
       pageNumber: 1,
       page: 1,
       isShowWarning: false,
@@ -1150,6 +1153,7 @@ export default {
     this.getPagingEmployee()
     // this.getDepartment()
     // this.getPosition()
+    this.getFaculty()
   },
   watch: {
     txtSearch: function () {
@@ -1159,7 +1163,10 @@ export default {
     },
   },
   methods: {
-
+    selectItemFaculty(value) {
+      this.IDKhoa = value.IDKhoa;
+      this.getPagingEmployee()
+    },
     onClickDeleteMultiple() {
       try {
         // kiểm tra danh sách được chọn có bao nhiêu bản ghi và hiển thị thông báo
@@ -1500,6 +1507,23 @@ export default {
       this.title = "Sửa nhân viên"
       this.formMode = 2
     },
+    getFaculty() {
+      try {
+        var me = this;
+
+        axios
+          .get("https://localhost:44301/api/khoa")
+          .then(function (res) {
+            me.faculty = res.data;
+          })
+
+          .catch(function () {
+            console.log(1);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getPagingEmployee() {
       try {
         var me = this;
@@ -1527,11 +1551,7 @@ export default {
         console.log(error);
       }
     },
-    selectItemFaculty(value) {
-      this.employees.IDKhoa = value.IDKhoa;
-      this.employees.TenKhoa = value.TenKhoa;
-      this.employees.MaKhoa = value.MaKhoa
-    },
+
 
     formatDate(date) {
       try {
