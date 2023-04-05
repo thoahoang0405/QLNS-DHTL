@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="education-header">
-          <div class="maNV">Mã nhân viên: {{ currentIdNhanVien }}</div>
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
           <div class="tenNV">Tên nhân viên: {{ currentNameNhanVien }}</div>
           <div class="btnWrap">
             <div
@@ -41,7 +41,7 @@
           </div>
         </div>
         <table
-        style="
+          style="
             width: 100%;
             border-collapse: collapse;
             border: 1px solid;
@@ -87,7 +87,6 @@
             </td>
           </tr>
         </table>
-        <!-- <div class="btnDelete" style="bottom: -140px;">Xóa</div> -->
       </div>
     </div>
     <popUp
@@ -126,11 +125,9 @@
         </div>
 
         <div class="education-header">
-          <div class="maNV">Mã nhân viên: {{ currentIdNhanVien }}</div>
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
           <div class="tenNV">Tên nhân viên: {{ currentNameNhanVien }}</div>
           <div class="btnWrap">
-            <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-            <div class="btnEdit">Sửa</div> -->
           </div>
         </div>
         <div class="form">
@@ -169,9 +166,9 @@
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">
           Hủy
         </div>
-        <!-- <div class="btnSave" @click="savePosition(dataAddInfoBonus)">Lưu</div> -->
-        <div class="btnSave" @click="AddDataInfoBonus(dataAddInfoBonus)">Lưu</div>
-
+        <div class="btnSave" @click="AddDataInfoBonus(dataAddInfoBonus)">
+          Lưu
+        </div>
       </div>
     </div>
     <!-- sua chuc vu-->
@@ -202,11 +199,9 @@
           </div>
         </div>
         <div class="education-header">
-          <div class="maNV">Mã nhân viên: {{ currentIdNhanVien }}</div>
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
           <div class="tenNV">Tên nhân viên: {{ currentNameNhanVien }}</div>
           <div class="btnWrap">
-            <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-            <div class="btnEdit">Sửa</div> -->
           </div>
         </div>
         <div class="form">
@@ -214,9 +209,6 @@
             <div class="input__box">
               <label for="">Hình thức khen thưởng</label>
               <input type="text" v-model="dataEditInfoBonus.HinhThucKT" />
-              <!-- <div class="invalid-feedback" v-if="errors.tenchucvu != ''">
-                {{ errors.tenchucvu }}
-              </div> -->
             </div>
             <div class="input__box">
               <label for="">Ngày khen thưởng</label>
@@ -226,16 +218,15 @@
             <div class="input__box">
               <label for="">Lý do khen thưởng</label>
               <input type="text" v-model="dataEditInfoBonus.LyDoKT" />
-              <!-- <div class="invalid-feedback" v-if="errors.dinhmucgiangday != ''">
-                {{ errors.dinhmucgiangday }}
-              </div> -->
             </div>
           </form>
         </div>
         <div class="btnCancel" @click.stop="isOpenPopupEditNotifi = true">
           Hủy
         </div>
-        <div class="btnSave" @click="btnEditPosition(dataEditInfoBonus)">Lưu</div>
+        <div class="btnSave" @click="btnEditPosition(dataEditInfoBonus)">
+          Lưu
+        </div>
       </div>
     </div>
     <!-- end open popup chuc vu   -->
@@ -300,7 +291,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="popup-bonus" v-if="isOpenPopupContract">
       <div class="bonus-form">
         <div class="head-popup">
@@ -328,18 +319,17 @@
           </div>
         </div>
         <div class="education-header">
-          <div class="maNV">Mã nhân viên: {{ currentIdNhanVien }}</div>
+          <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
           <div class="tenNV">Tên nhân viên: {{ currentNameNhanVien }}</div>
           <div class="btnWrap">
             <div class="btnAdd" @click="OpenPopupFormAddContract(item)">
               Thêm
             </div>
-            <!-- <div class="btnEdit" @click="OpenPopupFormEditContract(item)">Sửa</div> -->
           </div>
         </div>
         <div class="formm">
           <table
-          style="
+            style="
               width: 100%;
               border-collapse: collapse;
               border: 1px solid;
@@ -347,14 +337,14 @@
             "
           >
             <tr>
-              <th>HÌnh thức kỷ luật</th>
+              <th>Hình thức kỷ luật</th>
               <th>Ngày kỷ luật</th>
               <th>Lý do</th>
               <th style="width: 100px">Chức năng</th>
             </tr>
             <tr></tr>
-           
-            <tr v-for="item of dataListKiLuat" :key="item.IDHopDong">
+
+            <tr v-for="item of dataListKiLuat" :key="item.NgayKL">
               <td style="border: 1px solid #c7c7c7; width: 150px">
                 {{ item.HinhThucKL }}
               </td>
@@ -386,7 +376,6 @@
               </td>
             </tr>
           </table>
-          <!-- <div class="btnDelete" style="bottom: -16px">Xóa</div> -->
         </div>
       </div>
     </div>
@@ -401,7 +390,7 @@
     <div class="popup-bonus" v-if="isOpenPopupFormAddContract">
       <div class="bonus-formm">
         <div class="head-popup">
-          <h3 class="title-heading">Thêm thông tin kỷ </h3>
+          <h3 class="title-heading">Thêm thông tin kỷ luật</h3>
           <div
             class="btn-close-popup"
             @click.stop="isOpenPopupAddNotifiCV = true"
@@ -425,23 +414,21 @@
           </div>
         </div>
         <div class="education-header">
-          <div class="maNV">Mã nhân viên: {{ this.currentIdNhanVien }}</div>
+          <div class="maNV">Mã nhân viên: {{ this.MaNV }}</div>
           <div class="tenNV">Tên nhân viên: {{ this.currentNameNhanVien }}</div>
           <div class="btnWrap">
-            <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-              <div class="btnEdit">Sửa</div> -->
           </div>
         </div>
         <div class="form">
           <form action="">
             <div class="column">
               <div class="input__box">
-                <label for="">Tên hợp đồng</label>
+                <label for="">Hình thức kỷ luật</label>
                 <input
                   :class="errors.tenhopdong != '' ? 'border-red' : ''"
-                  @blur="validateNameHD"
+                  @blur="validateName"
                   type="text"
-                  v-model="dataAddKyLuat.TenKL"
+                  v-model="dataAddKyLuat. HinhThucKL"
                 />
                 <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
                   {{ errors.tenhopdong }}
@@ -460,7 +447,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="column">
               <div class="input__box">
                 <label for="">Lý do</label>
@@ -509,27 +496,19 @@
           <div class="maNV">Mã nhân viên: {{ MaNV }}</div>
           <div class="tenNV">Tên nhân viên: {{ TenNV }}</div>
           <div class="btnWrap">
-            <!-- <div class="btnAdd" @click="OpenPopupFormAddContract(item)">Thêm</div>
-              <div class="btnEdit">Sửa</div> -->
           </div>
         </div>
         <div class="form">
           <form action="">
             <div class="column" style="display: block">
               <div class="input__box">
-                <label for="">Thêm hình thức lỷ luật</label>
+                <label for="">Thêm hình thức kỷ luật 1</label>
                 <input type="text" v-model="suaHopDong.TenHD" />
-                <!-- <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
-                  {{ errors.tenhopdong }}
-                </div> -->
               </div>
               <br />
               <div class="input__box">
                 <label for="">Chọn ngày kỷ luật</label>
                 <input type="date" v-model="suaHopDong.NgayKi" />
-                <!-- <div class="invalid-feedback" v-if="errors.ngayki != ''">
-                  {{ errors.ngayki }}
-                </div> -->
               </div>
             </div>
             <div class="column">
@@ -580,23 +559,6 @@
         </div>
       </div>
     </div>
-    <!-- cảnh báo xóa hợp đồng-->
-    <!-- <div class="notification-wrap" v-if="isOpenPopupDeleteNotifiCV">
-      <div class="notification">
-        <div class="warring">
-          <div>
-            <div class="icon-warning"></div>
-          </div>
-          <div class="warrning-title">Thông tin hợp đồng của sinh viên. Bạn có muốn xóa thông tin không?</div>
-        </div>
-        <div class="btn-wrap">
-          <div class="btnNotifi btn-secondary"
-            @click.stop="(isOpenPopupDeleteNotifiCV = false, isOpenPopupFormEditContract = false)">Hủy</div>
-          <div class="btnNotifi btn-primary" @click="deleteDeleteNotifiCV">Xóa</div>
-        </div>
-      </div>
-    </div> -->
-    <!-- cảnh báo sửa hợp đồng-->
     <div class="notification-wrap" v-if="isOpenPopupEditNotifiCV">
       <div class="notification">
         <div class="warring">
@@ -667,11 +629,10 @@
             <td class="text-center">{{ i + 1 }}</td>
             <td>{{ item.MaNV }}</td>
             <td>{{ item.TenNV }}</td>
-            <td>{{ item.GioiTinh }}</td>
+            <td>{{ gender(item.GioiTinh) }}</td>
             <td>{{ item.Email }}</td>
             <td>
               <div class="desc" @click="OpenPopupPosition(item)">
-                
                 Xem chi tiết
               </div>
             </td>
@@ -776,12 +737,13 @@ import popUp from "../base/BasePopupDelete2.vue";
 export default {
   data() {
     return {
-      dataAddKyLuat:{},
-      currentIdNhanVien:null,
-      currentNameNhanVien:"",
+      dataAddKyLuat: {},
+      currentIdNhanVien: null,
+      currentNameNhanVien: "",
+      currentMaNhanVien: "",
       dataInfoBonus: {},
-      dataAddInfoBonus:{},
-      dataListKiLuat:{},
+      dataAddInfoBonus: {},
+      dataListKiLuat: {},
       isOpenPopupContract: false,
       isOpenPopupFostering: false,
       isOpenPopupPosition: false,
@@ -846,23 +808,21 @@ export default {
     thongbao() {
       alert("Xác nhận đóng");
     },
-    saveDataKyLuat(data){
+    saveDataKyLuat(data) {
       let obj = {
-        "IDKyLuat": data.IDKyLuat,
-        "IDNhanVien": this.currentIdNhanVien,
-        "TenKL": data.TenKL,
-        "HinhThucKL": data.HinhThucKL,
-        "LyDoKL": data.LyDoKL,
-        "DiaDiemKL": data.DiaDiemKL,
-        "NgayKL": data.NgayKL
-      }
+        IDKyLuat: data.IDKyLuat,
+        IDNhanVien: this.currentIdNhanVien,
+        TenKL: data.TenKL,
+        HinhThucKL: data.HinhThucKL,
+        LyDoKL: data.LyDoKL,
+        DiaDiemKL: data.DiaDiemKL,
+        NgayKL: data.NgayKL,
+      };
       try {
-        
-
         axios
-          .post(`https://localhost:44301/api/kyluat/${this.currentIdNhanVien}`, obj)
-          .then(res=>{
-            console.log(res)
+          .post(`https://localhost:44301/api/kiluat`, obj)
+          .then((res) => {
+            console.log(res);
           })
 
           .catch(function () {
@@ -871,44 +831,27 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    getContract() {
-      try {
-        var me = this;
-
-        axios
-          .get(`https://localhost:44301/api/hopdong/${this.IDNV}`)
-          .then(function (res) {
-            me.hopdong = res.data;
-          })
-
-          .catch(function () {
-            console.log(1);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    }, 
     OpenPopupContract(item) {
       this.isOpenPopupContract = true;
-      this.currentIdNhanVien = item.IDNhanVien
-      this.currentNameNhanVien = item.TenNV
-      // this.MaNV = item.MaNV;
-      // this.TenNV = item.TenNV;
-      // this.IDNV = item.IDNhanVien;
+      this.currentIdNhanVien = item.IDNhanVien;
+      this.currentNameNhanVien = item.TenNV;
+      this.MaNV = item.MaNV;
       this.getListKiLuat();
     },
     getListKiLuat() {
+      var me = this;
       try {
-       
-
         axios
           .get(`https://localhost:44301/api/kiluat/${this.currentIdNhanVien}`)
           .then(function (res) {
-            console.log(res.data,"sdjhsjdh")
-            this.dataListKiLuat = res.data;
+            me.dataListKiLuat = res.data;
+            console.log(res.data);
+            for (const item of me.dataListKiLuat) {
+              console.log(item);
+            }
           })
-
+ 
           .catch(function () {
             console.log(1);
           });
@@ -916,24 +859,29 @@ export default {
         console.log(error);
       }
     },
-    OpenPopupFostering(item) {
-      this.isOpenPopupFostering = true;
-      this.MaNV = item.MaNV;
-      this.TenNV = item.TenNV;
+    OpenPopupDeleteNotifi(item) {
+      this.idDelete = "";
+      this.isShowPopupPosition = true;
+      // this.isOpenPopupDeleteNotifi = true;
+      this.IDNhanVienD = item.IDNhanVien;
+      this.IDTTH = item.IDKT;
+      console.log({ item });
+
+      this.mess = "Bạn có chắc chắn muốn xóa thông tin này không?";
     },
-    getPosition() {
+    deletePosition(value) {
+      this.isShowPopupPosition = value;
+      const me = this;
+      const toast = useToast();
       try {
-        var me = this;
-
         axios
-          .get(`https://localhost:44301/api/chucvu/${this.IDNV}`)
-          .then(function (res) {
-            me.chucvu = res.data;
-            console.log(me.chucvu);
+          .delete(`https://localhost:44301/api/khenthuong/${this.IDTTH}`)
+          .then(function () {
+            me.getDataInfoBonus(me.IDNV);
+            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
           })
-
           .catch(function () {
-            console.log(1);
+            toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
           });
       } catch (error) {
         console.log(error);
@@ -941,22 +889,21 @@ export default {
     },
 
     OpenPopupPosition(item) {
-      console.log(item, "skjdksjdksjd")
+      console.log("skjdksjdksjd", item);
       this.isOpenPopupPosition = true;
-      this.currentIdNhanVien = item.IDNhanVien
-      this.currentNameNhanVien = item.TenNV
-      // this.MaNV = item.MaNV
-      // this.TenNV = item.TenNV
-      // this.IDNV = item.IDNhanVien
-      this.getDataInfoBonus(item.IDNhanVien)
+      this.currentIdNhanVien = item.IDNhanVien;
+      this.currentNameNhanVien = item.TenNV;
+      this.MaNV = item.MaNV;
+      this.IDNV = item.IDNhanVien; 
+      this.getDataInfoBonus(item.IDNhanVien);
     },
-    getDataInfoBonus(id){
+    getDataInfoBonus(id) {
       try {
         axios
           .get(`https://localhost:44301/api/khenthuong/${id}`)
-          .then(res=>{
-            this.dataInfoBonus = res.data
-            console.log(res.data,"jshdjshdj")
+          .then((res) => {
+            this.dataInfoBonus = res.data;
+            console.log(res.data, "jshdjshdj");
           })
           .catch(function () {
             console.log(1);
@@ -981,7 +928,8 @@ export default {
             console.log(res);
             me.isOpenPopupFormAddPosition = false;
             toast.success("thêm dữ liệu thành công", { timeout: 2000 });
-            me.getPosition();
+            console.log("sdahjkfja", me.IDNV, me);
+            me.getDataInfoBonus(me.IDNV);
           })
           .catch(function () {
             console.log("error");
@@ -1002,77 +950,71 @@ export default {
         }
       }
     },
-    AddDataInfoBonus(data){
-      let obj = {
-        IDKT: data,
-        IDNhanVien: data,
-        TenKT: data,
-        NgayKT: data,
-        HinhThucKT: data,
-        LyDoKT: data
-      }
+    AddDataInfoBonus(data) {
       var me = this;
       const toast = useToast();
       me.suaChucVu.IDNhanVien = me.IDNV;
+      console.log({ me });
+      let obj = {
+        // IDKT: "",
+        IDNhanVien: me.IDNV,
+        // TenKT: "",
+        NgayKT: data?.NgayKT,
+        HinhThucKT: data?.HinhThucKT,
+        LyDoKT: data?.LyDoKT,
+      };
+
       try {
         axios
-          .put(
-            `https://localhost:44301/api/khenthuong/${this.currentIdNhanVien}`,obj
-          )
+          .post(`https://localhost:44301/api/khenthuong`, obj)
           .then(function (res) {
-            console.log(res);
-            toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+            console.log(res.data);
+            toast.success("Thêm liệu thành công", { timeout: 2000 });
             me.isOpenPopupFormEditPosition = false;
-            me.getPosition();
+            me.getDataInfoBonus(me.IDNV);
           })
           .catch(function () {
             console.log("error");
-            toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
+            toast.error("Thêm liệu thất bại", { timeout: 2000 });
           });
       } catch (error) {
         console.log(error);
       }
     },
     OpenPopupFormEditPosition(item) {
-      this.dataEditInfoBonus = item
+      console.log({ item });
+      this.dataEditInfoBonus = item;
       this.isOpenPopupFormEditPosition = true;
-      this.suaChucVu = item;
-      item.ThoiGianBatDau = this.formatDate(item.ThoiGianBatDau);
-      this.suaChucVu.ThoiGianBatDau = item.ThoiGianBatDau;
-      item.ThoiGianKetThuc = this.formatDate(item.ThoiGianKetThuc);
-      this.suaChucVu.ThoiGianKetThuc = item.ThoiGianKetThuc;
+      this.suaChucVu = item; 
+      this.IDTTH = item.IDKT;
     },
     btnEditPosition(data) {
       var me = this;
-      console.log(data,"datakjdskdjksd")
+      console.log(data, "datakjdskdjksd");
       const toast = useToast();
-      let obj ={
-        IDKT: data.IDKT,
-        IDNhanVien: data.IDNhanVien,
-        TenKT: data.TenKT,
+      let obj = {
+        IDKT: me.IDTTH,
+        IDNhanVien: me.IDNV,
+        TenKT: "hello",
         NgayKT: this.formatDate(data.NgayKT),
         HinhThucKT: data.HinhThucKT,
-        LyDoKT: data.LyDoKT
-      }
+        LyDoKT: data.LyDoKT,
+        DiaDiemKT: "string",
+      };
+
       me.suaChucVu.IDNhanVien = me.IDNV;
-      try {
-        axios
-          .put(
-            `https://localhost:44301/api/khenthuong/${data.IDKT}`,obj
-          )
-          .then(function (res) {
-            console.log(res);
-            toast.success("sửa dữ liệu thành công", { timeout: 2000 });
-            me.isOpenPopupFormEditPosition = false;
-            me.getPosition();
-          })
-          .catch(function () {
-            console.log("error");
-            toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      axios
+        .put(`https://localhost:44301/api/khenthuong/${me.IDTTH}`, obj)
+        .then(function (res) {
+          console.log(res);
+          toast.success("sửa dữ liệu thành công", { timeout: 2000 });
+          me.isOpenPopupFormEditPosition = false;
+          me.getPosition();
+        })
+        .catch(function (err) {
+          console.log("error", err);
+          toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
+        });
     },
 
     OpenPopupFormAddContract() {
@@ -1102,50 +1044,14 @@ export default {
       }
     },
     saveContract() {
-      this.validateNameHD();
-      this.validateNgayKi();
-      this.validateNgayBD();
-      this.validateNgayKT();
+      this.validateName();
+      this.validateNorm();
       if (this.isValid == true) {
         if (this.formMode == 1) {
           this.btnAddContract();
         } else {
           this.btnEditContract();
         }
-      }
-    },
-    OpenPopupFormEditContract(item) {
-      this.isOpenPopupFormEditContract = true;
-      this.suaHopDong = item;
-      item.NgayKi = this.formatDate(item.NgayKi);
-      this.suaHopDong.NgayKi = item.NgayKi;
-      item.NgayBD = this.formatDate(item.NgayBD);
-      this.suaHopDong.NgayBD = item.NgayBD;
-      item.NgayKT = this.formatDate(item.NgayKT);
-      this.suaHopDong.NgayKT = item.NgayKT;
-    },
-    btnEditContract() {
-      var me = this;
-      const toast = useToast();
-      me.suaHopDong.IDNhanVien = me.IDNV;
-      try {
-        axios
-          .put(
-            `https://localhost:44301/api/hopdong/${this.suaHopDong.IDHopDong}`,
-            this.suaHopDong
-          )
-          .then(function (res) {
-            console.log(res);
-            toast.success("sửa dữ liệu thành công", { timeout: 2000 });
-            me.isOpenPopupFormEditContract = false;
-            me.getContract();
-          })
-          .catch(function () {
-            console.log("error");
-            toast.error("sửa dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
       }
     },
     OpenPopupFormAddFostering() {
@@ -1171,54 +1077,7 @@ export default {
       this.isShowPopupContract = true;
       this.isOpenPopupDeleteNotifiCV = true;
       this.idDelete = item.IDHopDong;
-      this.mess = "Bạn có chắc chắn muốn xóa thông tin hợp đồng này không?";
-    },
-    deleteNotifiContract(value) {
-      this.isShowPopupContract = value;
-      var me = this;
-      const toast = useToast();
-      try {
-        axios
-          .delete(`https://localhost:44301/api/hopdong/${this.idDelete}`)
-          .then(function (res) {
-            console.log(res);
-            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-            me.getContract();
-          })
-
-          .catch(function () {
-            toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    OpenPopupDeleteNotifi(item) {
-      this.idDelete = "";
-      this.isShowPopupPosition = true;
-      // this.isOpenPopupDeleteNotifi = true;
-      this.idDelete = item.IDChucVu;
-      this.mess = "Bạn có chắc chắn muốn xóa thông tin chức vụ này không?";
-    },
-    deletePosition(value) {
-      this.isShowPopupPosition = value;
-      var me = this;
-      const toast = useToast();
-      try {
-        axios
-          .delete(`https://localhost:44301/api/chucvu/${this.idDelete}`)
-          .then(function (res) {
-            console.log(res);
-            toast.success("Xóa dữ liệu thành công", { timeout: 2000 });
-            me.getPosition();
-          })
-
-          .catch(function () {
-            toast.error("xóa dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      this.mess = "Bạn có chắc chắn muốn xóa thông tin này không?";
     },
     noDelete(value) {
       this.isShowPopupContract = value;
@@ -1245,6 +1104,19 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    gender(gender) {
+      switch (gender) {
+        case 0:
+          gender = "Nam";
+          break;
+        case 1:
+          gender = "Nữ";
+          break;
+        default:
+          break;
+      }
+      return gender;
     },
     formatDate(date) {
       try {
@@ -1294,7 +1166,8 @@ export default {
         this.errors.tenchucvu = "Hình thức khen thưởng không được để trống!";
         this.isValid = false;
         // document.getElementsByClassName('ten').classList.add('borderRed')
-      } else {
+      }
+      else {
         this.errors.tenchucvu = "";
         this.isValid = true;
       }
@@ -1309,49 +1182,7 @@ export default {
         this.isValid = true;
       }
     },
-    // validateNameHD() {
-    //   if (!this.suaHopDong.TenHD) {
-    //     this.errors.tenhopdong = "Tên hợp đồng không được để trống!";
-    //     this.isValid = false;
-    //     // document.getElementsByClassName('ten').classList.add('borderRed')
-    //   } else {
-    //     this.errors.tenhopdong = "";
-    //     this.isValid = true;
-    //   }
-    // },
-    // // validateNgayKi() {
-    // //   if (!this.suaHopDong.NgayKi) {
-    // //     this.errors.ngayki = "Ngày kí không được để trống!";
-    // //     this.isValid = false;
-    // //     // document.getElementsByClassName('ten').classList.add('borderRed')
-    // //   } else {
-    // //     this.errors.ngayki = "";
-    // //     this.isValid = true;
-    // //   }
-    // // },
-    // validateNgayBD() {
-    //   if (!this.suaHopDong.NgayBD) {
-    //     this.errors.ngaybatdau = "Ngày bắt đầu không được để trống!";
-    //     this.isValid = false;
-    //     // document.getElementsByClassName('ten').classList.add('borderRed')
-    //   } else {
-    //     this.errors.ngaybatdau = "";
-    //     this.isValid = true;
-    //   }
-    // },
-    // validateNgayKT() {
-    //   if (!this.suaHopDong.NgayKT) {
-    //     this.errors.ngayketthuc = "Ngày kết thúc không được để trống!";
-    //     this.isValid = false;
-    //     // document.getElementsByClassName('ten').classList.add('borderRed')
-    //   } else {
-    //     this.errors.ngayketthuc = "";
-    //     this.isValid = true;
-    //   }
-    // },
   },
-
-  //
 };
 </script>
 <style scoped>
