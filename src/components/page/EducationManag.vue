@@ -76,9 +76,9 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Chứng chỉ ngoại ngữ: </label>
+            <label for="">Chứng chỉ ngoại ngữ <span>*</span> : </label>
             <input :class="errors.chungchingoaingu != '' ? 'border-red' : ''" @blur="validateCCNN" type="text"
-              v-model="suaHocVan.ChungChiNgoaiNgu">
+              v-model="suaHocVan.ChungChiNgoaiNu">
             <div class="invalid-feedback" v-if="errors.chungchingoaingu != ''">
               {{ errors.chungchingoaingu }}
             </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Tình trạng học vấn: </label>
+            <label for="">Tình trạng học vấn <span>*</span> : </label>
             <input :class="errors.tinhtranghocvan != '' ? 'border-red' : ''" @blur="validateTTHV" type="text"
               v-model="suaHocVan.TinhTrangHocVan">
             <div class="invalid-feedback" v-if="errors.tinhtranghocvan != ''">
@@ -96,7 +96,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Trình quản lý giáo dục: </label>
+            <label for="">Trình quản lý giáo dục <span>*</span> : </label>
             <input :class="errors.quanligiaoduc != '' ? 'border-red' : ''" @blur="validateQLGD" type="text"
               v-model="suaHocVan.TrinhDoQLGD">
             <div class="invalid-feedback" v-if="errors.quanligiaoduc != ''">
@@ -150,7 +150,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Chứng chỉ ngoại ngữ: </label>
+            <label for="">Chứng chỉ ngoại ngữ <span>*</span> : </label>
             <input :class="errors.chungchingoaingu != '' ? 'border-red' : ''" @blur="validateCCNN" type="text"
               v-model="suaHocVan.ChungChiNgoaiNgu">
             <div class="invalid-feedback" v-if="errors.chungchingoaingu != ''">
@@ -160,7 +160,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Tình trạng học vấn: </label>
+            <label for="">Tình trạng học vấn <span>*</span> : </label>
             <input :class="errors.tinhtranghocvan != '' ? 'border-red' : ''" @blur="validateTTHV" type="text"
               v-model="suaHocVan.TinhTrangHocVan">
             <div class="invalid-feedback" v-if="errors.tinhtranghocvan != ''">
@@ -170,7 +170,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Trình quản lý giáo dục: </label>
+            <label for="">Trình quản lý giáo dục <span>*</span> : </label>
             <input :class="errors.quanligiaoduc != '' ? 'border-red' : ''" @blur="validateQLGD" type="text"
               v-model="suaHocVan.TrinhDoQLGD">
             <div class="invalid-feedback" v-if="errors.quanligiaoduc != ''">
@@ -281,7 +281,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Chuyên ngành: </label>
+            <label for="">Chuyên ngành <span>*</span> : </label>
             <input :class="errors.chuyennganhdaotao != '' ? 'border-red' : ''" @blur="validateCNDT" type="text"
               v-model="suaDaotao.ChuyenNganh">
             <div class="invalid-feedback" v-if="errors.chuyennganhdaotao != ''">
@@ -301,7 +301,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Học vấn: </label>
+            <label for="">Học vấn <span>*</span> : </label>
             <input :class="errors.bangcap != '' ? 'border-red' : ''" @blur="validateBangCap" type="text"
               v-model="suaDaotao.BangCap">
             <div class="invalid-feedback" v-if="errors.bangcap != ''">
@@ -354,7 +354,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Chuyên ngành: </label>
+            <label for="">Chuyên ngành <span>*</span> : </label>
             <input :class="errors.chuyennganhdaotao != '' ? 'border-red' : ''" @blur="validateCNDT" type="text"
               v-model="suaDaotao.ChuyenNganh">
             <div class="invalid-feedback" v-if="errors.chuyennganhdaotao != ''">
@@ -364,7 +364,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Hình thức đào tạo: </label>
+            <label for="">Hình thức đào tạo <span>*</span> : </label>
             <input :class="errors.hinhthucdaotao != '' ? 'border-red' : ''" @blur="validateHinhThuc" type="text"
               v-model="suaDaotao.HinhThucDaoTao">
             <div class="invalid-feedback" v-if="errors.hinhthucdaotao != ''">
@@ -374,7 +374,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Học vấn: </label>
+            <label for="">Học vấn <span>*</span> : </label>
             <input :class="errors.bangcap != '' ? 'border-red' : ''" @blur="validateBangCap" type="text"
               v-model="suaDaotao.BangCap">
             <div class="invalid-feedback" v-if="errors.bangcap != ''">
@@ -486,7 +486,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Nội dung: </label>
+            <label for="">Nội dung <span>*</span> : </label>
             <input :class="errors.noidungboiduong != '' ? 'border-red' : ''" @blur="validateNDBD" type="text"
               v-model="suaBoiDuong.NoiDungBoiDuong">
             <div class="invalid-feedback" v-if="errors.noidungboiduong != ''">
@@ -496,7 +496,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Nơi bồi dưỡng: </label>
+            <label for="">Nơi bồi dưỡng <span>*</span> : </label>
             <input :class="errors.noiboiduong != '' ? 'border-red' : ''" @blur="validateNoiBD" type="text"
               v-model="suaBoiDuong.DiaDiem">
             <div class="invalid-feedback" v-if="errors.noiboiduong != ''">
@@ -506,7 +506,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Bằng cấp: </label>
+            <label for="">Bằng cấp <span>*</span> : </label>
             <input :class="errors.vanbangchungchi != '' ? 'border-red' : ''" @blur="validateVBCC" type="text"
               v-model="suaBoiDuong.VanBangChungChi">
             <div class="invalid-feedback" v-if="errors.vanbangchungchi != ''">
@@ -602,15 +602,13 @@
       <table id="tbEmployee" class="table" style="width: 100%;">
         <thead>
           <tr>
-            <th class="sticky-left-top checkbox" colspan="1" style="min-width: 30px !important; text-align: center">
-              <input ref="checkall" type="checkBox" class="check-all" style="width: 18px; height: 18px" />
-            </th>
+
             <th class="text-center" style="min-width: 40px; text-align: center">STT</th>
             <th style="width: 40px">Mã nhân viên </th>
             <th>Họ và tên</th>
             <th>Ngày sinh</th>
             <th style="width: 40px">Giới tính</th>
-            <th style="width: 40px">Giới tính</th>
+            <th style="width: 40px">Khoa</th>
             <div class="th-item-final sticky-right-top">
               <th style="height: 42px; padding-top: 11px">Trình độ học vấn</th>
               <th>Quá trình đào tạo</th>
@@ -631,15 +629,13 @@
         </thead>
         <tbody>
           <tr v-for=" (item, i) of students" :key="item.StudentID" ref="row">
-            <td ref="rowCheck" class="checkbox sticky-left" style="text-align: center" colspan="1">
-              <input ref="check" class="check-item" type="checkbox" style="width: 18px; height: 18px" />
-            </td>
+
             <td class="text-center">{{ i + 1 }}</td>
             <td style="width: 40px">{{ item.MaNV }}</td>
             <td>{{ item.TenNV }}</td>
             <td>{{ formatDate(item.NgaySinh) }}</td>
             <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
-            <td style="width: 40px">{{ gender(item.GioiTinh) }}</td>
+            <td style="width: 40px">{{ item.TenKhoa }}</td>
             <div class="th-item-final sticky-right-top">
               <td>
                 <div colspan="1" style="width: 121px;  box-sizing: border-box;" class="desc text-center"
@@ -994,9 +990,9 @@ export default {
       const toast = useToast();
       me.suaHocVan.IDNhanVien = me.IDNV
       console.log(me.suaHocVan);
+      this.validateCCNN()
       this.validateQLGD()
       this.validateTTHV()
-      this.validateCCNN()
       if (this.isValid == true) {
         try {
 
@@ -1539,12 +1535,12 @@ export default {
   color: red;
   position: absolute;
   font-size: 12px;
-  margin-top: 44px;
+  margin-top: 36px;
   margin-left: 200px;
 }
 
 .border-red {
-  border: 1px solid red
+  border-color: red
 }
 
 table,
@@ -1574,7 +1570,7 @@ table {
 }
 
 .btnSave {
-  width: 85px;
+  width: 67px;
   border: 1px solid;
   text-align: center;
   padding: 5px;
@@ -1588,7 +1584,7 @@ table {
 
 .btnSave:hover {
   border: 1px solid #7EA1F9;
-  color: #000;
+  color: #7EA1F9;
   background-color: #fff;
 }
 
@@ -1630,7 +1626,7 @@ table {
 
 .btnAdd:hover {
   background-color: #fff;
-  color: #000;
+  color: #7EA1F9;
   border: 1px solid #7EA1F9;
 }
 
@@ -1828,8 +1824,6 @@ tbody tr td {
   position: absolute;
   width: 68vw;
   height: 590px;
-  /* height: auto; */
-
   top: 10%;
   right: 14%;
   z-index: 99999;
@@ -1842,12 +1836,10 @@ tbody tr td {
 .bonus-form {
   padding: 0px 20px;
   position: absolute;
-  width: 80vw;
+  width: 68vw;
   height: 590px;
-  /* height: auto; */
-
-  top: 14%;
-  right: 10%;
+  top: 10%;
+  right: 14%;
   z-index: 99999;
   border-radius: 20px;
   box-shadow: 5px 5px 5px;
@@ -1956,18 +1948,20 @@ tbody tr:hover .td-item-final {
 }
 
 .btnCancel {
-  color: red;
-
+  color: #5d82e0;
   position: absolute;
   right: 150px;
-  border: 1px solid red;
+  border: 1px solid #5d82e0;
   bottom: 20px;
+  padding: 4px;
+  min-width: 67px;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .btnCancel:hover {
-  background-color: red;
+  background-color: #5d82e0;
   color: #fff;
-
 }
 </style>
   

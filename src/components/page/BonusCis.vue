@@ -5,24 +5,12 @@
       <div class="bonus-form">
         <div class="head-popup">
           <h3 class="title-heading">Thông tin khen thưởng</h3>
-          <div
-            class="btn-close-popup"
-            @click.stop="isOpenPopupPosition = false"
-          >
+          <div class="btn-close-popup" @click.stop="isOpenPopupPosition = false">
             <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
@@ -31,23 +19,18 @@
           <div class="maNV">Mã nhân viên: {{ currentIdNhanVien }}</div>
           <div class="tenNV">Tên nhân viên: {{ currentNameNhanVien }}</div>
           <div class="btnWrap">
-            <div
-              class="btnAdd"
-              @click="OpenPopupFormAddPosition(dataInfoBonus)"
-            >
+            <div class="btnAdd" @click="OpenPopupFormAddPosition(dataInfoBonus)">
               Thêm
             </div>
             <!-- <div class="btnEdit" @click="OpenPopupFormEditPosition(item)">Sửa</div> -->
           </div>
         </div>
-        <table
-        style="
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid;
-            margin-top: 12px;
-          "
-        >
+        <table style="
+                        width: 100%;
+                        border-collapse: collapse;
+                        border: 1px solid;
+                        margin-top: 12px;
+                      ">
           <tr>
             <th>Hình thức khen thưởng</th>
             <th>Ngày khen thưởng</th>
@@ -65,61 +48,33 @@
             <td style="border: 1px solid #c7c7c7; width: 150px">
               {{ item.LyDoKT }}
             </td>
-            <td
-              ref="func"
-              class="td-item-final td-func"
-              style="
-                background-color: #fff;
-                align-items: center;
-                border: 1px solid #c7c7c7;
-                column-gap: 10px;
-              "
-              colspan="12"
-            >
-              <div
-                class="icon icon-edit"
-                @click="OpenPopupFormEditPosition(item)"
-              ></div>
-              <div
-                class="icon icon-delete"
-                @click="OpenPopupDeleteNotifi(item)"
-              ></div>
+            <td ref="func" class="td-item-final td-func" style="
+                            background-color: #fff;
+                            align-items: center;
+                            border: 1px solid #c7c7c7;
+                            column-gap: 10px;
+                          " colspan="12">
+              <div class="icon icon-edit" @click="OpenPopupFormEditPosition(item)"></div>
+              <div class="icon icon-delete" @click="OpenPopupDeleteNotifi(item)"></div>
             </td>
           </tr>
         </table>
         <!-- <div class="btnDelete" style="bottom: -140px;">Xóa</div> -->
       </div>
     </div>
-    <popUp
-      v-show="isShowPopupPosition"
-      :msv="mess"
-      @cancelNotifi="noDelete"
-      @closeNotifi="deletePosition"
-    ></popUp>
+    <popUp v-show="isShowPopupPosition" :msv="mess" @cancelNotifi="noDelete" @closeNotifi="deletePosition"></popUp>
 
     <!-- them chuc vu -->
     <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Thêm thông tin khen thưởng</h3>
-          <div
-            class="btn-close-popup"
-            @click.stop="isOpenPopupAddNotifi = true"
-          >
+          <div class="btn-close-popup" @click.stop="isOpenPopupAddNotifi = true">
             <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
@@ -136,13 +91,9 @@
         <div class="form">
           <form action="">
             <div class="input__box">
-              <label for="">Hình thức khen thưởng</label>
-              <input
-                :class="errors.tenchucvu != '' ? 'border-red' : ''"
-                @blur="validateName"
-                type="text"
-                v-model="dataAddInfoBonus.HinhThucKT"
-              />
+              <label for="">Hình thức khen thưởng <span>*</span></label>
+              <input :class="errors.tenchucvu != '' ? 'border-red' : ''" @blur="validateName" type="text"
+                v-model="dataAddInfoBonus.HinhThucKT" />
               <div class="invalid-feedback" v-if="errors.tenchucvu != ''">
                 {{ errors.tenchucvu }}
               </div>
@@ -153,13 +104,9 @@
             </div>
 
             <div class="input__box">
-              <label for="">Thêm lý do khen thưởng</label>
-              <input
-                :class="errors.dinhmucgiangday != '' ? 'border-red' : ''"
-                @blur="validateNorm"
-                type="text"
-                v-model="dataAddInfoBonus.LyDoKT"
-              />
+              <label for="">Thêm lý do khen thưởng <span>*</span></label>
+              <input :class="errors.dinhmucgiangday != '' ? 'border-red' : ''" @blur="validateNorm" type="text"
+                v-model="dataAddInfoBonus.LyDoKT" />
               <div class="invalid-feedback" v-if="errors.dinhmucgiangday != ''">
                 {{ errors.dinhmucgiangday }}
               </div>
@@ -179,24 +126,12 @@
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa thông tin khen thưởng</h3>
-          <div
-            class="btn-close-popup"
-            @click.stop="isOpenPopupEditNotifi = true"
-          >
+          <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifi = true">
             <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
@@ -252,19 +187,13 @@
           </div>
         </div>
         <div class="btn-wrap">
-          <div
-            class="btnNotifi btn-secondary"
-            @click.stop="
-              (isOpenPopupAddNotifi = false),
-                (isOpenPopupFormAddPosition = false)
-            "
-          >
+          <div class="btnNotifi btn-secondary" @click.stop="
+            (isOpenPopupAddNotifi = false),
+            (isOpenPopupFormAddPosition = false)
+          ">
             Hủy
           </div>
-          <div
-            class="btnNotifi btn-primary"
-            @click="isOpenPopupAddNotifi = false"
-          >
+          <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifi = false">
             Không
           </div>
         </div>
@@ -282,47 +211,29 @@
           </div>
         </div>
         <div class="btn-wrap">
-          <div
-            class="btnNotifi btn-secondary"
-            @click.stop="
-              (isOpenPopupEditNotifi = false),
-                (isOpenPopupFormEditPosition = false)
-            "
-          >
+          <div class="btnNotifi btn-secondary" @click.stop="
+            (isOpenPopupEditNotifi = false),
+            (isOpenPopupFormEditPosition = false)
+          ">
             Hủy
           </div>
-          <div
-            class="btnNotifi btn-primary"
-            @click="isOpenPopupEditNotifi = false"
-          >
+          <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifi = false">
             Không
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="popup-bonus" v-if="isOpenPopupContract">
       <div class="bonus-form">
         <div class="head-popup">
           <h3 class="title-heading">Thông tin Kỷ Luật</h3>
-          <div
-            class="btn-close-popup"
-            @click.stop="isOpenPopupContract = false"
-          >
+          <div class="btn-close-popup" @click.stop="isOpenPopupContract = false">
             <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
@@ -338,14 +249,12 @@
           </div>
         </div>
         <div class="formm">
-          <table
-          style="
-              width: 100%;
-              border-collapse: collapse;
-              border: 1px solid;
-              margin-top: 12px;
-            "
-          >
+          <table style="
+                          width: 100%;
+                          border-collapse: collapse;
+                          border: 1px solid;
+                          margin-top: 12px;
+                        ">
             <tr>
               <th>HÌnh thức kỷ luật</th>
               <th>Ngày kỷ luật</th>
@@ -353,7 +262,7 @@
               <th style="width: 100px">Chức năng</th>
             </tr>
             <tr></tr>
-           
+
             <tr v-for="item of dataListKiLuat" :key="item.IDHopDong">
               <td style="border: 1px solid #c7c7c7; width: 150px">
                 {{ item.HinhThucKL }}
@@ -364,25 +273,14 @@
               <td style="border: 1px solid #c7c7c7; width: 150px">
                 {{ item.LyDoKL }}
               </td>
-              <td
-                ref="func"
-                class="td-item-final td-func"
-                style="
-                  background-color: #fff;
-                  align-items: center;
-                  border: 1px solid #c7c7c7;
-                  column-gap: 10px;
-                "
-                colspan="12"
-              >
-                <div
-                  class="icon icon-edit"
-                  @click="OpenPopupFormEditContract(item)"
-                ></div>
-                <div
-                  class="icon icon-delete"
-                  @click="OpenPopupDeleteNotifiCV(item)"
-                ></div>
+              <td ref="func" class="td-item-final td-func" style="
+                              background-color: #fff;
+                              align-items: center;
+                              border: 1px solid #c7c7c7;
+                              column-gap: 10px;
+                            " colspan="12">
+                <div class="icon icon-edit" @click="OpenPopupFormEditContract(item)"></div>
+                <div class="icon icon-delete" @click="OpenPopupDeleteNotifiCV(item)"></div>
               </td>
             </tr>
           </table>
@@ -390,36 +288,19 @@
         </div>
       </div>
     </div>
-    <popUp
-      v-show="isShowPopupContract"
-      :msv="mess"
-      @cancelNotifi="noDelete"
-      @closeNotifi="deleteNotifiContract"
-    ></popUp>
+    <popUp v-show="isShowPopupContract" :msv="mess" @cancelNotifi="noDelete" @closeNotifi="deleteNotifiContract"></popUp>
 
     <!-- them hop dong -->
     <div class="popup-bonus" v-if="isOpenPopupFormAddContract">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Thêm thông tin kỷ </h3>
-          <div
-            class="btn-close-popup"
-            @click.stop="isOpenPopupAddNotifiCV = true"
-          >
+          <div class="btn-close-popup" @click.stop="isOpenPopupAddNotifiCV = true">
             <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
@@ -437,37 +318,26 @@
             <div class="column">
               <div class="input__box">
                 <label for="">Tên hợp đồng</label>
-                <input
-                  :class="errors.tenhopdong != '' ? 'border-red' : ''"
-                  @blur="validateNameHD"
-                  type="text"
-                  v-model="dataAddKyLuat.TenKL"
-                />
+                <input :class="errors.tenhopdong != '' ? 'border-red' : ''" @blur="validateNameHD" type="text"
+                  v-model="dataAddKyLuat.TenKL" />
                 <div class="invalid-feedback" v-if="errors.tenhopdong != ''">
                   {{ errors.tenhopdong }}
                 </div>
               </div>
               <div class="input__box">
                 <label for="">Ngày kỷ Luật</label>
-                <input
-                  :class="errors.ngayki != '' ? 'border-red' : ''"
-                  @blur="validateNgayKi"
-                  type="date"
-                  v-model="dataAddKyLuat.NgayKL"
-                />
+                <input :class="errors.ngayki != '' ? 'border-red' : ''" @blur="validateNgayKi" type="date"
+                  v-model="dataAddKyLuat.NgayKL" />
                 <div class="invalid-feedback" v-if="errors.ngayki != ''">
                   {{ errors.ngayki }}
                 </div>
               </div>
             </div>
-  
+
             <div class="column">
               <div class="input__box">
                 <label for="">Lý do</label>
-                <textarea
-                  v-model="dataAddKyLuat.LyDoKL"
-                  style="width: 95%; height: 60px; margin-top: 5px"
-                ></textarea>
+                <textarea v-model="dataAddKyLuat.LyDoKL" style="width: 100%; height: 60px; margin-top: 5px"></textarea>
               </div>
             </div>
           </form>
@@ -483,24 +353,12 @@
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa thông tin kỷ luật</h3>
-          <div
-            class="btn-close-popup"
-            @click.stop="isOpenPopupEditNotifiCV = true"
-          >
+          <div class="btn-close-popup" @click.stop="isOpenPopupEditNotifiCV = true">
             <div class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
           </div>
@@ -535,10 +393,7 @@
             <div class="column">
               <div class="input__box">
                 <label for="">Thêm lý do kỷ luật</label>
-                <textarea
-                  v-model="suaHopDong.Mota"
-                  style="width: 95%; height: 60px; margin-top: 5px"
-                ></textarea>
+                <textarea v-model="suaHopDong.Mota" style="width: 95%; height: 60px; margin-top: 5px"></textarea>
               </div>
             </div>
           </form>
@@ -562,19 +417,13 @@
           </div>
         </div>
         <div class="btn-wrap">
-          <div
-            class="btnNotifi btn-secondary"
-            @click.stop="
-              (isOpenPopupAddNotifiCV = false),
-                (isOpenPopupFormAddContract = false)
-            "
-          >
+          <div class="btnNotifi btn-secondary" @click.stop="
+            (isOpenPopupAddNotifiCV = false),
+            (isOpenPopupFormAddContract = false)
+          ">
             Hủy
           </div>
-          <div
-            class="btnNotifi btn-primary"
-            @click="isOpenPopupAddNotifiCV = false"
-          >
+          <div class="btnNotifi btn-primary" @click="isOpenPopupAddNotifiCV = false">
             Không
           </div>
         </div>
@@ -608,19 +457,13 @@
           </div>
         </div>
         <div class="btn-wrap">
-          <div
-            class="btnNotifi btn-secondary"
-            @click.stop="
-              (isOpenPopupEditNotifiCV = false),
-                (isOpenPopupFormEditContract = false)
-            "
-          >
+          <div class="btnNotifi btn-secondary" @click.stop="
+            (isOpenPopupEditNotifiCV = false),
+            (isOpenPopupFormEditContract = false)
+          ">
             Hủy
           </div>
-          <div
-            class="btnNotifi btn-primary"
-            @click="isOpenPopupEditNotifiCV = false"
-          >
+          <div class="btnNotifi btn-primary" @click="isOpenPopupEditNotifiCV = false">
             Không
           </div>
         </div>
@@ -631,13 +474,8 @@
     <div class="body-header">
       <div class="row-input">
         <div class="input">
-          <input
-            type="text"
-            class="search"
-            placeholder="Tìm kiếm"
-            v-model="txtSearch"
-            @keypress.enter="getpagingStudent"
-          />
+          <input type="text" class="search" placeholder="Tìm kiếm" v-model="txtSearch"
+            @keypress.enter="getpagingStudent" />
           <div class="icon-search icon"></div>
         </div>
       </div>
@@ -667,11 +505,11 @@
             <td class="text-center">{{ i + 1 }}</td>
             <td>{{ item.MaNV }}</td>
             <td>{{ item.TenNV }}</td>
-            <td>{{ item.GioiTinh }}</td>
+            <td>{{ gender(item.GioiTinh) }}</td>
             <td>{{ item.Email }}</td>
             <td>
               <div class="desc" @click="OpenPopupPosition(item)">
-                
+
                 Xem chi tiết
               </div>
             </td>
@@ -696,62 +534,29 @@
           <div class="dropup-page">
             <div class="icon-dropup" @click="btnDropUp"></div>
             <div class="item-up" v-show="isShowDrop">
-              <div
-                class="item-dropup"
-                :class="{ act: isActive == '10' }"
-                pageSize="10"
-                :value="pageDefault"
-                @click="getPageDefault"
-              >
+              <div class="item-dropup" :class="{ act: isActive == '10' }" pageSize="10" :value="pageDefault"
+                @click="getPageDefault">
                 10 bản ghi trên 1 trang
               </div>
-              <div
-                class="item-dropup"
-                :class="{ act: isActive == '20' }"
-                pageSize="20"
-                @click="getPageDefault"
-              >
+              <div class="item-dropup" :class="{ act: isActive == '20' }" pageSize="20" @click="getPageDefault">
                 20 bản ghi trên 1 trang
               </div>
-              <div
-                class="item-dropup"
-                :class="{ act: isActive == '30' }"
-                pageSize="30"
-                @click="getPageDefault"
-              >
+              <div class="item-dropup" :class="{ act: isActive == '30' }" pageSize="30" @click="getPageDefault">
                 30 bản ghi trên 1 trang
               </div>
-              <div
-                class="item-dropup"
-                :class="{ act: isActive == '50' }"
-                pageSize="50"
-                @click="getPageDefault"
-              >
+              <div class="item-dropup" :class="{ act: isActive == '50' }" pageSize="50" @click="getPageDefault">
                 50 bản ghi trên 1 trang
               </div>
-              <div
-                class="item-dropup"
-                :class="{ act: isActive == '100' }"
-                pageSize="100"
-                @click="getPageDefault"
-              >
+              <div class="item-dropup" :class="{ act: isActive == '100' }" pageSize="100" @click="getPageDefault">
                 100 bản ghi trên 1 trang
               </div>
             </div>
           </div>
         </div>
         <div>
-          <Paginate
-            v-model="pageNumber"
-            :page-count="totalPage"
-            :page-range="3"
-            :margin-pages="1"
-            :click-handler="clickCallback"
-            :prev-text="'Trước'"
-            :next-text="'Sau'"
-            :container-class="'pagination'"
-            :page-class="'page-item'"
-          >
+          <Paginate v-model="pageNumber" :page-count="totalPage" :page-range="3" :margin-pages="1"
+            :click-handler="clickCallback" :prev-text="'Trước'" :next-text="'Sau'" :container-class="'pagination'"
+            :page-class="'page-item'">
           </Paginate>
         </div>
       </div>
@@ -776,12 +581,12 @@ import popUp from "../base/BasePopupDelete2.vue";
 export default {
   data() {
     return {
-      dataAddKyLuat:{},
-      currentIdNhanVien:null,
-      currentNameNhanVien:"",
+      dataAddKyLuat: {},
+      currentIdNhanVien: null,
+      currentNameNhanVien: "",
       dataInfoBonus: {},
-      dataAddInfoBonus:{},
-      dataListKiLuat:{},
+      dataAddInfoBonus: {},
+      dataListKiLuat: {},
       isOpenPopupContract: false,
       isOpenPopupFostering: false,
       isOpenPopupPosition: false,
@@ -843,10 +648,23 @@ export default {
     this.getpagingStudent();
   },
   methods: {
+    gender(gender) {
+      switch (gender) {
+        case 0:
+          gender = "Nam"
+          break;
+        case 1:
+          gender = "Nữ"
+          break;
+        default:
+          break;
+      }
+      return gender;
+    },
     thongbao() {
       alert("Xác nhận đóng");
     },
-    saveDataKyLuat(data){
+    saveDataKyLuat(data) {
       let obj = {
         "IDKyLuat": data.IDKyLuat,
         "IDNhanVien": this.currentIdNhanVien,
@@ -857,11 +675,11 @@ export default {
         "NgayKL": data.NgayKL
       }
       try {
-        
+
 
         axios
           .post(`https://localhost:44301/api/kyluat/${this.currentIdNhanVien}`, obj)
-          .then(res=>{
+          .then(res => {
             console.log(res)
           })
 
@@ -900,12 +718,12 @@ export default {
     },
     getListKiLuat() {
       try {
-       
+
 
         axios
           .get(`https://localhost:44301/api/kiluat/${this.currentIdNhanVien}`)
           .then(function (res) {
-            console.log(res.data,"sdjhsjdh")
+            console.log(res.data, "sdjhsjdh")
             this.dataListKiLuat = res.data;
           })
 
@@ -950,13 +768,13 @@ export default {
       // this.IDNV = item.IDNhanVien
       this.getDataInfoBonus(item.IDNhanVien)
     },
-    getDataInfoBonus(id){
+    getDataInfoBonus(id) {
       try {
         axios
           .get(`https://localhost:44301/api/khenthuong/${id}`)
-          .then(res=>{
+          .then(res => {
             this.dataInfoBonus = res.data
-            console.log(res.data,"jshdjshdj")
+            console.log(res.data, "jshdjshdj")
           })
           .catch(function () {
             console.log(1);
@@ -1002,7 +820,7 @@ export default {
         }
       }
     },
-    AddDataInfoBonus(data){
+    AddDataInfoBonus(data) {
       let obj = {
         IDKT: data,
         IDNhanVien: data,
@@ -1017,7 +835,7 @@ export default {
       try {
         axios
           .put(
-            `https://localhost:44301/api/khenthuong/${this.currentIdNhanVien}`,obj
+            `https://localhost:44301/api/khenthuong/${this.currentIdNhanVien}`, obj
           )
           .then(function (res) {
             console.log(res);
@@ -1044,9 +862,9 @@ export default {
     },
     btnEditPosition(data) {
       var me = this;
-      console.log(data,"datakjdskdjksd")
+      console.log(data, "datakjdskdjksd")
       const toast = useToast();
-      let obj ={
+      let obj = {
         IDKT: data.IDKT,
         IDNhanVien: data.IDNhanVien,
         TenKT: data.TenKT,
@@ -1058,7 +876,7 @@ export default {
       try {
         axios
           .put(
-            `https://localhost:44301/api/khenthuong/${data.IDKT}`,obj
+            `https://localhost:44301/api/khenthuong/${data.IDKT}`, obj
           )
           .then(function (res) {
             console.log(res);
@@ -1356,4 +1174,458 @@ export default {
 </script>
 <style scoped>
 @import url(../../css/page/bonusCis.css);
+
+.border-red {
+  border-color: red;
+}
+
+.invalid-feedback {
+  color: red;
+  position: absolute;
+  font-size: 12px;
+  margin-top: -12px;
+  /* border: 2px solid red; */
+}
+
+.btnSave {
+  width: 67px;
+  border: 1px solid;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #5d82e0;
+  position: absolute;
+  right: 40px;
+  bottom: 20px;
+}
+
+.btnSave:hover {
+  border: 1px solid #7EA1F9;
+  color: #7EA1F9;
+  background-color: #fff;
+}
+
+.btnCancel {
+  color: #5d82e0;
+  position: absolute;
+  right: 150px;
+  border: 1px solid #5d82e0;
+  bottom: 20px;
+  padding: 4px;
+  min-width: 67px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btnCancel:hover {
+  background-color: #5d82e0;
+  color: #fff;
+}
+
+
+
+.column input {
+  width: 80%;
+}
+
+.input__box {
+  display: block;
+}
+
+.title-heading {
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+}
+
+.education-header {
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.btnWrap {
+  display: flex;
+  column-gap: 10px;
+}
+
+.btnAdd,
+.btnEdit {
+  padding: 3px 25px;
+  background: #7EA1F9;
+  border-radius: 5px;
+  color: #fff;
+  border: 1px solid #7EA1F9;
+}
+
+.btnAdd:hover,
+.btnEdit:hover {
+  border: 1px solid #7EA1F9;
+  background-color: #fff;
+  color: #000;
+}
+
+.btnDelete {
+  padding: 3px 25px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: red;
+  right: 40px;
+  position: absolute;
+  bottom: 15px;
+}
+
+.btnDelete:hover {
+  border: 1px solid red;
+  background-color: #fff;
+  color: #000;
+}
+
+ul.pagination {
+  display: flex;
+  color: #111;
+  list-style-type: none;
+}
+
+th {
+  border-bottom: 1px solid #c7c7c7;
+  border-right: 1px dotted #c7c7c7;
+  text-align: left;
+  padding: 0px 10px;
+  height: 35px;
+  box-sizing: border-box;
+}
+
+td {
+  border-bottom: 1px solid #c7c7c7 !important;
+  border-right: 1px dotted #c7c7c7 !important;
+  padding: 0px 10px;
+  text-align: left;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+ul.pagination a {
+  text-decoration: none;
+  color: #111;
+  width: 200px;
+}
+
+.content-page {
+  min-width: 170px;
+  margin-left: 6px;
+  margin-right: 10px;
+  margin-top: 9px;
+  position: relative;
+}
+
+.page-link {
+  margin: 5px;
+}
+
+.paging-left {
+  color: #111;
+  margin-left: 5px;
+  margin-top: 20px;
+
+
+  text-align: center;
+}
+
+.page-item:first-child {
+
+
+  color: #727272;
+}
+
+.page-item:last-child {
+
+  color: #727272;
+}
+
+.page-item {
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  justify-content: center;
+}
+
+li.page-item.disabled {
+  color: #bbb;
+}
+
+.page-item.active {
+  font-weight: 700;
+  text-align: center;
+  background-color: #eeeaea;
+  color: #000;
+}
+
+.page-item.active a {
+  width: 20px;
+  text-align: center;
+}
+
+.before-text {
+  color: rgb(104, 102, 102);
+  margin: 8px;
+  margin-top: 10px;
+}
+
+.after-text {
+  color: #111;
+  margin: 8px;
+  margin-top: 10px;
+}
+
+.page {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+table {
+  width: 90%;
+}
+
+table,
+tr {
+  border: none;
+  padding: 0px 5px 5px 5px;
+  background-color: white;
+  margin-top: 0px;
+}
+
+td {
+  border: none;
+  background-color: white;
+  margin-top: 0px;
+}
+
+tbody tr td {
+  color: #111;
+  border-bottom: 1px solid #c7c7c7;
+  border-right: 1px dotted #c7c7c7;
+}
+
+.width-half {
+  width: 50%;
+}
+
+.color-red {
+  color: red;
+}
+
+.btn-action:hover {
+  background: #74bbd4;
+}
+
+.btn-action {
+  width: 100px;
+  height: 50px;
+  background: #3a98b9;
+  margin-right: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.btn-group {
+  text-align: center;
+}
+
+.w-full {
+  width: 100%;
+  height: 35px;
+}
+
+.mask {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-bonus {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(17 17 17 / 16%);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.bonus-form {
+  padding: 0px 20px;
+  position: absolute;
+  width: 50vw;
+  height: 534px;
+  /* height: auto; */
+  margin: 0 auto;
+  top: 12%;
+  right: 24%;
+  z-index: 99999;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px;
+  background-color: #fff;
+}
+
+.bonus-formm {
+  padding: 0px 20px;
+  position: absolute;
+  width: 42vw;
+  height: 534px;
+  /* height: auto; */
+  margin: 0 auto;
+  top: 12%;
+  right: 28%;
+  z-index: 99999;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px;
+  background-color: #fff;
+}
+
+.head-popup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 0 !important;
+  margin-top: 10px;
+  width: 96%;
+  margin-left: 4px;
+}
+
+svg:hover {
+  color: red;
+}
+
+.btn-close-popup:hover {
+  color: red !important;
+}
+
+input {
+  width: 300px;
+}
+
+table[data-v-07d000ee],
+tr[data-v-07d000ee],
+td[data-v-07d000ee] {
+  border: none;
+  padding: 0px 0px 5px 5px;
+  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-left: 4px;
+
+}
+
+.sticky-right-top {
+  position: sticky;
+  z-index: 0;
+  right: 0;
+  top: 0;
+  background-color: #e5e8ec;
+}
+
+.sticky-left-top {
+  position: sticky;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  background-color: #e5e8ec;
+}
+
+thead tr {
+  background-color: #e5e8ec;
+}
+
+/* .dis,
+  .bonus{
+    padding: 2px 6px;
+    font-size: 11px;
+    height: 30px;
+    box-sizing: border-box;
+    min-width: 80px;
+    margin-right: 4px;
+    border-radius: 2.5px;
+    color: #f5f2f2;
+    border: none;
+    margin-top: 2px;
+  }
+  .bonus {
+    background-color: #0cc71b;
+  }
+  .dis {
+    background-color: #426cf7;
+  
+  }
+  .bonus:hover{
+    background-color: #ffff;
+    color: #0fdb20;
+    border: 1px solid #0fdb20;
+  } */
+
+/* .dis:hover{
+    background-color: #ffff;
+    color: #426cf7;
+    border: 1px solid #426cf7;
+  } */
+.desc {
+  color: red;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.desc:hover {
+  text-decoration: underline;
+}
+
+tbody tr:hover .checkbox,
+tbody tr:hover .td-item-final {
+  background-color: #fff !important;
+}
+
+#form {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  position: fixed;
+  display: flex;
+  /* display: none; */
+}
+
+.form input {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.form {
+  position: absolute;
+  width: 88%;
+  height: fit-content;
+  background-color: #fff;
+  margin: auto auto;
+  border-radius: 8px;
+}
+
+.formm {
+  width: 100%;
+  height: fit-content;
+  background-color: #fff;
+  margin: auto auto;
+  border-radius: 8px;
+}
 </style>

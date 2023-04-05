@@ -339,7 +339,7 @@
         </div>
         <div class="column">
           <div class="input__state">
-            <label for="">Tình trạng: </label>
+            <label for="">Tình trạng <span>*</span> : </label>
             <input :class="errors.tinhtrang != '' ? 'border-red' : ''" @blur="validateTinhTrang"
               v-model="suatrangthai.TinhTrang" type="text">
             <div class="invalid-feedbackk" v-if="errors.tinhtrang != ''">
@@ -349,7 +349,7 @@
         </div>
         <div class="column">
           <div class="input__state">
-            <label for="">Gia đình: </label>
+            <label for="">Gia đình <span>*</span> : </label>
             <textarea :class="errors.giadinh != '' ? 'border-red' : ''" @blur="validateGiaDinh"
               v-model="suatrangthai.GiaDinh" style="width: 80%;height: 60px;" type="text"> </textarea>
             <div class="invalid-feedbackkk" v-if="errors.giadinh != ''">
@@ -385,7 +385,7 @@
           </div>
         </div> -->
         <div class="btnCancel" @click.stop="isOpenPopupAddNotifi = true">Hủy</div>
-        <div class="btnSave" @click="saveState">Lưu</div>
+        <div class="btnSave" @click="btnAddState">Lưu</div>
       </div>
     </div>
     <!-- sua trang thai -->
@@ -887,6 +887,15 @@ svg:hover {
   border: 1px solid #7EA1F9;
 }
 
+tbody tr:hover {
+  background-color: #9ed6e4 !important;
+}
+
+tbody tr:hover .checkbox,
+tbody tr:hover .td-item-final {
+  background-color: #9ed6e4 !important;
+}
+
 .btnAdd:hover,
 .btnEdit:hover {
   border: 1px solid #7EA1F9;
@@ -894,7 +903,7 @@ svg:hover {
   color: #000;
 }
 
-.btnCancel,
+/* .btnCancel,
 .btnSave {
   width: 85px;
   border: 1px solid;
@@ -902,32 +911,43 @@ svg:hover {
   padding: 5px;
   border-radius: 5px;
   color: #fff;
+} */
 
+
+.btnCancel {
+  color: #5d82e0;
+  position: absolute;
+  right: 150px;
+  border: 1px solid #5d82e0;
+  bottom: 20px;
+  padding: 4px;
+  min-width: 67px;
+  border-radius: 5px;
+
+  text-align: center;
+}
+
+.btnCancel:hover {
+  background-color: #5d82e0;
+  color: #fff;
 }
 
 .btnSave {
-  background-color: #7EA1F9;
+  width: 67px;
+  border: 1px solid;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #5d82e0;
   position: absolute;
   right: 40px;
   bottom: 20px;
 }
 
-.btnCancel {
-  color: #000;
-  border: 1px solid #ccc;
-  position: absolute;
-  right: 150px;
-  bottom: 20px;
-}
-
-.btnCancel:hover {
-  background-color: red;
-  color: #fff;
-}
-
 .btnSave:hover {
   border: 1px solid #7EA1F9;
-  color: #000;
+  color: #7EA1F9;
   background-color: #fff;
 }
 
@@ -1298,37 +1318,41 @@ export default {
       const toast = useToast();
       me.suatrangthai.IDNhanVien = me.IDNV
       console.log(me.suatrangthai);
-      try {
-        axios
-          .post(
-            "https://localhost:44301/api/quanhegiadinh", this.suatrangthai
-          )
-          .then(function (res) {
-            console.log(res)
-            me.isOpenPopupAddState = false;
-            toast.success("thêm dữ liệu thành công", { timeout: 2000 });
-            me.getState()
-          })
-          .catch(function () {
-            console.log("error");
-            toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    saveState() {
       this.validateTinhTrang()
       this.validateGiaDinh()
       if (this.isValid == true) {
-        if (this.formMode == 1) {
-          this.btnAddState()
-        }
-        else {
-          this.btnEditState()
+        try {
+          axios
+            .post(
+              "https://localhost:44301/api/quanhegiadinh", this.suatrangthai
+            )
+            .then(function (res) {
+              console.log(res)
+              me.isOpenPopupAddState = false;
+              toast.success("thêm dữ liệu thành công", { timeout: 2000 });
+              me.getState()
+            })
+            .catch(function () {
+              console.log("error");
+              toast.error("thêm dữ liệu thất bại", { timeout: 2000 });
+            });
+        } catch (error) {
+          console.log(error);
         }
       }
     },
+    // saveState() {
+    //   this.validateTinhTrang()
+    //   this.validateGiaDinh()
+    //   if (this.isValid == true) {
+    //     if (this.formMode == 1) {
+    //       this.btnAddState()
+    //     }
+    //     else {
+    //       this.btnEditState()
+    //     }
+    //   }
+    // },
     OpenPopupEditState(item) {
       this.isOpenPopupEditState = true;
       this.suatrangthai = item

@@ -124,8 +124,8 @@
         <div class="column column-s">
           <div class="input__box">
             <label for="">Mã khoa <span>*</span></label>
-            <combobox class="khoa" :value="employee.MaKhoa" :items="faculty" :code="'IDKhoa'" :fieldName="'TenKhoa'"
-              @selectedItem="selectItemFaculty"></combobox>
+            <combobox style="margin-top: 10px" class="khoa errorInput" :value="employee.MaKhoa" :items="faculty"
+              :code="'IDKhoa'" :fieldName="'TenKhoa'" @selectedItem="selectItemFaculty"></combobox>
 
           </div>
           <div class="input__box">
@@ -593,7 +593,11 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+#form .errorInput input {
+  margin-top: 23px !important;
+}
+
 label {
   margin: 10px 0;
 }
@@ -622,9 +626,9 @@ label span {
 
 #form input {
   max-width: 100%;
-  max-height: 26px;
+
   padding-bottom: 6px;
-  border: 1px solid #ccc;
+
   border-radius: 2px;
   outline: none;
   position: relative;
