@@ -335,6 +335,28 @@ export default {
     FormCancel(value) {
       this.isShowNotifi = value;
       this.$emit("hideForm", false);
+      this.errors = {
+        manv:"",
+        ten: "",
+        ngaysinh: "",
+        khoa: "",
+        cmnd: "",
+        ngaycap: "",
+        noicap: "",
+        email: "",
+        sodt: "",
+        masothue: "",
+        sotaikhoan: "",
+        tennganhang: "",
+        trangthai: "",
+        capbacluong: "",
+        phongban: "",
+        tinhtrang: "",
+        diachi: "",
+        daotao: "",
+        khenthuong: "",
+        kyluat: "",
+      };
     },
     formatDate(date) {
       try {
@@ -357,6 +379,7 @@ export default {
       // this.$emit("hideForm", false);
       this.errors.manv = ""
       this.errors = {
+        manv:"",
         ten: "",
         ngaysinh: "",
         khoa: "",

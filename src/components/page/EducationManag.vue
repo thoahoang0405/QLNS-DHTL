@@ -90,10 +90,12 @@
             <label for="">Tình trạng học vấn<span>*</span>: </label>
             <input :class="errors.tinhtranghocvan != ''? 'border-red': '' " @blur="validateTTHV" type="text" v-model="suaHocVan.TinhTrangHocVan">
 
-            <label for="">Tình trạng học vấn <span>*</span> : </label>
+            <div class="invalid-feedback" v-if="errors.tinhtranghocvan != ''">
               {{ errors.tinhtranghocvan }}
             </div>
           </div>
+          </div>
+
         <div class="column">
           <div class="input__box">
            
@@ -790,6 +792,8 @@ export default {
         vanbangchungchi: '',
         noidungboiduong: '',
         noiboiduong: '',
+        hinhthucdaotao:''
+        
       }
     }
   },

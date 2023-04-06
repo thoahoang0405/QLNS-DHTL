@@ -6,7 +6,7 @@
       <div class="row-input">
         <div class="input">
           <input type="text" class="search" v-model="txtSearch" @keypress.enter="getPagingSalary"
-            placeholder="Tìm kiếm sinh viên" />
+          placeholder="Tìm kiếm"/>
           <div class="icon-search icon"></div>
         </div>
         <div class="input">
