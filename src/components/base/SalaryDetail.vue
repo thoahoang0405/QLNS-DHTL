@@ -26,7 +26,7 @@
           <div class="education-header">
             <div class="maNV">Mã nhân viên: {{ maNV }}</div>
             <div class="tenNV">Tên nhân viên: {{ tenNV }}</div>
-            <div class="tenNV">Ngày sinh: {{ ngaySinh }}</div>
+            <div class="tenNV">Ngày sinh: {{ formatDate(ngaySinh) }}</div>
             <div class="tenNV">Tên Khoa: {{ khoa }}</div>
             <div class="btnWrap">
               <div class="btnAdd" @click="btnAddClick" >Thêm</div>
@@ -126,6 +126,21 @@ export default {
     }
   },
   methods :{
+    formatDate(date) {
+      try {
+        if (date) {
+          date = new Date(date);
+          let newDate = date.getDate();
+          let month = date.getMonth() + 1;
+          let year = date.getFullYear();
+          newDate = newDate < 10 ? `0${newDate}` : newDate;
+          month = month < 10 ? `0${month}` : month;
+          return `${newDate}-${month}-${year}`;
+        }
+      } catch (error) {
+        return "";
+      }
+    },
     loadData(){
       this.getSalaryByID()
       this.$emit("Load")

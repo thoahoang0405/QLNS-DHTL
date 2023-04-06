@@ -76,7 +76,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Chứng chỉ ngoại ngữ: </label>
+            <label for="">Chứng chỉ ngoại ngữ<span>*</span>: </label>
             <input :class="errors.chungchingoaingu != ''? 'border-red': '' " @blur="validateCCNN" type="text" v-model="suaHocVan.ChungChiNgoaiNgu">
             <div class="invalid-feedback" v-if="errors.chungchingoaingu != ''">
               {{ errors.chungchingoaingu }}
@@ -85,7 +85,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Tình trạng học vấn: </label>
+            <label for="">Tình trạng học vấn<span>*</span>: </label>
             <input :class="errors.tinhtranghocvan != ''? 'border-red': '' " @blur="validateTTHV" type="text" v-model="suaHocVan.TinhTrangHocVan">
             <div class="invalid-feedback" v-if="errors.tinhtranghocvan != ''">
               {{ errors.tinhtranghocvan }}
@@ -94,7 +94,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Trình quản lý giáo dục: </label>
+            <label for="">Trình quản lý giáo dục <span>*</span>: </label>
             <input :class="errors.quanligiaoduc != ''? 'border-red': '' " @blur="validateQLGD" type="text" v-model="suaHocVan.TrinhDoQLGD">
             <div class="invalid-feedback" v-if="errors.quanligiaoduc != ''">
               {{ errors.quanligiaoduc }}

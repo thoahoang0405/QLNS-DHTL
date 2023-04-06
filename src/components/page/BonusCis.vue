@@ -354,7 +354,7 @@
             </tr>
             <tr></tr>
            
-            <tr v-for="item of dataListKiLuat" :key="item.IDHopDong">
+            <tr v-for="item of dataListKiLuat" :key="item.IDKyLuat" >
               <td style="border: 1px solid #c7c7c7; width: 150px">
                 {{ item.HinhThucKL }}
               </td>
@@ -1355,5 +1355,21 @@ export default {
 };
 </script>
 <style scoped>
+th {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    text-align: left;
+    padding: 0px 10px;
+    height: 35px;
+    box-sizing: border-box;
+  }
+  td {
+    border-bottom: 1px solid #c7c7c7;
+    border-right: 1px dotted #c7c7c7;
+    padding: 0px 10px;
+    text-align: left;
+    height: 44px;
+    box-sizing: border-box;
+  }
 @import url(../../css/page/bonusCis.css);
 </style>

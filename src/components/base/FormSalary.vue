@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Hệ số lương <span>*</span></label>
+            <label for="">Hệ số lương </label>
             <input
               @blur="validateName"
               class="HSL"
@@ -69,7 +69,7 @@
         </div>
         <div class="column">
           <div class="input__box">
-            <label for="">Ngạch lương</label>
+            <label for="">Ngạch lương<span>*</span></label>
             <combobox
               style="margin-top: 2px"
               class="khoa"
@@ -112,7 +112,7 @@
 
         <div class="column">
           <div class="input__box">
-            <label for="">Tháng nhận</label>
+            <label for="">Tháng nhận<span>*</span></label>
             <input
               class="ngaycap input-left"
               v-model="salary.Thang"
@@ -125,7 +125,7 @@
             </div>
           </div>
           <div class="input__box">
-            <label for="">Năm nhận</label>
+            <label for="">Năm nhận<span>*</span></label>
             <input
               class="noicap"
               v-model="salary.Nam"
