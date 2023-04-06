@@ -88,15 +88,16 @@
           <div class="input__box">
 
             <label for="">Tình trạng học vấn<span>*</span>: </label>
-            <input :class="errors.tinhtranghocvan != ''? 'border-red': '' " @blur="validateTTHV" type="text" v-model="suaHocVan.TinhTrangHocVan">
-
-            <label for="">Tình trạng học vấn <span>*</span> : </label>
+            <input :class="errors.tinhtranghocvan != '' ? 'border-red' : ''" @blur="validateTTHV" type="text"
+              v-model="suaHocVan.TinhTrangHocVan">
+            <div class="invalid-feedback" v-if="errors.tinhtranghocvan != ''">
               {{ errors.tinhtranghocvan }}
             </div>
           </div>
+        </div>
         <div class="column">
           <div class="input__box">
-           
+
             <label for="">Trình quản lý giáo dục <span>*</span> : </label>
             <input :class="errors.quanligiaoduc != '' ? 'border-red' : ''" @blur="validateQLGD" type="text"
               v-model="suaHocVan.TrinhDoQLGD">
