@@ -13,7 +13,7 @@
       </div>
     </div> -->
   <!--  -->
-  <div id="form">
+  <div id="form" @keydown.enter="save">
     <form class="form">
       <div class="form-top">
         <div class="form-title">

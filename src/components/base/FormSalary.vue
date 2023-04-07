@@ -13,7 +13,7 @@
       </div>
     </div> -->
   <!--  -->
-  <div id="form">
+  <div id="form" @keydown.enter="save">
     <form class="form">
       <div class="form-top">
         <div class="form-title">
@@ -121,7 +121,7 @@ import popUpDup from "./PopUpDuplicateCode.vue";
 export default {
   data() {
     return {
-
+    
       isOpenPopupAddNotifiCV: false,
       employee: {},
       faculty: {},
@@ -142,7 +142,8 @@ export default {
       isValid: false,
       listData: {},
       listYear: [],
-      isValidYear: false,
+      listMonth:[],
+      isValidYear: true,
       errors: {
         chucvu: "",
         ngachLuong: "",
@@ -187,6 +188,7 @@ export default {
     }
 
     this.salary.IDNhanVien = this.IDNV;
+  
     this.getPositionNow();
     // this.getFaculty();
     // this.getPosition();
@@ -197,14 +199,16 @@ export default {
   },
   methods: {
     getSalaryByID() {
+      console.log(this.IDNV);
+      var me=this
       try {
-        var me = this;
-
         axios
-          .get(`https://localhost:44301/api/luong/${this.salary.IDNhanVien}`)
+          .get(`https://localhost:44301/api/luong/${this.IDNV}`)
           .then(function (res) {
+            console.log(res);
             console.log(res.data);
             me.listData = res.data
+            console.log(me.listData.length);
           })
 
           .catch(function () {
@@ -215,17 +219,24 @@ export default {
       }
     },
     validateYear() {
+      console.log(this.listData);
       for (const item of this.listData) {
-        if (this.salary.Nam == item.Nam && this.salary.Thang == item.Thang) {
+       if (this.salary.Nam == item.Nam && this.salary.Thang == item.Thang)
+         {
+         
           this.msgWarning = "Thông tin lương " + this.salary.Thang + "/" + this.salary.Nam + " của nhân viên này đã tồn tại"
           this.isShowWarning = true
-          this.isValidYear = false
-        } else {
-          this.msgWarning = ""
-          this.isValidYear = true
-          this.isShowWarning = false
-        }
+          this.isValidYear=false
+          break;
+         }
+          else{
+            this.isValidYear=true
+            // this.isValidYear =true
+            this.msgWarning = ""      
+            this.isShowWarning = false         
+          }
       }
+      
     },
     save() {
       const toast = useToast();
@@ -234,22 +245,20 @@ export default {
       this.validateNgachLuong();
       this.validateThang();
       this.validateNam();
-      
+    
       console.log(this.isValid);
       if (this.isValid == true) {
         if (this.formMode == 0) {
-         
           this.validateYear()
-          if (this.isValidYear == true) {
-            this.addSalary();
-          } else {
-            this.msgWarning = "Thông tin lương " + this.salary.Thang + "/" + this.salary.Nam + " của nhân viên này đã tồn tại"
-            this.isShowWarning = true
-          }
-
-        } else {
+          console.log(this.isValidYear);
+         if(this.isValidYear == true){
+           this.addSalary();  
+         }
+        }         
+         else {
           this.editSalary();
         }
+      
       } else {
         toast.error("cần nhập đúng dữ liệu", { timeout: 5000 });
       }

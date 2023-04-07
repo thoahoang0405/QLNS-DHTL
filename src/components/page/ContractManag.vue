@@ -52,7 +52,7 @@
     <popUp v-show="isShowPopupPosition" :msv="mess" @cancelNotifi="noDelete" @closeNotifi="deletePosition"></popUp>
 
     <!-- them chuc vu -->
-    <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
+    <div class="popup-bonus" v-if="isOpenPopupFormAddPosition" @keydown.enter="savePosition">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Thêm chức vụ</h3>
@@ -108,7 +108,7 @@
       </div>
     </div>
     <!-- sua chuc vu-->
-    <div class="popup-bonus" v-if="isOpenPopupFormEditPosition">
+    <div class="popup-bonus" v-if="isOpenPopupFormEditPosition" @keydown.enter="btnEditPosition">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa chức vụ</h3>
@@ -290,7 +290,7 @@
               <div class="btnEdit">Sửa</div> -->
           </div>
         </div>
-        <div class="form">
+        <div class="form" @keydown.enter="saveContract">
           <form action="">
             <div class="column">
               <div class="input__box">
@@ -341,7 +341,7 @@
       </div>
     </div>
     <!-- sua hop dong-->
-    <div class="popup-bonus" v-if="isOpenPopupFormEditContract">
+    <div class="popup-bonus" v-if="isOpenPopupFormEditContract" @keydown.enter="btnEditContract">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa hợp đồng</h3>

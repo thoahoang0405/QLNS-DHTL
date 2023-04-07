@@ -92,7 +92,7 @@
     ></popUp>
 
     <!-- them khen thuong -->
-    <div class="popup-bonus" v-if="isOpenPopupFormAddPosition">
+    <div class="popup-bonus" v-if="isOpenPopupFormAddPosition" @keydown.enter="AddDataInfoBonus(dataAddInfoBonus)">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Thêm thông tin khen thưởng</h3>
@@ -166,7 +166,7 @@
       </div>
     </div>
     <!-- sua khen thuong-->
-    <div class="popup-bonus" v-if="isOpenPopupFormEditPosition">
+    <div class="popup-bonus" v-if="isOpenPopupFormEditPosition" @keydown.enter="btnEditPosition(dataEditInfoBonus)">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa thông tin khen thưởng</h3>
@@ -222,6 +222,7 @@
         </div>
       </div>
     </div>
+
     <!-- end open popup khen thưởng   -->
     <!-- cảnh báo thêm khen thưởng -->
     <div class="notification-wrap" v-if="isOpenPopupAddNotifi">
@@ -376,7 +377,7 @@
     ></popUp>
 
     <!-- Thêm thông tin kỷ luật -->
-    <div class="popup-bonus" v-if="isOpenPopupFormAddContract">
+    <div class="popup-bonus" v-if="isOpenPopupFormAddContract" @keydown.enter="saveDataKyLuat(dataAddKyLuat)">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Thêm thông tin kỷ luật</h3>
@@ -459,7 +460,7 @@
       </div>
     </div>
     <!-- Sửa thông tin kỷ luật-->
-    <div class="popup-bonus" v-if="isOpenPopupFormEditContract">
+    <div class="popup-bonus" v-if="isOpenPopupFormEditContract"  @keydown.enter="btnEditContract(dataEditContract)">
       <div class="bonus-formm">
         <div class="head-popup">
           <h3 class="title-heading">Sửa thông tin kỷ luật</h3>
@@ -630,6 +631,7 @@
               </div>
             </td>
             <td>
+              
               <div class="desc" @click="OpenPopupContract(item)">
                 Xem chi tiết
               </div>
