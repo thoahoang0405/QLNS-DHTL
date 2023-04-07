@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jtbtdcJDbqnPo1X3mzZ60eL4oR/tcqiH9Q/73/JrcXxylFwPILtJozGgNGfd5fo4ehF22d6z/jR/ivymHUzliQ==",
+  "dgSpecHash": "C4zc6IFeNxbTvTGkM7EgjdBhiLe1zqSWJMfCQA1rO4UC26C3luQHFOCKzAprJY093UEhikbN0SWLBA6LNIUHMg==",
   "success": true,
   "projectFilePath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.DL\\QLNS.DL.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mysql.data\\8.0.32.1\\mysql.data.8.0.32.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512",

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  qlns.dhtl:
+    image: ${DOCKER_REGISTRY-}qlnsdhtl
+    build:
+      context: .
+      dockerfile: QLNS.DHTL/Dockerfile

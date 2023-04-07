@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mEtmEgA35CCwOrlWkFcegGcU7An3ndeos4cm0r62L+epN87IhNtfrySqVyjUOKTtgugp26F4+Kp+XtqOmsZGfw==",
+  "dgSpecHash": "6zjd8ghOiAMs62uKuUziPoST7yNokPuoHbDV3Foo0rBQ6ezl9h2btdKOeefgb35RA/VI00mJEnmNdm9iDY4iCw==",
   "success": true,
   "projectFilePath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.COMMON\\QLNS.COMMON.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512"
+  ],
   "logs": []
 }

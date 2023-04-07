@@ -4,6 +4,7 @@
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
     <ActiveDebugProfile>QLNS.DHTL</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>D:\dhtl\ptda\API\QLNS.DHTL\QLNS.DHTL\Properties\PublishProfiles\registry.hub.docker.com_thoa0405.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

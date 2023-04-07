@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vTBVtV8C2Mgq0H1mTCE2rgd/YSVnpTcUN31jf5nIxgEE5ow/kCLvVqSCsIlTSIdimWgcuLEnNNj5JKtqEm747g==",
+  "dgSpecHash": "GWTXYK9FAeMBRIIaFTFEZWNIycM96R63ZASocbrpry5fvrFtw1NGztL0R0QGXgNemJZ80mTGMGshvQHIOrgHrg==",
   "success": true,
   "projectFilePath": "D:\\dhtl\\ptda\\API\\QLNS.DHTL\\QLNS.BL\\QLNS.BL.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.io.recyclablememorystream\\2.2.1\\microsoft.io.recyclablememorystream.2.2.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\mysql.data\\8.0.32.1\\mysql.data.8.0.32.1.nupkg.sha512",
